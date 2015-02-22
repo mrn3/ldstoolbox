@@ -9,10 +9,16 @@
           <div class="bar bar-header bar-dark">
             <h1 class="title">Left Menu</h1>
           </div>
-          <div class="content has-header">
+          <div class="content has-header"> 
             <div class="list">
               <div class="item item-icon-right" data-ion-menu-close>
-                Close Me {{> ionIcon icon="ios-arrow-right"}}
+                Directory
+              </div>
+              <div class="item item-icon-right" data-ion-menu-close>
+                Callings
+              </div>
+              <div class="item item-icon-right" data-ion-menu-close>
+                Calling Changes
               </div>
             </div>
           </div>
@@ -35,7 +41,7 @@
 
       {{#ionSideMenuContent}}
 
-        {{> ionNavBar class="bar-positive"}}
+        {{> ionNavBar}}
 
         {{#ionNavView}}
           {{> yield}}

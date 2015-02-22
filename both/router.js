@@ -12,7 +12,7 @@ Meteor.startup(function () {
 });
 
 Router.map(function() {
-  this.route('index', {path: '/'});
+  this.route('sideMenu', {path: '/'});
   this.route('actionSheet');
   this.route('backdrop');
   this.route('forms', {
@@ -32,7 +32,7 @@ Router.map(function() {
   this.route('navigation.three', {path: '/navigation/three'});
   this.route('popover');
   this.route('popup');
-  this.route('sideMenu');
+  this.route('index');
   this.route('slideBox');
   this.route('tabs.one', {path: '/tabs/one', layoutTemplate: 'tabsLayout'});
   this.route('tabs.two', {path: '/tabs/two', layoutTemplate: 'tabsLayout'});
