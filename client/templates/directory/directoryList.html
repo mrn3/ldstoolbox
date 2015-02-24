@@ -1,4 +1,4 @@
-<template name="sideMenu">
+<template name="directoryList">
 
   {{#contentFor "headerButtonLeft"}}
     <button class="button button-clear pull-left" data-ion-menu-toggle="left">
@@ -9,8 +9,12 @@
       {{/if}}
     </button>
   {{/contentFor}}
+
   {{#contentFor "headerTitle"}}
-    <h1 class="title">LDS Toolkit</h1>
+    <h1 class="title">Callings</h1>
+  {{/contentFor}}
+
+  {{#contentFor "headerButtonRight"}}
     <button class="button button-clear pull-right" data-ion-menu-toggle="right">
       {{#if isAndroid}}
         {{> ionIcon icon='android-more-vertical'}}
@@ -22,9 +26,24 @@
 
   {{#ionView}}
     {{#ionContent}}
-      <div class="padding">
-        
-      </div>
+        {{#ionList}}
+
+          {{#each times}}
+
+            {{#ionItem buttonRight=true avatar=true}}
+
+              <img src="https://randomuser.me/api/portraits/thumb/men/27.jpg">
+              <h2>John Smith</h2>
+              <p>
+                (555) 555-1212
+              </p>
+              <button class="button button-positive">{{> ionIcon icon="ios-telephone"}}</button>
+
+            {{/ionItem}}
+
+          {{/each}}
+
+        {{/ionList}}
     {{/ionContent}}
   {{/ionView}}
 

@@ -13,6 +13,10 @@ Meteor.startup(function () {
 
 Router.map(function() {
   this.route('sideMenu', {path: '/'});
+  this.route('directoryList');
+  this.route('callingList');
+  this.route('callingChangeList');
+  this.route('sync');
   this.route('actionSheet');
   this.route('backdrop');
   this.route('forms', {
