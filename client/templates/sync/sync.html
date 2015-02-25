@@ -1,0 +1,34 @@
+<template name="sync">
+
+  {{#contentFor "headerButtonLeft"}}
+    <button class="button button-clear pull-left" data-ion-menu-toggle="left">
+      {{#if isAndroid}}
+        {{> ionIcon icon='android-more-vertical'}}
+      {{else}}
+        {{> ionIcon icon='navicon'}}
+      {{/if}}
+    </button>
+  {{/contentFor}}
+
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">Sync</h1>
+  {{/contentFor}}
+
+  {{#ionView}}
+    {{#ionContent}}
+      <div class="list">
+        <label class="item item-input">
+          <input type="text" placeholder="LDS Account Username" id="ldsAccountUsername">
+        </label>
+        <label class="item item-input">
+          <input type="password" placeholder="LDS Account Password" id="ldsAccountPassword">
+        </label>
+      </div>
+      <div class="padding">
+        <input class="button button-block button-positive" id="syncAllButton" value="Sync" />
+      </div>
+
+    {{/ionContent}}
+  {{/ionView}}
+
+</template>

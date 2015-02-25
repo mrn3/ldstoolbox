@@ -28,17 +28,15 @@
     {{#ionContent}}
         {{#ionList}}
 
-          {{#each times}}
+          {{#each householdData}}
 
-            {{#ionItem buttonRight=true avatar=true}}
-
-              <img src="https://randomuser.me/api/portraits/thumb/men/27.jpg">
-              <h2>John Smith</h2>
-              <p>
-                (555) 555-1212
-              </p>
-              <button class="button button-positive">{{> ionIcon icon="ios-telephone"}}</button>
-
+            {{#ionItem}}
+              <h2>
+                {{householdName}}, {{headOfHouse.directoryName}}
+                {{#if spouse.directoryName}}
+                  &amp; {{spouse.directoryName}}
+                {{/if}}
+              </h2>
             {{/ionItem}}
 
           {{/each}}

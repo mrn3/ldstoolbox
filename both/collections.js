@@ -23,3 +23,9 @@ Posts.attachSchema(new SimpleSchema({
     }
   }
 }));
+
+callingCollection = new Meteor.Collection("calling");
+callingChangeCollection = new Meteor.Collection("callingChange");
+householdCollection = new Meteor.Collection("household");
+memberCollection = new Meteor.Collection("member");
+unitCollection = new Meteor.Collection("unit");

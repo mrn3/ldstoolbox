@@ -13,7 +13,15 @@ Meteor.startup(function () {
 
 Router.map(function() {
   this.route('sideMenu', {path: '/'});
-  this.route('directoryList');
+  this.route('/directoryList/', {
+    name: 'directoryList',
+    data: function() {
+      return {
+        householdData: householdCollection.find({})
+      };
+    },
+    fastRender: true
+  });
   this.route('callingList');
   this.route('callingChangeList');
   this.route('sync');

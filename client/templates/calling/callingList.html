@@ -15,6 +15,7 @@
   {{/contentFor}}
 
   {{#contentFor "headerButtonRight"}}
+
     <button class="button button-clear pull-right" data-ion-menu-toggle="right">
       {{#if isAndroid}}
         {{> ionIcon icon='android-more-vertical'}}
@@ -30,17 +31,17 @@
 
           {{#each times}}
 
-            {{#ionItem buttonRight=true avatar=true}}
-              <a href="{{pathFor 'contacts.show'}}" class="item item-avatar item-icon-right">
-                <img src="https://randomuser.me/api/portraits/thumb/men/27.jpg">
-                <h2>John Smith</h2>
-                <p>
-                  (555) 555-1212
-                </p>
-                <button class="button button-positive" data-action="showActionSheet">{{> ionIcon icon="ios-telephone"}}</button>
-              </a>
-            {{/ionItem}}
+            {{#ionItem path="popover" buttonRight=true iconRight=true avatar=true}}
+              <img src="https://randomuser.me/api/portraits/thumb/men/27.jpg">
 
+              <h2>John Smith</h2>
+              <p>
+                (555) 555-1212
+              </p>
+
+              {{> ionIcon icon="ios-arrow-right"}}
+              <button class="button button-positive" data-action="showActionSheet">{{> ionIcon icon="ios-telephone"}}</button>
+            {{/ionItem}}
           {{/each}}
 
         {{/ionList}}

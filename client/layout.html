@@ -31,6 +31,11 @@
                   Sync
                 </div>
               </a>
+              <a href="{{pathFor 'userAccounts'}}" style="{text-decoration: none}">
+                <div class="item item-icon-right" data-ion-menu-close>
+                  Sign In/Out
+                </div>
+              </a>
             </div>
           </div>
         {{/ionSideMenu}}
@@ -40,12 +45,17 @@
             <h1 class="title">Search Filters</h1>
           </div>
           <div class="content has-header">
-            <div class="list">
+            <div class="list list-inset">
+              <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="Search">
+              </label>
               <div class="item item-icon-left" data-ion-menu-close>
-                {{> ionIcon icon="ios-arrow-left"}} Close Me
+                {{> ionIcon icon="ios-arrow-left"}} Apply Filters
               </div>
             </div>
           </div>
+
         {{/ionSideMenu}}
 
       {{/ionSideMenus}}
