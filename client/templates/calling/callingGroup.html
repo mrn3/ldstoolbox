@@ -1,19 +1,15 @@
-<template name="calling">
+<template name="callingGroup">
 
   {{#with callingData}}
 
     {{#contentFor "headerButtonLeft"}}
       <button class="button button-clear pull-left" data-ion-menu-toggle="left">
-        {{#if isAndroid}}
-          {{> ionIcon icon='android-more-vertical'}}
-        {{else}}
-          {{> ionIcon icon='navicon'}}
-        {{/if}}
+        {{>ionNavBackButton path="callingGroupList"}}
       </button>
     {{/contentFor}}
 
     {{#contentFor "headerTitle"}}
-      <h1 class="title">Calling Group</h1>
+      <h1 class="title">Callings</h1>
     {{/contentFor}}
 
     {{#contentFor "headerButtonRight"}}
@@ -34,8 +30,10 @@
             {{groupName}}
           </div>
           {{#each leaders}}
-            <a href="{{pathFor 'household'}}" class="item item-icon-right">
-              {{callingName}}
+            <a href="/member/{{individualId}}" class="item item-icon-right">
+              <h4>
+                {{callingName}}
+              </h4>
               <h2>
                 {{displayName}}
               </h2>

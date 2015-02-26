@@ -1,4 +1,4 @@
-<template name="callingList">
+<template name="callingGroupList">
 
   {{#contentFor "headerButtonLeft"}}
     <button class="button button-clear pull-left" data-ion-menu-toggle="left">
@@ -29,7 +29,7 @@
     {{#ionContent}}
         {{#ionList}}
           {{#each callingData}}
-            <a href="{{pathFor 'calling'}}" class="item item-icon-right">
+            <a href="{{pathFor 'callingGroup'}}" class="item item-icon-right">
               <h2>
                 {{groupName}}
               </h2>

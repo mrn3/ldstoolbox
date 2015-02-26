@@ -22,6 +22,16 @@ Router.map(function() {
     },
     fastRender: true
   });
+  this.route('/member/:individualId', {
+    name: 'member',
+    data: function() {
+      //console.log(memberCollection.findOne({individualId: this.params.individualId}));
+      return {
+        memberData: memberCollection.findOne({individualId: this.params.individualId})
+      };
+    },
+    fastRender: true
+  });
   this.route('/household/:_id', {
     name: 'household',
     data: function() {
@@ -31,8 +41,8 @@ Router.map(function() {
     },
     fastRender: true
   });
-  this.route('/callingList/', {
-    name: 'callingList',
+  this.route('/callingGroupList/', {
+    name: 'callingGroupList',
     data: function() {
       return {
         callingData: callingCollection.find({})
@@ -40,8 +50,8 @@ Router.map(function() {
     },
     fastRender: true
   });
-  this.route('/calling/:_id', {
-    name: 'calling',
+  this.route('/callingGroup/:_id', {
+    name: 'callingGroup',
     data: function() {
       return {
         callingData: callingCollection.findOne(this.params._id)
