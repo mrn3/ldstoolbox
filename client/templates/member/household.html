@@ -1,0 +1,62 @@
+<template name="household">
+
+  {{#contentFor "headerButtonLeft"}}
+    <button class="button button-clear pull-left" data-ion-menu-toggle="left">
+      {{#if isAndroid}}
+        {{> ionIcon icon='android-more-vertical'}}
+      {{else}}
+        {{> ionIcon icon='navicon'}}
+      {{/if}}
+    </button>
+  {{/contentFor}}
+
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">Directory</h1>
+  {{/contentFor}}
+
+  {{#contentFor "headerButtonRight"}}
+    <button class="button button-clear pull-right" data-ion-menu-toggle="right">
+      {{#if isAndroid}}
+        {{> ionIcon icon='android-more-vertical'}}
+      {{else}}
+        {{> ionIcon icon='navicon'}}
+      {{/if}}
+    </button>
+  {{/contentFor}}
+
+  {{#ionView}}
+    {{#ionContent}}
+      {{#with householdData}}
+        <div class="item item-divider">
+          Contact Information
+        </div>
+        {{#ionList}}
+          {{#ionItem}}
+          {{/ionItem}}
+        {{/ionList}}
+        <div class="item item-divider">
+          Membership Information
+        </div>
+        <div class="item item-divider">
+          Household Members
+        </div>
+        {{#ionItem}}
+          <h2>
+            {{headOfHouse.directoryName}} {{householdName}}
+          </h2>
+        {{/ionItem}}
+        {{#if spouse.directoryName}}
+          {{#ionItem}}
+            <h2>
+              {{spouse.directoryName}} {{householdName}}
+            </h2>
+          {{/ionItem}}
+        {{/if}}
+        <div class="item item-divider">
+          Options
+        </div>
+      {{/with}}
+    {{/ionContent}}
+  {{/ionView}}
+
+</template>

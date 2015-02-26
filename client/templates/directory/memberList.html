@@ -11,7 +11,7 @@
   {{/contentFor}}
 
   {{#contentFor "headerTitle"}}
-    <h1 class="title">Callings</h1>
+    <h1 class="title">Directory</h1>
   {{/contentFor}}
 
   {{#contentFor "headerButtonRight"}}
@@ -30,7 +30,7 @@
 
           {{#each householdData}}
 
-            {{#ionItem}}
+            {{#ionItem path="member"}}
               <h2>
                 {{householdName}}, {{headOfHouse.directoryName}}
                 {{#if spouse.directoryName}}
