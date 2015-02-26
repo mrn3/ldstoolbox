@@ -15,12 +15,8 @@
   {{/contentFor}}
 
   {{#contentFor "headerButtonRight"}}
-    <button class="button button-clear pull-right" data-ion-menu-toggle="right">
-      {{#if isAndroid}}
-        {{> ionIcon icon='android-more-vertical'}}
-      {{else}}
-        {{> ionIcon icon='navicon'}}
-      {{/if}}
+    <button class="button button-clear" data-action="showActionSheet">
+      Sort
     </button>
   {{/contentFor}}
 

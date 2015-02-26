@@ -1,0 +1,49 @@
+<template name="calling">
+
+  {{#with callingData}}
+
+    {{#contentFor "headerButtonLeft"}}
+      <button class="button button-clear pull-left" data-ion-menu-toggle="left">
+        {{#if isAndroid}}
+          {{> ionIcon icon='android-more-vertical'}}
+        {{else}}
+          {{> ionIcon icon='navicon'}}
+        {{/if}}
+      </button>
+    {{/contentFor}}
+
+    {{#contentFor "headerTitle"}}
+      <h1 class="title">Calling Group</h1>
+    {{/contentFor}}
+
+    {{#contentFor "headerButtonRight"}}
+
+      <button class="button button-clear pull-right" data-ion-menu-toggle="right">
+        {{#if isAndroid}}
+          {{> ionIcon icon='android-more-vertical'}}
+        {{else}}
+          {{> ionIcon icon='navicon'}}
+        {{/if}}
+      </button>
+    {{/contentFor}}
+
+    {{#ionView}}
+      {{#ionContent}}
+        {{#ionList}}
+          <div class="item item-divider">
+            {{groupName}}
+          </div>
+          {{#each leaders}}
+            <a href="{{pathFor 'household'}}" class="item item-icon-right">
+              {{callingName}}
+              <h2>
+                {{displayName}}
+              </h2>
+              {{> ionIcon icon="ios-arrow-right"}}
+            </a>
+          {{/each}}
+        {{/ionList}}
+      {{/ionContent}}
+    {{/ionView}}
+  {{/with}}
+</template>

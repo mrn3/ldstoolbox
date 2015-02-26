@@ -31,8 +31,24 @@ Router.map(function() {
     },
     fastRender: true
   });
-
-  this.route('callingList');
+  this.route('/callingList/', {
+    name: 'callingList',
+    data: function() {
+      return {
+        callingData: callingCollection.find({})
+      };
+    },
+    fastRender: true
+  });
+  this.route('/calling/:_id', {
+    name: 'calling',
+    data: function() {
+      return {
+        callingData: callingCollection.findOne(this.params._id)
+      };
+    },
+    fastRender: true
+  });
   this.route('callingChangeList');
   this.route('sync');
   this.route('actionSheet');

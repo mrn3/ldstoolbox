@@ -1,13 +1,7 @@
 <template name="household">
 
   {{#contentFor "headerButtonLeft"}}
-    <button class="button button-clear pull-left" data-ion-menu-toggle="left">
-      {{#if isAndroid}}
-        {{> ionIcon icon='android-more-vertical'}}
-      {{else}}
-        {{> ionIcon icon='navicon'}}
-      {{/if}}
-    </button>
+    {{>ionNavBackButton path="directory"}}
   {{/contentFor}}
 
   {{#contentFor "headerTitle"}}
