@@ -2,12 +2,15 @@ Template.callingChangeCreate.events({
   'click input[type=submit]': function(e, instance){
     e.preventDefault();
 
+    var callingChange = this;
+    var insertObject = {};
+
     $(e.target).addClass('disabled');
 
     // ------------------------------ Checks ------------------------------ //
 
     if(!Meteor.user()){
-      throwError(i18n.t('You must be logged in.'));
+      console.log('You must be logged in.');
       return false;
     }
 
@@ -31,17 +34,16 @@ Template.callingChangeCreate.events({
     };
 
     // ------------------------------ Insert ------------------------------ //
+
     if (properties) {
-      Meteor.call('insertCallingChange', properties, function(error, callingChange) {
+      insertObject.$set = properties;
+      callingChangeCollection.insert(insertObject, function(error){
         if(error){
-          throwError(error.reason);
-          clearSeenErrors();
+          console.log(error);
           $(e.target).removeClass('disabled');
-          if(error.error == 603)
-            Router.go('/callingChangesList/'+error.details);
         }else{
-          trackEvent("new calling change", {'callingChangeId': callingChange._id});
-          Router.go('/callingChangesList/');
+          trackEvent("edit calling change", {'callingChangeId': callingChange._id});
+          Router.go("/callingChangeList/");
         }
       });
     } else {

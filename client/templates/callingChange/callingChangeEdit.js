@@ -3,7 +3,6 @@ Template.callingChangeEdit.events({
     if (confirm("Are you sure you want to cancel this calling change?")) {
       var callingChange = this;
       var updateObject = {};
-      var calculatedStatus = "";
 
       e.preventDefault();
 
@@ -47,7 +46,6 @@ Template.callingChangeEdit.events({
   "click input[type=submit]": function(e, instance){
     var callingChange = this;
     var updateObject = {};
-    var calculatedStatus = "";
 
     e.preventDefault();
 
