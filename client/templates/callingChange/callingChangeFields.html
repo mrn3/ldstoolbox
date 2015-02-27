@@ -1,0 +1,50 @@
+<template name="callingChangeFields">
+  <div class="control-group">
+    <label class="control-label">{{_ "Member Name"}}</label>
+    <div class="controls"><input id="memberName" name="memberName" type="text" value="{{memberName}}" placeholder="Member Name" style="width: 270px" class="form-control typeahead" autocomplete="off" spellcheck="off" data-source="membersList" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /></div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">{{_ "Calling Name"}}</label>
+    <div class="controls"><input id="callingName" name="callingName" type="text" value="{{callingName}}" placeholder="Calling Name" style="width: 270px" class="form-control typeahead" autocomplete="off" spellcheck="off" data-source="callingsList" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /></div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">{{_ "Notes"}}</label>
+    <div class="controls"><textarea id="notes" name="notes" placeholder="Notes">{{notes}}</textarea></div>
+  </div>
+  <div class="control-group" id="dateDiscussedDiv">
+    <label class="control-label">{{_ "Date Discussed"}}</label>
+    <div class="controls"><input id="dateDiscussed" type="text" value="{{dateDiscussed}}" placeholder="Date Discussed" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /></div>
+  </div>
+  <div class="control-group" id="dateApprovedDiv">
+    <label class="control-label">{{_ "Date Approved"}}</label>
+    <div class="controls"><input id="dateApproved" type="text" value="{{dateApproved}}" placeholder="Date Approved" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /></div>
+  </div>
+  <div class="control-group" id="dateInterviewedDiv">
+    <label class="control-label">{{_ "Date Interviewed"}}</label>
+    <div class="controls"><input id="dateInterviewed" type="text" value="{{dateInterviewed}}" placeholder="Date Interviewed" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /></div>
+  </div>
+  <div class="control-group" id="datePresentedDiv">
+    <label class="control-label">{{_ "Date Presented"}}</label>
+    <div class="controls"><input id="datePresented" type="text" value="{{datePresented}}" placeholder="Date Presented" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /></div>
+  </div>
+  <div class="control-group" id="dateRecordedDiv">
+    <label class="control-label">{{_ "Date Recorded"}}</label>
+    <div class="controls"><input id="dateRecorded" type="text" value="{{dateRecorded}}" placeholder="Date Recorded" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /></div>
+  </div>
+  <div class="control-group" id="dateSetApartDiv">
+    <label class="control-label">{{_ "Date Set Apart"}}</label>
+    <div class="controls"><input id="dateSetApart" type="text" value="{{dateSetApart}}" placeholder="Date Set Apart" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /></div>
+  </div>
+  <div class="control-group" id="dateSetApartRecordedDiv">
+    <label class="control-label">{{_ "Date Set Apart Recorded"}}</label>
+    <div class="controls"><input id="dateSetApartRecorded" type="text" value="{{dateSetApartRecorded}}" placeholder="Date Set Apart Recorded" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /></div>
+  </div>
+  <div class="control-group" id="dateCancelledDiv">
+    <label class="control-label">{{_ "Date Cancelled"}}</label>
+    <div class="controls"><input id="dateCancelled" type="text" value="{{dateCancelled}}" placeholder="Date Cancelled" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /></div>
+  </div>
+  <div class="control-group" id="dateCancelledDiv">
+    <label class="control-label">{{_ "Status"}}</label>
+    <div class="controls"><input id="status" type="text" value="{{status}}" placeholder="Status" onfocus="this.blur();" /></div>
+  </div>
+</template>

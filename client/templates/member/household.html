@@ -1,7 +1,7 @@
 <template name="household">
 
   {{#contentFor "headerButtonLeft"}}
-    {{>ionNavBackButton path="directory"}}
+    {{>ionNavBackButton path="memberList"}}
   {{/contentFor}}
 
   {{#contentFor "headerTitle"}}
@@ -46,6 +46,13 @@
             </h2>
           {{/ionItem}}
         {{/if}}
+        {{#each children}}
+          {{#ionItem}}
+            <h2>
+              {{directoryName}} {{householdName}}
+            </h2>
+          {{/ionItem}}
+        {{/each}}
         <div class="item item-divider">
           Options
         </div>

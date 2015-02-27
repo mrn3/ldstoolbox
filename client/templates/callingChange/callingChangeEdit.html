@@ -1,0 +1,19 @@
+<template name="callingChangeEdit">
+  {{#with callingChangeData}}
+    <form class="grid-block form-horizontal">
+      <h3>Calling Change</h3>
+      <div class="control-group">
+        <label class="control-label">{{_ "Type"}}</label>
+        <div class="controls">
+          {{type}}
+        </div>
+      </div>
+      {{>callingChangeFields}}
+
+      <div class="form-actions">
+        <input type="button" class="button" id="cancelCallingChangeButton" style="float:left;" value="{{_ "Cancel Calling Change"}}" />
+        <input type="submit" class="button" value="{{_ "Update"}}" />
+      </div>
+    </form>
+  {{/with}}
+</template>

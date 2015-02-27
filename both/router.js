@@ -59,7 +59,15 @@ Router.map(function() {
     },
     fastRender: true
   });
-  this.route('callingChangeList');
+  this.route('/callingChangeList/', {
+    name: 'callingChangeList',
+    data: function() {
+      return {
+        callingChangeData: callingChangeCollection.find({})
+      };
+    },
+    fastRender: true
+  });
   this.route('sync');
   this.route('actionSheet');
   this.route('backdrop');

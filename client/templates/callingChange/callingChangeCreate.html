@@ -1,0 +1,48 @@
+<template name="callingChangeCreate">
+
+  {{#ionModal title="Create Calling Change"}}
+    {{#ionView}}
+      {{#ionContent}}
+        {{#ionList}}
+          <label class="item item-input">
+            <input type="text" placeholder="Type">
+          </label>
+          <label class="item item-input">
+            <input type="text" placeholder="Last Name">
+          </label>
+          <label class="item item-input">
+            <textarea placeholder="Comments"></textarea>
+          </label>
+          <div class="item item-divider">
+          </div>
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Type
+            </div>
+            <select id="type" name="type">
+              <option value="Call">Call</option>
+              <option value="Release">Release</option>
+            </select>
+          </label>
+
+          {{#if isAdmin}}
+            <label class="item item-input item-select">
+              <div class="input-label">
+                Created By
+              </div>
+              <select id="postUser">
+                {{#each users}}
+                <option {{isSelected this}} value="{{_id}}">{{userName}}</option>
+                {{/each}}
+              </select>
+            </label>
+          {{/if}}
+
+        {{/ionList}}
+        <div class="padding">
+          <input type="submit" class="button button-block button-positive" value="Create" />
+        </div>
+      {{/ionContent}}
+    {{/ionView}}
+  {{/ionModal}}
+</template>
