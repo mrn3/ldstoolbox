@@ -1,0 +1,32 @@
+<template name="callingChangeView">
+
+  {{#contentFor "headerButtonLeft"}}
+    {{>ionNavBackButton path="callingGroup"}}
+  {{/contentFor}}
+
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">Calling Change Details</h1>
+  {{/contentFor}}
+
+  {{#contentFor "headerButtonRight"}}
+    <button class="button button-clear pull-right">
+      Edit
+    </button>
+  {{/contentFor}}
+
+  {{#ionView}}
+    {{#ionContent}}
+      {{#with callingChangeData}}
+        {{#ionList}}
+          <label class="item item-input">
+            <span class="input-label">Type</span>
+            {{type}}
+          </label>
+        {{/ionList}}
+        {{#ionFooterBar}}
+          <h1 class="title">Delete Calling Change</h1>
+        {{/ionFooterBar}}
+      {{/with}}
+    {{/ionContent}}
+  {{/ionView}}
+</template>

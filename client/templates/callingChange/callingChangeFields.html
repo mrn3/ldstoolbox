@@ -1,16 +1,15 @@
 <template name="callingChangeFields">
-  <div class="control-group">
-    <label class="control-label">{{_ "Member Name"}}</label>
-    <div class="controls"><input id="memberName" name="memberName" type="text" value="{{memberName}}" placeholder="Member Name" style="width: 270px" class="form-control typeahead" autocomplete="off" spellcheck="off" data-source="membersList" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /></div>
-  </div>
-  <div class="control-group">
-    <label class="control-label">{{_ "Calling Name"}}</label>
-    <div class="controls"><input id="callingName" name="callingName" type="text" value="{{callingName}}" placeholder="Calling Name" style="width: 270px" class="form-control typeahead" autocomplete="off" spellcheck="off" data-source="callingsList" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /></div>
-  </div>
-  <div class="control-group">
-    <label class="control-label">{{_ "Notes"}}</label>
-    <div class="controls"><textarea id="notes" name="notes" placeholder="Notes">{{notes}}</textarea></div>
-  </div>
+  <label class="item item-input">
+    <input id="memberName" name="memberName" type="text" value="{{memberName}}" placeholder="Member Name" style="width: 270px" class="form-control typeahead" autocomplete="off" spellcheck="off" data-source="membersList" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" />
+  </label>
+  <label class="item item-input">
+    <input id="callingName" name="callingName" type="text" value="{{callingName}}" placeholder="Calling Name" style="width: 270px" class="form-control typeahead" autocomplete="off" spellcheck="off" data-source="callingsList" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" />
+  </label>
+  <label class="item item-input">
+    <textarea id="notes" name="notes" placeholder="Notes">{{notes}}</textarea>
+  </label>
+
+  <!--
   <div class="control-group" id="dateDiscussedDiv">
     <label class="control-label">{{_ "Date Discussed"}}</label>
     <div class="controls"><input id="dateDiscussed" type="text" value="{{dateDiscussed}}" placeholder="Date Discussed" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /></div>
@@ -47,4 +46,5 @@
     <label class="control-label">{{_ "Status"}}</label>
     <div class="controls"><input id="status" type="text" value="{{status}}" placeholder="Status" onfocus="this.blur();" /></div>
   </div>
+  //-->
 </template>

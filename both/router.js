@@ -68,6 +68,15 @@ Router.map(function() {
     },
     fastRender: true
   });
+  this.route('/callingChangeView/:_id', {
+    name: 'callingChangeView',
+    data: function() {
+      return {
+        callingChangeData: callingChangeCollection.findOne(this.params._id)
+      };
+    },
+    fastRender: true
+  });
   this.route('sync');
   this.route('actionSheet');
   this.route('backdrop');

@@ -36,14 +36,12 @@ Template.callingChangeCreate.events({
     // ------------------------------ Insert ------------------------------ //
 
     if (properties) {
-      insertObject.$set = properties;
-      callingChangeCollection.insert(insertObject, function(error){
+      Meteor.call('insertCallingChange', properties, function(error, callingChange) {
         if(error){
-          console.log(error);
+          console.log(error.reason);
           $(e.target).removeClass('disabled');
         }else{
-          trackEvent("edit calling change", {'callingChangeId': callingChange._id});
-          Router.go("/callingChangeList/");
+          $(e.target).removeClass('disabled');
         }
       });
     } else {
