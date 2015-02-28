@@ -22,15 +22,8 @@ Template.callingChangeCreate.events({
       memberName:           $('#memberName').val(),
       callingName:          $('#callingName').val(),
       notes:                $('#notes').val(),
-      dateDiscussed:        $('#dateDiscussed').val(),
-      dateApproved:         $('#dateApproved').val(),
-      dateInterviewed:      $('#dateInterviewed').val(),
-      datePresented:        $('#datePresented').val(),
-      dateRecorded:         $('#dateRecorded').val(),
-      dateSetApart:         $('#dateSetApart').val(),
-      dateSetApartRecorded: $('#dateSetApartRecorded').val(),
-      dateCancelled:        $('#dateCancelled').val(),
-      status:               $('#status').val()
+      dateDiscussed:        new Date(),
+      status:               "Discussed"
     };
 
     // ------------------------------ Insert ------------------------------ //

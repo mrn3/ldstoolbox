@@ -1,5 +1,6 @@
 Template.callingChangeFields.helpers({
   membersList: function(){
+    console.log("hie");
     return Members.find().fetch().map(function(member){
       if (typeof(member.callings) != "undefined") {
         returnString = member.switchedPreferredName;

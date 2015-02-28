@@ -54,7 +54,7 @@ Template.callingChangeEdit.events({
     // ------------------------------ Checks ------------------------------ //
 
     if(!Meteor.user()){
-      throwError(i18n.t('You must be logged in.'));
+      console.log('You must be logged in.');
       return false;
     }
 
