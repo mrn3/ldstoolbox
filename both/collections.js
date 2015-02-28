@@ -28,7 +28,6 @@ callingCollection = new Meteor.Collection("calling");
 callingChangeCollection = new Meteor.Collection("callingChange");
 Meteor.methods({
   insertCallingChange: function(callingChange){
-    console.log(callingChange);
     callingChange._id = callingChangeCollection.insert(callingChange);
     return callingChange;
   }

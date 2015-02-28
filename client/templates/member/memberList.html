@@ -1,6 +1,6 @@
 <template name="memberList">
 
-  {{#contentFor "headerButtonLeft"}}
+  <div class="bar bar-header bar-stable">
     <button class="button button-clear pull-left" data-ion-menu-toggle="left">
       {{#if isAndroid}}
         {{> ionIcon icon='android-more-vertical'}}
@@ -8,17 +8,13 @@
         {{> ionIcon icon='navicon'}}
       {{/if}}
     </button>
-  {{/contentFor}}
-
-  {{#contentFor "headerTitle"}}
     <h1 class="title">Directory</h1>
-  {{/contentFor}}
-
-  {{#contentFor "headerButtonRight"}}
-    <button class="button button-clear" data-action="showActionSheet">
-      Sort
-    </button>
-  {{/contentFor}}
+    <div class="buttons">
+      <button class="button button-clear" data-action="showActionSheet">
+        Sort
+      </button>
+    </div>
+  </div>
 
   {{#ionView}}
     {{#ionContent}}

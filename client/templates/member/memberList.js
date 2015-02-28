@@ -1,6 +1,5 @@
 Template.memberList.events({
   'click [data-action=showActionSheet]': function (event, template) {
-    alert("hi");
     IonActionSheet.show({
       titleText: 'ActionSheet Example',
       buttons: [

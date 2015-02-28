@@ -89,7 +89,7 @@ Template.callingChangeEdit.events({
           $(e.target).removeClass('disabled');
         }else{
           trackEvent("edit calling change", {'callingChangeId': callingChange._id});
-          Router.go("/callingChangesList/");
+          Router.go("callingChangeList");
         }
       });
     } else {

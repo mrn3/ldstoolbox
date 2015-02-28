@@ -4,17 +4,6 @@
     {{#ionView}}
       {{#ionContent}}
         {{#ionList}}
-          <label class="item item-input">
-            <input type="text" placeholder="Type">
-          </label>
-          <label class="item item-input">
-            <input type="text" placeholder="Last Name">
-          </label>
-          <label class="item item-input">
-            <textarea placeholder="Comments"></textarea>
-          </label>
-          <div class="item item-divider">
-          </div>
           <label class="item item-input item-select">
             <div class="input-label">
               Type
@@ -24,9 +13,10 @@
               <option value="Release">Release</option>
             </select>
           </label>
-
+          <div class="item item-divider">
+          </div>
           {{>callingChangeFields}}
-          
+
           {{#if isAdmin}}
             <label class="item item-input item-select">
               <div class="input-label">
@@ -42,7 +32,7 @@
 
         {{/ionList}}
         <div class="padding">
-          <input type="submit" class="button button-block button-positive" value="Create" />
+          <input type="submit" data-dismiss="modal" class="button button-block button-positive" value="Create" />
         </div>
       {{/ionContent}}
     {{/ionView}}

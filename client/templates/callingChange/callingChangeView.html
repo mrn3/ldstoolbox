@@ -1,32 +1,47 @@
 <template name="callingChangeView">
 
-  {{#contentFor "headerButtonLeft"}}
-    {{>ionNavBackButton path="callingGroup"}}
-  {{/contentFor}}
+  {{#with callingChangeData}}
+    <div class="bar bar-header bar-stable">
+      <div class="buttons">
+        {{>ionNavBackButton path="callingChangeList"}}
+      </div>
+      <h1 class="title">Calling Change Details</h1>
+      <div class="buttons">
+        <a class="button button-clear pull-right button-positive" href="/callingChangeEdit/{{_id}}">
+          Edit
+        </a>
+      </div>
+    </div>
 
-  {{#contentFor "headerTitle"}}
-    <h1 class="title">Calling Change Details</h1>
-  {{/contentFor}}
-
-  {{#contentFor "headerButtonRight"}}
-    <button class="button button-clear pull-right">
-      Edit
-    </button>
-  {{/contentFor}}
-
-  {{#ionView}}
-    {{#ionContent}}
-      {{#with callingChangeData}}
+    {{#ionView}}
+      {{#ionContent}}
         {{#ionList}}
           <label class="item item-input">
             <span class="input-label">Type</span>
             {{type}}
           </label>
+          <label class="item item-input">
+            <span class="input-label">Member Name</span>
+            {{memberName}}
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Calling Name</span>
+            {{callingName}}
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Notes</span>
+            {{notes}}
+          </label>
         {{/ionList}}
-        {{#ionFooterBar}}
-          <h1 class="title">Delete Calling Change</h1>
-        {{/ionFooterBar}}
-      {{/with}}
-    {{/ionContent}}
-  {{/ionView}}
+        <div class="bar bar-footer bar-light">
+          <div class="title">
+            <h1 class="title" data-action="showActionSheet">
+              Delete Calling Change
+            </h1>
+          </div>
+        </div>
+      {{/ionContent}}
+    {{/ionView}}
+
+  {{/with}}
 </template>

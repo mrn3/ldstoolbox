@@ -1,19 +1,53 @@
 <template name="callingChangeEdit">
-  {{#with callingChangeData}}
-    <form class="grid-block form-horizontal">
-      <h3>Calling Change</h3>
-      <div class="control-group">
-        <label class="control-label">{{_ "Type"}}</label>
-        <div class="controls">
-          {{type}}
-        </div>
-      </div>
-      {{>callingChangeFields}}
 
-      <div class="form-actions">
-        <input type="button" class="button" id="cancelCallingChangeButton" style="float:left;" value="{{_ "Cancel Calling Change"}}" />
-        <input type="submit" class="button" value="{{_ "Update"}}" />
-      </div>
-    </form>
-  {{/with}}
+  <div class="bar bar-header bar-stable">
+    <button class="button button-clear button-positive pull-left">
+      Cancel
+    </button>
+    <h1 class="title">Edit Calling Change</h1>
+    <div class="buttons">
+      <button class="button button-clear button-positive">
+        Done
+      </button>
+    </div>
+  </div>
+
+  {{#ionView}}
+    {{#ionContent}}
+      {{#with callingChangeData}}
+        {{#ionList}}
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Type
+            </div>
+            <select id="type" name="type">
+              <option value="Call">Call</option>
+              <option value="Release">Release</option>
+            </select>
+          </label>
+          <div class="item item-divider">
+          </div>
+          {{>callingChangeFields}}
+
+          {{#if isAdmin}}
+            <label class="item item-input item-select">
+              <div class="input-label">
+                Created By
+              </div>
+              <select id="postUser">
+                {{#each users}}
+                <option {{isSelected this}} value="{{_id}}">{{userName}}</option>
+                {{/each}}
+              </select>
+            </label>
+          {{/if}}
+
+        {{/ionList}}
+        <div class="padding">
+          <input type="submit" data-dismiss="modal" class="button button-block button-positive" value="Update" />
+        </div>
+      {{/with}}
+    {{/ionContent}}
+  {{/ionView}}
+
 </template>
