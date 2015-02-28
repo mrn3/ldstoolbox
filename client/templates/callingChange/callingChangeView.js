@@ -63,7 +63,7 @@ Template.callingChangeView.events({
     IonActionSheet.show({
       titleText: '',
       buttons: [],
-      destructiveText: 'Delete',
+      destructiveText: 'Delete Calling Change',
       cancelText: 'Cancel',
       cancel: function() {},
       destructiveButtonClicked: function() {
@@ -94,27 +94,6 @@ Template.callingChangeView.events({
       });
     }
   },
-  'click [data-action=markApproved]': function(e, instance){
-    var callingChange = this;
-    var updateObject = {};
-    var properties = {
-      memberName:       callingChange.memberName,
-      callingName:      callingChange.callingName,
-      notes:            callingChange.notes,
-      status:           "Approved",
-      dateApproved:     new Date()
-    };
-    if (properties) {
-      updateObject.$set = properties;
-      callingChangeCollection.update(callingChange._id, updateObject, function(error){
-        if(error) {
-          console.log(error);
-        }else{
-          Router.go("callingChangeList");
-        }
-      });
-    }
-  },
   'click [data-action=markInterviewed]': function(e, instance){
     var callingChange = this;
     var updateObject = {};
@@ -127,6 +106,7 @@ Template.callingChangeView.events({
       dateInterviewed:  new Date()
     };
     if (properties) {
+      //calculatedDatePresented = moment($('#dateInterviewed').val()).day(7);
       updateObject.$set = properties;
       callingChangeCollection.update(callingChange._id, updateObject, function(error){
         if(error) {

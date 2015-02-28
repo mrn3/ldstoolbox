@@ -1,40 +1,35 @@
 <template name="callingChangeCreate">
 
-  {{#ionModal title="Create Calling Change"}}
-    {{#ionView}}
-      {{#ionContent}}
-        {{#ionList}}
-          <label class="item item-input item-select">
-            <div class="input-label">
-              Type
-            </div>
-            <select id="type" name="type">
-              <option value="Call">Call</option>
-              <option value="Release">Release</option>
-            </select>
-          </label>
-          <div class="item item-divider">
+  <div class="bar bar-header bar-stable">
+    <div class="buttons">
+      <a class="button button-clear pull-left button-positive" href="javascript: history.back();">
+        Cancel
+      </a>
+    </div>
+    <h1 class="title">Create Calling Change</h1>
+    <div class="buttons">
+      <a id="createButton" class="button button-clear pull-right button-positive">
+        Done
+      </a>
+    </div>
+  </div>
+
+  {{#ionView}}
+    {{#ionContent}}
+      {{#ionList}}
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Type
           </div>
-          {{>callingChangeFields}}
-
-          {{#if isAdmin}}
-            <label class="item item-input item-select">
-              <div class="input-label">
-                Created By
-              </div>
-              <select id="postUser">
-                {{#each users}}
-                <option {{isSelected this}} value="{{_id}}">{{userName}}</option>
-                {{/each}}
-              </select>
-            </label>
-          {{/if}}
-
-        {{/ionList}}
-        <div class="padding">
-          <input type="submit" data-dismiss="modal" class="button button-block button-positive" value="Create" />
+          <select id="type" name="type">
+            <option value="Call">Call</option>
+            <option value="Release">Release</option>
+          </select>
+        </label>
+        <div class="item item-divider">
         </div>
-      {{/ionContent}}
-    {{/ionView}}
-  {{/ionModal}}
+        {{>callingChangeFields}}
+      {{/ionList}}
+    {{/ionContent}}
+  {{/ionView}}
 </template>

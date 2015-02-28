@@ -1,21 +1,17 @@
 <template name="callingChangeList">
 
-  {{#contentFor "headerButtonLeft"}}
-    <button class="button button-clear pull-left" data-ion-menu-toggle="left">
-      {{#if isAndroid}}
-        {{> ionIcon icon='android-more-vertical'}}
-      {{else}}
-        {{> ionIcon icon='navicon'}}
-      {{/if}}
-    </button>
-  {{/contentFor}}
-
-  {{#contentFor "headerTitle"}}
-    <h1 class="title">Calling Changes</h1>
-  {{/contentFor}}
-
-  {{#contentFor "headerButtonRight"}}
-    <div class="button button-clear">
+  <div class="bar bar-header bar-stable">
+    <div class="buttons">
+      <button class="button button-clear pull-left" data-ion-menu-toggle="left">
+        {{#if isAndroid}}
+          {{> ionIcon icon='android-more-vertical'}}
+        {{else}}
+          {{> ionIcon icon='navicon'}}
+        {{/if}}
+      </button>
+    </div>
+    <h1 class="title">Calling Change</h1>
+    <div class="buttons">
       <button class="button button-clear pull-right" data-ion-menu-toggle="right">
         {{#if isAndroid}}
           {{> ionIcon icon='android-search'}}
@@ -23,11 +19,11 @@
           {{> ionIcon icon='ios-search'}}
         {{/if}}
       </button>
-      <button class="button button-clear button-positive" data-ion-modal="callingChangeCreate">
+      <a class="button button-clear pull-right button-positive" href="/callingChangeCreate/">
         {{> ionIcon icon='ios-plus-empty'}}
-      </button>
+      </a>
     </div>
-  {{/contentFor}}
+  </div>
 
   {{#ionView}}
     {{#ionContent}}

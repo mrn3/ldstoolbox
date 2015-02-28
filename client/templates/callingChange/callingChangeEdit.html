@@ -1,14 +1,16 @@
 <template name="callingChangeEdit">
 
   <div class="bar bar-header bar-stable">
-    <button class="button button-clear button-positive pull-left">
-      Cancel
-    </button>
+    <div class="buttons">
+      <a class="button button-clear pull-left button-positive" href="javascript: history.back();">
+        Cancel
+      </a>
+    </div>
     <h1 class="title">Edit Calling Change</h1>
     <div class="buttons">
-      <button class="button button-clear button-positive">
+      <a id="editButton" class="button button-clear pull-right button-positive">
         Done
-      </button>
+      </a>
     </div>
   </div>
 
@@ -28,24 +30,7 @@
           <div class="item item-divider">
           </div>
           {{>callingChangeFields}}
-
-          {{#if isAdmin}}
-            <label class="item item-input item-select">
-              <div class="input-label">
-                Created By
-              </div>
-              <select id="postUser">
-                {{#each users}}
-                <option {{isSelected this}} value="{{_id}}">{{userName}}</option>
-                {{/each}}
-              </select>
-            </label>
-          {{/if}}
-
         {{/ionList}}
-        <div class="padding">
-          <input type="submit" data-dismiss="modal" class="button button-block button-positive" value="Update" />
-        </div>
       {{/with}}
     {{/ionContent}}
   {{/ionView}}
