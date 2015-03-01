@@ -13,16 +13,13 @@ Template.meetingCreate.events({
     var properties = {
       createdBy:            Meteor.userId(),
       createdAt:            new Date(),
-      type:                 $('#type').val(),
-      memberName:           $('#memberName').val(),
-      callingName:          $('#callingName').val(),
-      notes:                $('#notes').val(),
-      dateDiscussed:        new Date(),
-      status:               "Discussed"
+      meetingDate:          $('#meetingDate').val(),
+      organist:             $('#organist').val(),
+      announcements:        $('#announcements').val()
     };
 
     if (properties) {
-      Meteor.call('insertmeeting', properties, function(error, meeting) {
+      Meteor.call('insertMeeting', properties, function(error, meeting) {
         if(error) {
           console.log(error.reason);
         } else {

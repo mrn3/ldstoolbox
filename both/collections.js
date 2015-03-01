@@ -30,16 +30,15 @@ Meteor.methods({
   insertCallingChange: function(callingChange){
     callingChange._id = callingChangeCollection.insert(callingChange);
     return callingChange;
-  },
-  updateCallingChange: function(callingChangeId, properties){
-    var updateObject = {};
-    updateObject.$set = properties;
-
-    console.log(updateObject);
-    callingChangeCollection.update(callingChangeId, updateObject);
   }
 });
-
+meetingCollection = new Meteor.Collection("meeting");
+Meteor.methods({
+  insertMeeting: function(meeting){
+    meeting._id = meetingCollection.insert(meeting);
+    return meeting;
+  }
+});
 householdCollection = new Meteor.Collection("household");
 memberCollection = new Meteor.Collection("member");
 unitCollection = new Meteor.Collection("unit");

@@ -3,6 +3,7 @@ Template.callingChangeEdit.events({
     e.preventDefault();
 
     var callingChange = this;
+    var updateObject = {};
 
     if(!Meteor.user()){
       console.log('You must be logged in.');
@@ -19,9 +20,11 @@ Template.callingChangeEdit.events({
     };
 
     if (properties) {
-      Meteor.call('updateCallingChange', callingChange._id, properties, function(error, callingChange) {
-        if(error) {
-          console.log(error.reason);
+      updateObject.$set = properties;
+      console.log(updateObject);
+      callingChangeCollection.update(callingChange._id, updateObject, function(error){
+        if(error){
+          console.log(error);
         } else {
           Router.go("callingChangeList");
         }

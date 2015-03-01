@@ -63,7 +63,7 @@ Template.meetingView.events({
     IonActionSheet.show({
       titleText: '',
       buttons: [],
-      destructiveText: 'Delete Calling Change',
+      destructiveText: 'Delete Meeting',
       cancelText: 'Cancel',
       cancel: function() {},
       destructiveButtonClicked: function() {
