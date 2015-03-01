@@ -10,77 +10,26 @@
         <a class="button button-clear pull-right button-positive" href="/meetingEdit/{{_id}}">
           Edit
         </a>
+        <a id="editButton" class="button button-clear pull-right button-positive">
+          Done
+        </a>
       </div>
     </div>
 
     {{#ionView}}
       {{#ionContent}}
         {{#ionList}}
-          <label class="item item-input">
-            <span class="input-label">Type</span>
-            {{type}}
-          </label>
-          <label class="item item-input">
-            <span class="input-label">Member Name</span>
-            {{memberName}}
-          </label>
-          <label class="item item-input">
-            <span class="input-label">Calling Name</span>
-            {{callingName}}
-          </label>
-          <label class="item item-input">
-            <span class="input-label">Notes</span>
-            {{notes}}
-          </label>
-          <label class="item item-input">
-            <span class="input-label">Status</span>
-            {{status}}
-          </label>
+          {{>meetingFields}}
+          <div class="item item-divider">
+            &nbsp;
+          </div>
+          <a class="button button-positive button-full button-clear" data-action="showActionSheet">
+            Delete Meeting
+          </a>
+          <div class="item item-divider">
+            &nbsp;
+          </div>
         {{/ionList}}
-
-        {{#if isDiscussed status}}
-          <div class="padding">
-            <input type="button" data-action="markApproved" class="button button-block button-positive" value="Mark Approved" />
-          </div>
-        {{/if}}
-
-        {{#if isApproved status}}
-          <div class="padding">
-            <input type="button" data-action="markInterviewed" class="button button-block button-positive" value="Mark Interviewed" />
-          </div>
-        {{/if}}
-
-        {{#if isInterviewed status}}
-          <div class="padding">
-            <input type="button" data-action="markPresented" class="button button-block button-positive" value="Mark Presented" />
-          </div>
-        {{/if}}
-
-        {{#if isPresented status}}
-          <div class="padding">
-            <input type="button" data-action="markRecorded" class="button button-block button-positive" value="Mark Recorded" />
-          </div>
-        {{/if}}
-
-        {{#if isRecorded status}}
-          <div class="padding">
-            <input type="button" data-action="markSetApart" class="button button-block button-positive" value="Mark Set Apart" />
-          </div>
-        {{/if}}
-
-        {{#if isSetApart status}}
-          <div class="padding">
-            <input type="button" data-action="markSetApartRecorded" class="button button-block button-positive" value="Mark Set Apart Recorded" />
-          </div>
-        {{/if}}
-
-        <div class="bar bar-footer bar-light">
-          <div class="title">
-            <h1 class="title" data-action="showActionSheet">
-              Delete Meeting
-            </h1>
-          </div>
-        </div>
       {{/ionContent}}
     {{/ionView}}
 

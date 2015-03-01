@@ -1,62 +1,3 @@
-Template.meetingView.helpers({
-  isDiscussed: function (status) {
-    if (status == "Discussed") {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  isApproved: function (status) {
-    if (status == "Approved") {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  isInterviewed: function (status) {
-    if (status == "Interviewed") {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  isPresented: function (status) {
-    if (status == "Presented") {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  isRecorded: function (status) {
-    if (status == "Recorded") {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  isSetApart: function (status) {
-    if (status == "Set Apart") {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  isSetApartRecorded: function (status) {
-    if (status == "Set Apart Recorded") {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  isCanceled: function (status) {
-    if (status == "Canceled") {
-      return true;
-    } else {
-      return false;
-    }
-  }
-});
-
 Template.meetingView.events({
   'click [data-action=showActionSheet]': function(e, instance){
     var meeting = this;
@@ -73,137 +14,44 @@ Template.meetingView.events({
       }
     });
   },
-  'click [data-action=markApproved]': function(e, instance){
+  'click #editButton': function(e, instance){
     var meeting = this;
     var updateObject = {};
     var properties = {
-      memberName:     meeting.memberName,
-      callingName:    meeting.callingName,
-      notes:          meeting.notes,
-      status:         "Approved",
-      dateApproved:   new Date()
-    };
-    if (properties) {
-      updateObject.$set = properties;
-      meetingCollection.update(meeting._id, updateObject, function(error){
-        if(error) {
-          console.log(error);
-        }else{
-          Router.go("meetingList");
-        }
-      });
-    }
-  },
-  'click [data-action=markInterviewed]': function(e, instance){
-    var meeting = this;
-    var updateObject = {};
-    var properties = {
-      memberName:       meeting.memberName,
-      callingName:      meeting.callingName,
-      notes:            meeting.notes,
-      status:           "Interviewed",
-      dateApproved:     meeting.dateApproved,
-      dateInterviewed:  new Date()
-    };
-    if (properties) {
-      //calculatedDatePresented = moment($('#dateInterviewed').val()).day(7);
-      updateObject.$set = properties;
-      meetingCollection.update(meeting._id, updateObject, function(error){
-        if(error) {
-          console.log(error);
-        }else{
-          Router.go("meetingList");
-        }
-      });
-    }
-  },
-  'click [data-action=markPresented]': function(e, instance){
-    var meeting = this;
-    var updateObject = {};
-    var properties = {
-      memberName:       meeting.memberName,
-      callingName:      meeting.callingName,
-      notes:            meeting.notes,
-      status:           "Presented",
-      dateApproved:     meeting.dateApproved,
-      dateInterviewed:  meeting.dateInterviewed,
-      datePresented:    new Date()
-    };
-    if (properties) {
-      updateObject.$set = properties;
-      meetingCollection.update(meeting._id, updateObject, function(error){
-        if(error) {
-          console.log(error);
-        }else{
-          Router.go("meetingList");
-        }
-      });
-    }
-  },
-  'click [data-action=markRecorded]': function(e, instance){
-    var meeting = this;
-    var updateObject = {};
-    var properties = {
-      memberName:       meeting.memberName,
-      callingName:      meeting.callingName,
-      notes:            meeting.notes,
-      status:           "Recorded",
-      dateApproved:     meeting.dateApproved,
-      dateInterviewed:  meeting.dateInterviewed,
-      datePresented:    meeting.datePresented,
-      dateRecorded:     new Date()
-    };
-    if (properties) {
-      updateObject.$set = properties;
-      meetingCollection.update(meeting._id, updateObject, function(error){
-        if(error) {
-          console.log(error);
-        }else{
-          Router.go("meetingList");
-        }
-      });
-    }
-  },
-  'click [data-action=markSetApart]': function(e, instance){
-    var meeting = this;
-    var updateObject = {};
-    var properties = {
-      memberName:       meeting.memberName,
-      callingName:      meeting.callingName,
-      notes:            meeting.notes,
-      status:           "Set Apart",
-      dateApproved:     meeting.dateApproved,
-      dateInterviewed:  meeting.dateInterviewed,
-      datePresented:    meeting.datePresented,
-      dateRecorded:     meeting.dateRecorded,
-      dateSetApart:     new Date()
-    };
-    if (properties) {
-      updateObject.$set = properties;
-      meetingCollection.update(meeting._id, updateObject, function(error){
-        if(error) {
-          console.log(error);
-        }else{
-          Router.go("meetingList");
-        }
-      });
-    }
-  },
-  'click [data-action=markSetApartRecorded]': function(e, instance){
-    var meeting = this;
-    var updateObject = {};
-    var properties = {
-      memberName:           meeting.memberName,
-      callingName:          meeting.callingName,
-      notes:                meeting.notes,
-      status:               "Set Apart Recorded",
-      dateApproved:         meeting.dateApproved,
-      dateInterviewed:      meeting.dateInterviewed,
-      datePresented:        meeting.datePresented,
-      dateRecorded:         meeting.dateRecorded,
-      dateSetApart:         meeting.dateSetApart,
-      dateSetApartRecorded: new Date()
-    };
+      createdBy:            Meteor.userId(),
+      createdAt:            new Date(),
+      meetingDate:          $('#meetingDate').val(),
+      presiding:            $('#presiding').val(),
+      conducting:           $('#conducting').val(),
+      visitingAuthority:    $('#visitingAuthority').val(),
+      organist:             $('#organist').val(),
+      chorister:            $('#chorister').val(),
+      announcements:        $('#announcements').val(),
+      openingHymn:          $('#openingHymn').val(),
+      sacramentHymn:        $('#sacramentHymn').val(),
+      intermediateHymn:     $('#intermediateHymn').val(),
+      musicalNumber:        $('#musicalNumber').val(),
+      closingHymn:          $('#closingHymn').val(),
+      invocation:           $('#invocation').val(),
+      benediction:          $('#benediction').val(),
+      speaker1:             $('#speaker1').val(),
+      speaker2:             $('#speaker2').val(),
+      speaker3:             $('#speaker3').val(),
+      speaker4:             $('#speaker4').val(),
+      speaker5:             $('#speaker5').val(),
+      recognition1Type:     $('#recognition1Type').val(),
+      recognition1Person1:  $('#recognition1Person1').val(),
+      recognition1Person2:  $('#recognition1Person2').val(),
+      recognition1Person3:  $('#recognition1Person3').val(),
+      recognition2Type:     $('#recognition2Type').val(),
+      recognition2Person1:  $('#recognition2Person1').val(),
+      recognition2Person2:  $('#recognition2Person2').val(),
+      recognition2Person3:  $('#recognition2Person3').val(),
+      recognition3Type:     $('#recognition3Type').val(),
+      recognition3Person1:  $('#recognition3Person1').val(),
+      recognition3Person2:  $('#recognition3Person2').val(),
+      recognition3Person3:  $('#recognition3Person3').val()
+    };  
     if (properties) {
       updateObject.$set = properties;
       meetingCollection.update(meeting._id, updateObject, function(error){

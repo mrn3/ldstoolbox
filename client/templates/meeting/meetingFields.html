@@ -63,6 +63,10 @@
     <span class="input-label">Visiting Authority</span>
     <input type="text" id="visitingAuthority" placeholder="Visiting Authority" value="{{visitingAuthority}}">
   </label>
+  <label class="item item-input">
+    <span class="input-label">Attendance</span>
+    <input type="text" id="attendance" placeholder="Attendance" value="{{attendance}}">
+  </label>
 
   <div class="item item-divider">
     Announcements
@@ -120,43 +124,30 @@
       </ul>
     </div>
   </div>
-  <h4>Ordinances and Recognitions</h4>
-  <div class="control-group">
-    <label class="control-label">Recognition 1</label>
-    <div class="controls">
-      <input id="recognition1Type" name="recognition1Type" type="text" value="{{recognition1Type}}" placeholder="Recognition 1 Type" style="width: 270px" class="form-control typeahead" autocomplete="off" spellcheck="off" data-source="recognitionTypeList" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /><br />
-      <input id="recognition1Person1" name="recognition1Person1" type="text" value="{{recognition1Person1}}" placeholder="Recognition 1 Person 1" style="width: 270px" class="form-control typeahead" autocomplete="off" spellcheck="off" data-source="membersList" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /><br />
-      <input id="recognition1Person2" name="recognition1Person2" type="text" value="{{recognition1Person2}}" placeholder="Recognition 1 Person 2" style="width: 270px" class="form-control typeahead" autocomplete="off" spellcheck="off" data-source="membersList" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /><br />
-      <input id="recognition1Person3" name="recognition1Person3" type="text" value="{{recognition1Person3}}" placeholder="Recognition 1 Person 3" style="width: 270px" class="form-control typeahead" autocomplete="off" spellcheck="off" data-source="membersList" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /><br />
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label">Recognition 2</label>
-    <div class="controls">
-      <input id="recognition2Type" name="recognition2Type" type="text" value="{{recognition2Type}}" placeholder="Recognition 2 Type" style="width: 270px" class="form-control typeahead" autocomplete="off" spellcheck="off" data-source="recognitionTypeList" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /><br />
-      <input id="recognition2Person1" name="recognition2Person1" type="text" value="{{recognition2Person1}}" placeholder="Recognition 2 Person 1" style="width: 270px" class="form-control typeahead" autocomplete="off" spellcheck="off" data-source="membersList" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /><br />
-      <input id="recognition2Person2" name="recognition2Person2" type="text" value="{{recognition2Person2}}" placeholder="Recognition 2 Person 2" style="width: 270px" class="form-control typeahead" autocomplete="off" spellcheck="off" data-source="membersList" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /><br />
-      <input id="recognition2Person3" name="recognition2Person3" type="text" value="{{recognition2Person3}}" placeholder="Recognition 2 Person 3" style="width: 270px" class="form-control typeahead" autocomplete="off" spellcheck="off" data-source="membersList" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /><br />
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label">Recognition 3</label>
-    <div class="controls">
-      <input id="recognition3Type" name="recognition3Type" type="text" value="{{recognition3Type}}" placeholder="Recognition 3 Type" style="width: 270px" class="form-control typeahead" autocomplete="off" spellcheck="off" data-source="recognitionTypeList" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /><br />
-      <input id="recognition3Person1" name="recognition3Person1" type="text" value="{{recognition3Person1}}" placeholder="Recognition 3 Person 1" style="width: 270px" class="form-control typeahead" autocomplete="off" spellcheck="off" data-source="membersList" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /><br />
-      <input id="recognition3Person2" name="recognition3Person2" type="text" value="{{recognition3Person2}}" placeholder="Recognition 3 Person 2" style="width: 270px" class="form-control typeahead" autocomplete="off" spellcheck="off" data-source="membersList" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /><br />
-      <input id="recognition3Person3" name="recognition3Person3" type="text" value="{{recognition3Person3}}" placeholder="Recognition 3 Person 3" style="width: 270px" class="form-control typeahead" autocomplete="off" spellcheck="off" data-source="membersList" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" /><br />
-    </div>
-  </div>
-  <h4>Memberships Received</h4>
-  <h3>Attendance</h3>
-  <div class="control-group">
-    <label class="control-label">Attendance</label>
-    <div class="controls">
-      <input id="attendanceCount" name="attendanceCount" type="text" value="{{attendanceCount}}" placeholder="Attendance" class="form-control" />
-      <button id="incrementAttendanceCount" name="incrementAttendanceCount" style="width: 200px">+</button>
-      <button id="decrementAttendanceCount" name="decrementAttendanceCount" style="width: 200px">-</button>
-    </div>
-  </div>
   //-->
+
+  <div class="item item-divider">
+    Ordinances and Recognitions
+  </div>
+  <label class="item item-input">
+    <span class="input-label">Recognition 1</span>
+    <input type="text" id="recognition1Type" placeholder="Recognition 1 Type" value="{{recognition1Type}}">
+    <input type="text" id="recognition1Person1" placeholder="Recognition 1 Person 1" value="{{recognition1Person1}}">
+    <input type="text" id="recognition1Person2" placeholder="Recognition 1 Person 2" value="{{recognition1Person2}}">
+    <input type="text" id="recognition1Person3" placeholder="Recognition 1 Person 3" value="{{recognition1Person3}}">
+  </label>
+  <label class="item item-input">
+    <span class="input-label">Recognition 2</span>
+    <input type="text" id="recognition2Type" placeholder="Recognition 2 Type" value="{{recognition2Type}}">
+    <input type="text" id="recognition2Person1" placeholder="Recognition 2 Person 1" value="{{recognition2Person1}}">
+    <input type="text" id="recognition2Person2" placeholder="Recognition 2 Person 2" value="{{recognition2Person2}}">
+    <input type="text" id="recognition2Person3" placeholder="Recognition 2 Person 3" value="{{recognition2Person3}}">
+  </label>
+  <label class="item item-input">
+    <span class="input-label">Recognition 3</span>
+    <input type="text" id="recognition3Type" placeholder="Recognition 3 Type" value="{{recognition3Type}}">
+    <input type="text" id="recognition3Person1" placeholder="Recognition 3 Person 1" value="{{recognition3Person1}}">
+    <input type="text" id="recognition3Person2" placeholder="Recognition 3 Person 2" value="{{recognition3Person2}}">
+    <input type="text" id="recognition3Person3" placeholder="Recognition 3 Person 3" value="{{recognition3Person3}}">
+  </label>
 </template>

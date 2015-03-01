@@ -6,7 +6,7 @@
         Cancel
       </a>
     </div>
-    <h1 class="title">Edit Calling Change</h1>
+    <h1 class="title">Edit Meeting</h1>
     <div class="buttons">
       <a id="editButton" class="button button-clear pull-right button-positive">
         Done
@@ -18,15 +18,6 @@
     {{#ionContent}}
       {{#with meetingData}}
         {{#ionList}}
-          <label class="item item-input item-select">
-            <div class="input-label">
-              Type
-            </div>
-            <select id="type" name="type">
-              <option value="Call">Call</option>
-              <option value="Release">Release</option>
-            </select>
-          </label>
           {{>meetingFields}}
         {{/ionList}}
       {{/with}}
