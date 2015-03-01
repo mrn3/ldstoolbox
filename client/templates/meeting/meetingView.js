@@ -1,4 +1,4 @@
-Template.callingChangeView.helpers({
+Template.meetingView.helpers({
   isDiscussed: function (status) {
     if (status == "Discussed") {
       return true;
@@ -57,9 +57,9 @@ Template.callingChangeView.helpers({
   }
 });
 
-Template.callingChangeView.events({
+Template.meetingView.events({
   'click [data-action=showActionSheet]': function(e, instance){
-    var callingChange = this;
+    var meeting = this;
     IonActionSheet.show({
       titleText: '',
       buttons: [],
@@ -67,117 +67,150 @@ Template.callingChangeView.events({
       cancelText: 'Cancel',
       cancel: function() {},
       destructiveButtonClicked: function() {
-        callingChangeCollection.remove(callingChange._id);
-        Router.go("callingChangeList");
+        meetingCollection.remove(meeting._id);
+        Router.go("meetingList");
         return true;
       }
     });
   },
   'click [data-action=markApproved]': function(e, instance){
-    var callingChange = this;
+    var meeting = this;
     var updateObject = {};
     var properties = {
+      memberName:     meeting.memberName,
+      callingName:    meeting.callingName,
+      notes:          meeting.notes,
       status:         "Approved",
       dateApproved:   new Date()
     };
     if (properties) {
       updateObject.$set = properties;
-      callingChangeCollection.update(callingChange._id, updateObject, function(error){
+      meetingCollection.update(meeting._id, updateObject, function(error){
         if(error) {
           console.log(error);
         }else{
-          Router.go("callingChangeList");
+          Router.go("meetingList");
         }
       });
     }
   },
   'click [data-action=markInterviewed]': function(e, instance){
-    var callingChange = this;
+    var meeting = this;
     var updateObject = {};
     var properties = {
+      memberName:       meeting.memberName,
+      callingName:      meeting.callingName,
+      notes:            meeting.notes,
       status:           "Interviewed",
+      dateApproved:     meeting.dateApproved,
       dateInterviewed:  new Date()
     };
     if (properties) {
       //calculatedDatePresented = moment($('#dateInterviewed').val()).day(7);
       updateObject.$set = properties;
-      callingChangeCollection.update(callingChange._id, updateObject, function(error){
+      meetingCollection.update(meeting._id, updateObject, function(error){
         if(error) {
           console.log(error);
         }else{
-          Router.go("callingChangeList");
+          Router.go("meetingList");
         }
       });
     }
   },
   'click [data-action=markPresented]': function(e, instance){
-    var callingChange = this;
+    var meeting = this;
     var updateObject = {};
     var properties = {
+      memberName:       meeting.memberName,
+      callingName:      meeting.callingName,
+      notes:            meeting.notes,
       status:           "Presented",
+      dateApproved:     meeting.dateApproved,
+      dateInterviewed:  meeting.dateInterviewed,
       datePresented:    new Date()
     };
     if (properties) {
       updateObject.$set = properties;
-      callingChangeCollection.update(callingChange._id, updateObject, function(error){
+      meetingCollection.update(meeting._id, updateObject, function(error){
         if(error) {
           console.log(error);
         }else{
-          Router.go("callingChangeList");
+          Router.go("meetingList");
         }
       });
     }
   },
   'click [data-action=markRecorded]': function(e, instance){
-    var callingChange = this;
+    var meeting = this;
     var updateObject = {};
     var properties = {
+      memberName:       meeting.memberName,
+      callingName:      meeting.callingName,
+      notes:            meeting.notes,
       status:           "Recorded",
+      dateApproved:     meeting.dateApproved,
+      dateInterviewed:  meeting.dateInterviewed,
+      datePresented:    meeting.datePresented,
       dateRecorded:     new Date()
     };
     if (properties) {
       updateObject.$set = properties;
-      callingChangeCollection.update(callingChange._id, updateObject, function(error){
+      meetingCollection.update(meeting._id, updateObject, function(error){
         if(error) {
           console.log(error);
         }else{
-          Router.go("callingChangeList");
+          Router.go("meetingList");
         }
       });
     }
   },
   'click [data-action=markSetApart]': function(e, instance){
-    var callingChange = this;
+    var meeting = this;
     var updateObject = {};
     var properties = {
+      memberName:       meeting.memberName,
+      callingName:      meeting.callingName,
+      notes:            meeting.notes,
       status:           "Set Apart",
+      dateApproved:     meeting.dateApproved,
+      dateInterviewed:  meeting.dateInterviewed,
+      datePresented:    meeting.datePresented,
+      dateRecorded:     meeting.dateRecorded,
       dateSetApart:     new Date()
     };
     if (properties) {
       updateObject.$set = properties;
-      callingChangeCollection.update(callingChange._id, updateObject, function(error){
+      meetingCollection.update(meeting._id, updateObject, function(error){
         if(error) {
           console.log(error);
         }else{
-          Router.go("callingChangeList");
+          Router.go("meetingList");
         }
       });
     }
   },
   'click [data-action=markSetApartRecorded]': function(e, instance){
-    var callingChange = this;
+    var meeting = this;
     var updateObject = {};
     var properties = {
+      memberName:           meeting.memberName,
+      callingName:          meeting.callingName,
+      notes:                meeting.notes,
       status:               "Set Apart Recorded",
+      dateApproved:         meeting.dateApproved,
+      dateInterviewed:      meeting.dateInterviewed,
+      datePresented:        meeting.datePresented,
+      dateRecorded:         meeting.dateRecorded,
+      dateSetApart:         meeting.dateSetApart,
       dateSetApartRecorded: new Date()
     };
     if (properties) {
       updateObject.$set = properties;
-      callingChangeCollection.update(callingChange._id, updateObject, function(error){
+      meetingCollection.update(meeting._id, updateObject, function(error){
         if(error) {
           console.log(error);
         }else{
-          Router.go("callingChangeList");
+          Router.go("meetingList");
         }
       });
     }

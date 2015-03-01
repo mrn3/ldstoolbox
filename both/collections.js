@@ -30,6 +30,13 @@ Meteor.methods({
   insertCallingChange: function(callingChange){
     callingChange._id = callingChangeCollection.insert(callingChange);
     return callingChange;
+  },
+  updateCallingChange: function(callingChangeId, properties){
+    var updateObject = {};
+    updateObject.$set = properties;
+
+    console.log(updateObject);
+    callingChangeCollection.update(callingChangeId, updateObject);
   }
 });
 

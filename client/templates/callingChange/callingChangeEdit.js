@@ -3,7 +3,6 @@ Template.callingChangeEdit.events({
     e.preventDefault();
 
     var callingChange = this;
-    var insertObject = {};
 
     if(!Meteor.user()){
       console.log('You must be logged in.');
@@ -11,21 +10,18 @@ Template.callingChangeEdit.events({
     }
 
     var properties = {
-      createdBy:            Meteor.userId(),
-      createdAt:            new Date(),
+      updatedBy:            Meteor.userId(),
+      updatedAt:            new Date(),
       type:                 $('#type').val(),
       memberName:           $('#memberName').val(),
       callingName:          $('#callingName').val(),
-      notes:                $('#notes').val(),
-      dateDiscussed:        new Date(),
-      status:               "Discussed"
+      notes:                $('#notes').val()
     };
 
     if (properties) {
-      updateObject.$set = properties;
-      callingChangesCollection.update(callingChange._id, updateObject, function(error){
-        if(error){
-          console.log(error);
+      Meteor.call('updateCallingChange', callingChange._id, properties, function(error, callingChange) {
+        if(error) {
+          console.log(error.reason);
         } else {
           Router.go("callingChangeList");
         }

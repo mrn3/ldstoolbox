@@ -12,7 +12,7 @@ Meteor.startup(function () {
 });
 
 Router.map(function() {
-  this.route('sideMenu', {path: '/'});
+  this.route('home', {path: '/'});
   this.route('/memberList/', {
     name: 'memberList',
     data: function() {
@@ -85,6 +85,36 @@ Router.map(function() {
     data: function() {
       return {
         callingChangeData: callingChangeCollection.findOne(this.params._id)
+      };
+    },
+    fastRender: true
+  });
+  this.route('/meetingList/', {
+    name: 'meetingList',
+    data: function() {
+      return {
+        meetingData: meetingCollection.find({})
+      };
+    },
+    fastRender: true
+  });
+  this.route('/meetingView/:_id', {
+    name: 'meetingView',
+    data: function() {
+      return {
+        meetingData: meetingCollection.findOne(this.params._id)
+      };
+    },
+    fastRender: true
+  });
+  this.route('/meetingCreate/', {
+    name: 'meetingCreate'
+  });
+  this.route('/meetingEdit/:_id', {
+    name: 'meetingEdit',
+    data: function() {
+      return {
+        meetingData: meetingCollection.findOne(this.params._id)
       };
     },
     fastRender: true

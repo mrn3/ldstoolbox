@@ -1,0 +1,36 @@
+<template name="meetingEdit">
+
+  <div class="bar bar-header bar-stable">
+    <div class="buttons">
+      <a class="button button-clear pull-left button-positive" href="javascript: history.back();">
+        Cancel
+      </a>
+    </div>
+    <h1 class="title">Edit Calling Change</h1>
+    <div class="buttons">
+      <a id="editButton" class="button button-clear pull-right button-positive">
+        Done
+      </a>
+    </div>
+  </div>
+
+  {{#ionView}}
+    {{#ionContent}}
+      {{#with meetingData}}
+        {{#ionList}}
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Type
+            </div>
+            <select id="type" name="type">
+              <option value="Call">Call</option>
+              <option value="Release">Release</option>
+            </select>
+          </label>
+          {{>meetingFields}}
+        {{/ionList}}
+      {{/with}}
+    {{/ionContent}}
+  {{/ionView}}
+
+</template>
