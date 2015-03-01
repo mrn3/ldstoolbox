@@ -1,27 +1,34 @@
 <template name="meetingEdit">
 
-  <div class="bar bar-header bar-stable">
-    <div class="buttons">
-      <a class="button button-clear pull-left button-positive" href="javascript: history.back();">
-        Cancel
-      </a>
+  {{#with meetingData}}
+    <div class="bar bar-header bar-stable">
+      <div class="buttons">
+        {{>ionNavBackButton path="meetingList"}}
+      </div>
+      <h1 class="title">Meeting</h1>
+      <div class="buttons">
+        <a id="editButton" class="button button-clear pull-right button-positive">
+          Done
+        </a>
+      </div>
     </div>
-    <h1 class="title">Edit Meeting</h1>
-    <div class="buttons">
-      <a id="editButton" class="button button-clear pull-right button-positive">
-        Done
-      </a>
-    </div>
-  </div>
 
-  {{#ionView}}
-    {{#ionContent}}
-      {{#with meetingData}}
+    {{#ionView}}
+      {{#ionContent}}
         {{#ionList}}
           {{>meetingFields}}
+          <div class="item item-divider">
+            &nbsp;
+          </div>
+          <a class="button button-positive button-full button-clear" data-action="showActionSheet">
+            Delete Meeting
+          </a>
+          <div class="item item-divider">
+            &nbsp;
+          </div>
         {{/ionList}}
-      {{/with}}
-    {{/ionContent}}
-  {{/ionView}}
+      {{/ionContent}}
+    {{/ionView}}
 
+  {{/with}}
 </template>

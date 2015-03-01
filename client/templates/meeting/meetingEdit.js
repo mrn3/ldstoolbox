@@ -1,18 +1,25 @@
 Template.meetingEdit.events({
-  'click #editButton': function(e, instance) {
-    e.preventDefault();
-
+  'click [data-action=showActionSheet]': function(e, instance){
+    var meeting = this;
+    IonActionSheet.show({
+      titleText: '',
+      buttons: [],
+      destructiveText: 'Delete Meeting',
+      cancelText: 'Cancel',
+      cancel: function() {},
+      destructiveButtonClicked: function() {
+        meetingCollection.remove(meeting._id);
+        Router.go("meetingList");
+        return true;
+      }
+    });
+  },
+  'click #editButton': function(e, instance){
     var meeting = this;
     var updateObject = {};
-
-    if(!Meteor.user()){
-      console.log('You must be logged in.');
-      return false;
-    }
-
     var properties = {
-      updatedBy:            Meteor.userId(),
-      updatedAt:            new Date(),
+      createdBy:            Meteor.userId(),
+      createdAt:            new Date(),
       meetingDate:          $('#meetingDate').val(),
       presiding:            $('#presiding').val(),
       conducting:           $('#conducting').val(),
@@ -45,13 +52,12 @@ Template.meetingEdit.events({
       recognition3Person2:  $('#recognition3Person2').val(),
       recognition3Person3:  $('#recognition3Person3').val()
     };
-
     if (properties) {
       updateObject.$set = properties;
-      meetingsCollection.update(meeting._id, updateObject, function(error){
-        if(error){
+      meetingCollection.update(meeting._id, updateObject, function(error){
+        if(error) {
           console.log(error);
-        } else {
+        }else{
           Router.go("meetingList");
         }
       });

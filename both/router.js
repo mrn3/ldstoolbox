@@ -98,15 +98,6 @@ Router.map(function() {
     },
     fastRender: true
   });
-  this.route('/meetingView/:_id', {
-    name: 'meetingView',
-    data: function() {
-      return {
-        meetingData: meetingCollection.findOne(this.params._id)
-      };
-    },
-    fastRender: true
-  });
   this.route('/meetingCreate/', {
     name: 'meetingCreate'
   });
