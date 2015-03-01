@@ -1,11 +1,58 @@
 <template name="callingChangeFields">
+<!--
+  <style>
+
+    /* basic typeahead styles */
+
+    .tt-query {
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+         -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+              box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    }
+
+    .tt-hint {
+      color: #999
+    }
+
+    .tt-dropdown-menu {
+      width: 270px;
+      margin-top: 3px;
+      padding: 8px 0;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+
+    }
+
+    .tt-suggestion {
+      padding: 3px 10px;
+      font-size: 14px;
+      line-height: 24px;
+    }
+
+    .tt-suggestion.tt-cursor {
+      color: #fff;
+      background-color: #DD3416;
+
+    }
+
+    .tt-suggestion p {
+      margin: 0;
+    }
+</style>
+//-->
   <label class="item item-input">
-    <input id="memberName" name="memberName" type="text" value="{{memberName}}" placeholder="Member Name" style="width: 270px" class="form-control typeahead" autocomplete="off" spellcheck="off" data-source="memberList" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" />
+    <!--<input id="memberName" name="memberName" type="text" value="{{memberName}}" placeholder="Member Name" class="typeahead" autocomplete="off" spellcheck="off" data-source="memberList" />//-->
+    <span class="input-label">Member Name</span>
+    <input type="text" id="memberName" placeholder="Member Name" value="{{memberName}}">
   </label>
   <label class="item item-input">
-    <input id="callingName" name="callingName" type="text" value="{{callingName}}" placeholder="Calling Name" style="width: 270px" class="form-control typeahead" autocomplete="off" spellcheck="off" onclick="this.focus(); this.setSelectionRange(0,9999);" onmouseup="return false;" />
+    <span class="input-label">Calling Name</span>
+    <!--<input id="callingName" name="callingName" type="text" value="{{callingName}}" placeholder="Calling Name" class="typeahead" autocomplete="off" spellcheck="off" />//-->
+    <input type="text" id="callingName" placeholder="Calling Name" value="{{callingName}}">
   </label>
   <label class="item item-input">
-    <textarea id="notes" name="notes" placeholder="Notes">{{notes}}</textarea>
+    <span class="input-label">Notes</span>
+    <textarea id="notes" placeholder="Notes" rows="3">{{notes}}</textarea>
   </label>
 </template>
