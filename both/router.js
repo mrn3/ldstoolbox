@@ -73,7 +73,8 @@ Router.map(function() {
     fastRender: true
   });
   this.route('/callingChangeCreate/', {
-    name: 'callingChangeCreate'
+    name: 'callingChangeCreate',
+    fastRender: true
   });
   this.route('/callingChangeEdit/:_id', {
     name: 'callingChangeEdit',

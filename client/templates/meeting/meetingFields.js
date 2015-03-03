@@ -24,7 +24,3 @@ Template.meetingFields.helpers({
     }
   }
 });
-
-Template.meetingFields.rendered = function(){
-  Meteor.typeahead.inject();
-};

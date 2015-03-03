@@ -24,7 +24,3 @@ Template.callingChangeFields.helpers({
     }
   }
 });
-
-Template.callingChangeFields.rendered = function(){
-  Meteor.typeahead.inject();
-};

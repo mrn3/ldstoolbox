@@ -1,56 +1,8 @@
 <template name="callingChangeFields">
-<!--
-  <style>
-
-    /* basic typeahead styles */
-
-    .tt-query {
-      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-         -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-              box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    }
-
-    .tt-hint {
-      color: #999
-    }
-
-    .tt-dropdown-menu {
-      width: 270px;
-      margin-top: 3px;
-      padding: 8px 0;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      border: 1px solid rgba(0, 0, 0, 0.2);
-
-    }
-
-    .tt-suggestion {
-      padding: 3px 10px;
-      font-size: 14px;
-      line-height: 24px;
-    }
-
-    .tt-suggestion.tt-cursor {
-      color: #fff;
-      background-color: #DD3416;
-
-    }
-
-    .tt-suggestion p {
-      margin: 0;
-    }
-</style>
-//-->
-<!--
-  <label class="item item-input">
-    <input id="memberName" name="memberName" type="text" value="{{memberName}}" placeholder="Member Name" class="typeahead" autocomplete="off" spellcheck="off" data-source="memberList" />//-->
-    <!--<input type="text" id="memberName" placeholder="Member Name" value="{{memberName}}">
-  </label>
-  //-->
   <a class="item item-icon-right" href="{{pathFor 'memberPickerList'}}">
     Member Name
     <span class="item-note">Grammy</span>
-    {{> ionIcon icon="ios-arrow-right"}}
+    <i class="icon ion-ios-arrow-right stable"></i>
   </a>
   <label class="item item-input">
     <span class="input-label">Calling Name</span>
