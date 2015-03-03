@@ -83,8 +83,8 @@ Template.callingChangeEdit.events({
 
     if (properties) {
       updateObject.$set = properties;
-      console.log(callingChange._id);
-      console.log(updateObject);
+      //console.log(callingChange._id);
+      //console.log(updateObject);
       callingChangeCollection.update(callingChange._id, updateObject, function(error){
         if(error){
           console.log(error);

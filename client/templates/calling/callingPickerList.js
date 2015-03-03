@@ -47,3 +47,7 @@ Template.callingPickerList.events({
     history.back();
   },
 });
+
+Template.callingPickerList.rendered = function() {
+  $('#searchInput').focus();
+};
