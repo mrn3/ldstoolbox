@@ -40,11 +40,11 @@
               {{else}}
                 <i class="icon ion-log-out positive"></i>
               {{/if}}
-              <h4>{{memberName}} ({{status}})</h4>
+              <h4>{{member.switchedPreferredName}} ({{status}})</h4>
               <h2>
-                {{callingName}}
+                {{calling.callingName}}
               </h2>
-              <i class="icon ion-ios-arrow-right stable"></i>
+              <i class="icon ion-ios-arrow-right"></i>
             </a>
           {{/each}}
         {{/ionList}}

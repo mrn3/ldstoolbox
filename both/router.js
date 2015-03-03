@@ -26,6 +26,10 @@ Router.map(function() {
     name: 'memberPickerList',
     fastRender: true
   });
+  this.route('/callingPickerList/', {
+    name: 'callingPickerList',
+    fastRender: true
+  });
   this.route('/member/:individualId', {
     name: 'member',
     data: function() {

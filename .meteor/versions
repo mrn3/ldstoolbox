@@ -46,6 +46,8 @@ logging@1.0.6
 matb33:collection-hooks@0.7.9
 meteor@1.1.4
 meteor-platform@1.2.1
+meteorhacks:aggregate@1.1.0
+meteorhacks:collection-utils@1.0.0
 meteorhacks:picker@1.0.1
 meteorhacks:search-source@1.2.0
 meteoric:autoform-ionic@0.1.5
@@ -57,6 +59,7 @@ minimongo@1.0.6
 mobile-status-bar@1.0.2
 momentjs:moment@2.8.4
 mongo@1.0.11
+mongo-livedata@1.0.7
 npm-bcrypt@0.7.7
 observe-sequence@1.0.4
 ordered-dict@1.0.2

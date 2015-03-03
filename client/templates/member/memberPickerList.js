@@ -8,10 +8,10 @@ memberSearch = new SearchSource('members', fields, options);
 
 Template.memberPickerList.helpers({
   memberData: function(){
-    //return memberCollection.find();
     return memberSearch.getData({
       transform: function(matchText, regExp) {
-        return matchText.replace(regExp, "<b>$&</b>")
+        //return matchText.replace(regExp, "<b>$&</b>")
+        return matchText.replace(regExp, "$&")
       },
       sort: {isoScore: -1}
     });
@@ -31,7 +31,7 @@ Template.memberPickerList.events({
   }, 200),
   "click #memberRadioButton": function(e, instance) {
     //console.log(this.switchedPreferredName);
-    Session.set('selectedMember', this.switchedPreferredName);
+    Session.set('selectedMember', this);
     history.back();
   },
 });

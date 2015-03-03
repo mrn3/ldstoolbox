@@ -17,3 +17,41 @@ Meteor.methods({
     }
   }
 });
+
+SearchSource.defineSource('callings', function(searchText, options) {
+  var options = {sort: {"leaders.callingName": 1}, limit: 20};
+
+  if(searchText) {
+    var regExp = buildRegExp(searchText);
+    var selector = {$or: [
+      {"leaders.callingName": regExp}
+    ]};
+
+    /*
+    var pipeline = [
+      {$match:{ 'positions.positionName': searchText}},
+      {$project:{a:'$positions.positionName'}},
+      {$unwind:'$a'},
+      {$group:{_id:'a',res:{$addToSet:'$a'}}}
+    ];
+    */
+
+    //console.log(pipeline);
+    //console.log(callingCollection);
+    //console.log(callingCollection.aggregate(pipeline));
+
+    //return callingCollection.aggregate(pipeline);
+    //console.log(selector);
+    //console.log(callingCollection.find(selector, options).fetch());
+
+    return callingCollection.find(selector, options).fetch();
+  } else {
+    return callingCollection.find({}, options).fetch();
+  }
+});
+
+function buildRegExp(searchText) {
+  // this is a dumb implementation
+  var parts = searchText.trim().split(/[ \-\:]+/);
+  return new RegExp("(" + parts.join('|') + ")", "ig");
+}

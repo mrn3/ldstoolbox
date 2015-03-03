@@ -76,14 +76,15 @@ Template.callingChangeEdit.events({
       updatedBy:            Meteor.userId(),
       updatedAt:            new Date(),
       type:                 $('#type').val(),
-      memberName:           $('#memberName').val(),
-      callingName:          $('#callingName').val(),
+      member:               Session.get("selectedMember"),
+      calling:              Session.get("selectedCalling"),
       notes:                $('#notes').val()
     };
 
     if (properties) {
       updateObject.$set = properties;
-      //console.log(updateObject);
+      console.log(callingChange._id);
+      console.log(updateObject);
       callingChangeCollection.update(callingChange._id, updateObject, function(error){
         if(error){
           console.log(error);

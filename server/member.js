@@ -1,5 +1,5 @@
 SearchSource.defineSource('members', function(searchText, options) {
-  var options = {sort: {isoScore: -1}, limit: 20};
+  var options = {sort: {switchedPreferredName: 1}, limit: 20};
 
   if(searchText) {
     var regExp = buildRegExp(searchText);
