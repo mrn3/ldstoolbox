@@ -41,11 +41,17 @@
     }
 </style>
 //-->
+<!--
   <label class="item item-input">
-    <!--<input id="memberName" name="memberName" type="text" value="{{memberName}}" placeholder="Member Name" class="typeahead" autocomplete="off" spellcheck="off" data-source="memberList" />//-->
-    <span class="input-label">Member Name</span>
-    <input type="text" id="memberName" placeholder="Member Name" value="{{memberName}}">
+    <input id="memberName" name="memberName" type="text" value="{{memberName}}" placeholder="Member Name" class="typeahead" autocomplete="off" spellcheck="off" data-source="memberList" />//-->
+    <!--<input type="text" id="memberName" placeholder="Member Name" value="{{memberName}}">
   </label>
+  //-->
+  <a class="item item-icon-right" href="{{pathFor 'memberPickerList'}}">
+    Member Name
+    <span class="item-note">Grammy</span>
+    {{> ionIcon icon="ios-arrow-right"}}
+  </a>
   <label class="item item-input">
     <span class="input-label">Calling Name</span>
     <!--<input id="callingName" name="callingName" type="text" value="{{callingName}}" placeholder="Calling Name" class="typeahead" autocomplete="off" spellcheck="off" />//-->
@@ -53,6 +59,6 @@
   </label>
   <label class="item item-input">
     <span class="input-label">Notes</span>
-    <textarea id="notes" placeholder="Notes" rows="3">{{notes}}</textarea>
+    <textarea id="notes" placeholder="Notes">{{notes}}</textarea>
   </label>
 </template>

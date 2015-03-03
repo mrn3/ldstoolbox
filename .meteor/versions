@@ -46,6 +46,8 @@ logging@1.0.6
 matb33:collection-hooks@0.7.9
 meteor@1.1.4
 meteor-platform@1.2.1
+meteorhacks:picker@1.0.1
+meteorhacks:search-source@1.2.0
 meteoric:autoform-ionic@0.1.5
 meteoric:ionic@0.1.16
 meteoric:ionic-sass@0.1.9

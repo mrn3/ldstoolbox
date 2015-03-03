@@ -1,0 +1,39 @@
+<template name="memberPickerList">
+
+  <div class="bar bar-header bar-stable">
+    <div class="buttons">
+      <a id="cancelButton" class="button button-clear button-positive">
+        Cancel
+      </a>
+    </div>
+    <h1 class="title">Select Member</h1>
+    <div class="buttons">
+      <a id="doneButton" class="button button-clear pull-right button-positive">
+        <strong>Done</strong>
+      </a>
+    </div>
+  </div>
+
+  {{#ionView}}
+    {{#ionContent}}
+      <div class="bar bar-header item-input-inset">
+        <label class="item-input-wrapper">
+          <i class="icon ion-ios7-search placeholder-icon"></i>
+          <input id="searchInput" type="search" placeholder="Search">
+        </label>
+      </div>
+      {{#ionList}}
+        {{#each memberData}}
+          <label class="item item-radio">
+            <input type="radio" name="group">
+            <div class="item-content">
+              {{{switchedPreferredName}}}
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+        {{/each}}
+      {{/ionList}}
+    {{/ionContent}}
+  {{/ionView}}
+
+</template>

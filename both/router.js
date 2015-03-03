@@ -22,6 +22,10 @@ Router.map(function() {
     },
     fastRender: true
   });
+  this.route('/memberPickerList/', {
+    name: 'memberPickerList',
+    fastRender: true
+  });
   this.route('/member/:individualId', {
     name: 'member',
     data: function() {
@@ -64,15 +68,6 @@ Router.map(function() {
     data: function() {
       return {
         callingChangeData: callingChangeCollection.find({})
-      };
-    },
-    fastRender: true
-  });
-  this.route('/callingChangeView/:_id', {
-    name: 'callingChangeView',
-    data: function() {
-      return {
-        callingChangeData: callingChangeCollection.findOne(this.params._id)
       };
     },
     fastRender: true
