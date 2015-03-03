@@ -1,0 +1,92 @@
+<template name="callingChangeEdit">
+
+  <div class="bar bar-header bar-stable">
+    <div class="buttons">
+      <a id="cancelButton" class="button button-clear pull-left button-positive">
+        Cancel
+      </a>
+    </div>
+    <h1 class="title">Edit Calling Change</h1>
+    <div class="buttons">
+      <a id="doneButton" class="button button-clear pull-right button-positive">
+        <strong>Done</strong>
+      </a>
+    </div>
+  </div>
+
+  {{#with callingChangeData}}
+    {{#ionView}}
+      {{#ionContent}}
+
+        {{#ionList}}
+          {{>callingChangeFields}}
+
+          {{#if isDiscussed status}}
+            <div class="item item-divider">
+              &nbsp;
+            </div>
+            <a class="button button-positive button-full button-clear" data-action="markApproved">
+              Mark Approved
+            </a>
+          {{/if}}
+
+          {{#if isApproved status}}
+            <div class="item item-divider">
+              &nbsp;
+            </div>
+            <a class="button button-positive button-full button-clear" data-action="markInterviewed">
+              Mark Interviewed
+            </a>
+          {{/if}}
+
+          {{#if isInterviewed status}}
+            <div class="item item-divider">
+              &nbsp;
+            </div>
+            <a class="button button-positive button-full button-clear" data-action="markPresented">
+              Mark Presented
+            </a>
+          {{/if}}
+
+          {{#if isPresented status}}
+            <div class="item item-divider">
+              &nbsp;
+            </div>
+            <a class="button button-positive button-full button-clear" data-action="markRecorded">
+              Mark Recorded
+            </a>
+          {{/if}}
+
+          {{#if isRecorded status}}
+            <div class="item item-divider">
+              &nbsp;
+            </div>
+            <a class="button button-positive button-full button-clear" data-action="markSetApart">
+              Mark Set Apart
+            </a>
+          {{/if}}
+
+          {{#if isSetApart status}}
+            <div class="item item-divider">
+              &nbsp;
+            </div>
+            <a class="button button-positive button-full button-clear" data-action="markSetApartRecorded">
+              Mark Set Apart Recorded
+            </a>
+          {{/if}}
+
+          <div class="item item-divider">
+            &nbsp;
+          </div>
+          <a class="button button-positive button-full button-clear" data-action="showActionSheet">
+            Delete Calling Change
+          </a>
+          <div class="item item-divider">
+            &nbsp;
+          </div>
+        {{/ionList}}
+      {{/ionContent}}
+    {{/ionView}}
+
+  {{/with}}
+</template>
