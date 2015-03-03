@@ -27,3 +27,7 @@ Template.memberList.events({
     });
   }
 });
+
+Template.memberList.rendered = function() {
+  Session.set("selectedMember", "");
+};

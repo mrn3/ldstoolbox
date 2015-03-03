@@ -28,5 +28,10 @@ Template.memberPickerList.events({
   "keyup #searchInput": _.throttle(function(e) {
     var text = $(e.target).val().trim();
     memberSearch.search(text);
-  }, 200)
+  }, 200),
+  "click #memberRadioButton": function(e, instance) {
+    //console.log(this.switchedPreferredName);
+    Session.set('selectedMember', this.switchedPreferredName);
+    history.back();
+  },
 });

@@ -10,17 +10,22 @@
         {{/if}}
       </button>
     </div>
+
     <h1 class="title">Calling Changes</h1>
     <div class="buttons">
       <button class="button button-clear pull-right" data-ion-menu-toggle="right">
         {{#if isAndroid}}
-          {{> ionIcon icon='android-search'}}
+          <i class="icon ion-android-search positive"></i>
         {{else}}
-          {{> ionIcon icon='ios-search'}}
+          <i class="icon ion-ios-search positive"></i>
         {{/if}}
       </button>
       <a class="button button-clear pull-right button-positive" href="/callingChangeCreate/">
-        {{> ionIcon icon='ios-plus-empty'}}
+        {{#if isAndroid}}
+          <i class="icon ion-android-add positive"></i>
+        {{else}}
+          <i class="icon ion-ios-plus-empty positive"></i>
+        {{/if}}
       </a>
     </div>
   </div>
