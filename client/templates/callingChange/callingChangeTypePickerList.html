@@ -1,0 +1,33 @@
+<template name="callingChangeTypePickerList">
+
+  <div class="bar bar-header bar-stable">
+    <div class="buttons">
+      <a id="cancelButton" class="button button-clear button-positive">
+        Cancel
+      </a>
+    </div>
+    <h1 class="title">Select Type</h1>
+  </div>
+
+  {{#ionView}}
+    {{#ionContent}}
+      {{#ionList}}
+        <label class="item item-radio">
+          <input type="radio" name="callingRadioButton" value="Call" {{isChecked "Call"}}>
+          <div id="callingRadioButtonCall" class="item-content">
+            Call
+          </div>
+          <i class="radio-icon ion-checkmark"></i>
+        </label>
+        <label class="item item-radio">
+          <input type="radio" name="callingRadioButton" value="Release" {{isChecked "Release"}}>
+          <div id="callingRadioButtonRelease" class="item-content">
+            Release
+          </div>
+          <i class="radio-icon ion-checkmark"></i>
+        </label>
+      {{/ionList}}
+    {{/ionContent}}
+  {{/ionView}}
+
+</template>

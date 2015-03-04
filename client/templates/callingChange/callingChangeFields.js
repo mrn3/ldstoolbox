@@ -12,6 +12,13 @@ Template.callingChangeFields.helpers({
     } else {
       return Session.get("selectedCalling").callingName;
     }
+  },
+  callingChangeTypeSession: function() {
+    if (typeof Session.get("selectedCallingChangeType") == "undefined") {
+      return "";
+    } else {
+      return Session.get("selectedCallingChangeType");
+    }
   }
 });
 
@@ -24,6 +31,11 @@ Template.callingChangeFields.rendered = function() {
   if ((this.data) && (typeof this.data.calling != "undefined")) {
     if ((typeof Session.get("selectedCalling") == "undefined") || (Session.get("selectedCalling") == "")) {
       Session.set("selectedCalling", this.data.calling);
+    }
+  }
+  if ((this.data) && (typeof this.data.calling != "undefined")) {
+    if ((typeof Session.get("selectedCallingChangeType") == "undefined") || (Session.get("selectedCallingChangeType") == "")) {
+      Session.set("selectedCallingChangeType", this.data.type);
     }
   }
 };

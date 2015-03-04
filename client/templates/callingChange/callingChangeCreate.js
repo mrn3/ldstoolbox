@@ -16,7 +16,7 @@ Template.callingChangeCreate.events({
     var properties = {
       createdBy:            Meteor.userId(),
       createdAt:            new Date(),
-      type:                 $('#type').val(),
+      type:                 Session.get("selectedCallingChangeType"),
       member:               Session.get("selectedMember"),
       calling:              Session.get("selectedCalling"),
       notes:                $('#notes').val(),

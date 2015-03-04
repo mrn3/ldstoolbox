@@ -11,4 +11,5 @@ Template.callingChangeList.helpers({
 Template.callingChangeList.rendered = function() {
   Session.set("selectedMember", "");
   Session.set("selectedCalling", "");
+  Session.set("selectedCallingChangeType", "");  
 };

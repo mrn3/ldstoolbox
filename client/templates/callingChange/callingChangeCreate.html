@@ -1,6 +1,6 @@
 <template name="callingChangeCreate">
 
-  <div class="bar bar-header bar-stable">
+  <div class="bar bar-header bar-light">
     <div class="buttons">
       <a id="cancelButton" class="button button-clear pull-left button-positive">
         Cancel
@@ -17,15 +17,6 @@
   {{#ionView}}
     {{#ionContent}}
       {{#ionList}}
-        <label class="item item-input item-select">
-          <div class="input-label">
-            Type
-          </div>
-          <select id="type" name="type">
-            <option value="Call">Call</option>
-            <option value="Release">Release</option>
-          </select>
-        </label>
         {{>callingChangeFields}}
       {{/ionList}}
     {{/ionContent}}

@@ -26,10 +26,6 @@ Router.map(function() {
     name: 'memberPickerList',
     fastRender: true
   });
-  this.route('/callingPickerList/', {
-    name: 'callingPickerList',
-    fastRender: true
-  });
   this.route('/member/:individualId', {
     name: 'member',
     data: function() {
@@ -67,6 +63,10 @@ Router.map(function() {
     },
     fastRender: true
   });
+  this.route('/callingPickerList/', {
+    name: 'callingPickerList',
+    fastRender: true
+  });
   this.route('/callingChangeList/', {
     name: 'callingChangeList',
     data: function() {
@@ -87,6 +87,10 @@ Router.map(function() {
         callingChangeData: callingChangeCollection.findOne(this.params._id)
       };
     },
+    fastRender: true
+  });
+  this.route('/callingChangeTypePickerList/', {
+    name: 'callingChangeTypePickerList',
     fastRender: true
   });
   this.route('/meetingList/', {
