@@ -48,6 +48,8 @@ Template.callingPickerList.events({
   },
 });
 
+/*
 Template.callingPickerList.rendered = function() {
   $('#searchInput').focus();
 };
+*/

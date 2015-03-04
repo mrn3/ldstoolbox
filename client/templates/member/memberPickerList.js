@@ -36,6 +36,8 @@ Template.memberPickerList.events({
   },
 });
 
+/*
 Template.memberPickerList.rendered = function() {
   $('#searchInput').focus();
 };
+*/

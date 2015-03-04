@@ -1,6 +1,6 @@
 <template name="callingChangeTypePickerList">
 
-  <div class="bar bar-header bar-stable">
+  <div class="bar bar-header bar-light">
     <div class="buttons">
       <a id="cancelButton" class="button button-clear button-positive">
         Cancel
@@ -12,6 +12,9 @@
   {{#ionView}}
     {{#ionContent}}
       {{#ionList}}
+        <div class="item item-divider">
+          &nbsp;
+        </div>
         <label class="item item-radio">
           <input type="radio" name="callingRadioButton" value="Call" {{isChecked "Call"}}>
           <div id="callingRadioButtonCall" class="item-content">
