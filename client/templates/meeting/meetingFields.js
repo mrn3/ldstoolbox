@@ -24,3 +24,12 @@ Template.meetingFields.helpers({
     }
   }
 });
+
+Template.meetingEdit.events({
+  'click #organistItem': function(e, instance) {
+    Session.set("memberSelectType", "organist");
+  },
+  'click #choristerItem': function(e, instance) {
+    Session.set("memberSelectType", "chorister");
+  }
+});

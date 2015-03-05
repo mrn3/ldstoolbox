@@ -6,7 +6,7 @@ var fields = ["callingName", "displayName"];
 
 callingSearch = new SearchSource('callings', fields, options);
 
-Template.callingPickerList.helpers({
+Template.callingSelect.helpers({
   callingData: function(){
     return callingSearch.getData({
       transform: function(matchText, regExp) {
@@ -20,7 +20,7 @@ Template.callingPickerList.helpers({
   }
 });
 
-Template.callingPickerList.events({
+Template.callingSelect.events({
   "click #cancelButton": function(e, instance) {
     history.back();
   },
@@ -39,7 +39,7 @@ Template.callingPickerList.events({
 });
 
 /*
-Template.callingPickerList.rendered = function() {
+Template.callingSelect.rendered = function() {
   $('#searchInput').focus();
 };
 */

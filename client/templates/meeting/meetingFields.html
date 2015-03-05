@@ -7,14 +7,16 @@
   <div class="item item-divider">
     Music
   </div>
-  <label class="item item-input">
-    <span class="input-label">Organist</span>
-    <input type="text" id="organist" placeholder="Organist" value="{{organist}}">
-  </label>
-  <label class="item item-input">
-    <span class="input-label">Chorister</span>
-    <input type="text" id="chorister" placeholder="Chorister" value="{{chorister}}">
-  </label>
+  <a id="organistItem" class="item item-icon-right" href="{{pathFor 'memberSelect'}}">
+    Organist
+    <span class="item-note">{{{organistSession}}}</span>
+    <i class="icon ion-ios-arrow-right"></i>
+  </a>
+  <a class="item item-icon-right" href="{{pathFor 'memberSelect'}}">
+    Chorister
+    <span class="item-note">{{{choristerSession}}}</span>
+    <i class="icon ion-ios-arrow-right"></i>
+  </a>
   <label class="item item-input">
     <span class="input-label">Opening Hymn</span>
     <input type="text" id="openingHymn" placeholder="Opening Hymn" value="{{openingHymn}}">

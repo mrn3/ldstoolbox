@@ -1,5 +1,8 @@
 Template.meetingCreate.events({
-  'click #createButton': function(e, instance) {
+  'click #cancelButton': function(e, instance) {
+    history.back();
+  },
+  'click #doneButton': function(e, instance) {
     e.preventDefault();
 
     var meeting = this;
@@ -17,8 +20,8 @@ Template.meetingCreate.events({
       presiding:            $('#presiding').val(),
       conducting:           $('#conducting').val(),
       visitingAuthority:    $('#visitingAuthority').val(),
-      organist:             $('#organist').val(),
-      chorister:            $('#chorister').val(),
+      organist:             Session.get("selectedOrganist"),
+      chorister:            Session.get("selectedChorister"),
       announcements:        $('#announcements').val(),
       openingHymn:          $('#openingHymn').val(),
       sacramentHymn:        $('#sacramentHymn').val(),
@@ -44,7 +47,7 @@ Template.meetingCreate.events({
       recognition3Person1:  $('#recognition3Person1').val(),
       recognition3Person2:  $('#recognition3Person2').val(),
       recognition3Person3:  $('#recognition3Person3').val()
-    };  
+    };
 
     if (properties) {
       Meteor.call('insertMeeting', properties, function(error, meeting) {

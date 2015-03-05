@@ -14,7 +14,10 @@ Template.meetingEdit.events({
       }
     });
   },
-  'click #editButton': function(e, instance){
+  'click #cancelButton': function(e, instance) {
+    history.back();
+  },
+  'click #doneButton': function(e, instance){
     var meeting = this;
     var updateObject = {};
     var properties = {
@@ -24,8 +27,8 @@ Template.meetingEdit.events({
       presiding:            $('#presiding').val(),
       conducting:           $('#conducting').val(),
       visitingAuthority:    $('#visitingAuthority').val(),
-      organist:             $('#organist').val(),
-      chorister:            $('#chorister').val(),
+      organist:             Session.get("selectedOrganist"),
+      chorister:            Session.get("selectedChorister"),
       announcements:        $('#announcements').val(),
       openingHymn:          $('#openingHymn').val(),
       sacramentHymn:        $('#sacramentHymn').val(),

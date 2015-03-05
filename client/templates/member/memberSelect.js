@@ -6,7 +6,7 @@ var fields = ['switchedPreferredName', "callings.callingName"];
 
 memberSearch = new SearchSource('members', fields, options);
 
-Template.memberPickerList.helpers({
+Template.memberSelect.helpers({
   memberData: function(){
     return memberSearch.getData({
       transform: function(matchText, regExp) {
@@ -20,7 +20,7 @@ Template.memberPickerList.helpers({
   }
 });
 
-Template.memberPickerList.events({
+Template.memberSelect.events({
   "click #cancelButton": function(e, instance) {
     history.back();
   },
@@ -39,7 +39,7 @@ Template.memberPickerList.events({
 });
 
 /*
-Template.memberPickerList.rendered = function() {
+Template.memberSelect.rendered = function() {
   $('#searchInput').focus();
 };
 */

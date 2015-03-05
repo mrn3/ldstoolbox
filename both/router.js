@@ -22,8 +22,8 @@ Router.map(function() {
     },
     fastRender: true
   });
-  this.route('/memberPickerList/', {
-    name: 'memberPickerList',
+  this.route('/memberSelect/', {
+    name: 'memberSelect',
     fastRender: true
   });
   this.route('/member/:individualId', {
@@ -63,8 +63,8 @@ Router.map(function() {
     },
     fastRender: true
   });
-  this.route('/callingPickerList/', {
-    name: 'callingPickerList',
+  this.route('/callingSelect/', {
+    name: 'callingSelect',
     fastRender: true
   });
   this.route('/callingChangeList/', {

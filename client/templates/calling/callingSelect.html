@@ -1,4 +1,4 @@
-<template name="memberPickerList">
+<template name="callingSelect">
 
   <div class="bar bar-header bar-light">
     <div class="buttons">
@@ -6,7 +6,7 @@
         Cancel
       </a>
     </div>
-    <h1 class="title">Select Member</h1>
+    <h1 class="title">Select Calling</h1>
   </div>
 
   {{#ionView}}
@@ -18,17 +18,15 @@
         </label>
       </div>
       {{#ionList}}
-        {{#each memberData}}
+        {{#each callingData}}
           <label class="item item-radio">
             <input type="radio" name="group">
-            <div id="memberRadioButton" class="item-content">
+            <div id="callingRadioButton" class="item-content">
               <h4>
-              {{#each callings}}
-                {{callingName}}
-              {{/each}}
+                {{{displayName}}}
               </h4>
               <h2>
-                {{{switchedPreferredName}}}
+                {{{callingName}}}
               </h2>
             </div>
             <i class="radio-icon ion-checkmark"></i>
