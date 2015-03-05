@@ -43,3 +43,6 @@ Meteor.methods({
 householdCollection = new Meteor.Collection("household");
 memberCollection = new Meteor.Collection("member");
 unitCollection = new Meteor.Collection("unit");
+
+hymnCollection = new Meteor.Collection("hymn");
+recognitionTypeCollection = new Meteor.Collection("recognitionType");
