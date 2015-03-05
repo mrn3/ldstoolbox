@@ -1,4 +1,4 @@
-Template.callingChangeTypePickerList.helpers({
+Template.callingChangeTypeSelect.helpers({
   isChecked: function (type) {
     if (type == Session.get("selectedCallingChangeType")) {
       return "checked";
@@ -8,7 +8,7 @@ Template.callingChangeTypePickerList.helpers({
   }
 });
 
-Template.callingChangeTypePickerList.events({
+Template.callingChangeTypeSelect.events({
   "click #cancelButton": function(e, instance) {
     history.back();
   },

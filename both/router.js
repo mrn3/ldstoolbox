@@ -89,8 +89,8 @@ Router.map(function() {
     },
     fastRender: true
   });
-  this.route('/callingChangeTypePickerList/', {
-    name: 'callingChangeTypePickerList',
+  this.route('/callingChangeTypeSelect/', {
+    name: 'callingChangeTypeSelect',
     fastRender: true
   });
   this.route('/meetingList/', {
