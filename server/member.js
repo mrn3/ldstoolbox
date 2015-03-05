@@ -1,10 +1,11 @@
 SearchSource.defineSource('members', function(searchText, options) {
-  var options = {sort: {switchedPreferredName: 1}, limit: 20};
+  var options = {sort: {"switchedPreferredName": 1}, limit: 20};
 
   if(searchText) {
     var regExp = buildRegExp(searchText);
     var selector = {$or: [
-      {switchedPreferredName: regExp}
+      {"switchedPreferredName": regExp},
+      {"callings.callingName": regExp}
     ]};
 
     return memberCollection.find(selector, options).fetch();

@@ -2,7 +2,7 @@ var options = {
   keepHistory: 1000 * 60 * 5,
   localSearch: true
 };
-var fields = ['switchedPreferredName'];
+var fields = ['switchedPreferredName', "callings.callingName"];
 
 memberSearch = new SearchSource('members', fields, options);
 
@@ -10,8 +10,7 @@ Template.memberPickerList.helpers({
   memberData: function(){
     return memberSearch.getData({
       transform: function(matchText, regExp) {
-        //return matchText.replace(regExp, "<b>$&</b>")
-        return matchText.replace(regExp, "$&")
+        return matchText.replace(regExp, "<strong>$&</strong>")
       },
       sort: {isoScore: -1}
     });
@@ -30,7 +29,10 @@ Template.memberPickerList.events({
     memberSearch.search(text);
   }, 200),
   "click #memberRadioButton": function(e, instance) {
-    //console.log(this.switchedPreferredName);
+    //strip out html tags
+    this.switchedPreferredName = jQuery('<p>' + this.switchedPreferredName + '</p>').text();
+    this.callings.callingName = jQuery('<p>' + this.callings.callingName + '</p>').text();
+
     Session.set('selectedMember', this);
     history.back();
   },

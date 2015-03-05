@@ -19,18 +19,18 @@
       </div>
       {{#ionList}}
         {{#each callingData}}
-
-            <label class="item item-radio">
-              <input type="radio" name="group">
-              <div id="callingRadioButton" class="item-content">
-                <h2>
-                  {{thePositionName}}
-                  <!--{{{result['0'].res}}}//-->
-                </h2>
-              </div>
-              <i class="radio-icon ion-checkmark"></i>
-            </label>
-
+          <label class="item item-radio">
+            <input type="radio" name="group">
+            <div id="callingRadioButton" class="item-content">
+              <h4>
+                {{{displayName}}}
+              </h4>
+              <h2>
+                {{{callingName}}}
+              </h2>
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
         {{/each}}
       {{/ionList}}
     {{/ionContent}}

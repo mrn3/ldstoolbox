@@ -103,6 +103,7 @@ Meteor.methods({
       callingList = JSON.parse(result.content);
 
       //remove all positions in the ward
+      callingCollection.remove({wardUnitNo: unit.wardUnitNo});
       callingGroupCollection.remove({wardUnitNo: unit.wardUnitNo});
 
       //for each group of positions
@@ -127,7 +128,8 @@ Meteor.methods({
         callingGroupCollection.insert(_.extend(callingList.unitLeadership[callingIndex], {leaders: groupList.leaders, wardUnitNo: unit.wardUnitNo}));
 
         for(var leaderIndex in groupList.leaders) {
-          memberGroupCollection.update({individualId: groupList.leaders[leaderIndex].individualId}, { $addToSet: { "callings": { "callingName": groupList.leaders[leaderIndex].callingName, "positionId": groupList.leaders[leaderIndex].positionId } } } );
+          memberCollection.update({individualId: groupList.leaders[leaderIndex].individualId}, { $addToSet: { "callings": { "callingName": groupList.leaders[leaderIndex].callingName, "positionId": groupList.leaders[leaderIndex].positionId } } } );
+          callingCollection.insert({"callingName": groupList.leaders[leaderIndex].callingName, "positionId": groupList.leaders[leaderIndex].positionId, "displayName": groupList.leaders[leaderIndex].displayName, wardUnitNo: unit.wardUnitNo});
         }
         //
 

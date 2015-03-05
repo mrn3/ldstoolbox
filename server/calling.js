@@ -19,28 +19,27 @@ Meteor.methods({
 });
 
 SearchSource.defineSource('callings', function(searchText, options) {
-  //var options = {sort: {"leaders.callingName": 1}, limit: 20};
-
-
+  var options = {sort: {"callingName": 1}, limit: 20};
 
   if(searchText) {
     var regExp = buildRegExp(searchText);
-    //var selector = {$or: [
-    //  {"leaders.callingName": regExp}
-    //]};
+    var selector = {$or: [
+      {"displayName": regExp},
+      {"callingName": regExp}
+    ]};
 
-    var options = {"leaders.callingName": regExp};
-    var selector = {"leaders.callingName": regExp};
-
-
+    /*
     var pipeline = [
 
-      {$project:{thePositionName:'$positions.positionName', thePositionId:'$positions.positionId'} },
+      {$project:{thePositionName:'$positions.positionName'} },
       {$unwind:'$thePositionId'},
-      {$match:{ thePositionName: "Bishop"}}
+      {$match:{ thePositionName: regExp}}
 
     ];
-
+    */
+    //var options = {"leaders.callingName": regExp};
+    //var selector = {"leaders.callingName": regExp};
+    //{$project:{thePositionName:'$positions.positionName', thePositionId:'$positions.positionId'} },
     //{$group:{_id:'a',res:{$addToSet:'$a'}}},
     //{$match: { "positions" : { "$elemMatch" : {"positionName": "Bishop"}}}}
     //db.calling.find( { positions: { $elemMatch: { positionName: "Bishop" } } } )
@@ -56,9 +55,9 @@ SearchSource.defineSource('callings', function(searchText, options) {
 
     //console.log(pipeline);
     //console.log(callingGroupCollection);
-    console.log(callingGroupCollection.aggregate(pipeline));
+    //console.log(callingGroupCollection.aggregate(pipeline));
 
-    return callingGroupCollection.aggregate(pipeline);
+
     //console.log(selector);
     //console.log(callingGroupCollection.find(selector, options).fetch());
 
@@ -66,9 +65,9 @@ SearchSource.defineSource('callings', function(searchText, options) {
     //console.log(selector);
 
     //console.log(callingGroupCollection.find(selector, options).fetch());
-    //return callingGroupCollection.find(selector, options).fetch();
+    return callingCollection.find(selector, options).fetch();
   } else {
-    return callingGroupCollection.find({}, options).fetch();
+    return callingCollection.find({}, options).fetch();
   }
 });
 

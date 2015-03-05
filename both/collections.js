@@ -24,6 +24,7 @@ Posts.attachSchema(new SimpleSchema({
   }
 }));
 
+callingCollection = new Meteor.Collection("calling");
 callingGroupCollection = new Meteor.Collection("callingGroup");
 callingChangeCollection = new Meteor.Collection("callingChange");
 Meteor.methods({
