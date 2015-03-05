@@ -49,7 +49,7 @@ Router.map(function() {
     name: 'callingGroupList',
     data: function() {
       return {
-        callingData: callingCollection.find({})
+        callingData: callingGroupCollection.find({})
       };
     },
     fastRender: true
@@ -58,7 +58,7 @@ Router.map(function() {
     name: 'callingGroup',
     data: function() {
       return {
-        callingData: callingCollection.findOne(this.params._id)
+        callingData: callingGroupCollection.findOne(this.params._id)
       };
     },
     fastRender: true

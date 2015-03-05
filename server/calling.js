@@ -3,11 +3,11 @@ Meteor.methods({
     this.unblock();
     try {
       var pipeline = [
-        {$project:{a:'$positions.positionName'}},
+        {$project:{a:'$leaders.callingName'}},
         {$unwind:'$a'},
         {$group:{_id:'a',res:{$addToSet:'$a'}}}
       ];
-      var result = callingCollection.aggregate(pipeline);
+      var result = callingGroupCollection.aggregate(pipeline);
       //console.log(result);
       return result;
     } catch (e) {
@@ -19,34 +19,56 @@ Meteor.methods({
 });
 
 SearchSource.defineSource('callings', function(searchText, options) {
-  var options = {sort: {"leaders.callingName": 1}, limit: 20};
+  //var options = {sort: {"leaders.callingName": 1}, limit: 20};
+
+
 
   if(searchText) {
     var regExp = buildRegExp(searchText);
-    var selector = {$or: [
-      {"leaders.callingName": regExp}
-    ]};
+    //var selector = {$or: [
+    //  {"leaders.callingName": regExp}
+    //]};
 
-    /*
+    var options = {"leaders.callingName": regExp};
+    var selector = {"leaders.callingName": regExp};
+
+
     var pipeline = [
-      {$match:{ 'positions.positionName': searchText}},
-      {$project:{a:'$positions.positionName'}},
-      {$unwind:'$a'},
-      {$group:{_id:'a',res:{$addToSet:'$a'}}}
+
+      {$project:{thePositionName:'$positions.positionName', thePositionId:'$positions.positionId'} },
+      {$unwind:'$thePositionId'},
+      {$match:{ thePositionName: "Bishop"}}
+
     ];
-    */
+
+    //{$group:{_id:'a',res:{$addToSet:'$a'}}},
+    //{$match: { "positions" : { "$elemMatch" : {"positionName": "Bishop"}}}}
+    //db.calling.find( { positions: { $elemMatch: { positionName: "Bishop" } } } )
+
+    //console.log(callingGroupCollection.find({"leaders.callingName": "Bishop"}, {fields: {leaders: {$elemMatch: {callingName: "/(bish)/gi"}}}}).fetch());
+
+    //return callingGroupCollection.find({"leaders.callingName": "Bishop"}, {fields: {leaders: {$elemMatch: {callingName: "/(bish)/gi"}}}}).fetch();
+
+    //{fields: {"leaders.callingName": "/(bish)/gi"}
+    //console.log(callingGroupCollection.find({"leaders.callingName": regExp}, {fields: {leaders: {$elemMatch: {"callingName": regExp}}}}).fetch());
+
+    //return callingGroupCollection.find({"leaders.callingName": regExp}, {fields: {leaders: {$elemMatch: {"callingName": regExp}}}}).fetch();
 
     //console.log(pipeline);
-    //console.log(callingCollection);
-    //console.log(callingCollection.aggregate(pipeline));
+    //console.log(callingGroupCollection);
+    console.log(callingGroupCollection.aggregate(pipeline));
 
-    //return callingCollection.aggregate(pipeline);
+    return callingGroupCollection.aggregate(pipeline);
     //console.log(selector);
-    //console.log(callingCollection.find(selector, options).fetch());
+    //console.log(callingGroupCollection.find(selector, options).fetch());
 
-    return callingCollection.find(selector, options).fetch();
+    //console.log(options);
+    //console.log(selector);
+
+    //console.log(callingGroupCollection.find(selector, options).fetch());
+    //return callingGroupCollection.find(selector, options).fetch();
   } else {
-    return callingCollection.find({}, options).fetch();
+    return callingGroupCollection.find({}, options).fetch();
   }
 });
 
