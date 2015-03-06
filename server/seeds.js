@@ -1,12 +1,7 @@
-Meteor.startup(function () {
+//for monitoring from kadira
+Kadira.connect("pvBC29Y6Tu8fjkn7R", "27e67b07-c1e1-4784-9681-834a00969d3e");
 
-  if (Posts.find({}).count() === 0) {
-    Posts.insert({
-      title: Fake.sentence(),
-      body: Fake.paragraph(),
-      published: Fake.fromArray([true, false])
-    });
-  }
+Meteor.startup(function () {
 
   if (hymnCollection.find().count() === 0) {
     hymnCollection.insert({number: 1, numberText: "1", name: "The Morning Breaks"});
