@@ -114,6 +114,10 @@ Router.map(function() {
     },
     fastRender: true
   });
+  this.route('/hymnSelect/', {
+    name: 'hymnSelect',
+    fastRender: true
+  });
   this.route('sync');
   this.route('userAccounts');
   this.route('/meetingPrint/:_id', function() {

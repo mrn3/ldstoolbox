@@ -17,26 +17,30 @@
     <span class="item-note">{{{choristerSession}}}</span>
     <i class="icon ion-ios-arrow-right"></i>
   </a>
-  <label class="item item-input">
-    <span class="input-label">Opening Hymn</span>
-    <input type="text" id="openingHymn" placeholder="Opening Hymn" value="{{openingHymn}}">
-  </label>
-  <label class="item item-input">
-    <span class="input-label">Sacrament Hymn</span>
-    <input type="text" id="sacramentHymn" placeholder="Sacrament Hymn" value="{{sacramentHymn}}">
-  </label>
-  <label class="item item-input">
-    <span class="input-label">Intermediate Hymn</span>
-    <input type="text" id="intermediateHymn" placeholder="Intermediate Hymn" value="{{intermediateHymn}}">
-  </label>
+  <a id="openingHymnItem" class="item item-icon-right" href="{{pathFor 'hymnSelect'}}">
+    Opening Hymn
+    <span class="item-note">{{{openingHymnSession}}}</span>
+    <i class="icon ion-ios-arrow-right"></i>
+  </a>
+  <a id="sacramentHymnItem" class="item item-icon-right" href="{{pathFor 'hymnSelect'}}">
+    Sacrament Hymn
+    <span class="item-note">{{{sacramentHymnSession}}}</span>
+    <i class="icon ion-ios-arrow-right"></i>
+  </a>
+  <a id="intermediateHymnItem" class="item item-icon-right" href="{{pathFor 'hymnSelect'}}">
+    Intermediate Hymn
+    <span class="item-note">{{{intermediateHymnSession}}}</span>
+    <i class="icon ion-ios-arrow-right"></i>
+  </a>
   <label class="item item-input">
     <span class="input-label">Musical Number</span>
     <input type="text" id="musicalNumber" placeholder="Musical Number" value="{{musicalNumber}}">
   </label>
-  <label class="item item-input">
-    <span class="input-label">Closing Hymn</span>
-    <input type="text" id="closingHymn" placeholder="Closing Hymn" value="{{closingHymn}}">
-  </label>
+  <a id="closingHymnItem" class="item item-icon-right" href="{{pathFor 'hymnSelect'}}">
+    Closing Hymn
+    <span class="item-note">{{{closingHymnSession}}}</span>
+    <i class="icon ion-ios-arrow-right"></i>
+  </a>
 
   <div class="item item-divider">
     Prayers

@@ -1,0 +1,39 @@
+<template name="hymnSelect">
+
+  <div class="bar bar-header bar-light">
+    <div class="buttons">
+      <a id="cancelButton" class="button button-clear button-positive">
+        Cancel
+      </a>
+    </div>
+    <h1 class="title">Select Hymn</h1>
+  </div>
+
+  {{#ionView}}
+    {{#ionContent}}
+      <div class="bar bar-header item-input-inset">
+        <label class="item-input-wrapper">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input id="searchInput" type="search" placeholder="Search">
+        </label>
+      </div>
+      {{#ionList}}
+        {{#each hymnData}}
+          <label class="item item-radio">
+            <input type="radio" name="group">
+            <div id="hymnRadioButton" class="item-content">
+              <h4>
+                {{{number}}}
+              </h4>
+              <h2>
+                {{{name}}}
+              </h2>
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+        {{/each}}
+      {{/ionList}}
+    {{/ionContent}}
+  {{/ionView}}
+
+</template>
