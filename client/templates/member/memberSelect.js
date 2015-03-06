@@ -47,6 +47,12 @@ Template.memberSelect.events({
     else if (Session.get("memberSelectType") == "chorister") {
       Session.set('selectedChorister', this);
     }
+    else if (Session.get("memberSelectType") == "invocation") {
+      Session.set('selectedInvocation', this);
+    }
+    else if (Session.get("memberSelectType") == "benediction") {
+      Session.set('selectedBenediction', this);
+    }
 
     //console.log(Session.get('selectedCallingChangeMember'));
     //console.log(Session.get('selectedOrganist'));
