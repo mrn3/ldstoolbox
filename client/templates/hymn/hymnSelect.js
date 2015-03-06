@@ -2,7 +2,7 @@ var options = {
   keepHistory: 1000 * 60 * 5,
   localSearch: true
 };
-var fields = ["name", "number"];
+var fields = ["name", "numberText"];
 
 hymnSearch = new SearchSource('hymns', fields, options);
 
@@ -34,7 +34,7 @@ Template.hymnSelect.events({
       this.name = jQuery('<p>' + this.name + '</p>').text();
     }
     if (this.number) {
-      this.number = jQuery('<p>' + this.number + '</p>').text();
+      this.numberText = jQuery('<p>' + this.number + '</p>').text();
     }
 
     if (Session.get("hymnSelectType") == "openingHymn") {

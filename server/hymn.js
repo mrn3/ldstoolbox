@@ -5,9 +5,9 @@ SearchSource.defineSource('hymns', function(searchText, options) {
     var regExp = buildRegExp(searchText);
     var selector = {$or: [
       {"name": regExp},
-      {"number": regExp}
+      {"numberText": regExp}
     ]};
-    console.log(hymnCollection.find(selector, options).fetch());
+
     return hymnCollection.find(selector, options).fetch();
   } else {
     return hymnCollection.find({}, options).fetch();

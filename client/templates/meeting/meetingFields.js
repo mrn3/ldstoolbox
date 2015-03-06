@@ -17,28 +17,28 @@ Template.meetingFields.helpers({
     if (typeof Session.get("selectedOpeningHymn") == "undefined") {
       return "";
     } else {
-      return Session.get("selectedOpeningHymn").name;
+      return Session.get("selectedOpeningHymn").numberText + " - " + Session.get("selectedOpeningHymn").name;
     }
   },
   sacramentHymnSession: function() {
     if (typeof Session.get("selectedSacramentHymn") == "undefined") {
       return "";
     } else {
-      return Session.get("selectedSacramentHymn").name;
+      return Session.get("selectedSacramentHymn").numberText + " - " + Session.get("selectedSacramentHymn").name;
     }
   },
   intermediateHymnSession: function() {
-    if (typeof Session.get("selecteIntermediateHymn") == "undefined") {
+    if (typeof Session.get("selectedIntermediateHymn") == "undefined") {
       return "";
     } else {
-      return Session.get("selecteIntermediateHymn").name;
+      return Session.get("selectedIntermediateHymn").numberText + " - " + Session.get("selectedIntermediateHymn").name;
     }
   },
   closingHymnSession: function() {
     if (typeof Session.get("selectedClosingHymn") == "undefined") {
       return "";
     } else {
-      return Session.get("selectedClosingHymn").name;
+      return Session.get("selectedClosingHymn").numberText + " - " + Session.get("selectedClosingHymn").name  ;
     }
   },
   invocationSession: function() {
