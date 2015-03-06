@@ -350,7 +350,7 @@ Meteor.startup(function () {
     hymnCollection.insert({number: 339, numberText: "339", name: "My Country, 'Tis of Thee"});
     hymnCollection.insert({number: 340, numberText: "340", name: "The Star Spangled Banner"});
     hymnCollection.insert({number: 341, numberText: "341", name: "God Save the King"});
-  }; 
+  };
 
   if (recognitionTypeCollection.find().count() === 0) {
     recognitionTypeCollection.insert({typeName: "Baby Blessing"});

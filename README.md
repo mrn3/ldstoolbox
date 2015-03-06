@@ -1,5 +1,5 @@
 ![](http://f.cl.ly/items/391y4708420P0H001k1G/meteoric.png)
 
-# LDS Toolkit
+# LDS Toolbox
 
-This is a toolkit for LDS members.
+This is a toolbox for LDS members.
