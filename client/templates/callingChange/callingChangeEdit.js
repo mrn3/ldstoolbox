@@ -76,8 +76,8 @@ Template.callingChangeEdit.events({
       updatedBy:            Meteor.userId(),
       updatedAt:            new Date(),
       type:                 Session.get("selectedCallingChangeType"),
-      member:               Session.get("selectedMember"),
-      calling:              Session.get("selectedCalling"),
+      member:               Session.get("selectedCallingChangeMember"),
+      calling:              Session.get("selectedCallingChangeCalling"),
       notes:                $('#notes').val()
     };
 

@@ -1,36 +1,36 @@
 Template.callingChangeFields.helpers({
-  memberNameSession: function() {
-    if (typeof Session.get("selectedMember") == "undefined") {
-      return "";
-    } else {
-      return Session.get("selectedMember").switchedPreferredName;
-    }
-  },
-  callingNameSession: function() {
-    if (typeof Session.get("selectedCalling") == "undefined") {
-      return "";
-    } else {
-      return Session.get("selectedCalling").callingName;
-    }
-  },
   callingChangeTypeSession: function() {
     if (typeof Session.get("selectedCallingChangeType") == "undefined") {
       return "";
     } else {
       return Session.get("selectedCallingChangeType");
     }
+  },
+  callingChangeMemberSession: function() {
+    if (typeof Session.get("selectedCallingChangeMember") == "undefined") {
+      return "";
+    } else {
+      return Session.get("selectedCallingChangeMember").switchedPreferredName;
+    }
+  },
+  callingChangeCallingSession: function() {
+    if (typeof Session.get("selectedCallingChangeCalling") == "undefined") {
+      return "";
+    } else {
+      return Session.get("selectedCallingChangeCalling").callingName;
+    }
   }
 });
 
 Template.callingChangeFields.rendered = function() {
   if ((this.data) && (typeof this.data.member != "undefined")) {
-    if ((typeof Session.get("selectedMember") == "undefined") || (Session.get("selectedMember") == "")) {
-      Session.set("selectedMember", this.data.member);
+    if ((typeof Session.get("selectedCallingChangeMember") == "undefined") || (Session.get("selectedCallingChangeMember") == "")) {
+      Session.set("selectedCallingChangeMember", this.data.member);
     }
   }
   if ((this.data) && (typeof this.data.calling != "undefined")) {
-    if ((typeof Session.get("selectedCalling") == "undefined") || (Session.get("selectedCalling") == "")) {
-      Session.set("selectedCalling", this.data.calling);
+    if ((typeof Session.get("selectedCallingChangeCalling") == "undefined") || (Session.get("selectedCallingChangeCalling") == "")) {
+      Session.set("selectedCallingChangeCalling", this.data.calling);
     }
   }
   if ((this.data) && (typeof this.data.calling != "undefined")) {
@@ -39,3 +39,9 @@ Template.callingChangeFields.rendered = function() {
     }
   }
 };
+
+Template.callingChangeFields.events({
+  'click #callingChangeMemberItem': function(e, instance) {
+    Session.set("memberSelectType", "callingChangeMember");
+  }
+});

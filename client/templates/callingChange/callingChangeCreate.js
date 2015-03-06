@@ -17,8 +17,8 @@ Template.callingChangeCreate.events({
       createdBy:            Meteor.userId(),
       createdAt:            new Date(),
       type:                 Session.get("selectedCallingChangeType"),
-      member:               Session.get("selectedMember"),
-      calling:              Session.get("selectedCalling"),
+      member:               Session.get("selectedCallingChangeMember"),
+      calling:              Session.get("selectedCallingChangeCalling"),
       notes:                $('#notes').val(),
       dateDiscussed:        new Date(),
       status:               "Discussed"

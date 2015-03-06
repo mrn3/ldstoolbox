@@ -30,10 +30,29 @@ Template.memberSelect.events({
   }, 200),
   "click #memberRadioButton": function(e, instance) {
     //strip out html tags
-    this.switchedPreferredName = jQuery('<p>' + this.switchedPreferredName + '</p>').text();
-    this.callings.callingName = jQuery('<p>' + this.callings.callingName + '</p>').text();
+    if (this.switchedPreferredName) {
+      this.switchedPreferredName = jQuery('<p>' + this.switchedPreferredName + '</p>').text();
+    }
+    if (this.callings) {
+      this.callings.callingName = jQuery('<p>' + this.callings.callingName + '</p>').text();
+    }
 
-    Session.set('selectedMember', this);
+    //console.log(Session.get("memberSelectType"));
+    if (Session.get("memberSelectType") == "callingChangeMember") {
+      Session.set('selectedCallingChangeMember', this);
+    }
+    else if (Session.get("memberSelectType") == "organist") {
+      Session.set('selectedOrganist', this);
+    }
+    else if (Session.get("memberSelectType") == "chorister") {
+      Session.set('selectedChorister', this);
+    }
+
+    //console.log(Session.get('selectedCallingChangeMember'));
+    //console.log(Session.get('selectedOrganist'));
+    //console.log(Session.get('selectedChorister'));
+
+
     history.back();
   },
 });

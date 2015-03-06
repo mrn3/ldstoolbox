@@ -33,7 +33,7 @@ Template.callingSelect.events({
     this.callingName = jQuery('<p>' + this.callingName + '</p>').text();
     this.displayName = jQuery('<p>' + this.displayName + '</p>').text();
 
-    Session.set('selectedCalling', this);
+    Session.set('selectedCallingChangeCalling', this);
     history.back();
   },
 });
