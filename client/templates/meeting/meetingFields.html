@@ -41,14 +41,16 @@
   <div class="item item-divider">
     Prayers
   </div>
-  <label class="item item-input">
-    <span class="input-label">Invocation</span>
-    <input type="text" id="invocation" placeholder="Invocation" value="{{invocation}}">
-  </label>
-  <label class="item item-input">
-    <span class="input-label">Benediction</span>
-    <input type="text" id="benediction" placeholder="Benediction" value="{{benediction}}">
-  </label>
+  <a id="invocationItem" class="item item-icon-right" href="{{pathFor 'memberSelect'}}">
+    Invocation
+    <span class="item-note">{{{invocationSession}}}</span>
+    <i class="icon ion-ios-arrow-right"></i>
+  </a>
+  <a id="benedictionItem" class="item item-icon-right" href="{{pathFor 'memberSelect'}}">
+    Benediction
+    <span class="item-note">{{{benedictionSession}}}</span>
+    <i class="icon ion-ios-arrow-right"></i>
+  </a>
 
   <div class="item item-divider">
     Administration
