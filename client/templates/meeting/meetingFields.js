@@ -54,6 +54,27 @@ Template.meetingFields.helpers({
     } else {
       return Session.get("selectedBenediction").switchedPreferredName;
     }
+  },
+  presidingSession: function() {
+    if (typeof Session.get("selectedPresiding").switchedPreferredName == "undefined") {
+      return "";
+    } else {
+      return Session.get("selectedPresiding").switchedPreferredName;
+    }
+  },
+  conductingSession: function() {
+    if (typeof Session.get("selectedConducting").switchedPreferredName == "undefined") {
+      return "";
+    } else {
+      return Session.get("selectedConducting").switchedPreferredName;
+    }
+  },
+  visitingAuthoritySession: function() {
+    if (typeof Session.get("selectedVisitingAuthority").switchedPreferredName == "undefined") {
+      return "";
+    } else {
+      return Session.get("selectedVisitingAuthority").switchedPreferredName;
+    }
   }
 });
 
@@ -81,6 +102,15 @@ Template.meetingFields.events({
   },
   'click #benedictionItem': function(e, instance) {
     Session.set("memberSelectType", "benediction");
+  },
+  'click #presidingItem': function(e, instance) {
+    Session.set("memberSelectType", "presiding");
+  },
+  'click #conductingItem': function(e, instance) {
+    Session.set("memberSelectType", "conducting");
+  },
+  'click #visitingAuthorityItem': function(e, instance) {
+    Session.set("memberSelectType", "visitingAuthority");
   }
 });
 
@@ -123,6 +153,21 @@ Template.meetingFields.rendered = function() {
   if ((this.data) && (typeof this.data.benediction != "undefined")) {
     if ((typeof Session.get("selectedBenediction") == "undefined") || (Session.get("selectedBenediction") == "")) {
       Session.set("selectedBenediction", this.data.benediction);
+    }
+  }
+  if ((this.data) && (typeof this.data.presiding != "undefined")) {
+    if ((typeof Session.get("selectedPresiding") == "undefined") || (Session.get("selectedPresiding") == "")) {
+      Session.set("selectedPresiding", this.data.presiding);
+    }
+  }
+  if ((this.data) && (typeof this.data.conducting != "undefined")) {
+    if ((typeof Session.get("selectedConducting") == "undefined") || (Session.get("selectedConducting") == "")) {
+      Session.set("selectedConducting", this.data.conducting);
+    }
+  }
+  if ((this.data) && (typeof this.data.visitingAuthority != "undefined")) {
+    if ((typeof Session.get("selectedVisitingAuthority") == "undefined") || (Session.get("selectedVisitingAuthority") == "")) {
+      Session.set("selectedVisitingAuthority", this.data.visitingAuthority);
     }
   }
 };

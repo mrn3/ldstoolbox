@@ -59,18 +59,21 @@
   <div class="item item-divider">
     Administration
   </div>
-  <label class="item item-input">
-    <span class="input-label">Presiding</span>
-    <input type="text" id="presiding" placeholder="Presiding" value="{{presiding}}">
-  </label>
-  <label class="item item-input">
-    <span class="input-label">Conducting</span>
-    <input type="text" id="conducting" placeholder="Conducting" value="{{conducting}}">
-  </label>
-  <label class="item item-input">
-    <span class="input-label">Visiting Authority</span>
-    <input type="text" id="visitingAuthority" placeholder="Visiting Authority" value="{{visitingAuthority}}">
-  </label>
+  <a id="presidingItem" class="item item-icon-right" href="{{pathFor 'memberSelect'}}">
+    Presiding
+    <span class="item-note">{{{presidingSession}}}</span>
+    <i class="icon ion-ios-arrow-right"></i>
+  </a>
+  <a id="conductingItem" class="item item-icon-right" href="{{pathFor 'memberSelect'}}">
+    Conducting
+    <span class="item-note">{{{conductingSession}}}</span>
+    <i class="icon ion-ios-arrow-right"></i>
+  </a>
+  <a id="visitingAuthorityItem" class="item item-icon-right" href="{{pathFor 'memberSelect'}}">
+    Visiting Authority
+    <span class="item-note">{{{visitingAuthoritySession}}}</span>
+    <i class="icon ion-ios-arrow-right"></i>
+  </a>
   <label class="item item-input">
     <span class="input-label">Attendance</span>
     <input type="text" id="attendance" placeholder="Attendance" value="{{attendance}}">

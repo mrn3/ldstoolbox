@@ -8,4 +8,7 @@ Template.meetingList.rendered = function() {
   Session.set("selectedClosingHymn", "");
   Session.set("selectedInvocation", "");
   Session.set("selectedBenediction", "");
+  Session.set("selectedPresiding", "");
+  Session.set("selectedConducting", "");
+  Session.set("selectedVisitingAuthority", "");
 };
