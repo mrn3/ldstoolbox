@@ -4,4 +4,4 @@ These tools augment tools already available through LDS Tools, Leader and Clerk 
 
 Note that LDS Toolbox is distributed under the [MIT License](http://opensource.org/licenses/MIT)
 
-If you'd like to be part of the project, please see if there's anything you can help with and let us know.
+If you'd like to be part of the project, please see if there's anything you can help with and let us know.  Also, feel free to view/submit [issues] (https://github.com/mrn3/ldstoolbox/issues) and [milestones](https://github.com/mrn3/ldstoolbox/milestones).
