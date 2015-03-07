@@ -1,0 +1,37 @@
+<template name="attendanceSelect">
+
+  <div class="bar bar-header bar-light">
+    <div class="buttons">
+      <a id="cancelButton" class="button button-clear button-positive">
+        Cancel
+      </a>
+    </div>
+    <h1 class="title">Select Attendance</h1>
+  </div>
+
+  {{#ionView}}
+    {{#ionContent}}
+      {{#ionList}}
+        <div class="item item-divider">
+          &nbsp;
+        </div>
+        <div class="row">
+          <div class="col">
+            <button id="decrementAttendanceButton" class="button button-positive">
+              -
+            </button>
+          </div>
+          <div class="col">
+            {{attendanceSession}}
+          </div>
+          <div class="col">
+            <button id="incrementAttendanceButton" class="button button-positive">
+              +
+            </button>
+          </div>
+        </div>
+      {{/ionList}}
+    {{/ionContent}}
+  {{/ionView}}
+
+</template>

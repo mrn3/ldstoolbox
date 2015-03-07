@@ -75,6 +75,13 @@ Template.meetingFields.helpers({
     } else {
       return Session.get("selectedVisitingAuthority").switchedPreferredName;
     }
+  },
+  attendanceSession: function() {
+    if (typeof Session.get("selectedAttendance") == "undefined") {
+      return "";
+    } else {
+      return Session.get("selectedAttendance");
+    }
   }
 });
 
@@ -168,6 +175,11 @@ Template.meetingFields.rendered = function() {
   if ((this.data) && (typeof this.data.visitingAuthority != "undefined")) {
     if ((typeof Session.get("selectedVisitingAuthority") == "undefined") || (Session.get("selectedVisitingAuthority") == "")) {
       Session.set("selectedVisitingAuthority", this.data.visitingAuthority);
+    }
+  }
+  if ((this.data) && (typeof this.data.attendance != "undefined")) {
+    if ((typeof Session.get("selectedAttendance") == "undefined") || (Session.get("selectedAttendance") == "")) {
+      Session.set("selectedAttendance", this.data.attendance);
     }
   }
 };

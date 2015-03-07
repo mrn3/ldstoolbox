@@ -118,6 +118,10 @@ Router.map(function() {
     name: 'hymnSelect',
     fastRender: true
   });
+  this.route('/attendanceSelect/', {
+    name: 'attendanceSelect',
+    fastRender: true
+  });
   this.route('sync');
   this.route('userAccounts');
   this.route('/meetingPrint/:_id', function() {

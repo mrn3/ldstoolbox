@@ -20,6 +20,7 @@ Template.meetingCreate.events({
       presiding:            Session.get("selectedPresiding"),
       conducting:           Session.get("selectedConducting"),
       visitingAuthority:    Session.get("selectedVisitingAuthority"),
+      attendance:           Session.get("selectedAttendance"),
       organist:             Session.get("selectedOrganist"),
       chorister:            Session.get("selectedChorister"),
       announcements:        $('#announcements').val(),

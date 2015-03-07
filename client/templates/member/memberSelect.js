@@ -53,11 +53,15 @@ Template.memberSelect.events({
     else if (Session.get("memberSelectType") == "benediction") {
       Session.set('selectedBenediction', this);
     }
-
-    //console.log(Session.get('selectedCallingChangeMember'));
-    //console.log(Session.get('selectedOrganist'));
-    //console.log(Session.get('selectedChorister'));
-
+    else if (Session.get("memberSelectType") == "presiding") {
+      Session.set('selectedPresiding', this);
+    }
+    else if (Session.get("memberSelectType") == "conducting") {
+      Session.set('selectedConducting', this);
+    }
+    else if (Session.get("memberSelectType") == "visitingAuthority") {
+      Session.set('selectedVisitingAuthority', this);
+    }
 
     history.back();
   },

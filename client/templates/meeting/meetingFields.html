@@ -74,10 +74,11 @@
     <span class="item-note">{{{visitingAuthoritySession}}}</span>
     <i class="icon ion-ios-arrow-right"></i>
   </a>
-  <label class="item item-input">
-    <span class="input-label">Attendance</span>
-    <input type="text" id="attendance" placeholder="Attendance" value="{{attendance}}">
-  </label>
+  <a id="attendanceItem" class="item item-icon-right" href="{{pathFor 'attendanceSelect'}}">
+    Attendance
+    <span class="item-note">{{{attendanceSession}}}</span>
+    <i class="icon ion-ios-arrow-right"></i>
+  </a>
 
   <div class="item item-divider">
     Announcements
