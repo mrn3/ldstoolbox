@@ -7,14 +7,14 @@ Template.callingChangeFields.helpers({
     }
   },
   callingChangeMemberSession: function() {
-    if (typeof Session.get("selectedCallingChangeMember") == "undefined") {
+    if (typeof Session.get("selectedCallingChangeMember").switchedPreferredName == "undefined") {
       return "";
     } else {
       return Session.get("selectedCallingChangeMember").switchedPreferredName;
     }
   },
   callingChangeCallingSession: function() {
-    if (typeof Session.get("selectedCallingChangeCalling") == "undefined") {
+    if (typeof Session.get("selectedCallingChangeCalling").callingName == "undefined") {
       return "";
     } else {
       return Session.get("selectedCallingChangeCalling").callingName;

@@ -1,55 +1,55 @@
 Template.meetingFields.helpers({
   organistSession: function() {
-    if (typeof Session.get("selectedOrganist") == "undefined") {
+    if (typeof Session.get("selectedOrganist").switchedPreferredName == "undefined") {
       return "";
     } else {
       return Session.get("selectedOrganist").switchedPreferredName;
     }
   },
   choristerSession: function() {
-    if (typeof Session.get("selectedChorister") == "undefined") {
+    if (typeof Session.get("selectedChorister").switchedPreferredName == "undefined") {
       return "";
     } else {
       return Session.get("selectedChorister").switchedPreferredName;
     }
   },
   openingHymnSession: function() {
-    if (typeof Session.get("selectedOpeningHymn") == "undefined") {
+    if (typeof Session.get("selectedOpeningHymn").numberText == "undefined") {
       return "";
     } else {
       return Session.get("selectedOpeningHymn").numberText + " - " + Session.get("selectedOpeningHymn").name;
     }
   },
   sacramentHymnSession: function() {
-    if (typeof Session.get("selectedSacramentHymn") == "undefined") {
+    if (typeof Session.get("selectedSacramentHymn").numberText == "undefined") {
       return "";
     } else {
       return Session.get("selectedSacramentHymn").numberText + " - " + Session.get("selectedSacramentHymn").name;
     }
   },
   intermediateHymnSession: function() {
-    if (typeof Session.get("selectedIntermediateHymn") == "undefined") {
+    if (typeof Session.get("selectedIntermediateHymn").numberText == "undefined") {
       return "";
     } else {
       return Session.get("selectedIntermediateHymn").numberText + " - " + Session.get("selectedIntermediateHymn").name;
     }
   },
   closingHymnSession: function() {
-    if (typeof Session.get("selectedClosingHymn") == "undefined") {
+    if (typeof Session.get("selectedClosingHymn").numberText == "undefined") {
       return "";
     } else {
       return Session.get("selectedClosingHymn").numberText + " - " + Session.get("selectedClosingHymn").name  ;
     }
   },
   invocationSession: function() {
-    if (typeof Session.get("selectedInvocation") == "undefined") {
+    if (typeof Session.get("selectedInvocation").switchedPreferredName == "undefined") {
       return "";
     } else {
       return Session.get("selectedInvocation").switchedPreferredName;
     }
   },
   benedictionSession: function() {
-    if (typeof Session.get("selectedBenediction") == "undefined") {
+    if (typeof Session.get("selectedBenediction").switchedPreferredName == "undefined") {
       return "";
     } else {
       return Session.get("selectedBenediction").switchedPreferredName;
