@@ -7,6 +7,11 @@
       </a>
     </div>
     <h1 class="title">Select Attendance</h1>
+    <div class="buttons">
+      <a id="doneButton" class="button button-clear button-positive">
+        <strong>Done</strong>
+      </a>
+    </div>
   </div>
 
   {{#ionView}}
@@ -17,16 +22,27 @@
         </div>
         <div class="row">
           <div class="col">
-            <button id="decrementAttendanceButton" class="button button-positive">
-              -
+            <button id="decrementTenAttendanceButton" class="button button-positive button-large">
+              -10
             </button>
           </div>
           <div class="col">
+            <button id="decrementOneAttendanceButton" class="button button-positive button-large">
+              -1
+            </button>
+          </div>
+          <div class="col" style="font-size: 5em">
+            <br />
             {{attendanceSession}}
           </div>
           <div class="col">
-            <button id="incrementAttendanceButton" class="button button-positive">
-              +
+            <button id="incrementOneAttendanceButton" class="button button-positive button-large">
+              +1
+            </button>
+          </div>
+          <div class="col">
+            <button id="incrementTenAttendanceButton" class="button button-positive button-large">
+              +10
             </button>
           </div>
         </div>

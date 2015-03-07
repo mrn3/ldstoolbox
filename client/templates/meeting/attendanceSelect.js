@@ -9,11 +9,23 @@ Template.attendanceSelect.helpers({
 });
 
 Template.attendanceSelect.events({
-  'click #incrementAttendanceButton': function(e, instance){
+  'click #incrementOneAttendanceButton': function(e, instance){
     Session.set("selectedAttendance", Session.get("selectedAttendance") + 1);
   },
-  'click #decrementAttendanceButton': function(e, instance){
+  'click #decrementOneAttendanceButton': function(e, instance){
     Session.set("selectedAttendance", Session.get("selectedAttendance") - 1);
+  },
+  'click #incrementTenAttendanceButton': function(e, instance){
+    Session.set("selectedAttendance", Session.get("selectedAttendance") + 10);
+  },
+  'click #decrementTenAttendanceButton': function(e, instance){
+    Session.set("selectedAttendance", Session.get("selectedAttendance") - 10);
+  },
+  "click #cancelButton": function(e, instance) {
+    history.back();
+  },
+  "click #doneButton": function(e, instance) {
+    history.back();
   }
 });
 
