@@ -20,31 +20,22 @@
         <div class="item item-divider">
           &nbsp;
         </div>
-        <div class="row">
-          <div class="col">
-            <button id="decrementTenAttendanceButton" class="button button-positive button-large">
-              -10
-            </button>
-          </div>
-          <div class="col">
-            <button id="decrementOneAttendanceButton" class="button button-positive button-large">
-              -1
-            </button>
-          </div>
-          <div class="col" style="font-size: 5em">
-            <br />
+        <div class="padding">
+          <button id="incrementTenAttendanceButton" class="button button-positive button-large button-full">
+            +10
+          </button>
+          <button id="incrementOneAttendanceButton" class="button button-positive button-large button-full">
+            +1
+          </button>
+          <div style="font-size: 5em; padding:30px" align="center">
             {{attendanceSession}}
           </div>
-          <div class="col">
-            <button id="incrementOneAttendanceButton" class="button button-positive button-large">
-              +1
-            </button>
-          </div>
-          <div class="col">
-            <button id="incrementTenAttendanceButton" class="button button-positive button-large">
-              +10
-            </button>
-          </div>
+          <button id="decrementOneAttendanceButton" class="button button-positive button-large button-full">
+            -1
+          </button>
+          <button id="decrementTenAttendanceButton" class="button button-positive button-large button-full">
+            -10
+          </button>
         </div>
       {{/ionList}}
     {{/ionContent}}
