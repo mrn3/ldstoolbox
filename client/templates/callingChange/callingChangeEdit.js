@@ -78,6 +78,7 @@ Template.callingChangeEdit.events({
       type:                 Session.get("selectedCallingChangeType"),
       member:               Session.get("selectedCallingChangeMember"),
       calling:              Session.get("selectedCallingChangeCalling"),
+      meetingDate:          $('#meetingDate').val(),
       notes:                $('#notes').val()
     };
 
@@ -130,12 +131,14 @@ Template.callingChangeEdit.events({
   'click [data-action=markInterviewed]': function(e, instance){
     var callingChange = this;
     var updateObject = {};
+    var meetingDate = moment().day(7).format("YYYY-MM-DD");
+    console.log(meetingDate);
     var properties = {
       status:           "Interviewed",
-      dateInterviewed:  new Date()
+      dateInterviewed:  new Date(),
+      meetingDate:      meetingDate
     };
     if (properties) {
-      //calculatedDatePresented = moment($('#dateInterviewed').val()).day(7);
       updateObject.$set = properties;
       callingChangeCollection.update(callingChange._id, updateObject, function(error){
         if(error) {

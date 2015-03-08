@@ -130,8 +130,8 @@ Router.map(function() {
 
     //meetingDateFormatted = moment(meeting.title).tz('Etc/GMT').format('YYYY-MM-DD');
     meetingDateFormatted = meeting.meetingDate;
-    releaseResultArray = callingChangeCollection.find({type: "Release", datePresented : new Date(meetingDateFormatted)}).fetch();
-    callingResultArray = callingChangeCollection.find({type: "Call", datePresented : new Date(meetingDateFormatted)}).fetch();
+    releaseResultArray = callingChangeCollection.find({type: "Release", meetingDate : meetingDateFormatted}).fetch();
+    callingResultArray = callingChangeCollection.find({type: "Call", meetingDate : meetingDateFormatted}).fetch();
 
     var doc = new PDFDocument({size: 'A4', margin: 50});
 
@@ -219,8 +219,8 @@ Router.map(function() {
 
       for(var releaseResultIndex in releaseResultArray) {
         doc.text("____________________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-        doc.text(releaseResultArray[releaseResultIndex].memberName, distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-        doc.text(releaseResultArray[releaseResultIndex].callingName, distanceFromLeft4, distanceFromTop, {align: "left", width: pageWidth});
+        doc.text(releaseResultArray[releaseResultIndex].member.switchedPreferredName, distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+        doc.text(releaseResultArray[releaseResultIndex].calling.callingName, distanceFromLeft4, distanceFromTop, {align: "left", width: pageWidth});
         distanceFromTop += verticalPositionIncrement;
       }
 
