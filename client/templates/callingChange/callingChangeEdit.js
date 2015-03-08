@@ -170,8 +170,14 @@ Template.callingChangeEdit.events({
   'click [data-action=markRecorded]': function(e, instance){
     var callingChange = this;
     var updateObject = {};
+    var calculatedStatus;
+    if (callingChange.type == "Release") {
+      calculatedStatus = "Complete";
+    } else {
+      calculatedStatus = "Recorded"
+    }
     var properties = {
-      status:           "Recorded",
+      status:           calculatedStatus,
       dateRecorded:     new Date()
     };
     if (properties) {
@@ -207,7 +213,7 @@ Template.callingChangeEdit.events({
     var callingChange = this;
     var updateObject = {};
     var properties = {
-      status:               "Set Apart Recorded",
+      status:               "Complete",
       dateSetApartRecorded: new Date()
     };
     if (properties) {
