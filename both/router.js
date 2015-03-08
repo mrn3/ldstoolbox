@@ -13,8 +13,11 @@ Meteor.startup(function () {
 
 Router.map(function() {
   this.route('home', {path: '/'});
-  this.route('/memberList/', {
-    name: 'memberList',
+  this.route('/householdList/', {
+    name: 'householdList',
+    waitOn: function () {
+      return Meteor.subscribe('householdPublication')
+    },
     data: function() {
       return {
         householdData: householdCollection.find({})
@@ -22,22 +25,11 @@ Router.map(function() {
     },
     fastRender: true
   });
-  this.route('/memberSelect/', {
-    name: 'memberSelect',
-    fastRender: true
-  });
-  this.route('/member/:individualId', {
-    name: 'member',
-    data: function() {
-      //console.log(memberCollection.findOne({individualId: this.params.individualId}));
-      return {
-        memberData: memberCollection.findOne({individualId: this.params.individualId})
-      };
-    },
-    fastRender: true
-  });
   this.route('/household/:_id', {
     name: 'household',
+    waitOn: function () {
+      return Meteor.subscribe('householdPublication')
+    },
     data: function() {
       return {
         householdData: householdCollection.findOne(this.params._id)
@@ -45,8 +37,37 @@ Router.map(function() {
     },
     fastRender: true
   });
+  this.route('/memberSelect/', {
+    name: 'memberSelect',
+    waitOn: function () {
+      return Meteor.subscribe('memberPublication')
+    },
+    fastRender: true
+  });
+  this.route('/member/:individualId', {
+    name: 'member',
+    waitOn: function () {
+      return Meteor.subscribe('memberPublication')
+    },
+    data: function() {
+      return {
+        memberData: memberCollection.findOne({individualId: this.params.individualId})
+      };
+    },
+    fastRender: true
+  });
+  this.route('/callingSelect/', {
+    name: 'callingSelect',
+    waitOn: function () {
+      return Meteor.subscribe('callingPublication')
+    },
+    fastRender: true
+  });
   this.route('/callingGroupList/', {
     name: 'callingGroupList',
+    waitOn: function () {
+      return Meteor.subscribe('callingGroupPublication')
+    },
     data: function() {
       return {
         callingData: callingGroupCollection.find({})
@@ -56,6 +77,9 @@ Router.map(function() {
   });
   this.route('/callingGroup/:_id', {
     name: 'callingGroup',
+    waitOn: function () {
+      return Meteor.subscribe('callingGroupPublication')
+    },
     data: function() {
       return {
         callingData: callingGroupCollection.findOne(this.params._id)
@@ -63,12 +87,11 @@ Router.map(function() {
     },
     fastRender: true
   });
-  this.route('/callingSelect/', {
-    name: 'callingSelect',
-    fastRender: true
-  });
   this.route('/callingChangeList/', {
     name: 'callingChangeList',
+    waitOn: function () {
+      return Meteor.subscribe('callingChangePublication')
+    },
     data: function() {
       return {
         callingChangeData: callingChangeCollection.find({})
@@ -78,10 +101,16 @@ Router.map(function() {
   });
   this.route('/callingChangeCreate/', {
     name: 'callingChangeCreate',
+    waitOn: function () {
+      return Meteor.subscribe('callingChangePublication')
+    },
     fastRender: true
   });
   this.route('/callingChangeEdit/:_id', {
     name: 'callingChangeEdit',
+    waitOn: function () {
+      return Meteor.subscribe('callingChangePublication')
+    },
     data: function() {
       return {
         callingChangeData: callingChangeCollection.findOne(this.params._id)
@@ -95,6 +124,9 @@ Router.map(function() {
   });
   this.route('/meetingList/', {
     name: 'meetingList',
+    waitOn: function () {
+      return Meteor.subscribe('meetingPublication')
+    },
     data: function() {
       return {
         meetingData: meetingCollection.find({})
@@ -103,10 +135,16 @@ Router.map(function() {
     fastRender: true
   });
   this.route('/meetingCreate/', {
-    name: 'meetingCreate'
+    name: 'meetingCreate',
+    waitOn: function () {
+      return Meteor.subscribe('meetingPublication')
+    },
   });
   this.route('/meetingEdit/:_id', {
     name: 'meetingEdit',
+    waitOn: function () {
+      return Meteor.subscribe('meetingPublication')
+    },
     data: function() {
       return {
         meetingData: meetingCollection.findOne(this.params._id)
@@ -116,6 +154,9 @@ Router.map(function() {
   });
   this.route('/hymnSelect/', {
     name: 'hymnSelect',
+    waitOn: function () {
+      return Meteor.subscribe('hymnPublication')
+    },
     fastRender: true
   });
   this.route('/attendanceSelect/', {

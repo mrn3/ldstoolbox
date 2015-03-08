@@ -1,4 +1,4 @@
-Template.memberList.events({
+Template.householdList.events({
   'click [data-action=showActionSheet]': function (event, template) {
     IonActionSheet.show({
       titleText: 'ActionSheet Example',
