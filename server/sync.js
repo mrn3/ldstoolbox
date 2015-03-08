@@ -73,7 +73,7 @@ Meteor.methods({
       memberCollection.remove({wardUnitNo: unit.wardUnitNo});
 
       //add all households in ward
-        for(var householdIndex in householdList) {
+      for(var householdIndex in householdList) {
         householdCollection.insert(householdList[householdIndex]);
 
         //insert head of household, spouse, and children, and append on the ward unit number

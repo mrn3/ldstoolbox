@@ -118,10 +118,24 @@ Template.meetingFields.events({
   },
   'click #visitingAuthorityItem': function(e, instance) {
     Session.set("memberSelectType", "visitingAuthority");
+  },
+  'click #addAnnouncementButton': function(e, instance) {
+    $("#announcementList").append($("#announcementList div.list:eq(0)").clone(true));
+    $("#announcementList div.list").eq(-1).find("input").val('');
+    e.preventDefault();
   }
 });
 
 Template.meetingFields.rendered = function() {
+  if ((this.data) && (typeof this.data.announcementArray != "undefined")) {
+    for(var announcementIndex in this.data.announcementArray) {
+      $("#announcementList").append($("#announcementList div.list:eq(0)").clone(true));
+      $("#announcementList div.list").eq(-1).find("input").val(this.data.announcementArray[announcementIndex]);
+      $("#announcementList div.list").eq(-1).find("button").attr("id", "removeAnnouncementButton" + announcementIndex);
+      $("#announcementList div.list").eq(-1).find("button").attr("onclick", "console.log(this);");
+    }
+  }
+
   if ((this.data) && (typeof this.data.organist != "undefined")) {
     if ((typeof Session.get("selectedOrganist") == "undefined") || (Session.get("selectedOrganist") == "")) {
       Session.set("selectedOrganist", this.data.organist);

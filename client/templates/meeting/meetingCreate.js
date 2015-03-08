@@ -13,6 +13,13 @@ Template.meetingCreate.events({
       return false;
     }
 
+    var announcementArray = [];
+    $('.announcement').each(function() {
+      if ($(this).val() != "") {
+        announcementArray.push($(this).val());
+      }
+    });
+
     var properties = {
       createdBy:            Meteor.userId(),
       createdAt:            new Date(),
@@ -23,7 +30,7 @@ Template.meetingCreate.events({
       attendance:           Session.get("selectedAttendance"),
       organist:             Session.get("selectedOrganist"),
       chorister:            Session.get("selectedChorister"),
-      announcements:        $('#announcements').val(),
+      announcementArray:    announcementArray,
       openingHymn:          Session.get("selectedOpeningHymn"),
       sacramentHymn:        Session.get("selectedSacramentHymn"),
       intermediateHymn:     Session.get("selectedIntermediateHymn"),
