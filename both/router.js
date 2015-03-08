@@ -153,56 +153,58 @@ Router.map(function() {
     doc.fontSize(12);
 
     doc.text("Conducting: ___________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: halfPageWidth});
-    if (typeof meeting.conducting != "undefined") {
-      doc.text(meeting.conducting, distanceFromLeft2, distanceFromTop, {align: "left", width: halfPageWidth});
+    if (typeof meeting.conducting.switchedPreferredName != "undefined") {
+      doc.text(meeting.conducting.switchedPreferredName, distanceFromLeft2, distanceFromTop, {align: "left", width: halfPageWidth});
     }
     doc.text("Presiding: _____________________________", distanceFromLeft4, distanceFromTop, {align: "left", width: halfPageWidth});
-    if (typeof meeting.presiding != "undefined") {
-      doc.text(meeting.presiding, distanceFromLeft5, distanceFromTop, {align: "left", width: halfPageWidth});
+    if (typeof meeting.presiding.switchedPreferredName != "undefined") {
+      doc.text(meeting.presiding.switchedPreferredName, distanceFromLeft5, distanceFromTop, {align: "left", width: halfPageWidth});
     }
     distanceFromTop += verticalPositionIncrement;
 
     doc.text("Chorister: _____________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: halfPageWidth});
-    if (typeof meeting.chorister != "undefined") {
-      doc.text(meeting.chorister, distanceFromLeft2, distanceFromTop, {align: "left", width: halfPageWidth});
+    if (typeof meeting.chorister.switchedPreferredName != "undefined") {
+      doc.text(meeting.chorister.switchedPreferredName, distanceFromLeft2, distanceFromTop, {align: "left", width: halfPageWidth});
     }
     doc.text("Organist: ______________________________", distanceFromLeft4, distanceFromTop, {align: "left", width: halfPageWidth});
-    if (typeof meeting.organist != "undefined") {
-      doc.text(meeting.organist, distanceFromLeft5, distanceFromTop, {align: "left", width: halfPageWidth});
+    if (typeof meeting.organist.switchedPreferredName != "undefined") {
+      doc.text(meeting.organist.switchedPreferredName, distanceFromLeft5, distanceFromTop, {align: "left", width: halfPageWidth});
     }
     distanceFromTop += verticalPositionIncrement;
 
     doc.text("Visiting Authorities: _____________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-    if (typeof meeting.visitingAuthority != "undefined") {
-      doc.text(meeting.visitingAuthority, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
+    if (typeof meeting.visitingAuthority.switchedPreferredName != "undefined") {
+      doc.text(meeting.visitingAuthority.switchedPreferredName, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
     }
     distanceFromTop += verticalPositionIncrement;
 
     doc.text("Welcome Visitors", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
     distanceFromTop += verticalPositionIncrement;
 
-    doc.text("Announcements: _____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-    distanceFromTop += verticalPositionIncrement;
-    if (typeof meeting.announcements != "undefined") {
-      doc.text(meeting.announcements, distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-    }
-    distanceFromTop += verticalPositionIncrement;
-    distanceFromTop += verticalPositionIncrement;
-    distanceFromTop += verticalPositionIncrement;
-    distanceFromTop += verticalPositionIncrement;
-    distanceFromTop += verticalPositionIncrement;
+    doc.text("Announcements: _______________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
     distanceFromTop += verticalPositionIncrement;
 
+    if (typeof meeting.announcementArray != "undefined") {
+      for(var announcementIndex in meeting.announcementArray) {
+        doc.text(meeting.announcementArray[announcementIndex], distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+        doc.text("_____________________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+        distanceFromTop += verticalPositionIncrement;
+      }
+    }
+    doc.text("_____________________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+    distanceFromTop += verticalPositionIncrement;
+    doc.text("_____________________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+    distanceFromTop += verticalPositionIncrement;
 
     doc.text("Opening Hymn: ________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-    if (typeof meeting.openingHymn != "undefined") {
-      doc.text(meeting.openingHymn, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
+    if (typeof meeting.openingHymn.name != "undefined") {
+      doc.text(meeting.openingHymn.number + " - " + meeting.openingHymn.name, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
     }
     distanceFromTop += verticalPositionIncrement;
 
     doc.text("Invocation: ____________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-    if (typeof meeting.invocation != "undefined") {
-      doc.text(meeting.invocation, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
+    if (typeof meeting.invocation.switchedPreferredName != "undefined") {
+      doc.text(meeting.invocation.switchedPreferredName, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
     }
     distanceFromTop += verticalPositionIncrement+5;
 
@@ -286,8 +288,8 @@ Router.map(function() {
     doc.fontSize(12);
 
     doc.text("Sacrament Hymn: ______________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-    if (typeof meeting.sacramentHymn != "undefined") {
-      doc.text(meeting.sacramentHymn, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
+    if (typeof meeting.sacramentHymn.name != "undefined") {
+      doc.text(meeting.sacramentHymn.number + " - " + meeting.sacramentHymn.name, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
     }
     distanceFromTop += verticalPositionIncrement;
 
@@ -312,9 +314,9 @@ Router.map(function() {
     }
     distanceFromTop += verticalPositionIncrement;
 
-    if (typeof meeting.intermediateHymn != "undefined") {
+    if (typeof meeting.intermediateHymn.name != "undefined") {
       doc.text("Intermediate Hymn: _____________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-      doc.text(meeting.intermediateHymn, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
+      doc.text(meeting.intermediateHymn.number + " - " + meeting.intermediateHymn.name, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
       distanceFromTop += verticalPositionIncrement;
     }
 
@@ -335,14 +337,14 @@ Router.map(function() {
     distanceFromTop += verticalPositionIncrement;
 
     doc.text("Closing Hymn: _________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-    if (typeof meeting.closingHymn != "undefined") {
-      doc.text(meeting.closingHymn, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
+    if (typeof meeting.closingHymn.name != "undefined") {
+      doc.text(meeting.closingHymn.number + " - " + meeting.closingHymn.name, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
     }
     distanceFromTop += verticalPositionIncrement;
 
     doc.text("Benediction: ___________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-    if (typeof meeting.benediction != "undefined") {
-      doc.text(meeting.benediction, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
+    if (typeof meeting.benediction.switchedPreferredName != "undefined") {
+      doc.text(meeting.benediction.switchedPreferredName, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
     }
     distanceFromTop += verticalPositionIncrement;
 
