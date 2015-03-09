@@ -59,9 +59,11 @@
 
           {{#each speakerData}}
             <div class="list list-inset">
-              <label class="item item-input">
-                <input type="text" id="{{_id}}" placeholder="Speaker Name" class="speakerInput" value="{{memberName}}">
-              </label>
+              <a id="{{_id}}" class="item item-icon-right speakerItem" href="{{pathFor 'memberSelect'}}">
+                Speaker
+                <span class="item-note">{{speaker.switchedPreferredName}}</span>
+                <i class="icon ion-ios-arrow-right"></i>
+              </a>
               <div class="item item-divider">
                 <button type="button" class="button button-clear button-small pull-right removeSpeakerButton">
                   Remove

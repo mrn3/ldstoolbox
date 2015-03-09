@@ -12,16 +12,14 @@ Template.meetingEdit.events({
     announcementCollection.update(this._id, updateObject);
   },
   'click #addSpeakerButton': function(e, instance) {
-    speakerCollection.insert({meetingId: this._id, memberName: "" });
+    speakerCollection.insert({meetingId: this._id});
   },
   'click .removeSpeakerButton': function(e, instance) {
     speakerCollection.remove({_id: this._id});
   },
-  'change .speakerInput': function(e, instance) {
-    speakerValue = document.getElementById(this._id).value;
-    var updateObject = {};
-    updateObject.$set = {memberName: speakerValue};
-    speakerCollection.update(this._id, updateObject);
+  'click .speakerItem': function(e, instance) {
+    Session.set("memberSelectType", "speaker");
+    Session.set("memberSelectId", this._id);
   },
   'click [data-action=showActionSheet]': function(e, instance){
     var meeting = this;
@@ -43,16 +41,6 @@ Template.meetingEdit.events({
   },
   'click #doneButton': function(e, instance){
     var meeting = this;
-
-    /*
-    var announcementArray = [];
-    $('.announcement').each(function() {
-      if ($(this).val() != "") {
-        announcements.push($(this).val());
-      }
-    });
-    */
-
     var updateObject = {};
     var properties = {
       createdBy:            Meteor.userId(),
@@ -64,7 +52,6 @@ Template.meetingEdit.events({
       attendance:           Session.get("selectedAttendance"),
       organist:             Session.get("selectedOrganist"),
       chorister:            Session.get("selectedChorister"),
-      //announcementArray:    announcementArray,
       openingHymn:          Session.get("selectedOpeningHymn"),
       sacramentHymn:        Session.get("selectedSacramentHymn"),
       intermediateHymn:     Session.get("selectedIntermediateHymn"),
@@ -72,11 +59,6 @@ Template.meetingEdit.events({
       closingHymn:          Session.get("selectedClosingHymn"),
       invocation:           Session.get("selectedInvocation"),
       benediction:          Session.get("selectedBenediction"),
-      speaker1:             $('#speaker1').val(),
-      speaker2:             $('#speaker2').val(),
-      speaker3:             $('#speaker3').val(),
-      speaker4:             $('#speaker4').val(),
-      speaker5:             $('#speaker5').val(),
       recognition1Type:     $('#recognition1Type').val(),
       recognition1Person1:  $('#recognition1Person1').val(),
       recognition1Person2:  $('#recognition1Person2').val(),

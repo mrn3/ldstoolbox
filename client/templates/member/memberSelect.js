@@ -62,6 +62,11 @@ Template.memberSelect.events({
     else if (Session.get("memberSelectType") == "visitingAuthority") {
       Session.set('selectedVisitingAuthority', this);
     }
+    else if (Session.get("memberSelectType") == "speaker") {
+      var updateObject = {};
+      updateObject.$set = {speaker: this};
+      speakerCollection.update(Session.get("memberSelectId"), updateObject);
+    }
 
     history.back();
   },
