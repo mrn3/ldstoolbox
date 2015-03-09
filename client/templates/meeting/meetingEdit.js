@@ -1,34 +1,16 @@
 Template.meetingEdit.events({
   'click #addAnnouncementButton': function(e, instance) {
-    //$("#announcementList").append($("#announcementList div.list:eq(0)").clone(true));
-    //$("#announcementList div.list").eq(-1).find("input").val('');
-    e.preventDefault();
-
-    //meetingCollection.update({_id: this._id}, { $addToSet: { "announcements": { "text": "" }}});
-    announcementCollection.insert({meetingId: this._id, "text": "" });
+    announcementCollection.insert({meetingId: this._id, text: "" });
   },
   'click .removeAnnouncementButton': function(e, instance) {
-    e.preventDefault();
     announcementCollection.remove({_id: this._id});
   },
   'change .announcementInput': function(e, instance) {
-    e.preventDefault();
-    announcementValue = document.getElementById("announcementInput" + this._id).value;
-
+    //console.log($(this._id));
+    announcementValue = document.getElementById(this._id).value;
     var updateObject = {};
-    var properties = {
-      text:             announcementValue
-    };
-    updateObject.$set = properties;
-
-    if (properties) {
-      updateObject.$set = properties;
-      announcementCollection.update(this._id, updateObject, function(error){
-        if(error) {
-          console.log(error);
-        }
-      });
-    }
+    updateObject.$set = {text: announcementValue};
+    announcementCollection.update(this._id, updateObject);
   },
   'click [data-action=showActionSheet]': function(e, instance){
     var meeting = this;
