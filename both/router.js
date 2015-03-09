@@ -179,6 +179,8 @@ Router.map(function() {
     releaseResultArray = callingChangeCollection.find({type: "Release", meetingDate : meetingDateFormatted}).fetch();
     callingResultArray = callingChangeCollection.find({type: "Call", meetingDate : meetingDateFormatted}).fetch();
 
+    announcementArray = announcementCollection.find({meetingId : this.params._id}).fetch();
+
     var doc = new PDFDocument({size: "A4", margin: 50});
 
     var pageWidth = 520;
@@ -230,9 +232,9 @@ Router.map(function() {
     doc.text("Announcements: _______________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
     distanceFromTop += verticalPositionIncrement;
 
-    if (typeof meeting.announcementArray != "undefined") {
-      for(var announcementIndex in meeting.announcementArray) {
-        doc.text(meeting.announcementArray[announcementIndex], distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+    if (typeof announcementArray != "undefined") {
+      for(var announcementIndex in announcementArray) {
+        doc.text(announcementArray[announcementIndex].text, distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
         doc.text("_____________________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
         distanceFromTop += verticalPositionIncrement;
       }

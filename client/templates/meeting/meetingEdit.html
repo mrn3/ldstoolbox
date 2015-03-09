@@ -34,10 +34,10 @@
             <div class="list list-inset">
               <div class="announcementItem">
                 <label class="item item-input">
-                  <input type="text" onchange="console.log(this);" name="announcement[]" placeholder="Announcement" class="announcement" value="{{text}}">
+                  <input type="text" id="announcementInput{{_id}}" placeholder="Announcement" class="announcementInput" value="{{text}}">
                 </label>
                 <div class="item item-divider">
-                  <button id="removeAnnouncementButton" onclick="console.log(this);" type="button" class="button button-clear button-small pull-right">
+                  <button id="{{_id}}" type="button" class="button button-clear button-small pull-right removeAnnouncementButton">
                     Remove
                     <span class="icon ion-close"></span>
                   </button>
