@@ -276,8 +276,8 @@ Router.map(function() {
 
       for(var callingResultIndex in callingResultArray) {
         doc.text("____________________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-        doc.text(callingResultArray[callingResultIndex].memberName, distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-        doc.text(callingResultArray[callingResultIndex].callingName, distanceFromLeft4, distanceFromTop, {align: "left", width: pageWidth});
+        doc.text(callingResultArray[callingResultIndex].member.switchedPreferredName, distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+        doc.text(callingResultArray[callingResultIndex].calling.callingName, distanceFromLeft4, distanceFromTop, {align: "left", width: pageWidth});
         distanceFromTop += verticalPositionIncrement;
       }
 
@@ -286,6 +286,7 @@ Router.map(function() {
       distanceFromTop += verticalPositionIncrement;
     }
 
+    /*
     if (typeof meeting.recognition1Type != "undefined") {
       doc.text(meeting.recognition1Type + ": _____________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
       recognition1People = meeting.recognition1Person1;
@@ -322,6 +323,7 @@ Router.map(function() {
       doc.text(recognition3People, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
       distanceFromTop += verticalPositionIncrement;
     }
+    */
 
     doc.fontSize(14);
     doc.text("Sacrament", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
