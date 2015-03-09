@@ -6,11 +6,22 @@ Template.meetingEdit.events({
     announcementCollection.remove({_id: this._id});
   },
   'change .announcementInput': function(e, instance) {
-    //console.log($(this._id));
     announcementValue = document.getElementById(this._id).value;
     var updateObject = {};
     updateObject.$set = {text: announcementValue};
     announcementCollection.update(this._id, updateObject);
+  },
+  'click #addSpeakerButton': function(e, instance) {
+    speakerCollection.insert({meetingId: this._id, memberName: "" });
+  },
+  'click .removeSpeakerButton': function(e, instance) {
+    speakerCollection.remove({_id: this._id});
+  },
+  'change .speakerInput': function(e, instance) {
+    speakerValue = document.getElementById(this._id).value;
+    var updateObject = {};
+    updateObject.$set = {memberName: speakerValue};
+    speakerCollection.update(this._id, updateObject);
   },
   'click [data-action=showActionSheet]': function(e, instance){
     var meeting = this;

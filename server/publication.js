@@ -22,6 +22,10 @@ Meteor.publish('meetingPublication', function() {
   return meetingCollection.find({});
 });
 
+Meteor.publish('speakerPublication', function() {
+  return speakerCollection.find({});
+});
+
 Meteor.publish('announcementPublication', function() {
   return announcementCollection.find({});
 });

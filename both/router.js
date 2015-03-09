@@ -145,14 +145,15 @@ Router.map(function() {
     waitOn: function () {
       return [
         Meteor.subscribe("meetingPublication"),
-        Meteor.subscribe("announcementPublication")
+        Meteor.subscribe("announcementPublication"),
+        Meteor.subscribe("speakerPublication")
       ]
     },
     data: function() {
-      //console.log(announcementCollection.find({meetingId: this.params._id}).fetch());
       return {
         meetingData: meetingCollection.findOne(this.params._id),
-        announcementData: announcementCollection.find({meetingId: this.params._id})
+        announcementData: announcementCollection.find({meetingId: this.params._id}),
+        speakerData: speakerCollection.find({meetingId: this.params._id})
       };
     },
     fastRender: true
