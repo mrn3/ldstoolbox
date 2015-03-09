@@ -14,29 +14,57 @@
         </a>
       </div>
     </div>
+  {{/with}}
 
     {{#ionView}}
       {{#ionContent}}
         {{#ionList}}
-          {{>meetingFields}}
-          <div class="item item-divider">
-            &nbsp;
-          </div>
-          <a class="button button-positive button-full button-clear" href="/meetingPrint/{{_id}}">
-            Print Meeting
-          </a>
-          <div class="item item-divider">
-            &nbsp;
-          </div>
-          <a class="button button-positive button-full button-clear" data-action="showActionSheet">
-            Delete Meeting
-          </a>
-          <div class="item item-divider">
-            &nbsp;
-          </div>
+          {{#with meetingData}}
+            {{>meetingFields}}
+            <div class="item item-divider">
+              Announcements
+              <button id="addAnnouncementButton" type="button" class="button button-clear button-small pull-right">
+                Add
+                <span class="icon ion-plus"></span>
+              </button>
+            </div>
+          {{/with}}
+
+          {{#each announcementData}}
+            <div class="list list-inset">
+              <div class="announcementItem">
+                <label class="item item-input">
+                  <input type="text" onchange="console.log(this);" name="announcement[]" placeholder="Announcement" class="announcement" value="{{text}}">
+                </label>
+                <div class="item item-divider">
+                  <button id="removeAnnouncementButton" onclick="console.log(this);" type="button" class="button button-clear button-small pull-right">
+                    Remove
+                    <span class="icon ion-close"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+
+          {{#with meetingData}}
+            <div class="item item-divider">
+              &nbsp;
+            </div>
+            <a class="button button-positive button-full button-clear" href="/meetingPrint/{{_id}}">
+              Print Meeting
+            </a>
+            <div class="item item-divider">
+              &nbsp;
+            </div>
+            <a class="button button-positive button-full button-clear" data-action="showActionSheet">
+              Delete Meeting
+            </a>
+            <div class="item item-divider">
+              &nbsp;
+            </div>
+          {{/with}}
         {{/ionList}}
       {{/ionContent}}
     {{/ionView}}
 
-  {{/with}}
 </template>

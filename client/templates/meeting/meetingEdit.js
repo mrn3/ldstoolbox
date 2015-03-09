@@ -1,4 +1,12 @@
 Template.meetingEdit.events({
+  'click #addAnnouncementButton': function(e, instance) {
+    //$("#announcementList").append($("#announcementList div.list:eq(0)").clone(true));
+    //$("#announcementList div.list").eq(-1).find("input").val('');
+    e.preventDefault();
+
+    //meetingCollection.update({_id: this._id}, { $addToSet: { "announcements": { "text": "" }}});
+    announcementCollection.insert({meetingId: this._id, "text": "" });
+  },
   'click [data-action=showActionSheet]': function(e, instance){
     var meeting = this;
     IonActionSheet.show({
@@ -20,12 +28,14 @@ Template.meetingEdit.events({
   'click #doneButton': function(e, instance){
     var meeting = this;
 
+    /*
     var announcementArray = [];
     $('.announcement').each(function() {
       if ($(this).val() != "") {
-        announcementArray.push($(this).val());
+        announcements.push($(this).val());
       }
     });
+    */
 
     var updateObject = {};
     var properties = {
@@ -38,7 +48,7 @@ Template.meetingEdit.events({
       attendance:           Session.get("selectedAttendance"),
       organist:             Session.get("selectedOrganist"),
       chorister:            Session.get("selectedChorister"),
-      announcementArray:    announcementArray,
+      //announcementArray:    announcementArray,
       openingHymn:          Session.get("selectedOpeningHymn"),
       sacramentHymn:        Session.get("selectedSacramentHymn"),
       intermediateHymn:     Session.get("selectedIntermediateHymn"),

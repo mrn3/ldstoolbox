@@ -14,6 +14,7 @@ Meteor.methods({
     return meeting;
   }
 });
+announcementCollection = new Meteor.Collection("announcement");
 householdCollection = new Meteor.Collection("household");
 memberCollection = new Meteor.Collection("member");
 unitCollection = new Meteor.Collection("unit");

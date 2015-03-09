@@ -1,22 +1,22 @@
 Router.configure({
-  layoutTemplate: 'layout'
+  layoutTemplate: "layout"
 });
 
 Meteor.startup(function () {
   if (Meteor.isClient) {
     var location = Iron.Location.get();
     if (location.queryObject.platformOverride) {
-      Session.set('platformOverride', location.queryObject.platformOverride);
+      Session.set("platformOverride", location.queryObject.platformOverride);
     }
   }
 });
 
 Router.map(function() {
-  this.route('home', {path: '/'});
-  this.route('/householdList/', {
-    name: 'householdList',
+  this.route("home", {path: "/"});
+  this.route("/householdList/", {
+    name: "householdList",
     waitOn: function () {
-      return Meteor.subscribe('householdPublication')
+      return Meteor.subscribe("householdPublication")
     },
     data: function() {
       return {
@@ -25,10 +25,10 @@ Router.map(function() {
     },
     fastRender: true
   });
-  this.route('/household/:_id', {
-    name: 'household',
+  this.route("/household/:_id", {
+    name: "household",
     waitOn: function () {
-      return Meteor.subscribe('householdPublication')
+      return Meteor.subscribe("householdPublication")
     },
     data: function() {
       return {
@@ -37,17 +37,17 @@ Router.map(function() {
     },
     fastRender: true
   });
-  this.route('/memberSelect/', {
-    name: 'memberSelect',
+  this.route("/memberSelect/", {
+    name: "memberSelect",
     waitOn: function () {
-      return Meteor.subscribe('memberPublication')
+      return Meteor.subscribe("memberPublication")
     },
     fastRender: true
   });
-  this.route('/member/:individualId', {
-    name: 'member',
+  this.route("/member/:individualId", {
+    name: "member",
     waitOn: function () {
-      return Meteor.subscribe('memberPublication')
+      return Meteor.subscribe("memberPublication")
     },
     data: function() {
       return {
@@ -56,17 +56,17 @@ Router.map(function() {
     },
     fastRender: true
   });
-  this.route('/callingSelect/', {
-    name: 'callingSelect',
+  this.route("/callingSelect/", {
+    name: "callingSelect",
     waitOn: function () {
-      return Meteor.subscribe('callingPublication')
+      return Meteor.subscribe("callingPublication")
     },
     fastRender: true
   });
-  this.route('/callingGroupList/', {
-    name: 'callingGroupList',
+  this.route("/callingGroupList/", {
+    name: "callingGroupList",
     waitOn: function () {
-      return Meteor.subscribe('callingGroupPublication')
+      return Meteor.subscribe("callingGroupPublication")
     },
     data: function() {
       return {
@@ -75,10 +75,10 @@ Router.map(function() {
     },
     fastRender: true
   });
-  this.route('/callingGroup/:_id', {
-    name: 'callingGroup',
+  this.route("/callingGroup/:_id", {
+    name: "callingGroup",
     waitOn: function () {
-      return Meteor.subscribe('callingGroupPublication')
+      return Meteor.subscribe("callingGroupPublication")
     },
     data: function() {
       return {
@@ -87,10 +87,10 @@ Router.map(function() {
     },
     fastRender: true
   });
-  this.route('/callingChangeList/', {
-    name: 'callingChangeList',
+  this.route("/callingChangeList/", {
+    name: "callingChangeList",
     waitOn: function () {
-      return Meteor.subscribe('callingChangePublication')
+      return Meteor.subscribe("callingChangePublication")
     },
     data: function() {
       return {
@@ -99,17 +99,17 @@ Router.map(function() {
     },
     fastRender: true
   });
-  this.route('/callingChangeCreate/', {
-    name: 'callingChangeCreate',
+  this.route("/callingChangeCreate/", {
+    name: "callingChangeCreate",
     waitOn: function () {
-      return Meteor.subscribe('callingChangePublication')
+      return Meteor.subscribe("callingChangePublication")
     },
     fastRender: true
   });
-  this.route('/callingChangeEdit/:_id', {
-    name: 'callingChangeEdit',
+  this.route("/callingChangeEdit/:_id", {
+    name: "callingChangeEdit",
     waitOn: function () {
-      return Meteor.subscribe('callingChangePublication')
+      return Meteor.subscribe("callingChangePublication")
     },
     data: function() {
       return {
@@ -118,14 +118,14 @@ Router.map(function() {
     },
     fastRender: true
   });
-  this.route('/callingChangeTypeSelect/', {
-    name: 'callingChangeTypeSelect',
+  this.route("/callingChangeTypeSelect/", {
+    name: "callingChangeTypeSelect",
     fastRender: true
   });
-  this.route('/meetingList/', {
-    name: 'meetingList',
+  this.route("/meetingList/", {
+    name: "meetingList",
     waitOn: function () {
-      return Meteor.subscribe('meetingPublication')
+      return Meteor.subscribe("meetingPublication")
     },
     data: function() {
       return {
@@ -134,47 +134,52 @@ Router.map(function() {
     },
     fastRender: true
   });
-  this.route('/meetingCreate/', {
-    name: 'meetingCreate',
+  this.route("/meetingCreate/", {
+    name: "meetingCreate",
     waitOn: function () {
-      return Meteor.subscribe('meetingPublication')
+      return Meteor.subscribe("meetingPublication")
     },
   });
-  this.route('/meetingEdit/:_id', {
-    name: 'meetingEdit',
+  this.route("/meetingEdit/:_id", {
+    name: "meetingEdit",
     waitOn: function () {
-      return Meteor.subscribe('meetingPublication')
+      return [
+        Meteor.subscribe("meetingPublication"),
+        Meteor.subscribe("announcementPublication")
+      ]
     },
     data: function() {
+      //console.log(announcementCollection.find({meetingId: this.params._id}).fetch());
       return {
-        meetingData: meetingCollection.findOne(this.params._id)
+        meetingData: meetingCollection.findOne(this.params._id),
+        announcementData: announcementCollection.find({meetingId: this.params._id})
       };
     },
     fastRender: true
   });
-  this.route('/hymnSelect/', {
-    name: 'hymnSelect',
+  this.route("/hymnSelect/", {
+    name: "hymnSelect",
     waitOn: function () {
-      return Meteor.subscribe('hymnPublication')
+      return Meteor.subscribe("hymnPublication")
     },
     fastRender: true
   });
-  this.route('/attendanceSelect/', {
-    name: 'attendanceSelect',
+  this.route("/attendanceSelect/", {
+    name: "attendanceSelect",
     fastRender: true
   });
-  this.route('sync');
-  this.route('userAccounts');
-  this.route('/meetingPrint/:_id', function() {
+  this.route("sync");
+  this.route("userAccounts");
+  this.route("/meetingPrint/:_id", function() {
 
     meeting = meetingCollection.findOne(this.params._id);
 
-    //meetingDateFormatted = moment(meeting.title).tz('Etc/GMT').format('YYYY-MM-DD');
+    //meetingDateFormatted = moment(meeting.title).tz("Etc/GMT").format("YYYY-MM-DD");
     meetingDateFormatted = meeting.meetingDate;
     releaseResultArray = callingChangeCollection.find({type: "Release", meetingDate : meetingDateFormatted}).fetch();
     callingResultArray = callingChangeCollection.find({type: "Call", meetingDate : meetingDateFormatted}).fetch();
 
-    var doc = new PDFDocument({size: 'A4', margin: 50});
+    var doc = new PDFDocument({size: "A4", margin: 50});
 
     var pageWidth = 520;
     var halfPageWidth = pageWidth / 2;
@@ -485,10 +490,10 @@ Router.map(function() {
 
 
     this.response.writeHead(200, {
-      'Content-type': 'application/pdf'
+      "Content-type": "application/pdf"
     });
     this.response.end( doc.outputSync() );
-  }, {where: 'server'});
+  }, {where: "server"});
 
 
 });
