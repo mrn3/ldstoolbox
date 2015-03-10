@@ -147,7 +147,8 @@ Router.map(function() {
         Meteor.subscribe("meetingPublication"),
         Meteor.subscribe("announcementPublication"),
         Meteor.subscribe("speakerPublication"),
-        Meteor.subscribe("recognitionPublication")
+        Meteor.subscribe("recognitionPublication"),
+        Meteor.subscribe("callingChangePublication")
       ]
     },
     data: function() {
@@ -155,7 +156,8 @@ Router.map(function() {
         meetingData: meetingCollection.findOne(this.params._id),
         announcementData: announcementCollection.find({meetingId: this.params._id}),
         speakerData: speakerCollection.find({meetingId: this.params._id}),
-        recognitionData: recognitionCollection.find({meetingId: this.params._id})
+        recognitionData: recognitionCollection.find({meetingId: this.params._id}),
+        callingChangeData: callingChangeCollection.find({meetingId: this.params._id})
       };
     },
     fastRender: true
@@ -281,7 +283,7 @@ Router.map(function() {
       distanceFromTop += verticalPositionIncrement;
 
       for(var releaseResultIndex in releaseResultArray) {
-        doc.text("____________________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+        doc.text("_____________________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
         doc.text(releaseResultArray[releaseResultIndex].member.switchedPreferredName, distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
         doc.text(releaseResultArray[releaseResultIndex].calling.callingName, distanceFromLeft4, distanceFromTop, {align: "left", width: pageWidth});
         distanceFromTop += verticalPositionIncrement;
@@ -308,7 +310,7 @@ Router.map(function() {
       distanceFromTop += verticalPositionIncrement;
     }
 
-    doc.text("Ordinances and Recognitions: ____________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+    doc.text("Ordinances and Recognitions: ____________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
     distanceFromTop += verticalPositionIncrement;
 
     if (typeof recognitionArray != "undefined") {
@@ -338,7 +340,7 @@ Router.map(function() {
     distanceFromTop += verticalPositionIncrement;
     distanceFromTop += verticalPositionIncrement;
 
-    doc.text("Speakers: _______________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+    doc.text("Speakers: ____________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
     distanceFromTop += verticalPositionIncrement;
 
     if (typeof speakerArray != "undefined") {
