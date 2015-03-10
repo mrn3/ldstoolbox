@@ -171,6 +171,18 @@ Router.map(function() {
     name: "attendanceSelect",
     fastRender: true
   });
+  this.route("/recognitionTypeSelect/", {
+    name: "recognitionTypeSelect",
+    waitOn: function () {
+      return Meteor.subscribe("recognitionTypePublication")
+    },
+    data: function() {
+      return {
+        recognitionTypeData: recognitionTypeCollection.find({})
+      };
+    },
+    fastRender: true
+  });
   this.route("sync");
   this.route("userAccounts");
   this.route("/meetingPrint/:_id", function() {

@@ -65,12 +65,12 @@ Template.memberSelect.events({
     else if (Session.get("memberSelectType") == "speaker") {
       var updateObject = {};
       updateObject.$set = {speaker: this};
-      speakerCollection.update(Session.get("memberSelectId"), updateObject);
+      speakerCollection.update(Session.get("speakerId"), updateObject);
     }
     else if (Session.get("memberSelectType") == "recognition") {
       var updateObject = {};
-      updateObject.$set = {recognition: this};
-      recognitionCollection.update(Session.get("memberSelectId"), updateObject);
+      updateObject.$set = {member: this};
+      recognitionCollection.update(Session.get("recognitionId"), updateObject);
     }
 
     history.back();

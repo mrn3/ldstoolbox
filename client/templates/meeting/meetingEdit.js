@@ -19,7 +19,7 @@ Template.meetingEdit.events({
   },
   'click .speakerItem': function(e, instance) {
     Session.set("memberSelectType", "speaker");
-    Session.set("memberSelectId", this._id);
+    Session.set("speakerId", this._id);
   },
   'click #addRecognitionButton': function(e, instance) {
     recognitionCollection.insert({meetingId: this._id});
@@ -27,9 +27,12 @@ Template.meetingEdit.events({
   'click .removeRecognitionButton': function(e, instance) {
     recognitionCollection.remove({_id: this._id});
   },
-  'click .speakerItem': function(e, instance) {
+  'click .recognitionItem': function(e, instance) {
     Session.set("memberSelectType", "recognition");
-    Session.set("memberSelectId", this._id);
+    Session.set("recognitionId", this._id);
+  },
+  'click .recognitionTypeItem': function(e, instance) {
+    Session.set("recognitionId", this._id);
   },
   'click [data-action=showActionSheet]': function(e, instance){
     var meeting = this;

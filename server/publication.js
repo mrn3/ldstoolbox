@@ -26,6 +26,14 @@ Meteor.publish('speakerPublication', function() {
   return speakerCollection.find({});
 });
 
+Meteor.publish('recognitionPublication', function() {
+  return recognitionCollection.find({});
+});
+
+Meteor.publish('recognitionTypePublication', function() {
+  return recognitionTypeCollection.find({});
+});
+
 Meteor.publish('announcementPublication', function() {
   return announcementCollection.find({});
 });
@@ -36,8 +44,4 @@ Meteor.publish('unitPublication', function() {
 
 Meteor.publish('hymnPublication', function() {
   return hymnCollection.find({});
-});
-
-Meteor.publish('recognitionTypePublication', function() {
-  return recognitionTypeCollection.find({});
 });

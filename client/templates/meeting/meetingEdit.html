@@ -85,9 +85,14 @@
 
           {{#each recognitionData}}
             <div class="list list-inset">
+              <a id="{{_id}}" class="item item-icon-right recognitionTypeItem" href="{{pathFor 'recognitionTypeSelect'}}">
+                Type
+                <span class="item-note">{{recognitionType.typeName}}</span>
+                <i class="icon ion-ios-arrow-right"></i>
+              </a>
               <a id="{{_id}}" class="item item-icon-right recognitionItem" href="{{pathFor 'memberSelect'}}">
-                Speaker
-                <span class="item-note">{{recognition.switchedPreferredName}}</span>
+                Member
+                <span class="item-note">{{member.switchedPreferredName}}</span>
                 <i class="icon ion-ios-arrow-right"></i>
               </a>
               <div class="item item-divider">
