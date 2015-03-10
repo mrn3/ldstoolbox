@@ -8,12 +8,6 @@ Meteor.methods({
   }
 });
 meetingCollection = new Meteor.Collection("meeting");
-Meteor.methods({
-  insertMeeting: function(meeting){
-    meeting._id = meetingCollection.insert(meeting);
-    return meeting;
-  }
-});
 announcementCollection = new Meteor.Collection("announcement");
 speakerCollection = new Meteor.Collection("speaker");
 

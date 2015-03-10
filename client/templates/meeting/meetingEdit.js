@@ -43,9 +43,18 @@ Template.meetingEdit.events({
       cancelText: 'Cancel',
       cancel: function() {},
       destructiveButtonClicked: function() {
-        meetingCollection.remove(meeting._id);
-        Router.go("meetingList");
-        return true;
+        if(!Meteor.user()){
+          console.log('You must be logged in.');
+          return false;
+        }
+
+        Meteor.call('removeMeeting', meeting, function(error, meeting) {
+          if(error) {
+            console.log(error.reason);
+          } else {
+            Router.go("meetingList");
+          }
+        });
       }
     });
   },
