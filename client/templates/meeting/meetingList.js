@@ -1,7 +1,7 @@
 Template.meetingList.rendered = function() {
   Session.set("memberSelectType", "");
   Session.set("hymnSelectType", "");
-
+  
   Session.set("selectedOrganist", "");
   Session.set("selectedChorister", "");
   Session.set("selectedOpeningHymn", "");
@@ -14,4 +14,5 @@ Template.meetingList.rendered = function() {
   Session.set("selectedConducting", "");
   Session.set("selectedVisitingAuthority", "");
   Session.set("selectedAttendance", "");
+  Session.set("memberSelectId", "");
 };

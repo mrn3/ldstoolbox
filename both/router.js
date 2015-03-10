@@ -146,14 +146,16 @@ Router.map(function() {
       return [
         Meteor.subscribe("meetingPublication"),
         Meteor.subscribe("announcementPublication"),
-        Meteor.subscribe("speakerPublication")
+        Meteor.subscribe("speakerPublication"),
+        Meteor.subscribe("recognitionPublication")
       ]
     },
     data: function() {
       return {
         meetingData: meetingCollection.findOne(this.params._id),
         announcementData: announcementCollection.find({meetingId: this.params._id}),
-        speakerData: speakerCollection.find({meetingId: this.params._id})
+        speakerData: speakerCollection.find({meetingId: this.params._id}),
+        recognitionData: recognitionCollection.find({meetingId: this.params._id})
       };
     },
     fastRender: true

@@ -67,6 +67,11 @@ Template.memberSelect.events({
       updateObject.$set = {speaker: this};
       speakerCollection.update(Session.get("memberSelectId"), updateObject);
     }
+    else if (Session.get("memberSelectType") == "recognition") {
+      var updateObject = {};
+      updateObject.$set = {recognition: this};
+      recognitionCollection.update(Session.get("memberSelectId"), updateObject);
+    }
 
     history.back();
   },
