@@ -1,4 +1,4 @@
-Template.callingChangeFields.helpers({
+  Template.callingChangeFields.helpers({
   callingChangeTypeSession: function() {
     if (typeof Session.get("selectedCallingChangeType") == "undefined") {
       return "";

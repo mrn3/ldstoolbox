@@ -61,6 +61,10 @@ Template.callingChangeEdit.events({
   'click #cancelButton': function(e, instance) {
     history.back();
   },
+  'click #meetingItem': function(e, instance) {
+    console.log(this._id);
+    Session.set("meetingId", this._id);
+  },
   'click #doneButton': function(e, instance) {
     e.preventDefault();
 
@@ -131,8 +135,8 @@ Template.callingChangeEdit.events({
   'click [data-action=markInterviewed]': function(e, instance){
     var callingChange = this;
     var updateObject = {};
-    var meetingDate = moment().day(7).format("YYYY-MM-DD");
-    console.log(meetingDate);
+    var meetingDate = moment().subtract(1, "days").day(7).format("YYYY-MM-DD");
+    //console.log(meetingDate);
     var properties = {
       status:           "Interviewed",
       dateInterviewed:  new Date(),

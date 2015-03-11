@@ -14,23 +14,33 @@
         </a>
       </div>
     </div>
+  {{/with}}
 
-    {{#ionView}}
-      {{#ionContent}}
-        {{#ionList}}
-
+  {{#ionView}}
+    {{#ionContent}}
+      {{#ionList}}
+        {{#with callingChangeData}}
           {{>callingChangeFields}}
+        {{/with}}
 
+        {{#with callingChangeData}}
           {{#if isInterviewed status}}
             <div class="item item-divider">
               &nbsp;
             </div>
-            <label class="item item-input">
-              <span class="input-label">Meeting Date</span>
-              <input type="date" id="meetingDate" placeholder="Meeting Date" value="{{meetingDate}}">
-            </label>
+            <a id="meetingItem" class="item item-icon-right" href="{{pathFor 'meetingSelect'}}">
+              Meeting
+              <span class="item-note">
+                {{#with meetingData}}
+                  {{{meeting.meetingDate}}}
+                {{/with}}
+              </span>
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
           {{/if}}
+        {{/with}}
 
+        {{#with callingChangeData}}
           {{#if isDiscussed status}}
             <div class="item item-divider">
               &nbsp;
@@ -94,8 +104,8 @@
           <div class="item item-divider">
             &nbsp;
           </div>
-        {{/ionList}}
-      {{/ionContent}}
-    {{/ionView}}
-  {{/with}}
+        {{/with}}
+      {{/ionList}}
+    {{/ionContent}}
+  {{/ionView}}
 </template>

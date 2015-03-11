@@ -162,6 +162,18 @@ Router.map(function() {
     },
     fastRender: true
   });
+  this.route("/meetingSelect/", {
+    name: "meetingSelect",
+    waitOn: function () {
+      return Meteor.subscribe("meetingPublication")
+    },
+    data: function() {
+      return {
+        meetingData: meetingCollection.find({})
+      };
+    },
+    fastRender: true
+  });
   this.route("/hymnSelect/", {
     name: "hymnSelect",
     waitOn: function () {

@@ -1,0 +1,33 @@
+<template name="meetingSelect">
+
+  <div class="bar bar-header bar-light">
+    <div class="buttons">
+      <a id="cancelButton" class="button button-clear button-positive">
+        Cancel
+      </a>
+    </div>
+    <h1 class="title">Select Meeting</h1>
+  </div>
+
+  {{#ionView}}
+    {{#ionContent}}
+      {{#ionList}}
+        <div class="item item-divider">
+          &nbsp;
+        </div>
+        {{#each meetingData}}
+          <label class="item item-radio">
+            <input type="radio" name="meetingRadioButton" value="{{_id}}" {{isChecked meetingDate}}>
+            <div id="meetingItem" class="item-content">
+              <h2>
+                {{meetingDate}}
+              </h2>
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+        {{/each}}
+      {{/ionList}}
+    {{/ionContent}}
+  {{/ionView}}
+
+</template>
