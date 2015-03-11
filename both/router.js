@@ -109,7 +109,10 @@ Router.map(function() {
   this.route("/callingChangeEdit/:_id", {
     name: "callingChangeEdit",
     waitOn: function () {
-      return Meteor.subscribe("callingChangePublication")
+      return [
+        Meteor.subscribe("callingChangePublication"),
+        Meteor.subscribe("meetingPublication")
+      ]
     },
     data: function() {
       return {
