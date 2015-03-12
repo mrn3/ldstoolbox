@@ -31,6 +31,17 @@
             </a>
           {{/if}}
 
+          {{#if isPresented status}}
+            <div class="item item-divider">
+              &nbsp;
+            </div>
+            <a id="meetingItem" class="item item-icon-right" href="{{pathFor 'meetingSelect'}}">
+              Meeting
+              <span class="item-note">{{{meeting.meetingDate}}}</span>
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
+          {{/if}}
+
           {{#if isDiscussed status}}
             <div class="item item-divider">
               &nbsp;
