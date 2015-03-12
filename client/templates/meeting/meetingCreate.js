@@ -46,10 +46,10 @@ Template.meetingCreate.events({
 
     if (properties) {
       Meteor.call('insertMeeting', properties, function(error, meeting) {
-        if(error) {
+        if (error) {
           console.log(error.reason);
         } else {
-          Router.go("meetingList");
+          history.back();
         }
       });
     }

@@ -87,10 +87,10 @@ Template.callingChangeEdit.events({
     if (properties) {
       updateObject.$set = properties;
       callingChangeCollection.update(callingChange._id, updateObject, function(error){
-        if(error){
+        if (error) {
           console.log(error);
         } else {
-          Router.go("callingChangeList");
+          history.back();
         }
       });
     }

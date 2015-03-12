@@ -107,10 +107,10 @@ Template.meetingEdit.events({
     if (properties) {
       updateObject.$set = properties;
       meetingCollection.update(meeting._id, updateObject, function(error){
-        if(error) {
+        if (error) {
           console.log(error);
-        }else{
-          Router.go("meetingList");
+        } else {
+          history.back();
         }
       });
     }

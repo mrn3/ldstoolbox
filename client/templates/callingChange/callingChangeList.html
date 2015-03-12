@@ -33,18 +33,7 @@
     {{#ionContent}}
       {{#ionList}}
         {{#each callingChangeData}}
-          <a href="{{pathFor 'callingChangeEdit'}}" class="item item-icon-left item-icon-right">
-            {{#if isCall type}}
-              <i class="icon ion-log-in balanced"></i>
-            {{else}}
-              <i class="icon ion-log-out positive"></i>
-            {{/if}}
-            <h4>{{member.switchedPreferredName}} ({{status}})</h4>
-            <h2>
-              {{calling.callingName}}
-            </h2>
-            <i class="icon ion-ios-arrow-right"></i>
-          </a>
+          {{>callingChangeItem}}
         {{/each}}
       {{/ionList}}
     {{/ionContent}}

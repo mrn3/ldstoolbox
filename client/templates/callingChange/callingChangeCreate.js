@@ -26,10 +26,10 @@ Template.callingChangeCreate.events({
 
     if (properties) {
       Meteor.call('insertCallingChange', properties, function(error, callingChange) {
-        if(error) {
+        if (error) {
           console.log(error.reason);
         } else {
-          Router.go("callingChangeList");
+          history.back();
         }
       });
     }
