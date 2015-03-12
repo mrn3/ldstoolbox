@@ -82,7 +82,6 @@ Template.callingChangeEdit.events({
       type:                 Session.get("selectedCallingChangeType"),
       member:               Session.get("selectedCallingChangeMember"),
       calling:              Session.get("selectedCallingChangeCalling"),
-      meetingDate:          $('#meetingDate').val(),
       notes:                $('#notes').val()
     };
 
