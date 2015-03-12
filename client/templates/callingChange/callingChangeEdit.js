@@ -62,7 +62,6 @@ Template.callingChangeEdit.events({
     history.back();
   },
   'click #meetingItem': function(e, instance) {
-    console.log(this._id);
     Session.set("meetingId", this._id);
   },
   'click #doneButton': function(e, instance) {
@@ -87,8 +86,6 @@ Template.callingChangeEdit.events({
 
     if (properties) {
       updateObject.$set = properties;
-      //console.log(callingChange._id);
-      //console.log(updateObject);
       callingChangeCollection.update(callingChange._id, updateObject, function(error){
         if(error){
           console.log(error);

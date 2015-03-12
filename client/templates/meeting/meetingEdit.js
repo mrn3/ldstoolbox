@@ -1,3 +1,13 @@
+Template.meetingEdit.helpers({
+  isCall: function (type) {
+    if (type == "Call") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+});
+
 Template.meetingEdit.events({
   'click #addAnnouncementButton': function(e, instance) {
     announcementCollection.insert({meetingId: this._id, text: "" });

@@ -111,49 +111,21 @@
           {{/with}}
 
           {{#each callingChangeData}}
-            <div class="list list-inset">
-              <a id="{{_id}}" class="item item-icon-right recognitionTypeItem" href="{{pathFor 'recognitionTypeSelect'}}">
-                Type
-                <span class="item-note">{{recognitionType.typeName}}</span>
+            <div class="list">
+              <a href="{{pathFor 'callingChangeEdit'}}" class="item item-icon-left item-icon-right">
+                {{#if isCall type}}
+                  <i class="icon ion-log-in balanced"></i>
+                {{else}}
+                  <i class="icon ion-log-out positive"></i>
+                {{/if}}
+                <h4>{{member.switchedPreferredName}} ({{status}})</h4>
+                <h2>
+                  {{calling.callingName}}
+                </h2>
                 <i class="icon ion-ios-arrow-right"></i>
               </a>
-              <a id="{{_id}}" class="item item-icon-right recognitionItem" href="{{pathFor 'memberSelect'}}">
-                Member
-                <span class="item-note">{{member.switchedPreferredName}}</span>
-                <i class="icon ion-ios-arrow-right"></i>
-              </a>
-              <div class="item item-divider">
-                <button type="button" class="button button-clear button-small pull-right removeRecognitionButton">
-                  Remove
-                  <span class="icon ion-close"></span>
-                </button>
-              </div>
             </div>
           {{/each}}
-          <!--
-
-            <h3>Ward Business</h3>
-            <div class="control-group">
-              <label class="control-label">Releases</label>
-              <div class="controls">
-                <ul>
-                {{#each releasesList title}}
-                  <li><u>{{memberName}}</u> From <u>{{callingName}}</u></li>
-                {{/each}}
-                </ul>
-              </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label">Sustainings</label>
-              <div class="controls">
-                <ul>
-                {{#each sustainingsList title}}
-                  <li><u>{{memberName}}</u> To <u>{{callingName}}</u></li>
-                {{/each}}
-                </ul>
-              </div>
-            </div>
-            //-->
 
           {{#with meetingData}}
             <div class="item item-divider">
