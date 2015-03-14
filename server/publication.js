@@ -1,47 +1,78 @@
 Meteor.publish('memberPublication', function() {
-  return memberCollection.find({});
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    return memberCollection.find({wardUnitNo: user.wardUnitNo});
+  }
 });
 
 Meteor.publish('householdPublication', function() {
-  return householdCollection.find({});
+  console.log(this.userId);
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    return householdCollection.find({wardUnitNo: user.wardUnitNo});
+  }
 });
 
 Meteor.publish('callingPublication', function() {
-  return callingCollection.find({});
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    return callingCollection.find({wardUnitNo: user.wardUnitNo});
+  }
 });
 
 Meteor.publish('callingGroupPublication', function() {
-  return callingGroupCollection.find({});
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    return callingGroupCollection.find({wardUnitNo: user.wardUnitNo});
+  }
 });
 
 Meteor.publish('callingChangePublication', function() {
-  return callingChangeCollection.find({});
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    return callingChangeCollection.find({wardUnitNo: user.wardUnitNo});
+  }
 });
 
 Meteor.publish('meetingPublication', function() {
-  return meetingCollection.find({});
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    return meetingCollection.find({wardUnitNo: user.wardUnitNo});
+  }
 });
 
 Meteor.publish('speakerPublication', function() {
-  return speakerCollection.find({});
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    return speakerCollection.find({wardUnitNo: user.wardUnitNo});
+  }
 });
 
 Meteor.publish('recognitionPublication', function() {
-  return recognitionCollection.find({});
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    return recognitionCollection.find({wardUnitNo: user.wardUnitNo});
+  }
 });
 
 Meteor.publish('recognitionTypePublication', function() {
-  return recognitionTypeCollection.find({});
+  return recognitionTypeCollection.find({wardUnitNo: user.wardUnitNo});
 });
 
 Meteor.publish('announcementPublication', function() {
-  return announcementCollection.find({});
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    return announcementCollection.find({wardUnitNo: user.wardUnitNo});
+  }
 });
 
 Meteor.publish('unitPublication', function() {
-  return unitCollection.find({});
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    return unitCollection.find({wardUnitNo: user.wardUnitNo});
+  }
 });
 
 Meteor.publish('hymnPublication', function() {
-  return hymnCollection.find({});
+  return hymnCollection.find({wardUnitNo: user.wardUnitNo});
 });

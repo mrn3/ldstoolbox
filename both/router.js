@@ -50,8 +50,11 @@ Router.map(function() {
       return Meteor.subscribe("memberPublication")
     },
     data: function() {
+      console.log(this.params.individualId);
+      console.log(memberCollection.find({individualId: this.params.individualId}).fetch());
+      console.log(memberCollection.findOne({individualId: this.params.individualId}));
       return {
-        memberData: memberCollection.findOne({individualId: this.params.individualId})
+        memberData: memberCollection.find({individualId: this.params.individualId})
       };
     },
     fastRender: true

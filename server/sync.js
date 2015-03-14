@@ -41,13 +41,17 @@ Meteor.methods({
 
       //update the user to have additional fields to link
       var update = {
-        wardUnitNo: unit.wardUnitNo
+        wardUnitNo:   unit.wardUnitNo,
+        wardName:     unit.wardName,
+        stakeUnitNo:  unit.stakeUnitNo,
+        stakeName:    unit.stakeName,
+        areaUnitNo:   unit.areaUnitNo
       };
 
       Meteor.users.update(Meteor.user()._id, {
         $set: update
-      }, function(error){
-        if(error){
+      }, function(error) {
+        if (error) {
           console.log(error.reason);
         }
       });
@@ -74,7 +78,7 @@ Meteor.methods({
 
       //add all households in ward
       for(var householdIndex in householdList) {
-        householdCollection.insert(householdList[householdIndex]);
+        householdCollection.insert(_.extend(householdList[householdIndex], {wardUnitNo: unit.wardUnitNo}));
 
         //insert head of household, spouse, and children, and append on the ward unit number
         memberCollection.insert(_.extend(householdList[householdIndex].headOfHouse, {wardUnitNo: unit.wardUnitNo, switchedPreferredName: switchName(householdList[householdIndex].headOfHouse.preferredName)}));
