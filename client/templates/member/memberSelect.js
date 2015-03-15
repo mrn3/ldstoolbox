@@ -64,12 +64,12 @@ Template.memberSelect.events({
     }
     else if (Session.get("memberSelectType") == "speaker") {
       var updateObject = {};
-      updateObject.$set = {speaker: this};
+      updateObject.$set = {speaker: this, wardUnitNo: Meteor.user().wardUnitNo};
       speakerCollection.update(Session.get("speakerId"), updateObject);
     }
     else if (Session.get("memberSelectType") == "recognition") {
       var updateObject = {};
-      updateObject.$set = {member: this};
+      updateObject.$set = {member: this, wardUnitNo: Meteor.user().wardUnitNo};
       recognitionCollection.update(Session.get("recognitionId"), updateObject);
     }
 

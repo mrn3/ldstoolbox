@@ -10,7 +10,7 @@ Template.meetingEdit.helpers({
 
 Template.meetingEdit.events({
   'click #addAnnouncementButton': function(e, instance) {
-    announcementCollection.insert({meetingId: this._id, text: "" });
+    announcementCollection.insert({meetingId: this._id, text: "", wardUnitNo: Meteor.user().wardUnitNo });
   },
   'click .removeAnnouncementButton': function(e, instance) {
     announcementCollection.remove({_id: this._id});
@@ -18,24 +18,24 @@ Template.meetingEdit.events({
   'change .announcementInput': function(e, instance) {
     announcementValue = document.getElementById(this._id).value;
     var updateObject = {};
-    updateObject.$set = {text: announcementValue};
+    updateObject.$set = {text: announcementValue, wardUnitNo: Meteor.user().wardUnitNo};
     announcementCollection.update(this._id, updateObject);
   },
   'click #addSpeakerButton': function(e, instance) {
-    speakerCollection.insert({meetingId: this._id});
+    speakerCollection.insert({meetingId: this._id, wardUnitNo: Meteor.user().wardUnitNo});
   },
   'click .removeSpeakerButton': function(e, instance) {
-    speakerCollection.remove({_id: this._id});
+    speakerCollection.remove({_id: this._id, wardUnitNo: Meteor.user().wardUnitNo});
   },
   'click .speakerItem': function(e, instance) {
     Session.set("memberSelectType", "speaker");
     Session.set("speakerId", this._id);
   },
   'click #addRecognitionButton': function(e, instance) {
-    recognitionCollection.insert({meetingId: this._id});
+    recognitionCollection.insert({meetingId: this._id, wardUnitNo: Meteor.user().wardUnitNo});
   },
   'click .removeRecognitionButton': function(e, instance) {
-    recognitionCollection.remove({_id: this._id});
+    recognitionCollection.remove({_id: this._id, wardUnitNo: Meteor.user().wardUnitNo});
   },
   'click .recognitionItem': function(e, instance) {
     Session.set("memberSelectType", "recognition");

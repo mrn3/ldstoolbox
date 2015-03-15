@@ -40,7 +40,10 @@ Router.map(function() {
   this.route("/memberSelect/", {
     name: "memberSelect",
     waitOn: function () {
-      return Meteor.subscribe("memberPublication")
+      return [
+        Meteor.subscribe("memberPublication"),
+        Meteor.subscribe("userPublication")
+      ]
     },
     fastRender: true
   });
