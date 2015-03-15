@@ -25,7 +25,7 @@ Template.meetingEdit.events({
     speakerCollection.insert({meetingId: this._id, wardUnitNo: Meteor.user().wardUnitNo});
   },
   'click .removeSpeakerButton': function(e, instance) {
-    speakerCollection.remove({_id: this._id, wardUnitNo: Meteor.user().wardUnitNo});
+    speakerCollection.remove({_id: this._id});
   },
   'click .speakerItem': function(e, instance) {
     Session.set("memberSelectType", "speaker");
@@ -35,7 +35,7 @@ Template.meetingEdit.events({
     recognitionCollection.insert({meetingId: this._id, wardUnitNo: Meteor.user().wardUnitNo});
   },
   'click .removeRecognitionButton': function(e, instance) {
-    recognitionCollection.remove({_id: this._id, wardUnitNo: Meteor.user().wardUnitNo});
+    recognitionCollection.remove({_id: this._id});
   },
   'click .recognitionItem': function(e, instance) {
     Session.set("memberSelectType", "recognition");
