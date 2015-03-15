@@ -98,11 +98,6 @@ Router.map(function() {
     waitOn: function () {
       return Meteor.subscribe("callingChangePublication")
     },
-    data: function() {
-      return {
-        callingChangeData: callingChangeCollection.find({})
-      };
-    },
     fastRender: true
   });
   this.route("/callingChangeCreate/", {
