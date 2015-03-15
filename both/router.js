@@ -137,7 +137,7 @@ Router.map(function() {
     },
     data: function() {
       return {
-        meetingData: meetingCollection.find({})
+        meetingData: meetingCollection.find({}, {sort: {meetingDate: -1}})
       };
     },
     fastRender: true
@@ -171,7 +171,7 @@ Router.map(function() {
         announcementData: announcementCollection.find({meetingId: this.params._id}),
         speakerData: speakerCollection.find({meetingId: this.params._id}),
         recognitionData: recognitionCollection.find({meetingId: this.params._id}),
-        callingChangeData: callingChangeCollection.find({"meeting._id": this.params._id}, {$sort: {type: 1}})
+        callingChangeData: callingChangeCollection.find({"meeting._id": this.params._id}, {sort: {type: -1}})
       };
     },
     fastRender: true
@@ -219,8 +219,8 @@ Router.map(function() {
 
     //meetingDateFormatted = moment(meeting.title).tz("Etc/GMT").format("YYYY-MM-DD");
     meetingDateFormatted = meeting.meetingDate;
-    releaseResultArray = callingChangeCollection.find({meetingId : this.params._id, type: "Release"}).fetch();
-    callingResultArray = callingChangeCollection.find({meetingId : this.params._id, type: "Call"}).fetch();
+    releaseResultArray = callingChangeCollection.find({"meeting._id" : this.params._id, type: "Release"}).fetch();
+    callingResultArray = callingChangeCollection.find({"meeting._id" : this.params._id, type: "Call"}).fetch();
 
     announcementArray = announcementCollection.find({meetingId : this.params._id}).fetch();
     speakerArray = speakerCollection.find({meetingId : this.params._id}).fetch();
