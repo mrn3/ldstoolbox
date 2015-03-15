@@ -55,7 +55,7 @@ Meteor.publish('recognitionPublication', function() {
 });
 
 Meteor.publish('recognitionTypePublication', function() {
-  return recognitionTypeCollection.find({wardUnitNo: user.wardUnitNo});
+  return recognitionTypeCollection.find({});
 });
 
 Meteor.publish('announcementPublication', function() {
@@ -73,7 +73,7 @@ Meteor.publish('unitPublication', function() {
 });
 
 Meteor.publish('hymnPublication', function() {
-  return hymnCollection.find({wardUnitNo: user.wardUnitNo});
+  return hymnCollection.find({});
 });
 
 Meteor.publish("userPublication", function () {
