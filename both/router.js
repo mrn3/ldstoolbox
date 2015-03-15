@@ -50,9 +50,9 @@ Router.map(function() {
       return Meteor.subscribe("memberPublication")
     },
     data: function() {
-      console.log(this.params.individualId);
-      console.log(memberCollection.find({individualId: this.params.individualId}).fetch());
-      console.log(memberCollection.findOne({individualId: this.params.individualId}));
+      //console.log(this.params.individualId);
+      //console.log(memberCollection.find({individualId: this.params.individualId}).fetch());
+      //console.log(memberCollection.findOne({individualId: this.params.individualId}));
       return {
         memberData: memberCollection.find({individualId: this.params.individualId})
       };
@@ -105,7 +105,10 @@ Router.map(function() {
   this.route("/callingChangeCreate/", {
     name: "callingChangeCreate",
     waitOn: function () {
-      return Meteor.subscribe("callingChangePublication")
+      return [
+        Meteor.subscribe("callingChangePublication"),
+        Meteor.subscribe("userPublication")
+      ]
     },
     fastRender: true
   });
@@ -114,7 +117,8 @@ Router.map(function() {
     waitOn: function () {
       return [
         Meteor.subscribe("callingChangePublication"),
-        Meteor.subscribe("meetingPublication")
+        Meteor.subscribe("meetingPublication"),
+        Meteor.subscribe("userPublication")
       ]
     },
     data: function() {
@@ -143,7 +147,10 @@ Router.map(function() {
   this.route("/meetingCreate/", {
     name: "meetingCreate",
     waitOn: function () {
-      return Meteor.subscribe("meetingPublication")
+      return [
+        Meteor.subscribe("meetingPublication"),
+        Meteor.subscribe("userPublication")
+      ]
     },
   });
   this.route("/meetingEdit/:_id", {
@@ -154,7 +161,8 @@ Router.map(function() {
         Meteor.subscribe("announcementPublication"),
         Meteor.subscribe("speakerPublication"),
         Meteor.subscribe("recognitionPublication"),
-        Meteor.subscribe("callingChangePublication")
+        Meteor.subscribe("callingChangePublication"),
+        Meteor.subscribe("userPublication")
       ]
     },
     data: function() {

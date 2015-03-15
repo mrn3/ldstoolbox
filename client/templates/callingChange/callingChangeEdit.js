@@ -77,6 +77,7 @@ Template.callingChangeEdit.events({
 
     var properties = {
       updatedBy:            Meteor.userId(),
+      wardUnitNo:           Meteor.user().wardUnitNo,
       updatedAt:            new Date(),
       type:                 Session.get("selectedCallingChangeType"),
       member:               Session.get("selectedCallingChangeMember"),

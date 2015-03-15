@@ -77,6 +77,7 @@ Template.meetingEdit.events({
     var properties = {
       createdBy:            Meteor.userId(),
       createdAt:            new Date(),
+      wardUnitNo:           Meteor.user().wardUnitNo,
       meetingDate:          $('#meetingDate').val(),
       presiding:            Session.get("selectedPresiding"),
       conducting:           Session.get("selectedConducting"),

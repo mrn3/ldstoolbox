@@ -15,6 +15,7 @@ Template.callingChangeCreate.events({
 
     var properties = {
       createdBy:            Meteor.userId(),
+      wardUnitNo:           Meteor.user().wardUnitNo,
       createdAt:            new Date(),
       type:                 Session.get("selectedCallingChangeType"),
       member:               Session.get("selectedCallingChangeMember"),
