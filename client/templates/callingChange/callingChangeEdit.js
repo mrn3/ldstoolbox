@@ -48,11 +48,11 @@ Template.callingChangeEdit.helpers({
       return false;
     }
   },
-  isCanceled: function (status) {
+  isNotCanceled: function (status) {
     if (status == "Canceled") {
-      return true;
-    } else {
       return false;
+    } else {
+      return true;
     }
   }
 });
@@ -96,7 +96,36 @@ Template.callingChangeEdit.events({
       });
     }
   },
-  'click [data-action=showActionSheet]': function(e, instance){
+  'click [data-action=showCancelActionSheet]': function(e, instance){
+    var callingChange = this;
+    IonActionSheet.show({
+      titleText: '',
+      buttons: [],
+      destructiveText: 'Mark Canceled',
+      cancelText: 'Cancel',
+      cancel: function() {},
+      destructiveButtonClicked: function() {
+        var updateObject = {};
+        var properties = {
+          status:         "Canceled",
+          dateCanceled:   new Date()
+        };
+        if (properties) {
+          updateObject.$set = properties;
+          callingChangeCollection.update(callingChange._id, updateObject, function(error){
+            if (error) {
+              console.log(error);
+            } else {
+              Router.go("callingChangeList");
+
+            }
+          });
+        }
+        return true;
+      }
+    });
+  },
+  'click [data-action=showDeleteActionSheet]': function(e, instance){
     var callingChange = this;
     IonActionSheet.show({
       titleText: '',
@@ -121,9 +150,9 @@ Template.callingChangeEdit.events({
     if (properties) {
       updateObject.$set = properties;
       callingChangeCollection.update(callingChange._id, updateObject, function(error){
-        if(error) {
+        if (error) {
           console.log(error);
-        }else{
+        } else {
           Router.go("callingChangeList");
         }
       });
@@ -143,9 +172,9 @@ Template.callingChangeEdit.events({
     if (properties) {
       updateObject.$set = properties;
       callingChangeCollection.update(callingChange._id, updateObject, function(error){
-        if(error) {
+        if (error) {
           console.log(error);
-        }else{
+        } else {
           Router.go("callingChangeList");
         }
       });
@@ -161,9 +190,9 @@ Template.callingChangeEdit.events({
     if (properties) {
       updateObject.$set = properties;
       callingChangeCollection.update(callingChange._id, updateObject, function(error){
-        if(error) {
+        if (error) {
           console.log(error);
-        }else{
+        } else {
           Router.go("callingChangeList");
         }
       });
@@ -185,9 +214,9 @@ Template.callingChangeEdit.events({
     if (properties) {
       updateObject.$set = properties;
       callingChangeCollection.update(callingChange._id, updateObject, function(error){
-        if(error) {
+        if (error) {
           console.log(error);
-        }else{
+        } else {
           Router.go("callingChangeList");
         }
       });
@@ -203,9 +232,9 @@ Template.callingChangeEdit.events({
     if (properties) {
       updateObject.$set = properties;
       callingChangeCollection.update(callingChange._id, updateObject, function(error){
-        if(error) {
+        if (error) {
           console.log(error);
-        }else{
+        } else {
           Router.go("callingChangeList");
         }
       });
@@ -221,9 +250,9 @@ Template.callingChangeEdit.events({
     if (properties) {
       updateObject.$set = properties;
       callingChangeCollection.update(callingChange._id, updateObject, function(error){
-        if(error) {
+        if (error) {
           console.log(error);
-        }else{
+        } else {
           Router.go("callingChangeList");
         }
       });

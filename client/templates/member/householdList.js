@@ -9,7 +9,7 @@ Template.householdList.events({
       destructiveText: 'Delete',
       cancelText: 'Cancel',
       cancel: function() {
-        console.log('Cancelled!');
+        console.log('Canceled!');
       },
       buttonClicked: function(index) {
         if (index === 0) {

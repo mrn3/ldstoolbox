@@ -96,10 +96,19 @@
             </a>
           {{/if}}
 
+          {{#if isNotCanceled status}}
+            <div class="item item-divider">
+              &nbsp;
+            </div>
+            <a class="button button-positive button-full button-clear" data-action="showCancelActionSheet">
+              Mark Canceled
+            </a>
+          {{/if}}
+
           <div class="item item-divider">
             &nbsp;
           </div>
-          <a class="button button-positive button-full button-clear" data-action="showActionSheet">
+          <a class="button button-positive button-full button-clear" data-action="showDeleteActionSheet">
             Delete Calling Change
           </a>
           <div class="item item-divider">
