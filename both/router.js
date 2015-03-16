@@ -12,8 +12,12 @@ Meteor.startup(function () {
 });
 
 Router.map(function() {
-  this.route("home", {path: "/"});
-  this.route("about", {path: "/about"});
+  this.route("home", {
+    path: "/"
+  });
+  this.route("/about/", {
+    name: "about"
+  });
   this.route("/householdList/", {
     name: "householdList",
     waitOn: function () {
