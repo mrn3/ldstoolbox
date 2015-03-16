@@ -41,6 +41,11 @@
                   Sign In/Out
                 </div>
               </a>
+              <a href="{{pathFor 'about'}}" style="{text-decoration: none}">
+                <div class="item item-icon-right" data-ion-menu-close>
+                  About
+                </div>
+              </a>
             </div>
           </div>
         {{/ionSideMenu}}
@@ -74,7 +79,6 @@
                 <select id="statusSelector" name="statusSelector">
                   <option value="All" {{selectedStatusOption "All"}}>All</option>
                   <option value="Incomplete" {{selectedStatusOption "Incomplete"}}>Incomplete</option>
-                  <option value="New" {{selectedStatusOption "New"}}>New</option>
                   <option value="Discussed" {{selectedStatusOption "Discussed"}}>Discussed</option>
                   <option value="Approved" {{selectedStatusOption "Approved"}}>Approved</option>
                   <option value="Interviewed" {{selectedStatusOption "Interviewed"}}>Interviewed</option>
