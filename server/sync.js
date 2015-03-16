@@ -206,7 +206,7 @@ Meteor.methods({
       callingCollection.insert({callingName: "Teachers Quorum First Counselor", wardUnitNo: unit.wardUnitNo});
       callingCollection.insert({callingName: "Teachers Quorum Second Counselor", wardUnitNo: unit.wardUnitNo});
       callingCollection.insert({callingName: "Teachers Quorum Secretary", wardUnitNo: unit.wardUnitNo});
-      ca//llingCollection.insert({callingName: "Deacons Quorum", wardUnitNo: unit.wardUnitNo});
+      //callingCollection.insert({callingName: "Deacons Quorum", wardUnitNo: unit.wardUnitNo});
       callingCollection.insert({callingName: "Deacons Quorum President", wardUnitNo: unit.wardUnitNo});
       callingCollection.insert({callingName: "Deacons Quorum First Counselor", wardUnitNo: unit.wardUnitNo});
       callingCollection.insert({callingName: "Deacons Quorum Second Counselor", wardUnitNo: unit.wardUnitNo});
