@@ -216,7 +216,13 @@ Router.map(function() {
     },
     fastRender: true
   });
-  this.route("sync");
+  this.route("/sync/", {
+    name: "sync",
+    waitOn: function () {
+      return Meteor.subscribe("userPublication")
+    },
+    fastRender: true
+  });
   this.route("userAccounts");
   this.route("/meetingPrint/:_id", function() {
 
