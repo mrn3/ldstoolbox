@@ -15,7 +15,11 @@ Meteor.publish('householdPublication', function() {
 Meteor.publish('callingPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
-    return callingCollection.find({wardUnitNo: user.wardUnitNo});
+    var selector = {$or: [
+      {"wardUnitNo": user.wardUnitNo},
+      {"wardUnitNo": -1}
+    ]};
+    return callingCollection.find(selector);
   }
 });
 
