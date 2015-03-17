@@ -1,7 +1,7 @@
 Meteor.publish('memberPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
-    return memberCollection.find({wardUnitNo: user.wardUnitNo});
+    return memberCollection.find({stakeUnitNo: user.stakeUnitNo});
   }
 });
 

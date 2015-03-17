@@ -152,7 +152,6 @@ Meteor.methods({
   syncStakeMembers: function(inStakeUnitNo) {
     var unitList = unitCollection.find({stakeUnitNo: inStakeUnitNo}).fetch();
     for (var unitIndex in unitList) {
-      console.log(unitList[unitIndex].wardUnitNo);
       Meteor.call("syncWardMembers", unitList[unitIndex].wardUnitNo, function(error) {
         if (error) {
           console.log(error);
@@ -218,7 +217,6 @@ Meteor.methods({
   syncStakeCallings: function(inStakeUnitNo) {
     var unitList = unitCollection.find({stakeUnitNo: inStakeUnitNo}).fetch();
     for (var unitIndex in unitList) {
-      console.log(unitList[unitIndex].wardUnitNo);
       Meteor.call("syncWardCallings", unitList[unitIndex].wardUnitNo, function(error) {
         if (error) {
           console.log(error);
