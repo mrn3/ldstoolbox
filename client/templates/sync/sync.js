@@ -41,7 +41,7 @@ Template.sync.events({
     $("#syncWardMembersButton").prop('disabled', true);
     $("#syncWardMembersButton").val("Syncing Ward Members, please wait...");
 
-    Meteor.call("syncWardMembers", Meteor.user().wardUnitNo, function(error) {
+    Meteor.call("syncWardMembers", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo, function(error) {
       if (error) {
         console.log(error);
       }
@@ -70,7 +70,7 @@ Template.sync.events({
     $("#syncWardCallingsButton").prop('disabled', true);
     $("#syncWardCallingsButton").val("Syncing Ward Callings, please wait...");
 
-    Meteor.call("syncWardCallings", Meteor.user().wardUnitNo, function(error) {
+    Meteor.call("syncWardCallings", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo, function(error) {
       if (error) {
         console.log(error);
       }

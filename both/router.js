@@ -45,11 +45,14 @@ Router.map(function() {
   this.route("/memberList/", {
     name: "memberList",
     waitOn: function () {
-      return Meteor.subscribe("memberPublication")
+      return [
+        Meteor.subscribe("memberPublication"),
+        Meteor.subscribe("userPublication")
+      ]
     },
     data: function() {
       return {
-        memberData: memberCollection.find({}, {sort: {preferredName: 1}})
+        memberData: memberCollection.find({})
       };
     },
     fastRender: true
@@ -58,7 +61,6 @@ Router.map(function() {
     name: "memberSelect",
     waitOn: function () {
       return [
-        Meteor.subscribe("memberPublication"),
         Meteor.subscribe("userPublication")
       ]
     },

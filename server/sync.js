@@ -38,7 +38,7 @@ Meteor.methods({
       return e;
     }
   },
-  syncUnits: function(inUsername, inPassword) {
+  syncUnits: function() {
     this.unblock();
     try {
       //get units in stake
@@ -106,7 +106,7 @@ Meteor.methods({
       return e;
     }
   },
-  syncWardMembers: function(inWardUnitNo) {
+  syncWardMembers: function(inWardUnitNo, inStakeUnitNo) {
     this.unblock();
     try {
       var householdList;
@@ -131,13 +131,13 @@ Meteor.methods({
 
       //add all households in ward
       for(var householdIndex in householdList) {
-        householdCollection.insert(_.extend(householdList[householdIndex], {wardUnitNo: inWardUnitNo}));
+        householdCollection.insert(_.extend(householdList[householdIndex], {wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo}));
 
         //insert head of household, spouse, and children, and append on the ward unit number
-        memberCollection.insert(_.extend(householdList[householdIndex].headOfHouse, {wardUnitNo: inWardUnitNo, switchedPreferredName: switchName(householdList[householdIndex].headOfHouse.preferredName)}));
-        memberCollection.insert(_.extend(householdList[householdIndex].spouse, {wardUnitNo: inWardUnitNo, switchedPreferredName: switchName(householdList[householdIndex].spouse.preferredName)}));
+        memberCollection.insert(_.extend(householdList[householdIndex].headOfHouse, {wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo, switchedPreferredName: switchName(householdList[householdIndex].headOfHouse.preferredName)}));
+        memberCollection.insert(_.extend(householdList[householdIndex].spouse, {wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo, switchedPreferredName: switchName(householdList[householdIndex].spouse.preferredName)}));
         for(var childrenIndex in householdList[householdIndex].children) {
-          memberCollection.insert(_.extend(householdList[householdIndex].children[childrenIndex], {wardUnitNo: inWardUnitNo, switchedPreferredName: switchName(householdList[householdIndex].children[childrenIndex].preferredName)}));
+          memberCollection.insert(_.extend(householdList[householdIndex].children[childrenIndex], {wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo, switchedPreferredName: switchName(householdList[householdIndex].children[childrenIndex].preferredName)}));
         }
       }
       //remove all the junk records
@@ -152,7 +152,7 @@ Meteor.methods({
   syncStakeMembers: function(inStakeUnitNo) {
     var unitList = unitCollection.find({stakeUnitNo: inStakeUnitNo}).fetch();
     for (var unitIndex in unitList) {
-      Meteor.call("syncWardMembers", unitList[unitIndex].wardUnitNo, function(error) {
+      Meteor.call("syncWardMembers", unitList[unitIndex].wardUnitNo, inStakeUnitNo, function(error) {
         if (error) {
           console.log(error);
         }
@@ -201,11 +201,11 @@ Meteor.methods({
 
         groupList = JSON.parse(groupResult.content);
 
-        callingGroupCollection.insert(_.extend(callingList.unitLeadership[callingIndex], {leaders: groupList.leaders, wardUnitNo: inWardUnitNo}));
+        callingGroupCollection.insert(_.extend(callingList.unitLeadership[callingIndex], {leaders: groupList.leaders, wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo}));
 
         for(var leaderIndex in groupList.leaders) {
           memberCollection.update({individualId: groupList.leaders[leaderIndex].individualId}, { $addToSet: { "callings": { "callingName": groupList.leaders[leaderIndex].callingName, "positionId": groupList.leaders[leaderIndex].positionId } } } );
-          callingCollection.insert({"callingName": groupList.leaders[leaderIndex].callingName, "positionId": groupList.leaders[leaderIndex].positionId, "displayName": groupList.leaders[leaderIndex].displayName, wardUnitNo: inWardUnitNo});
+          callingCollection.insert({"callingName": groupList.leaders[leaderIndex].callingName, "positionId": groupList.leaders[leaderIndex].positionId, "displayName": groupList.leaders[leaderIndex].displayName, wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo});
         }
       }
     } catch (e) {
@@ -217,7 +217,7 @@ Meteor.methods({
   syncStakeCallings: function(inStakeUnitNo) {
     var unitList = unitCollection.find({stakeUnitNo: inStakeUnitNo}).fetch();
     for (var unitIndex in unitList) {
-      Meteor.call("syncWardCallings", unitList[unitIndex].wardUnitNo, function(error) {
+      Meteor.call("syncWardCallings", unitList[unitIndex].wardUnitNo, inStakeUnitNo, function(error) {
         if (error) {
           console.log(error);
         }
