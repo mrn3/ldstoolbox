@@ -25,7 +25,7 @@ Router.map(function() {
     },
     data: function() {
       return {
-        householdData: householdCollection.find({})
+        householdData: householdCollection.find({}, {sort: {householdName: 1}})
       };
     },
     fastRender: true
