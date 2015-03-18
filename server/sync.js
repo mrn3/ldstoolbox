@@ -159,7 +159,7 @@ Meteor.methods({
       });
     }
   },
-  syncWardCallings: function(inWardUnitNo) {
+  syncWardCallings: function(inWardUnitNo, inStakeUnitNo) {
     this.unblock();
     try {
       var callingList;
