@@ -1,0 +1,33 @@
+<template name="memberList">
+
+  <div class="bar bar-header bar-stable">
+    <button class="button button-clear pull-left" data-ion-menu-toggle="left">
+      {{#if isAndroid}}
+        {{> ionIcon icon='android-more-vertical'}}
+      {{else}}
+        {{> ionIcon icon='navicon'}}
+      {{/if}}
+    </button>
+    <h1 class="title">Directory</h1>
+    <div class="buttons">
+      <button class="button button-clear" data-action="showActionSheet">
+        Sort
+      </button>
+    </div>
+  </div>
+
+  {{#ionView}}
+    {{#ionContent}}
+        {{#ionList}}
+          {{#each memberData}}
+            <a href="{{pathFor 'member'}}" class="item">
+              <h2>
+                {{preferredName}}
+              </h2>
+            </a>
+          {{/each}}
+        {{/ionList}}
+    {{/ionContent}}
+  {{/ionView}}
+
+</template>

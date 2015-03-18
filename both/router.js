@@ -42,6 +42,18 @@ Router.map(function() {
     },
     fastRender: true
   });
+  this.route("/memberList/", {
+    name: "memberList",
+    waitOn: function () {
+      return Meteor.subscribe("memberPublication")
+    },
+    data: function() {
+      return {
+        memberData: memberCollection.find({}, {sort: {preferredName: 1}})
+      };
+    },
+    fastRender: true
+  });
   this.route("/memberSelect/", {
     name: "memberSelect",
     waitOn: function () {
@@ -49,6 +61,12 @@ Router.map(function() {
         Meteor.subscribe("memberPublication"),
         Meteor.subscribe("userPublication")
       ]
+    },
+    data: function() {
+      console.log(memberCollection.find({"callings.callingName": "Chorister"}).fetch());
+      return {
+        organistData: memberCollection.find({"callings.callingName": "Chorister"})
+      };
     },
     fastRender: true
   });

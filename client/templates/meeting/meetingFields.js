@@ -1,86 +1,86 @@
 Template.meetingFields.helpers({
   organistSession: function() {
-    if (typeof Session.get("selectedOrganist").switchedPreferredName == "undefined") {
-      return "";
-    } else {
+    if ((Session.get("selectedOrganist")) && (Session.get("selectedOrganist").switchedPreferredName)) {
       return Session.get("selectedOrganist").switchedPreferredName;
+    } else {
+      return "";
     }
   },
   choristerSession: function() {
-    if (typeof Session.get("selectedChorister").switchedPreferredName == "undefined") {
-      return "";
-    } else {
+    if ((Session.get("selectedChorister")) && (Session.get("selectedChorister").switchedPreferredName)) {
       return Session.get("selectedChorister").switchedPreferredName;
+    } else {
+      return "";
     }
   },
   openingHymnSession: function() {
-    if (typeof Session.get("selectedOpeningHymn").numberText == "undefined") {
-      return "";
-    } else {
+    if (Session.get("selectedOpeningHymn").numberText) {
       return Session.get("selectedOpeningHymn").numberText + " - " + Session.get("selectedOpeningHymn").name;
+    } else {
+      return "";
     }
   },
   sacramentHymnSession: function() {
-    if (typeof Session.get("selectedSacramentHymn").numberText == "undefined") {
-      return "";
-    } else {
+    if (Session.get("selectedSacramentHymn").numberText) {
       return Session.get("selectedSacramentHymn").numberText + " - " + Session.get("selectedSacramentHymn").name;
+    } else {
+      return "";
     }
   },
   intermediateHymnSession: function() {
-    if (typeof Session.get("selectedIntermediateHymn").numberText == "undefined") {
-      return "";
-    } else {
+    if (Session.get("selectedIntermediateHymn").numberText) {
       return Session.get("selectedIntermediateHymn").numberText + " - " + Session.get("selectedIntermediateHymn").name;
+    } else {
+      return "";
     }
   },
   closingHymnSession: function() {
-    if (typeof Session.get("selectedClosingHymn").numberText == "undefined") {
-      return "";
+    if (Session.get("selectedClosingHymn").numberText) {
+      return Session.get("selectedClosingHymn").numberText + " - " + Session.get("selectedClosingHymn").name;
     } else {
-      return Session.get("selectedClosingHymn").numberText + " - " + Session.get("selectedClosingHymn").name  ;
+      return "";
     }
   },
   invocationSession: function() {
-    if (typeof Session.get("selectedInvocation").switchedPreferredName == "undefined") {
-      return "";
-    } else {
+    if ((Session.get("selectedInvocation")) && (Session.get("selectedInvocation").switchedPreferredName)) {
       return Session.get("selectedInvocation").switchedPreferredName;
+    } else {
+      return "";
     }
   },
   benedictionSession: function() {
-    if (typeof Session.get("selectedBenediction").switchedPreferredName == "undefined") {
-      return "";
-    } else {
+    if ((Session.get("selectedBenediction")) && (Session.get("selectedBenediction").switchedPreferredName)) {
       return Session.get("selectedBenediction").switchedPreferredName;
+    } else {
+      return "";
     }
   },
   presidingSession: function() {
-    if (typeof Session.get("selectedPresiding").switchedPreferredName == "undefined") {
-      return "";
-    } else {
+    if ((Session.get("selectedPresiding")) && (Session.get("selectedPresiding").switchedPreferredName)) {
       return Session.get("selectedPresiding").switchedPreferredName;
+    } else {
+      return "";
     }
   },
   conductingSession: function() {
-    if (typeof Session.get("selectedConducting").switchedPreferredName == "undefined") {
-      return "";
-    } else {
+    if ((Session.get("selectedConducting")) && (Session.get("selectedConducting").switchedPreferredName)) {
       return Session.get("selectedConducting").switchedPreferredName;
+    } else {
+      return "";
     }
   },
   visitingAuthoritySession: function() {
-    if (typeof Session.get("selectedVisitingAuthority").switchedPreferredName == "undefined") {
-      return "";
-    } else {
+    if ((Session.get("selectedVisitingAuthority")) && (Session.get("selectedVisitingAuthority").switchedPreferredName)) {
       return Session.get("selectedVisitingAuthority").switchedPreferredName;
+    } else {
+      return "";
     }
   },
   attendanceSession: function() {
-    if (typeof Session.get("selectedAttendance") == "undefined") {
-      return "";
-    } else {
+    if (Session.get("selectedAttendance")) {
       return Session.get("selectedAttendance");
+    } else {
+      return "";
     }
   }
 });

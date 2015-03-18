@@ -17,7 +17,19 @@ Template.memberSelect.helpers({
   },
   isLoading: function() {
     return memberSearch.getStatus().loading;
-  }
+  },
+  memberSelectTypeIs: function (inMemberSelectType) {
+    return (Session.get("memberSelectType") == inMemberSelectType);
+  },
+  /*
+  organistData: function() {
+    console.log(memberCollection.find().fetch());
+    Meteor.subscribe('memberPublication', function() {
+      console.log(memberCollection.find().count());
+    });
+    return memberCollection.find();
+  },
+  */
 });
 
 Template.memberSelect.events({

@@ -18,6 +18,27 @@
         </label>
       </div>
       {{#ionList}}
+
+        {{#if memberSelectTypeIs "organist"}}
+        organists:
+          {{#each organistData}}
+            <label class="item item-radio">
+              <input type="radio" name="group">
+              <div id="memberRadioButton" class="item-content">
+                <h4>
+                {{#each callings}}
+                  {{callingName}}
+                {{/each}}
+                </h4>
+                <h2>
+                  {{{switchedPreferredName}}}
+                </h2>
+              </div>
+              <i class="radio-icon ion-checkmark"></i>
+            </label>
+          {{/each}}
+        {{/if}}
+
         {{#each memberData}}
           <label class="item item-radio">
             <input type="radio" name="group">
