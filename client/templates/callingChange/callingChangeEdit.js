@@ -162,7 +162,7 @@ Template.callingChangeEdit.events({
     var callingChange = this;
     var updateObject = {};
     var meetingDate = moment().subtract(1, "days").day(7).format("YYYY-MM-DD");
-    var foundMeeting = meetingCollection.findOne({"meetingDate": "2015-03-15"});
+    var foundMeeting = meetingCollection.findOne({"meetingDate": meetingDate});
 
     var properties = {
       status:           "Interviewed",

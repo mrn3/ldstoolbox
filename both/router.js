@@ -75,14 +75,15 @@ Router.map(function() {
   this.route("/member/:individualId", {
     name: "member",
     waitOn: function () {
-      return Meteor.subscribe("memberPublication")
+      return [
+        Meteor.subscribe("memberPublication"),
+        Meteor.subscribe("householdPublication")
+      ]
     },
     data: function() {
-      //console.log(this.params.individualId);
-      //console.log(memberCollection.find({individualId: this.params.individualId}).fetch());
-      //console.log(memberCollection.findOne({individualId: this.params.individualId}));
       return {
-        memberData: memberCollection.find({individualId: this.params.individualId})
+        memberData: memberCollection.findOne({individualId: parseInt(this.params.individualId)}),
+        householdData: householdCollection.findOne({"headOfHouse.individualId": parseInt(this.params.individualId)})
       };
     },
     fastRender: true

@@ -8,49 +8,59 @@
     <h1 class="title">Member</h1>
   {{/contentFor}}
 
-  {{#contentFor "headerButtonRight"}}
-    <button class="button button-clear pull-right" data-ion-menu-toggle="right">
-      {{#if isAndroid}}
-        {{> ionIcon icon='android-more-vertical'}}
-      {{else}}
-        {{> ionIcon icon='navicon'}}
-      {{/if}}
-    </button>
-  {{/contentFor}}
-
   {{#ionView}}
     {{#ionContent}}
-      {{#each memberData}}
-        <div class="item item-divider">
-          Contact Information
-        </div>
-        {{#ionList}}
-          {{#ionItem}}
-          {{/ionItem}}
-        {{/ionList}}
-        <div class="item item-divider">
-          Membership Information
-        </div>
-        {{switchedPreferredName}}
-        <div class="item item-divider">
-          Household Members
-        </div>
-        {{#ionItem}}
-          <h2>
-            {{headOfHouse.directoryName}} {{householdName}}
-          </h2>
-        {{/ionItem}}
-        {{#if spouse.directoryName}}
-          {{#ionItem}}
-            <h2>
-              {{spouse.directoryName}} {{householdName}}
-            </h2>
-          {{/ionItem}}
-        {{/if}}
-        <div class="item item-divider">
-          Options
-        </div>
-      {{/each}}
+      {{#ionList}}
+        {{#with memberData}}
+          <div class="item item-divider">
+            Contact Information
+          </div>
+          <a class="item item-icon-right" href="#">
+            Name
+            <span class="item-note">{{switchedPreferredName}}</span>
+            <i class="icon ion-ios-arrow-right"></i>
+          </a>
+          <a class="item item-icon-right" href="#">
+            Gender
+            <span class="item-note">{{gender}}</span>
+            <i class="icon ion-ios-arrow-right"></i>
+          </a>
+          <div class="item item-divider">
+            Calling(s)
+          </div>
+          {{#each callings}}
+            <a class="item item-icon-right" href="#">
+              Calling Name
+              <span class="item-note">{{callingName}}</span>
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
+          {{/each}}
+        {{/with}}
+        {{#with householdData}}
+          <div class="item item-divider">
+            Household Members
+          </div>
+          <a class="item item-icon-right" href="/member/{{headOfHouse.individualId}}">
+            Head of Household
+            <span class="item-note">{{headOfHouse.directoryName}} {{headOfHouse.surname}}</span>
+            <i class="icon ion-ios-arrow-right"></i>
+          </a>
+          {{#if spouse.directoryName}}
+            <a class="item item-icon-right" href="/member/{{spouse.individualId}}">
+              Spouse
+              <span class="item-note">{{spouse.directoryName}} {{spouse.surname}}</span>
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
+          {{/if}}
+          {{#each children}}
+            <a class="item item-icon-right" href="/member/{{individualId}}">
+              Child
+              <span class="item-note">{{directoryName}} {{surname}}</span>
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
+          {{/each}}
+        {{/with}}
+      {{/ionList}}
     {{/ionContent}}
   {{/ionView}}
 
