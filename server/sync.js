@@ -38,6 +38,111 @@ Meteor.methods({
       return e;
     }
   },
+  getUserUnitInfo: function() {
+    this.unblock();
+    try {
+      //get current user's unit information
+      var unit;
+      var currentUserUnitUrl="https://www.lds.org/directory/services/ludrs/unit/current-user-ward-stake/";
+      result = Meteor.http.call("GET", currentUserUnitUrl, {
+        params: {
+          timeout: 30000
+        },
+        headers: {
+          "cookie": Meteor.user().ldsAccountCookieValue,
+          "content-type": "application/json",
+          "Accept": "application/json"
+        },
+      });
+      unit = JSON.parse(result.content);
+
+      //update the user to have additional fields to link
+      var properties = {
+        wardUnitNo:   unit.wardUnitNo,
+        wardName:     unit.wardName,
+        stakeUnitNo:  unit.stakeUnitNo,
+        stakeName:    unit.stakeName,
+        areaUnitNo:   unit.areaUnitNo,
+      };
+
+      Meteor.users.update(Meteor.user()._id, {
+        $set: properties
+      }, function(error) {
+        if (error) {
+          console.log(error.reason);
+        }
+      });
+
+      return true;
+    } catch (e) {
+      // Got a network error, time-out or HTTP error in the 400 or 500 range.
+      console.log(e);
+      return e;
+    }
+  },
+  getUserIndividualId: function() {
+    this.unblock();
+    try {
+      //get current user's invidual id
+      var currentUser;
+      var currentUserInfoUrl="https://www.lds.org/directory/services/ludrs/mem/current-user-info/";
+      result = Meteor.http.call("GET", currentUserInfoUrl, {
+        params: {
+          timeout: 30000
+        },
+        headers: {
+          "cookie": Meteor.user().ldsAccountCookieValue,
+          "content-type": "application/json",
+          "Accept": "application/json"
+        },
+      });
+      currentUser = JSON.parse(result.content);
+
+      //update the user to have additional fields to link
+      var properties = {
+        individualId: currentUser.individualId
+      };
+
+      Meteor.users.update(Meteor.user()._id, {
+        $set: properties
+      }, function(error) {
+        if (error) {
+          console.log(error.reason);
+        }
+      });
+
+      return true;
+    } catch (e) {
+      // Got a network error, time-out or HTTP error in the 400 or 500 range.
+      console.log(e);
+      return e;
+    }
+  },
+  getUserCallingInfo: function() {
+    this.unblock();
+    try {
+      var member = memberCollection.findOne({individualId : Meteor.user().individualId});
+
+      //update the user to have additional fields to link
+      var properties = {
+        callings:     member.callings
+      };
+
+      Meteor.users.update(Meteor.user()._id, {
+        $set: properties
+      }, function(error) {
+        if (error) {
+          console.log(error.reason);
+        }
+      });
+
+      return true;
+    } catch (e) {
+      // Got a network error, time-out or HTTP error in the 400 or 500 range.
+      console.log(e);
+      return e;
+    }
+  },
   syncUnits: function() {
     this.unblock();
     try {
@@ -65,41 +170,6 @@ Meteor.methods({
       for(var unitIndex in unitList[0].wards) {
         unitCollection.insert(unitList[0].wards[unitIndex]);
       }
-
-      //get current user's ward
-      var unit;
-      var currentUserUnitUrl="https://www.lds.org/directory/services/ludrs/unit/current-user-ward-stake/";
-      result = Meteor.http.call("GET", currentUserUnitUrl, {
-        params: {
-          timeout: 30000
-        },
-        headers: {
-          "cookie": Meteor.user().ldsAccountCookieValue,
-          "content-type": "application/json",
-          "Accept": "application/json"
-        },
-      });
-
-      unit = JSON.parse(result.content);
-
-      //update the user to have additional fields to link
-      var properties = {
-        wardUnitNo:   unit.wardUnitNo,
-        wardName:     unit.wardName,
-        stakeUnitNo:  unit.stakeUnitNo,
-        stakeName:    unit.stakeName,
-        areaUnitNo:   unit.areaUnitNo
-      };
-
-      Meteor.users.update(Meteor.user()._id, {
-        $set: properties
-      }, function(error) {
-        if (error) {
-          console.log(error.reason);
-        }
-      });
-
-      return true;
     } catch (e) {
       // Got a network error, time-out or HTTP error in the 400 or 500 range.
       console.log(e);
@@ -214,7 +284,6 @@ Meteor.methods({
       return e;
     }
   },
-  //get stake callings, get user calling
   syncStakeCallings: function(inStakeUnitNo) {
     var unitList = unitCollection.find({stakeUnitNo: inStakeUnitNo}).fetch();
     for (var unitIndex in unitList) {
@@ -230,5 +299,21 @@ Meteor.methods({
         console.log(error);
       }
     });
-  }
+  },
+  syncWard: function(inWardUnitNo, inStakeUnitNo) {
+    var unitList = unitCollection.find({stakeUnitNo: inStakeUnitNo}).fetch();
+    for (var unitIndex in unitList) {
+      Meteor.call("syncWardCallings", unitList[unitIndex].wardUnitNo, inStakeUnitNo, function(error) {
+        if (error) {
+          console.log(error);
+        }
+      });
+    }
+    //get stake callings too
+    Meteor.call("syncWardCallings", inStakeUnitNo, inStakeUnitNo, function(error) {
+      if (error) {
+        console.log(error);
+      }
+    });
+  },
 });

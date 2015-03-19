@@ -21,6 +21,20 @@ Template.sync.events({
       $("#authenticateMemberButton").val("Authenticate Member");
     });
   },
+  'click #getUserInfoButton': function(e){
+    e.preventDefault();
+
+    $("#getUserInfoButton").prop('disabled', true);
+    $("#getUserInfoButton").val("Getting User Info, please wait...");
+
+    Meteor.call("getUserInfo", function(error) {
+      if (error) {
+        console.log(error);
+      }
+      $("#getUserInfoButton").prop('disabled', false);
+      $("#getUserInfoButton").val("Get User Info");
+    });
+  },
   'click #syncUnitsButton': function(e){
     e.preventDefault();
 
@@ -33,6 +47,20 @@ Template.sync.events({
       }
       $("#syncUnitsButton").prop('disabled', false);
       $("#syncUnitsButton").val("Sync Units");
+    });
+  },
+  'click #syncWardButton': function(e){
+    e.preventDefault();
+
+    $("#syncWardButton").prop('disabled', true);
+    $("#syncWardButton").val("Syncing Ward, please wait...");
+
+    Meteor.call("syncWard", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo, function(error) {
+      if (error) {
+        console.log(error);
+      }
+      $("#syncWardButton").prop('disabled', false);
+      $("#syncWardButton").val("Sync Ward");
     });
   },
   'click #syncWardMembersButton': function(e){

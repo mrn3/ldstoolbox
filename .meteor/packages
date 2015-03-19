@@ -21,10 +21,10 @@ useraccounts:ionic
 http
 pascoual:pdfkit
 meteorhacks:search-source
-meteorhacks:aggregate
 accounts-facebook
 accounts-twitter
 accounts-google
 accounts-ui
-meteorhacks:kadira
 mrt:moment
+meteorhacks:kadira@2.20.1
+meteorhacks:aggregate@1.2.0
