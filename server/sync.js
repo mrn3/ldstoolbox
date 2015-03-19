@@ -214,6 +214,7 @@ Meteor.methods({
       return e;
     }
   },
+  //get stake callings, get user calling
   syncStakeCallings: function(inStakeUnitNo) {
     var unitList = unitCollection.find({stakeUnitNo: inStakeUnitNo}).fetch();
     for (var unitIndex in unitList) {

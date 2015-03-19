@@ -20,14 +20,13 @@
     {{#ionContent}}
         {{#ionList}}
           {{#each householdData}}
-            <a href="{{pathFor 'household'}}" class="item">
-              <h2>
-                {{householdName}}, {{headOfHouse.directoryName}}
-                {{#if spouse.directoryName}}
-                  &amp; {{spouse.directoryName}}
-                {{/if}}
-              </h2>
-            </a>
+            <a class="item item-icon-right" href="/member/{{headOfHouse.individualId}}">
+              {{householdName}}, {{headOfHouse.directoryName}}
+              {{#if spouse.directoryName}}
+                &amp; {{spouse.directoryName}}
+              {{/if}}
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>  
           {{/each}}
         {{/ionList}}
     {{/ionContent}}
