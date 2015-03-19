@@ -61,13 +61,18 @@ Router.map(function() {
     name: "memberSelect",
     waitOn: function () {
       return [
+        Meteor.subscribe("memberPublication"),
         Meteor.subscribe("userPublication")
       ]
     },
     data: function() {
-      console.log(memberCollection.find({"callings.callingName": "Chorister"}).fetch());
+      if (Meteor.user() && Meteor.user().wardUnitNo) {
+        console.log(memberCollection.find({"callings.callingName": "Chorister", "wardUnitNo": Meteor.user().wardUnitNo}).fetch());
+      } else {
+        console.log("not ready yet");
+      }
       return {
-        organistData: memberCollection.find({"callings.callingName": "Chorister"})
+        //organistData: memberCollection.find({"callings.callingName": "Chorister", "wardUnitNo": Meteor.user().wardUnitNo})
       };
     },
     fastRender: true

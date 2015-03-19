@@ -224,5 +224,11 @@ Meteor.methods({
         }
       });
     }
+    //get stake callings too
+    Meteor.call("syncWardCallings", inStakeUnitNo, inStakeUnitNo, function(error) {
+      if (error) {
+        console.log(error);
+      }
+    });
   }
 });
