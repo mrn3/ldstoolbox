@@ -6,7 +6,7 @@ function switchName(inName) {
 }
 
 Meteor.methods({
-  authenticateMember: function(inUsername, inPassword) {
+  authenticateLdsAccountUser: function(inUsername, inPassword) {
     this.unblock();
     try {
       var authUrl="https://signin.lds.org/login.html";
@@ -22,7 +22,11 @@ Meteor.methods({
       }
 
       var properties = {
-        ldsAccountCookieValue:   ldsAccountCookieValue
+        ldsAccount: {
+          username:         inUsername,
+          cookieValue:      ldsAccountCookieValue,
+          updatedAt:  new Date()
+        }
       };
 
       Meteor.users.update(Meteor.user()._id, {
@@ -32,6 +36,7 @@ Meteor.methods({
           console.log(error.reason);
         }
       });
+
     } catch (e) {
       // Got a network error, time-out or HTTP error in the 400 or 500 range.
       console.log(e);
@@ -49,7 +54,7 @@ Meteor.methods({
           timeout: 30000
         },
         headers: {
-          "cookie": Meteor.user().ldsAccountCookieValue,
+          "cookie": Meteor.user().ldsAccount.cookieValue,
           "content-type": "application/json",
           "Accept": "application/json"
         },
@@ -91,7 +96,7 @@ Meteor.methods({
           timeout: 30000
         },
         headers: {
-          "cookie": Meteor.user().ldsAccountCookieValue,
+          "cookie": Meteor.user().ldsAccount.cookieValue,
           "content-type": "application/json",
           "Accept": "application/json"
         },
@@ -143,7 +148,7 @@ Meteor.methods({
       return e;
     }
   },
-  syncUnits: function() {
+  getUnits: function() {
     this.unblock();
     try {
       //get units in stake
@@ -155,7 +160,7 @@ Meteor.methods({
           timeout: 30000
         },
         headers: {
-          "cookie": Meteor.user().ldsAccountCookieValue,
+          "cookie": Meteor.user().ldsAccount.cookieValue,
           "content-type": "application/json",
           "Accept": "application/json"
         },
@@ -176,7 +181,7 @@ Meteor.methods({
       return e;
     }
   },
-  syncWardMembers: function(inWardUnitNo, inStakeUnitNo) {
+  getWardMembers: function(inWardUnitNo, inStakeUnitNo) {
     this.unblock();
     try {
       var householdList;
@@ -187,7 +192,7 @@ Meteor.methods({
           timeout: 30000
         },
         headers: {
-          "cookie": Meteor.user().ldsAccountCookieValue,
+          "cookie": Meteor.user().ldsAccount.cookieValue,
           "content-type": "application/json",
           "Accept": "application/json"
         },
@@ -219,17 +224,17 @@ Meteor.methods({
       return e;
     }
   },
-  syncStakeMembers: function(inStakeUnitNo) {
+  getStakeMembers: function(inStakeUnitNo) {
     var unitList = unitCollection.find({stakeUnitNo: inStakeUnitNo}).fetch();
     for (var unitIndex in unitList) {
-      Meteor.call("syncWardMembers", unitList[unitIndex].wardUnitNo, inStakeUnitNo, function(error) {
+      Meteor.call("getWardMembers", unitList[unitIndex].wardUnitNo, inStakeUnitNo, function(error) {
         if (error) {
           console.log(error);
         }
       });
     }
   },
-  syncWardCallings: function(inWardUnitNo, inStakeUnitNo) {
+  getWardCallings: function(inWardUnitNo, inStakeUnitNo) {
     this.unblock();
     try {
       var callingList;
@@ -240,7 +245,7 @@ Meteor.methods({
           timeout: 30000
         },
         headers: {
-          "cookie": Meteor.user().ldsAccountCookieValue,
+          "cookie": Meteor.user().ldsAccount.cookieValue,
           "content-type": "application/json",
           "Accept": "application/json"
         },
@@ -263,7 +268,7 @@ Meteor.methods({
             timeout: 30000
           },
           headers: {
-            "cookie": Meteor.user().ldsAccountCookieValue,
+            "cookie": Meteor.user().ldsAccount.cookieValue,
             "content-type": "application/json",
             "Accept": "application/json"
           },
@@ -284,36 +289,36 @@ Meteor.methods({
       return e;
     }
   },
-  syncStakeCallings: function(inStakeUnitNo) {
+  getStakeCallings: function(inStakeUnitNo) {
     var unitList = unitCollection.find({stakeUnitNo: inStakeUnitNo}).fetch();
     for (var unitIndex in unitList) {
-      Meteor.call("syncWardCallings", unitList[unitIndex].wardUnitNo, inStakeUnitNo, function(error) {
+      Meteor.call("getWardCallings", unitList[unitIndex].wardUnitNo, inStakeUnitNo, function(error) {
         if (error) {
           console.log(error);
         }
       });
     }
     //get stake callings too
-    Meteor.call("syncWardCallings", inStakeUnitNo, inStakeUnitNo, function(error) {
+    Meteor.call("getWardCallings", inStakeUnitNo, inStakeUnitNo, function(error) {
       if (error) {
         console.log(error);
       }
     });
   },
-  syncWard: function(inWardUnitNo, inStakeUnitNo) {
-    var unitList = unitCollection.find({stakeUnitNo: inStakeUnitNo}).fetch();
-    for (var unitIndex in unitList) {
-      Meteor.call("syncWardCallings", unitList[unitIndex].wardUnitNo, inStakeUnitNo, function(error) {
-        if (error) {
-          console.log(error);
-        }
-      });
-    }
-    //get stake callings too
-    Meteor.call("syncWardCallings", inStakeUnitNo, inStakeUnitNo, function(error) {
-      if (error) {
-        console.log(error);
-      }
-    });
+  syncWard: function () {
+    Meteor.call("getUserIndividualId");
+    Meteor.call("getUserUnitInfo");
+    Meteor.call("getUnits");
+    Meteor.call("getWardMembers", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo);
+    Meteor.call("getWardCallings", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo);
+    Meteor.call("getUserCallingInfo");
   },
+  syncStake: function () {
+    Meteor.call("getUserIndividualId");
+    Meteor.call("getUserUnitInfo");
+    Meteor.call("getUnits");
+    Meteor.call("getStakeMembers", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo);
+    Meteor.call("getStakeCallings", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo);
+    Meteor.call("getUserCallingInfo");
+  }
 });

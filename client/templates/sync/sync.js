@@ -1,52 +1,34 @@
+Template.sync.helpers({
+  user: function() {
+    return Meteor.user();
+  },
+  ldsAccountUserNotAuthenticated: function() {
+    var oneHourAgo = moment().subtract(1, "hours");
+    return oneHourAgo.isAfter(Meteor.user().ldsAccount.updatedAt);
+  }
+});
+
 Template.sync.events({
-  'click #authenticateMemberButton': function(e){
+  'click #authenticateLdsAccountUserButton': function(e){
     e.preventDefault();
 
-    $("#authenticateMemberButton").prop('disabled', true);
-    $("#authenticateMemberButton").val("Authenticating, please wait...");
+    $("#authenticateLdsAccountUserButton").prop('disabled', true);
+    $("#authenticateLdsAccountUserButton").val("Authenticating, please wait...");
 
     if ($("#ldsAccountUsername").val() == "" || $("#ldsAccountPassword").val() == "") {
       alert("LDS Account username and password are required.");
 
-      $("#authenticateMemberButton").prop('disabled', false);
-      $("#authenticateMemberButton").val("Authenticate Member");
+      $("#authenticateLdsAccountUserButton").prop('disabled', false);
+      $("#authenticateLdsAccountUserButton").val("Authenticate");
       return false;
     }
 
-    Meteor.call("authenticateMember", $("#ldsAccountUsername").val(), $("#ldsAccountPassword").val(), function(error) {
+    Meteor.call("authenticateLdsAccountUser", $("#ldsAccountUsername").val(), $("#ldsAccountPassword").val(), function(error) {
       if (error) {
         console.log(error);
       }
-      $("#authenticateMemberButton").prop('disabled', false);
-      $("#authenticateMemberButton").val("Authenticate Member");
-    });
-  },
-  'click #getUserInfoButton': function(e){
-    e.preventDefault();
-
-    $("#getUserInfoButton").prop('disabled', true);
-    $("#getUserInfoButton").val("Getting User Info, please wait...");
-
-    Meteor.call("getUserInfo", function(error) {
-      if (error) {
-        console.log(error);
-      }
-      $("#getUserInfoButton").prop('disabled', false);
-      $("#getUserInfoButton").val("Get User Info");
-    });
-  },
-  'click #syncUnitsButton': function(e){
-    e.preventDefault();
-
-    $("#syncUnitsButton").prop('disabled', true);
-    $("#syncUnitsButton").val("Syncing Units, please wait...");
-
-    Meteor.call("syncUnits", function(error) {
-      if (error) {
-        console.log(error);
-      }
-      $("#syncUnitsButton").prop('disabled', false);
-      $("#syncUnitsButton").val("Sync Units");
+      $("#authenticateLdsAccountUserButton").prop('disabled', false);
+      $("#authenticateLdsAccountUserButton").val("Authenticate");
     });
   },
   'click #syncWardButton': function(e){
@@ -55,7 +37,7 @@ Template.sync.events({
     $("#syncWardButton").prop('disabled', true);
     $("#syncWardButton").val("Syncing Ward, please wait...");
 
-    Meteor.call("syncWard", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo, function(error) {
+    Meteor.call("syncWard", function(error) {
       if (error) {
         console.log(error);
       }
@@ -63,64 +45,18 @@ Template.sync.events({
       $("#syncWardButton").val("Sync Ward");
     });
   },
-  'click #syncWardMembersButton': function(e){
+  'click #syncStakeButton': function(e){
     e.preventDefault();
 
-    $("#syncWardMembersButton").prop('disabled', true);
-    $("#syncWardMembersButton").val("Syncing Ward Members, please wait...");
+    $("#syncStakeButton").prop('disabled', true);
+    $("#syncStakeButton").val("Syncing Stake, please wait...");
 
-    Meteor.call("syncWardMembers", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo, function(error) {
+    Meteor.call("syncStake", function(error) {
       if (error) {
         console.log(error);
       }
-      $("#syncWardMembersButton").prop('disabled', false);
-      $("#syncWardMembersButton").val("Sync Ward Members");
+      $("#syncStakeButton").prop('disabled', false);
+      $("#syncStakeButton").val("Sync Stake");
     });
-  },
-  'click #syncStakeMembersButton': function(e){
-    e.preventDefault();
-
-    $("#syncStakeMembersButton").prop('disabled', true);
-    $("#syncStakeMembersButton").val("Syncing Stake Members, please wait...");
-    //console.log(Meteor.user().stakeUnitNo);
-
-    Meteor.call("syncStakeMembers", Meteor.user().stakeUnitNo, function(error) {
-      if (error) {
-        console.log(error);
-      }
-      $("#syncStakeMembersButton").prop('disabled', false);
-      $("#syncStakeMembersButton").val("Sync Stake Members");
-    });
-  },
-  'click #syncWardCallingsButton': function(e){
-    e.preventDefault();
-
-    $("#syncWardCallingsButton").prop('disabled', true);
-    $("#syncWardCallingsButton").val("Syncing Ward Callings, please wait...");
-
-    Meteor.call("syncWardCallings", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo, function(error) {
-      if (error) {
-        console.log(error);
-      }
-      $("#syncWardCallingsButton").prop('disabled', false);
-      $("#syncWardCallingsButton").val("Sync Ward Callings");
-    });
-  },
-  'click #syncStakeCallingsButton': function(e){
-    e.preventDefault();
-
-    $("#syncStakeCallingsButton").prop('disabled', true);
-    $("#syncStakeCallingsButton").val("Syncing Stake Callings, please wait...");
-    //console.log(Meteor.user().stakeUnitNo);
-
-    Meteor.call("syncStakeCallings", Meteor.user().stakeUnitNo, function(error) {
-      if (error) {
-        console.log(error);
-      }
-      $("#syncStakeCallingsButton").prop('disabled', false);
-      $("#syncStakeCallingsButton").val("Sync Stake Callings");
-    });
-  },
-
-
+  }
 });
