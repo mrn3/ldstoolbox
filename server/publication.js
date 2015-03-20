@@ -33,6 +33,28 @@ Meteor.publish('stakeCallingPublication', function() {
   }
 });
 
+Meteor.publish('reportPublication', function() {
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    return memberCollection.group({
+        "key": {
+            "wardUnitNo": true,
+            "stakeUnitNo": true
+        },
+        "initial": {
+            "countstar": 0
+        },
+        "reduce": function(obj, prev) {
+            if (true != null) if (true instanceof Array) prev.countstar += true.length;
+            else prev.countstar++;
+        },
+        "cond": {
+            "stakeUnitNo": user.stakeUnitNo
+        }
+    });
+  }
+});
+
 Meteor.publish('callingGroupPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);

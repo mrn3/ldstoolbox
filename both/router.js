@@ -20,26 +20,6 @@ Router.map(function() {
   });
   this.route("/householdList/", {
     name: "householdList",
-    waitOn: function () {
-      return Meteor.subscribe("householdPublication")
-    },
-    data: function() {
-      return {
-        householdData: householdCollection.find({}, {sort: {householdName: 1}})
-      };
-    },
-    fastRender: true
-  });
-  this.route("/household/:_id", {
-    name: "household",
-    waitOn: function () {
-      return Meteor.subscribe("householdPublication")
-    },
-    data: function() {
-      return {
-        householdData: householdCollection.findOne(this.params._id)
-      };
-    },
     fastRender: true
   });
   this.route("/memberList/", {
