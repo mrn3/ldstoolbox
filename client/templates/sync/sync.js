@@ -5,6 +5,9 @@ Template.sync.helpers({
   ldsAccountUserNotAuthenticated: function() {
     var oneHourAgo = moment().subtract(1, "hours");
     return oneHourAgo.isAfter(Meteor.user().ldsAccount.updatedAt);
+  },
+  wardData: function() {
+    return memberCollection.find({wardUnitNo: Meteor.user().wardUnitNo}).count();
   }
 });
 

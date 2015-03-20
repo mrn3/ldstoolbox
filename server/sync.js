@@ -317,8 +317,8 @@ Meteor.methods({
     Meteor.call("getUserIndividualId");
     Meteor.call("getUserUnitInfo");
     Meteor.call("getUnits");
-    Meteor.call("getStakeMembers", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo);
-    Meteor.call("getStakeCallings", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo);
+    Meteor.call("getStakeMembers", Meteor.user().stakeUnitNo);
+    Meteor.call("getStakeCallings", Meteor.user().stakeUnitNo);
     Meteor.call("getUserCallingInfo");
   }
 });

@@ -252,7 +252,10 @@ Router.map(function() {
   this.route("/sync/", {
     name: "sync",
     waitOn: function () {
-      return Meteor.subscribe("userPublication")
+      return [
+        Meteor.subscribe("userPublication"),
+        Meteor.subscribe("memberPublication")
+      ]
     },
     fastRender: true
   });

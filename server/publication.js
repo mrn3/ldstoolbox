@@ -72,7 +72,7 @@ Meteor.publish('announcementPublication', function() {
 Meteor.publish('unitPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
-    return unitCollection.find({wardUnitNo: user.wardUnitNo});
+    return unitCollection.find({stakeUnitNo: user.stakeUnitNo});
   }
 });
 
