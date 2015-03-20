@@ -19,7 +19,7 @@ Template.memberSelect.helpers({
     return memberSearch.getStatus().loading;
   },
   memberSelectTypeIs: function (inMemberSelectType) {
-    console.log(Session.get("memberSelectType"));
+    //console.log(Session.get("memberSelectType"));
     return (Session.get("memberSelectType") == inMemberSelectType);
   },
   organistData: function() {
@@ -32,7 +32,28 @@ Template.memberSelect.helpers({
   },
   presidingData: function() {
     //get Presiding position - 1, 2, 3, 4, 54, 55
-    return memberCollection.find({"callings.positionId": 1, "stakeUnitNo": Meteor.user().stakeUnitNo});
+    var selector = {$or: [
+      {"callings.positionId": {$in: [4, 54, 55]}, "wardUnitNo": Meteor.user().wardUnitNo},
+      {"callings.positionId": {$in: [1, 2, 3]}, "stakeUnitNo": Meteor.user().stakeUnitNo}
+    ]};
+    var options = {sort: {"callings.positionId": 1}};
+    return memberCollection.find(selector, options);
+  },
+  conductingData: function() {
+    //get Presiding position - 1, 2, 3, 4, 54, 55
+    var selector = {$or: [
+      {"callings.positionId": {$in: [4, 54, 55]}, "wardUnitNo": Meteor.user().wardUnitNo}
+    ]};
+    var options = {sort: {"callings.positionId": 1}};
+    return memberCollection.find(selector, options);
+  },
+  visitingAuthorityData: function() {
+    //get Presiding position - 1, 2, 3, 94
+    var selector = {$or: [
+      {"callings.positionId": {$in: [1, 2, 3, 94]}, "stakeUnitNo": Meteor.user().stakeUnitNo}
+    ]};
+    var options = {sort: {"callings.positionId": 1}};
+    return memberCollection.find(selector, options);
   }
 });
 

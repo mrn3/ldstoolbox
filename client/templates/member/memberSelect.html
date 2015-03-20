@@ -11,13 +11,11 @@
 
   {{#ionView}}
     {{#ionContent}}
-      <div class="bar bar-header item-input-inset">
-        <label class="item-input-wrapper">
-          <i class="icon ion-search placeholder-icon"></i>
-          <input id="searchInput" type="search" placeholder="Search">
-        </label>
-      </div>
       {{#ionList}}
+
+        <div class="item item-divider">
+          Most Likely Options
+        </div>
 
         {{#if memberSelectTypeIs "organist"}}
           {{#each organistData}}
@@ -37,9 +35,31 @@
           {{/each}}
         {{/if}}
 
+        {{#if memberSelectTypeIs "conducting"}}
+          {{#each conductingData}}
+            {{>memberSelectItem}}
+          {{/each}}
+        {{/if}}
+
+        {{#if memberSelectTypeIs "visitingAuthority"}}
+          {{#each visitingAuthorityData}}
+            {{>memberSelectItem}}
+          {{/each}}
+        {{/if}}
+
+        <div class="item item-divider">
+          Search
+        </div>
+        <div class="bar bar-header item-input-inset">
+          <label class="item-input-wrapper">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input id="searchInput" type="search" placeholder="Search">
+          </label>
+        </div>
         {{#each memberData}}
           {{>memberSelectItem}}
         {{/each}}
+
       {{/ionList}}
     {{/ionContent}}
   {{/ionView}}
