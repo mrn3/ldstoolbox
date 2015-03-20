@@ -31,7 +31,7 @@ Template.memberSelect.helpers({
     return memberCollection.find({"callings.positionId": 1585, "wardUnitNo": Meteor.user().wardUnitNo});
   },
   presidingData: function() {
-    //get Presiding position - 1, 2, 3, 4, 54, 55
+    //get Presiding position - Stake Presidency, Bishopric
     var selector = {$or: [
       {"callings.positionId": {$in: [4, 54, 55]}, "wardUnitNo": Meteor.user().wardUnitNo},
       {"callings.positionId": {$in: [1, 2, 3]}, "stakeUnitNo": Meteor.user().stakeUnitNo}
@@ -40,7 +40,7 @@ Template.memberSelect.helpers({
     return memberCollection.find(selector, options);
   },
   conductingData: function() {
-    //get Presiding position - 1, 2, 3, 4, 54, 55
+    //get Presiding position - Bishopric
     var selector = {$or: [
       {"callings.positionId": {$in: [4, 54, 55]}, "wardUnitNo": Meteor.user().wardUnitNo}
     ]};
@@ -48,7 +48,7 @@ Template.memberSelect.helpers({
     return memberCollection.find(selector, options);
   },
   visitingAuthorityData: function() {
-    //get Presiding position - 1, 2, 3, 94
+    //get Visiting Authority position - Stake Presidency, High Council
     var selector = {$or: [
       {"callings.positionId": {$in: [1, 2, 3, 94]}, "stakeUnitNo": Meteor.user().stakeUnitNo}
     ]};
