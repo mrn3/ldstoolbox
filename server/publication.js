@@ -23,6 +23,16 @@ Meteor.publish('callingPublication', function() {
   }
 });
 
+Meteor.publish('stakeCallingPublication', function() {
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    var selector = {$or: [
+      {"stakeUnitNo": user.stakeUnitNo}
+    ]};
+    return callingCollection.find(selector);
+  }
+});
+
 Meteor.publish('callingGroupPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);

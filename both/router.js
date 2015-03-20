@@ -244,7 +244,8 @@ Router.map(function() {
     waitOn: function () {
       return [
         Meteor.subscribe("userPublication"),
-        Meteor.subscribe("memberPublication")
+        Meteor.subscribe("memberPublication"),
+        Meteor.subscribe("stakeCallingPublication")
       ]
     },
     fastRender: true
