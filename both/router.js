@@ -65,16 +65,6 @@ Router.map(function() {
         Meteor.subscribe("userPublication")
       ]
     },
-    data: function() {
-      if (Meteor.user() && Meteor.user().wardUnitNo) {
-        console.log(memberCollection.find({"callings.callingName": "Chorister", "wardUnitNo": Meteor.user().wardUnitNo}).fetch());
-      } else {
-        console.log("not ready yet");
-      }
-      return {
-        //organistData: memberCollection.find({"callings.callingName": "Chorister", "wardUnitNo": Meteor.user().wardUnitNo})
-      };
-    },
     fastRender: true
   });
   this.route("/member/:individualId", {

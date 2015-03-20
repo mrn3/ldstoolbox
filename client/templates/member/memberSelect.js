@@ -21,15 +21,13 @@ Template.memberSelect.helpers({
   memberSelectTypeIs: function (inMemberSelectType) {
     return (Session.get("memberSelectType") == inMemberSelectType);
   },
-  /*
   organistData: function() {
-    console.log(memberCollection.find().fetch());
-    Meteor.subscribe('memberPublication', function() {
-      console.log(memberCollection.find().count());
-    });
-    return memberCollection.find();
-  },
-  */
+    if (Meteor.user() && Meteor.user().wardUnitNo) {
+      return memberCollection.find({"callings.callingName": "Organist or Pianist", "wardUnitNo": Meteor.user().wardUnitNo});
+    } else {
+      return {}
+    }
+  }
 });
 
 Template.memberSelect.events({
