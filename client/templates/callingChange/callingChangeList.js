@@ -10,21 +10,21 @@ Template.callingChangeList.helpers({
 
     if ((Session.get("statusSelector") == "Incomplete")) {
       if (Session.get("typeSelector") == "All") {
-        return callingChangeCollection.find({status: { $not : "Complete"}}, {sort: {meetingDate: -1}});
+        return callingChangeCollection.find({status: { $not : "Complete"}});
       } else {
-        return callingChangeCollection.find({status: { $not : "Complete"}, type: Session.get("typeSelector")}, {sort: {meetingDate: -1}});
+        return callingChangeCollection.find({status: { $not : "Complete"}, type: Session.get("typeSelector")});
       }
     } else if (Session.get("statusSelector") == "All") {
       if (Session.get("typeSelector") == "All") {
-        return callingChangeCollection.find({}, {sort: {meetingDate: -1}});
+        return callingChangeCollection.find({});
       } else {
-        return callingChangeCollection.find({type: Session.get("typeSelector")}, {sort: {meetingDate: -1}});
+        return callingChangeCollection.find({type: Session.get("typeSelector")});
       }
     } else {
       if (Session.get("typeSelector") == "All") {
-        return callingChangeCollection.find({status: Session.get("statusSelector")}, {sort: {meetingDate: -1}});
+        return callingChangeCollection.find({status: Session.get("statusSelector")});
       } else {
-        return callingChangeCollection.find({status: Session.get("statusSelector"), type: Session.get("typeSelector")}, {sort: {meetingDate: -1}});
+        return callingChangeCollection.find({status: Session.get("statusSelector"), type: Session.get("typeSelector")});
       }
     }
   }
