@@ -19,14 +19,20 @@ Template.memberSelect.helpers({
     return memberSearch.getStatus().loading;
   },
   memberSelectTypeIs: function (inMemberSelectType) {
+    console.log(Session.get("memberSelectType"));
     return (Session.get("memberSelectType") == inMemberSelectType);
   },
   organistData: function() {
-    if (Meteor.user() && Meteor.user().wardUnitNo) {
-      return memberCollection.find({"callings.callingName": "Organist or Pianist", "wardUnitNo": Meteor.user().wardUnitNo});
-    } else {
-      return {}
-    }
+    //get Organist or Pianist position
+    return memberCollection.find({"callings.positionId": 234, "wardUnitNo": Meteor.user().wardUnitNo});
+  },
+  choristerData: function() {
+    //get Chorister position
+    return memberCollection.find({"callings.positionId": 1585, "wardUnitNo": Meteor.user().wardUnitNo});
+  },
+  presidingData: function() {
+    //get Presiding position - 1, 2, 3, 4, 54, 55
+    return memberCollection.find({"callings.positionId": 1, "stakeUnitNo": Meteor.user().stakeUnitNo});
   }
 });
 
