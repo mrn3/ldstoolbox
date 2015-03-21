@@ -23,7 +23,7 @@ Template.sync.helpers({
     return callingCollection.find({stakeUnitNo: Meteor.user().stakeUnitNo}).count();
   },
   reportData: function() {
-    Meteor.subscribe("reportPublication");
+    return memberClientCollection.find();
   }
 });
 

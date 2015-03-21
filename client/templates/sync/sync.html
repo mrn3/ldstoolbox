@@ -36,19 +36,59 @@
       {{/if}}
       <div class="list">
         <label class="item item-input">
-          Ward Member Count: {{wardMemberCount}}
+          <div class="row">
+            <div class="col">
+              <strong>Ward</strong>
+            </div>
+            <div class="col">
+              <strong>Members</strong>
+            </div>
+            <div class="col">
+              <strong>Callings</strong>
+            </div>
+          </div>
         </label>
         <label class="item item-input">
-          Ward Calling Count: {{wardCallingCount}}
+          <div class="row">
+            <div class="col">
+              My Ward
+            </div>
+            <div class="col">
+              {{wardMemberCount}}
+            </div>
+            <div class="col">
+              {{wardCallingCount}}
+            </div>
+          </div>
         </label>
         <label class="item item-input">
-          Stake Member Count: {{stakeMemberCount}}
+          <div class="row">
+            <div class="col">
+              My Stake
+            </div>
+            <div class="col">
+              {{stakeMemberCount}}
+            </div>
+            <div class="col">
+              {{stakeCallingCount}}
+            </div>
+          </div>
         </label>
+        {{#each reportData}}
         <label class="item item-input">
-          Stake Calling Count: {{stakeCallingCount}}
+          <div class="row">
+            <div class="col">
+              {{wardUnitNo}}
+            </div>
+            <div class="col">
+              {{count}}
+            </div>
+            <div class="col">
+            </div>
+          </div>
         </label>
+        {{/each}}
       </div>
-      {{reportData}}
     {{/ionContent}}
   {{/ionView}}
 

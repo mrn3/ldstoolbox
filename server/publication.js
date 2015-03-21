@@ -5,6 +5,54 @@ Meteor.publish('memberPublication', function() {
   }
 });
 
+Meteor.publish("reportPublication", function () {
+  if (this.userId) {
+    var sub = this;
+    var user = Meteor.users.findOne(this.userId);
+    //console.log(sub);
+    // This works for Meteor 0.6.5
+    var db = MongoInternals.defaultRemoteCollectionDriver().mongo.db;
+
+    // Your arguments to Mongo's aggregation. Make these however you want.
+    var pipeline = [
+      {
+        $match: { stakeUnitNo: user.stakeUnitNo }
+      },
+      {
+        $group : {
+          _id : "$wardUnitNo",
+          count: { $sum: 1 }
+        }
+      }
+    ];
+
+    //console.log(pipeline);
+    //console.log(db.collection("memberCollection"));
+    db.collection("member").aggregate(
+      pipeline,
+      // Need to wrap the callback so it gets called in a Fiber.
+      Meteor.bindEnvironment(
+        function(err, result) {
+          // Add each of the results to the subscription.
+          //console.log(result);
+          _.each(result, function(e) {
+            // Generate a random disposable id for aggregated documents
+            sub.added("memberClient", Random.id(), {
+              wardUnitNo: e._id,
+              count: e.count
+            });
+            //console.log(e);
+          });
+          sub.ready();
+        },
+        function(error) {
+          Meteor._debug( "Error doing aggregation: " + error);
+        }
+      )
+    );
+  }
+});
+
 Meteor.publish('householdPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
@@ -30,28 +78,6 @@ Meteor.publish('stakeCallingPublication', function() {
       {"stakeUnitNo": user.stakeUnitNo}
     ]};
     return callingCollection.find(selector);
-  }
-});
-
-Meteor.publish('reportPublication', function() {
-  if (this.userId) {
-    var user = Meteor.users.findOne(this.userId);
-    return memberCollection.group({
-        "key": {
-            "wardUnitNo": true,
-            "stakeUnitNo": true
-        },
-        "initial": {
-            "countstar": 0
-        },
-        "reduce": function(obj, prev) {
-            if (true != null) if (true instanceof Array) prev.countstar += true.length;
-            else prev.countstar++;
-        },
-        "cond": {
-            "stakeUnitNo": user.stakeUnitNo
-        }
-    });
   }
 });
 

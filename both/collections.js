@@ -19,3 +19,5 @@ memberCollection = new Meteor.Collection("member");
 unitCollection = new Meteor.Collection("unit");
 
 hymnCollection = new Meteor.Collection("hymn");
+
+memberClientCollection = new Meteor.Collection("memberClient");

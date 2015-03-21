@@ -225,7 +225,8 @@ Router.map(function() {
       return [
         Meteor.subscribe("userPublication"),
         Meteor.subscribe("memberPublication"),
-        Meteor.subscribe("stakeCallingPublication")
+        Meteor.subscribe("stakeCallingPublication"),
+        Meteor.subscribe("reportPublication")
       ]
     },
     fastRender: true
