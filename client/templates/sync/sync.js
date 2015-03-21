@@ -28,6 +28,12 @@ Template.sync.helpers({
 });
 
 Template.sync.events({
+  /*
+  "click #wardMemberCount": function(e) {
+    console.log($("#wardMemberCount"));
+    $("#wardMemberCount").style.color = "#ff0000";
+  },
+  */
   'click #authenticateLdsAccountUserButton': function(e){
     e.preventDefault();
 
