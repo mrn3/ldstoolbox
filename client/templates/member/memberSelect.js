@@ -18,8 +18,15 @@ Template.memberSelect.helpers({
   isLoading: function() {
     return memberSearch.getStatus().loading;
   },
+  isLikelyOptions: function () {
+    return (
+      (Session.get("memberSelectType") == "organist") ||
+      (Session.get("memberSelectType") == "chorister") ||
+      (Session.get("memberSelectType") == "presiding") ||
+      (Session.get("memberSelectType") == "visitingAuthority")
+    );
+  },
   memberSelectTypeIs: function (inMemberSelectType) {
-    //console.log(Session.get("memberSelectType"));
     return (Session.get("memberSelectType") == inMemberSelectType);
   },
   organistData: function() {
@@ -65,6 +72,47 @@ Template.memberSelect.events({
     var text = $(e.target).val().trim();
     memberSearch.search(text);
   }, 200),
+
+  "click #goButton": function() {
+    var memberObject = {
+      "switchedPreferredName": $('#other').val()
+    }
+    if (Session.get("memberSelectType") == "callingChangeMember") {
+      Session.set('selectedCallingChangeMember', memberObject);
+    }
+    else if (Session.get("memberSelectType") == "organist") {
+      Session.set('selectedOrganist', memberObject);
+    }
+    else if (Session.get("memberSelectType") == "chorister") {
+      Session.set('selectedChorister', memberObject);
+    }
+    else if (Session.get("memberSelectType") == "invocation") {
+      Session.set('selectedInvocation', memberObject);
+    }
+    else if (Session.get("memberSelectType") == "benediction") {
+      Session.set('selectedBenediction', memberObject);
+    }
+    else if (Session.get("memberSelectType") == "presiding") {
+      Session.set('selectedPresiding', memberObject);
+    }
+    else if (Session.get("memberSelectType") == "conducting") {
+      Session.set('selectedConducting', memberObject);
+    }
+    else if (Session.get("memberSelectType") == "visitingAuthority") {
+      Session.set('selectedVisitingAuthority', memberObject);
+    }
+    else if (Session.get("memberSelectType") == "speaker") {
+      var updateObject = {};
+      updateObject.$set = {speaker: memberObject};
+      speakerCollection.update(Session.get("speakerId"), updateObject);
+    }
+    else if (Session.get("memberSelectType") == "recognition") {
+      var updateObject = {};
+      updateObject.$set = {member: memberObject};
+      recognitionCollection.update(Session.get("recognitionId"), updateObject);
+    }
+    history.back();
+  },
   "click #memberRadioButton": function(e, instance) {
     //strip out html tags
     if (this.switchedPreferredName) {
@@ -73,8 +121,6 @@ Template.memberSelect.events({
     if (this.callings) {
       this.callings.callingName = jQuery('<p>' + this.callings.callingName + '</p>').text();
     }
-
-    //console.log(Session.get("memberSelectType"));
     if (Session.get("memberSelectType") == "callingChangeMember") {
       Session.set('selectedCallingChangeMember', this);
     }
@@ -109,7 +155,6 @@ Template.memberSelect.events({
       updateObject.$set = {member: this, wardUnitNo: Meteor.user().wardUnitNo};
       recognitionCollection.update(Session.get("recognitionId"), updateObject);
     }
-
     history.back();
   },
 });

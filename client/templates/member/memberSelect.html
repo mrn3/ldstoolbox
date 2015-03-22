@@ -13,38 +13,40 @@
     {{#ionContent}}
       {{#ionList}}
 
-        <div class="item item-divider">
-          Most Likely Options
-        </div>
+        {{#if isLikelyOptions}}
+          <div class="item item-divider">
+            Most Likely Options
+          </div>
 
-        {{#if memberSelectTypeIs "organist"}}
-          {{#each organistData}}
-            {{>memberSelectItem}}
-          {{/each}}
-        {{/if}}
+          {{#if memberSelectTypeIs "organist"}}
+            {{#each organistData}}
+              {{>memberSelectItem}}
+            {{/each}}
+          {{/if}}
 
-        {{#if memberSelectTypeIs "chorister"}}
-          {{#each choristerData}}
-            {{>memberSelectItem}}
-          {{/each}}
-        {{/if}}
+          {{#if memberSelectTypeIs "chorister"}}
+            {{#each choristerData}}
+              {{>memberSelectItem}}
+            {{/each}}
+          {{/if}}
 
-        {{#if memberSelectTypeIs "presiding"}}
-          {{#each presidingData}}
-            {{>memberSelectItem}}
-          {{/each}}
-        {{/if}}
+          {{#if memberSelectTypeIs "presiding"}}
+            {{#each presidingData}}
+              {{>memberSelectItem}}
+            {{/each}}
+          {{/if}}
 
-        {{#if memberSelectTypeIs "conducting"}}
-          {{#each conductingData}}
-            {{>memberSelectItem}}
-          {{/each}}
-        {{/if}}
+          {{#if memberSelectTypeIs "conducting"}}
+            {{#each conductingData}}
+              {{>memberSelectItem}}
+            {{/each}}
+          {{/if}}
 
-        {{#if memberSelectTypeIs "visitingAuthority"}}
-          {{#each visitingAuthorityData}}
-            {{>memberSelectItem}}
-          {{/each}}
+          {{#if memberSelectTypeIs "visitingAuthority"}}
+            {{#each visitingAuthorityData}}
+              {{>memberSelectItem}}
+            {{/each}}
+          {{/if}}
         {{/if}}
 
         <div class="item item-divider">
@@ -59,6 +61,18 @@
         {{#each memberData}}
           {{>memberSelectItem}}
         {{/each}}
+
+        <div class="item item-divider">
+          Other
+        </div>
+        <div class="item item-input-inset">
+          <label class="item-input-wrapper">
+            <input type="text" placeholder="Other" id="other">
+          </label>
+          <button class="button button-small" id="goButton">
+            Go
+          </button>
+        </div>
 
       {{/ionList}}
     {{/ionContent}}
