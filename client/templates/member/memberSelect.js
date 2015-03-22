@@ -23,6 +23,7 @@ Template.memberSelect.helpers({
       (Session.get("memberSelectType") == "organist") ||
       (Session.get("memberSelectType") == "chorister") ||
       (Session.get("memberSelectType") == "presiding") ||
+      (Session.get("memberSelectType") == "conducting") ||
       (Session.get("memberSelectType") == "visitingAuthority")
     );
   },
