@@ -279,8 +279,30 @@ Meteor.methods({
         callingGroupCollection.insert(_.extend(callingList.unitLeadership[callingIndex], {leaders: groupList.leaders, wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo}));
 
         for(var leaderIndex in groupList.leaders) {
-          memberCollection.update({individualId: groupList.leaders[leaderIndex].individualId}, { $addToSet: { "callings": { "callingName": groupList.leaders[leaderIndex].callingName, "positionId": groupList.leaders[leaderIndex].positionId } } } );
-          callingCollection.insert({"callingName": groupList.leaders[leaderIndex].callingName, "positionId": groupList.leaders[leaderIndex].positionId, "displayName": groupList.leaders[leaderIndex].displayName, wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo});
+          memberCollection.update({
+            individualId: groupList.leaders[leaderIndex].individualId},
+            {
+              $addToSet:
+                {
+                  "callings":
+                    {
+                      "callingName": groupList.leaders[leaderIndex].callingName,
+                      "positionId": groupList.leaders[leaderIndex].positionId,
+                      "groupKey": callingList.unitLeadership[callingIndex].groupKey,
+                      "groupName": callingList.unitLeadership[callingIndex].groupName
+                    }
+                }
+            }
+          );
+          callingCollection.insert(
+            {
+              "callingName": groupList.leaders[leaderIndex].callingName,
+              "positionId": groupList.leaders[leaderIndex].positionId,
+              "displayName": groupList.leaders[leaderIndex].displayName,
+              wardUnitNo: inWardUnitNo,
+              stakeUnitNo: inStakeUnitNo
+            }
+          );
         }
       }
     } catch (e) {
