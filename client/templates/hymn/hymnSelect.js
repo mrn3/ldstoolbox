@@ -38,11 +38,18 @@ Template.hymnSelect.events({
     else if (Session.get("hymnSelectType") == "sacramentHymn") {
       Session.set('selectedSacramentHymn', hymnObject);
     }
-    else if (Session.get("hymnSelectType") == "intermediateHymn") {
-      Session.set('selectedIntermediateHymn', hymnObject);
-    }
     else if (Session.get("hymnSelectType") == "closingHymn") {
       Session.set('selectedClosingHymn', hymnObject);
+    }
+    else if (Session.get("hymnSelectType") == "intermediateHymn") {
+      var updateObject = {};
+      updateObject.$set = {hymn: hymnObject, wardUnitNo: Meteor.user().wardUnitNo};
+      intermediateHymnCollection.update(Session.get("intermediateHymnId"), updateObject);
+    }
+    else if (Session.get("hymnSelectType") == "musicalNumberHymn") {
+      var updateObject = {};
+      updateObject.$set = {hymn: hymnObject, wardUnitNo: Meteor.user().wardUnitNo};
+      musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
     }
     history.back();
   },
@@ -61,11 +68,18 @@ Template.hymnSelect.events({
     else if (Session.get("hymnSelectType") == "sacramentHymn") {
       Session.set('selectedSacramentHymn', this);
     }
-    else if (Session.get("hymnSelectType") == "intermediateHymn") {
-      Session.set('selectedIntermediateHymn', this);
-    }
     else if (Session.get("hymnSelectType") == "closingHymn") {
       Session.set('selectedClosingHymn', this);
+    }
+    else if (Session.get("hymnSelectType") == "intermediateHymn") {
+      var updateObject = {};
+      updateObject.$set = {hymn: this, wardUnitNo: Meteor.user().wardUnitNo};
+      intermediateHymnCollection.update(Session.get("intermediateHymnId"), updateObject);
+    }
+    else if (Session.get("hymnSelectType") == "musicalNumberHymn") {
+      var updateObject = {};
+      updateObject.$set = {hymn: this, wardUnitNo: Meteor.user().wardUnitNo};
+      musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
     }
     history.back();
   },

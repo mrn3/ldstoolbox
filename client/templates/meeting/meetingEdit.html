@@ -35,22 +35,27 @@
 
           {{#each intermediateHymnData}}
             <div class="list list-inset">
-              <a id="{{_id}}" class="item item-icon-right intermediateHymnItem" href="{{pathFor 'hymnSelect'}}">
+              <a class="item item-icon-right intermediateHymnItem" href="{{pathFor 'hymnSelect'}}">
                 Hymn
-                <span class="item-note">{{intermediateHymn}}</span>
+                <span class="item-note">
+                  {{#if hymn.number}}
+                    {{hymn.number}} -
+                  {{/if}}
+                  {{hymn.name}}
+                </span>
                 <i class="icon ion-ios-arrow-right"></i>
               </a>
               <label class="item item-input item-select">
                 <div class="input-label">
                   Performed After How Many Speakers
                 </div>
-                <select>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
+                <select id="{{_id}}" class="intermediateHymnAfterSpeakerSelect">
+                  <option {{isSelected afterSpeaker 1}}>1</option>
+                  <option {{isSelected afterSpeaker 2}}>2</option>
+                  <option {{isSelected afterSpeaker 3}}>3</option>
+                  <option {{isSelected afterSpeaker 4}}>4</option>
+                  <option {{isSelected afterSpeaker 5}}>5</option>
+                  <option {{isSelected afterSpeaker 6}}>6</option>
                 </select>
               </label>
               <div class="item item-divider">
@@ -74,30 +79,37 @@
 
           {{#each musicalNumberData}}
             <div class="list list-inset">
-              <label class="item item-input">
-                <input type="text" id="{{_id}}" placeholder="Title" class="musicalNumberInput" value="{{title}}">
-              </label>
-              <a id="{{_id}}" class="item item-icon-right musicalNumberPerformerItem" href="{{pathFor 'memberSelect'}}">
-                Performer
-                <span class="item-note">{{member.switchedPreferredName}}</span>
+              <a class="item item-icon-right musicalNumberHymnItem" href="{{pathFor 'hymnSelect'}}">
+                Hymn
+                <span class="item-note">
+                  {{#if hymn.number}}
+                    {{hymn.number}} -
+                  {{/if}}
+                  {{hymn.name}}
+                </span>
                 <i class="icon ion-ios-arrow-right"></i>
               </a>
-              <a id="{{_id}}" class="item item-icon-right musicalNumberAccompanistItem" href="{{pathFor 'memberSelect'}}">
+              <a class="item item-icon-right musicalNumberPerformerItem" href="{{pathFor 'memberSelect'}}">
+                Performer
+                <span class="item-note">{{performer.switchedPreferredName}}</span>
+                <i class="icon ion-ios-arrow-right"></i>
+              </a>
+              <a class="item item-icon-right musicalNumberAccompanistItem" href="{{pathFor 'memberSelect'}}">
                 Accompanist
-                <span class="item-note">{{member.switchedPreferredName}}</span>
+                <span class="item-note">{{accompanist.switchedPreferredName}}</span>
                 <i class="icon ion-ios-arrow-right"></i>
               </a>
               <label class="item item-input item-select">
                 <div class="input-label">
                   Performed After How Many Speakers
                 </div>
-                <select>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
+                <select id="{{_id}}" class="musicalNumberAfterSpeakerSelect">
+                  <option {{isSelected afterSpeaker 1}}>1</option>
+                  <option {{isSelected afterSpeaker 2}}>2</option>
+                  <option {{isSelected afterSpeaker 3}}>3</option>
+                  <option {{isSelected afterSpeaker 4}}>4</option>
+                  <option {{isSelected afterSpeaker 5}}>5</option>
+                  <option {{isSelected afterSpeaker 6}}>6</option>
                 </select>
               </label>
               <div class="item item-divider">

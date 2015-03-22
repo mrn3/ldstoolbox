@@ -113,12 +113,12 @@ Template.memberSelect.events({
     }
     else if (Session.get("memberSelectType") == "musicalNumberPerformer") {
       var updateObject = {};
-      updateObject.$set = {member: memberObject, wardUnitNo: Meteor.user().wardUnitNo};
+      updateObject.$set = {performer: memberObject, wardUnitNo: Meteor.user().wardUnitNo};
       musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
     }
     else if (Session.get("memberSelectType") == "musicalNumberAccompanist") {
       var updateObject = {};
-      updateObject.$set = {member: memberObject, wardUnitNo: Meteor.user().wardUnitNo};
+      updateObject.$set = {accompanist: memberObject, wardUnitNo: Meteor.user().wardUnitNo};
       musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
     }
     history.back();
@@ -167,12 +167,12 @@ Template.memberSelect.events({
     }
     else if (Session.get("memberSelectType") == "musicalNumberPerformer") {
       var updateObject = {};
-      updateObject.$set = {member: this, wardUnitNo: Meteor.user().wardUnitNo};
+      updateObject.$set = {performer: this, wardUnitNo: Meteor.user().wardUnitNo};
       musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
     }
     else if (Session.get("memberSelectType") == "musicalNumberAccompanist") {
       var updateObject = {};
-      updateObject.$set = {member: this, wardUnitNo: Meteor.user().wardUnitNo};
+      updateObject.$set = {accompanist: this, wardUnitNo: Meteor.user().wardUnitNo};
       musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
     }
 

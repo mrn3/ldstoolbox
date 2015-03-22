@@ -5,7 +5,14 @@ Template.meetingEdit.helpers({
     } else {
       return false;
     }
-  }
+  },
+  isSelected: function (value1, value2) {
+    if (value1 == value2) {
+      return "selected";
+    } else {
+      return "";
+    }
+  },
 });
 
 Template.meetingEdit.events({
@@ -22,26 +29,30 @@ Template.meetingEdit.events({
     announcementCollection.update(this._id, updateObject);
   },
   'click #addIntermediateHymnButton': function(e, instance) {
-    intermediateHymnCollection.insert({meetingId: this._id, wardUnitNo: Meteor.user().wardUnitNo });
+    intermediateHymnCollection.insert({meetingId: this._id, afterSpeaker: 1, wardUnitNo: Meteor.user().wardUnitNo });
   },
   'click .removeIntermediateHymnButton': function(e, instance) {
     intermediateHymnCollection.remove({_id: this._id});
   },
   'click .intermediateHymnItem': function(e, instance) {
-    Session.set("memberSelectType", "intermediateHymn");
+    Session.set("hymnSelectType", "intermediateHymn");
     Session.set("intermediateHymnId", this._id);
   },
+  'change .intermediateHymnAfterSpeakerSelect': function(e, instance) {
+    afterSpeakerValue = document.getElementById(this._id).value;
+    var updateObject = {};
+    updateObject.$set = {afterSpeaker: afterSpeakerValue, wardUnitNo: Meteor.user().wardUnitNo};
+    intermediateHymnCollection.update(this._id, updateObject);
+  },
   'click #addMusicalNumberButton': function(e, instance) {
-    musicalNumberCollection.insert({meetingId: this._id, title: "", wardUnitNo: Meteor.user().wardUnitNo });
+    musicalNumberCollection.insert({meetingId: this._id, afterSpeaker: 1, wardUnitNo: Meteor.user().wardUnitNo });
   },
   'click .removeMusicalNumberButton': function(e, instance) {
     musicalNumberCollection.remove({_id: this._id});
   },
-  'change .musicalNumberInput': function(e, instance) {
-    musicalNumberValue = document.getElementById(this._id).value;
-    var updateObject = {};
-    updateObject.$set = {title: musicalNumberValue, wardUnitNo: Meteor.user().wardUnitNo};
-    musicalNumberCollection.update(this._id, updateObject);
+  'click .musicalNumberHymnItem': function(e, instance) {
+    Session.set("hymnSelectType", "musicalNumberHymn");
+    Session.set("musicalNumberId", this._id);
   },
   'click .musicalNumberPerformerItem': function(e, instance) {
     Session.set("memberSelectType", "musicalNumberPerformer");
@@ -50,6 +61,12 @@ Template.meetingEdit.events({
   'click .musicalNumberAccompanistItem': function(e, instance) {
     Session.set("memberSelectType", "musicalNumberAccompanist");
     Session.set("musicalNumberId", this._id);
+  },
+  'change .musicalNumberAfterSpeakerSelect': function(e, instance) {
+    afterSpeakerValue = document.getElementById(this._id).value;
+    var updateObject = {};
+    updateObject.$set = {afterSpeaker: afterSpeakerValue, wardUnitNo: Meteor.user().wardUnitNo};
+    musicalNumberCollection.update(this._id, updateObject);
   },
   'click #addSpeakerButton': function(e, instance) {
     speakerCollection.insert({meetingId: this._id, wardUnitNo: Meteor.user().wardUnitNo});
