@@ -16,6 +16,8 @@ Template.meetingFields.helpers({
   openingHymnSession: function() {
     if (Session.get("selectedOpeningHymn").numberText) {
       return Session.get("selectedOpeningHymn").numberText + " - " + Session.get("selectedOpeningHymn").name;
+    } else if (Session.get("selectedOpeningHymn").name) {
+      return Session.get("selectedOpeningHymn").name;
     } else {
       return "";
     }
@@ -23,6 +25,8 @@ Template.meetingFields.helpers({
   sacramentHymnSession: function() {
     if (Session.get("selectedSacramentHymn").numberText) {
       return Session.get("selectedSacramentHymn").numberText + " - " + Session.get("selectedSacramentHymn").name;
+    } else if (Session.get("selectedSacramentHymn").name) {
+      return Session.get("selectedSacramentHymn").name;
     } else {
       return "";
     }
@@ -30,6 +34,8 @@ Template.meetingFields.helpers({
   intermediateHymnSession: function() {
     if (Session.get("selectedIntermediateHymn").numberText) {
       return Session.get("selectedIntermediateHymn").numberText + " - " + Session.get("selectedIntermediateHymn").name;
+    } else if (Session.get("selectedIntermediateHymn").name) {
+      return Session.get("selectedIntermediateHymn").name;
     } else {
       return "";
     }
@@ -37,6 +43,8 @@ Template.meetingFields.helpers({
   closingHymnSession: function() {
     if (Session.get("selectedClosingHymn").numberText) {
       return Session.get("selectedClosingHymn").numberText + " - " + Session.get("selectedClosingHymn").name;
+    } else if (Session.get("selectedClosingHymn").name) {
+      return Session.get("selectedClosingHymn").name;
     } else {
       return "";
     }

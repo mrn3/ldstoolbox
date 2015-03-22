@@ -164,6 +164,8 @@ Router.map(function() {
     waitOn: function () {
       return [
         Meteor.subscribe("meetingPublication"),
+        Meteor.subscribe("musicalNumberPublication"),
+        Meteor.subscribe("intermediateHymnPublication"),
         Meteor.subscribe("announcementPublication"),
         Meteor.subscribe("speakerPublication"),
         Meteor.subscribe("recognitionPublication"),
@@ -176,6 +178,8 @@ Router.map(function() {
       //console.log(callingChangeCollection.find({"meeting._id": this.params._id}).fetch());
       return {
         meetingData: meetingCollection.findOne(this.params._id),
+        musicalNumberData: musicalNumberCollection.find({meetingId: this.params._id}),
+        intermediateHymnData: intermediateHymnCollection.find({meetingId: this.params._id}),
         announcementData: announcementCollection.find({meetingId: this.params._id}),
         speakerData: speakerCollection.find({meetingId: this.params._id}),
         recognitionData: recognitionCollection.find({meetingId: this.params._id}),

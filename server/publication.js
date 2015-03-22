@@ -127,6 +127,20 @@ Meteor.publish('announcementPublication', function() {
   }
 });
 
+Meteor.publish('musicalNumberPublication', function() {
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    return musicalNumberCollection.find({wardUnitNo: user.wardUnitNo});
+  }
+});
+
+Meteor.publish('intermediateHymnPublication', function() {
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    return intermediateHymnCollection.find({wardUnitNo: user.wardUnitNo});
+  }
+});
+
 Meteor.publish('unitPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);

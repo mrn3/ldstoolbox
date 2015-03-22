@@ -111,6 +111,16 @@ Template.memberSelect.events({
       updateObject.$set = {member: memberObject};
       recognitionCollection.update(Session.get("recognitionId"), updateObject);
     }
+    else if (Session.get("memberSelectType") == "musicalNumberPerformer") {
+      var updateObject = {};
+      updateObject.$set = {member: memberObject, wardUnitNo: Meteor.user().wardUnitNo};
+      musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
+    }
+    else if (Session.get("memberSelectType") == "musicalNumberAccompanist") {
+      var updateObject = {};
+      updateObject.$set = {member: memberObject, wardUnitNo: Meteor.user().wardUnitNo};
+      musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
+    }
     history.back();
   },
   "click #memberRadioButton": function(e, instance) {
@@ -155,6 +165,17 @@ Template.memberSelect.events({
       updateObject.$set = {member: this, wardUnitNo: Meteor.user().wardUnitNo};
       recognitionCollection.update(Session.get("recognitionId"), updateObject);
     }
+    else if (Session.get("memberSelectType") == "musicalNumberPerformer") {
+      var updateObject = {};
+      updateObject.$set = {member: this, wardUnitNo: Meteor.user().wardUnitNo};
+      musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
+    }
+    else if (Session.get("memberSelectType") == "musicalNumberAccompanist") {
+      var updateObject = {};
+      updateObject.$set = {member: this, wardUnitNo: Meteor.user().wardUnitNo};
+      musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
+    }
+
     history.back();
   },
 });

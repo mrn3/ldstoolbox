@@ -11,6 +11,9 @@
 
   {{#ionView}}
     {{#ionContent}}
+      <div class="item item-divider">
+        Search
+      </div>
       <div class="bar bar-header item-input-inset">
         <label class="item-input-wrapper">
           <i class="icon ion-search placeholder-icon"></i>
@@ -32,6 +35,18 @@
             <i class="radio-icon ion-checkmark"></i>
           </label>
         {{/each}}
+
+        <div class="item item-divider">
+          Other
+        </div>
+        <div class="item item-input-inset">
+          <label class="item-input-wrapper">
+            <input type="text" placeholder="Other" id="other">
+          </label>
+          <button class="button button-small" id="goButton">
+            Go
+          </button>
+        </div>
       {{/ionList}}
     {{/ionContent}}
   {{/ionView}}

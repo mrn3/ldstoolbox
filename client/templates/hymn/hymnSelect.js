@@ -28,6 +28,24 @@ Template.hymnSelect.events({
     var text = $(e.target).val().trim();
     hymnSearch.search(text);
   }, 200),
+  "click #goButton": function() {
+    var hymnObject = {
+      "name": $('#other').val()
+    }
+    if (Session.get("hymnSelectType") == "openingHymn") {
+      Session.set('selectedOpeningHymn', hymnObject);
+    }
+    else if (Session.get("hymnSelectType") == "sacramentHymn") {
+      Session.set('selectedSacramentHymn', hymnObject);
+    }
+    else if (Session.get("hymnSelectType") == "intermediateHymn") {
+      Session.set('selectedIntermediateHymn', hymnObject);
+    }
+    else if (Session.get("hymnSelectType") == "closingHymn") {
+      Session.set('selectedClosingHymn', hymnObject);
+    }
+    history.back();
+  },
   "click #hymnRadioButton": function(e, instance) {
     //strip out html tags
     if (this.name) {
@@ -49,7 +67,6 @@ Template.hymnSelect.events({
     else if (Session.get("hymnSelectType") == "closingHymn") {
       Session.set('selectedClosingHymn', this);
     }
-
     history.back();
   },
 });

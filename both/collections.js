@@ -9,6 +9,8 @@ Meteor.methods({
 });
 meetingCollection = new Meteor.Collection("meeting");
 announcementCollection = new Meteor.Collection("announcement");
+musicalNumberCollection = new Meteor.Collection("musicalNumber");
+intermediateHymnCollection = new Meteor.Collection("intermediateHymn");
 speakerCollection = new Meteor.Collection("speaker");
 
 recognitionCollection = new Meteor.Collection("recognition");

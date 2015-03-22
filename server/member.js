@@ -1,7 +1,7 @@
 SearchSource.defineSource('members', function(searchText, options) {
   var options = {sort: {"switchedPreferredName": 1}, limit: 20};
 
-  if(searchText) {
+  if (searchText) {
     var regExp = buildRegExp(searchText);
     var selector = {$or: [
       {"switchedPreferredName": regExp},
