@@ -244,7 +244,8 @@ Router.map(function() {
     meetingDateFormatted = meeting.meetingDate;
     releaseResultArray = callingChangeCollection.find({"meeting._id" : this.params._id, type: "Release"}).fetch();
     callingResultArray = callingChangeCollection.find({"meeting._id" : this.params._id, type: "Call"}).fetch();
-
+    intermediateHymnArray = intermediateHymnCollection.find({meetingId : this.params._id}).fetch();
+    musicalNumberArray = musicalNumberCollection.find({meetingId : this.params._id}).fetch();
     announcementArray = announcementCollection.find({meetingId : this.params._id}).fetch();
     speakerArray = speakerCollection.find({meetingId : this.params._id}).fetch();
     recognitionArray = recognitionCollection.find({meetingId : this.params._id}).fetch();
@@ -267,6 +268,8 @@ Router.map(function() {
     distanceFromTop += verticalPositionIncrement+10;
 
     doc.fontSize(12);
+    doc.text(moment(meeting.meetingDate).format("dddd, MMMM Do YYYY"), distanceFromLeft1, distanceFromTop, {align: "center", width: pageWidth});
+    distanceFromTop += verticalPositionIncrement+10;
 
     doc.text("Conducting: ___________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: halfPageWidth});
     if (typeof meeting.conducting.switchedPreferredName != "undefined") {
@@ -320,9 +323,10 @@ Router.map(function() {
     if (typeof meeting.invocation.switchedPreferredName != "undefined") {
       doc.text(meeting.invocation.switchedPreferredName, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
     }
-    distanceFromTop += verticalPositionIncrement+5;
+    distanceFromTop += verticalPositionIncrement;
 
     doc.fontSize(14);
+    distanceFromTop += 5;
     doc.text("Ward and Stake Business", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
     distanceFromTop += verticalPositionIncrement+5;
     doc.fontSize(12);
@@ -372,6 +376,7 @@ Router.map(function() {
     }
 
     doc.fontSize(14);
+    distanceFromTop += 5;
     doc.text("Sacrament", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
     distanceFromTop += verticalPositionIncrement+5;
     doc.fontSize(12);
@@ -389,27 +394,41 @@ Router.map(function() {
     distanceFromTop += verticalPositionIncrement;
     distanceFromTop += verticalPositionIncrement;
 
-    doc.text("Speakers: ____________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-    distanceFromTop += verticalPositionIncrement;
+    doc.fontSize(14);
+    distanceFromTop += 5;
+    doc.text("Program", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+    distanceFromTop += verticalPositionIncrement+5;
+    doc.fontSize(12);
 
     if (typeof speakerArray != "undefined") {
       for(var speakerIndex in speakerArray) {
-        doc.text(speakerArray[speakerIndex].speaker.switchedPreferredName, distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-        doc.text("_____________________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+        doc.text(speakerArray[speakerIndex].speaker.switchedPreferredName, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
+        doc.text("Speaker: _____________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
         distanceFromTop += verticalPositionIncrement;
+
+        for(var intermediateHymnIndex in intermediateHymnArray) {
+          if ((intermediateHymnArray[intermediateHymnIndex].afterSpeaker - 1) == speakerIndex) {
+            doc.text("Intermediate Hymn: _____________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+            if (intermediateHymnArray[intermediateHymnIndex].hymn.number) {
+              doc.text(intermediateHymnArray[intermediateHymnIndex].hymn.number + " - " + intermediateHymnArray[intermediateHymnIndex].hymn.name, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
+            } else {
+              doc.text(intermediateHymnArray[intermediateHymnIndex].hymn.name, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
+            }
+            distanceFromTop += verticalPositionIncrement;
+          }
+        }
+        for(var musicalNumberIndex in musicalNumberArray) {
+          if ((musicalNumberArray[musicalNumberIndex].afterSpeaker - 1) == speakerIndex) {
+            doc.text("Musical Number: _______________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+            if (musicalNumberArray[musicalNumberIndex].hymn.number) {
+              doc.text(musicalNumberArray[musicalNumberIndex].hymn.number + " - " + musicalNumberArray[musicalNumberIndex].hymn.name, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
+            } else {
+              doc.text(musicalNumberArray[musicalNumberIndex].hymn.name, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
+            }
+            distanceFromTop += verticalPositionIncrement;
+          }
+        }
       }
-    }
-
-    if (typeof meeting.intermediateHymn.name != "undefined") {
-      doc.text("Intermediate Hymn: _____________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-      doc.text(meeting.intermediateHymn.number + " - " + meeting.intermediateHymn.name, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
-      distanceFromTop += verticalPositionIncrement;
-    }
-
-    if (typeof meeting.musicalNumber != "undefined") {
-      doc.text("Musical Number: _______________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-      doc.text(meeting.musicalNumber, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
-      distanceFromTop += verticalPositionIncrement;
     }
 
     doc.text("Closing Hymn: _________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
