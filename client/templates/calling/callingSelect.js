@@ -20,8 +20,8 @@ Template.callingSelect.helpers({
   }
 });
 
-function doUpdate (updateObject) {
-  Session.set('selectedCallingChangeCalling', updateObject);
+function doUpdate (inUpdateObject) {
+  Session.set('selectedCallingChangeCalling', inUpdateObject);
   history.back();
 }
 

@@ -65,6 +65,72 @@ Template.memberSelect.helpers({
   }
 });
 
+function doUpdate (inUpdateObject) {
+  if (Session.get("memberSelectType") == "callingChangeMember") {
+    Session.set('selectedCallingChangeMember', inUpdateObject);
+  }
+  else if (Session.get("memberSelectType") == "organist") {
+    Session.set('selectedOrganist', inUpdateObject);
+  }
+  else if (Session.get("memberSelectType") == "chorister") {
+    Session.set('selectedChorister', inUpdateObject);
+  }
+  else if (Session.get("memberSelectType") == "invocation") {
+    Session.set('selectedInvocation', inUpdateObject);
+  }
+  else if (Session.get("memberSelectType") == "benediction") {
+    Session.set('selectedBenediction', inUpdateObject);
+  }
+  else if (Session.get("memberSelectType") == "presiding") {
+    Session.set('selectedPresiding', inUpdateObject);
+  }
+  else if (Session.get("memberSelectType") == "conducting") {
+    Session.set('selectedConducting', inUpdateObject);
+  }
+  else if (Session.get("memberSelectType") == "visitor") {
+    var updateObject = {};
+    updateObject.$set = {visitor: inUpdateObject, wardUnitNo: Meteor.user().wardUnitNo};
+    visitorCollection.update(Session.get("visitorId"), updateObject);
+  }
+  else if (Session.get("memberSelectType") == "speaker") {
+    var updateObject = {};
+    updateObject.$set = {speaker: inUpdateObject, wardUnitNo: Meteor.user().wardUnitNo};
+    speakerCollection.update(Session.get("speakerId"), updateObject);
+  }
+  else if (Session.get("memberSelectType") == "recognition") {
+    //first delete
+    var updateObject = {
+      $pull:
+        {
+          "members":
+            {
+              _id: Session.get("recognitionMemberId")
+            }
+        }
+    }
+    recognitionCollection.update(Session.get("recognitionId"), updateObject);
+    //then add back
+    var updateObject = {
+      $addToSet:
+        {
+          "members": inUpdateObject
+        }
+    }
+    recognitionCollection.update(Session.get("recognitionId"), updateObject);
+  }
+  else if (Session.get("memberSelectType") == "musicalNumberPerformer") {
+    var updateObject = {};
+    updateObject.$set = {performer: inUpdateObject, wardUnitNo: Meteor.user().wardUnitNo};
+    musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
+  }
+  else if (Session.get("memberSelectType") == "musicalNumberAccompanist") {
+    var updateObject = {};
+    updateObject.$set = {accompanist: inUpdateObject, wardUnitNo: Meteor.user().wardUnitNo};
+    musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
+  }
+  history.back();
+}
+
 Template.memberSelect.events({
   "click #cancelButton": function(e, instance) {
     history.back();
@@ -78,53 +144,7 @@ Template.memberSelect.events({
     var memberObject = {
       "switchedPreferredName": $('#other').val()
     }
-    if (Session.get("memberSelectType") == "callingChangeMember") {
-      Session.set('selectedCallingChangeMember', memberObject);
-    }
-    else if (Session.get("memberSelectType") == "organist") {
-      Session.set('selectedOrganist', memberObject);
-    }
-    else if (Session.get("memberSelectType") == "chorister") {
-      Session.set('selectedChorister', memberObject);
-    }
-    else if (Session.get("memberSelectType") == "invocation") {
-      Session.set('selectedInvocation', memberObject);
-    }
-    else if (Session.get("memberSelectType") == "benediction") {
-      Session.set('selectedBenediction', memberObject);
-    }
-    else if (Session.get("memberSelectType") == "presiding") {
-      Session.set('selectedPresiding', memberObject);
-    }
-    else if (Session.get("memberSelectType") == "conducting") {
-      Session.set('selectedConducting', memberObject);
-    }
-    else if (Session.get("memberSelectType") == "visitor") {
-      var updateObject = {};
-      updateObject.$set = {visitor: memberObject};
-      visitorCollection.update(Session.get("visitorId"), updateObject);
-    }
-    else if (Session.get("memberSelectType") == "speaker") {
-      var updateObject = {};
-      updateObject.$set = {speaker: memberObject};
-      speakerCollection.update(Session.get("speakerId"), updateObject);
-    }
-    else if (Session.get("memberSelectType") == "recognition") {
-      var updateObject = {};
-      updateObject.$set = {member: memberObject};
-      recognitionCollection.update(Session.get("recognitionId"), updateObject);
-    }
-    else if (Session.get("memberSelectType") == "musicalNumberPerformer") {
-      var updateObject = {};
-      updateObject.$set = {performer: memberObject, wardUnitNo: Meteor.user().wardUnitNo};
-      musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
-    }
-    else if (Session.get("memberSelectType") == "musicalNumberAccompanist") {
-      var updateObject = {};
-      updateObject.$set = {accompanist: memberObject, wardUnitNo: Meteor.user().wardUnitNo};
-      musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
-    }
-    history.back();
+    doUpdate (memberObject);
   },
   "click #memberRadioButton": function(e, instance) {
     //strip out html tags
@@ -134,71 +154,8 @@ Template.memberSelect.events({
     if (this.callings) {
       this.callings.callingName = jQuery('<p>' + this.callings.callingName + '</p>').text();
     }
-    if (Session.get("memberSelectType") == "callingChangeMember") {
-      Session.set('selectedCallingChangeMember', this);
-    }
-    else if (Session.get("memberSelectType") == "organist") {
-      Session.set('selectedOrganist', this);
-    }
-    else if (Session.get("memberSelectType") == "chorister") {
-      Session.set('selectedChorister', this);
-    }
-    else if (Session.get("memberSelectType") == "invocation") {
-      Session.set('selectedInvocation', this);
-    }
-    else if (Session.get("memberSelectType") == "benediction") {
-      Session.set('selectedBenediction', this);
-    }
-    else if (Session.get("memberSelectType") == "presiding") {
-      Session.set('selectedPresiding', this);
-    }
-    else if (Session.get("memberSelectType") == "conducting") {
-      Session.set('selectedConducting', this);
-    }
-    else if (Session.get("memberSelectType") == "visitor") {
-      var updateObject = {};
-      updateObject.$set = {visitor: this, wardUnitNo: Meteor.user().wardUnitNo};
-      visitorCollection.update(Session.get("visitorId"), updateObject);
-    }
-    else if (Session.get("memberSelectType") == "speaker") {
-      var updateObject = {};
-      updateObject.$set = {speaker: this, wardUnitNo: Meteor.user().wardUnitNo};
-      speakerCollection.update(Session.get("speakerId"), updateObject);
-    }
-    else if (Session.get("memberSelectType") == "recognition") {
-      //first delete
-      var updateObject = {
-        $pull:
-          {
-            "members":
-              {
-                _id: Session.get("recognitionMemberId")
-              }
-          }
-      }
-      recognitionCollection.update(Session.get("recognitionId"), updateObject);
-      //then add back
-      var updateObject = {
-        $addToSet:
-          {
-            "members": this
-          }
-      }
-      recognitionCollection.update(Session.get("recognitionId"), updateObject);
-    }
-    else if (Session.get("memberSelectType") == "musicalNumberPerformer") {
-      var updateObject = {};
-      updateObject.$set = {performer: this, wardUnitNo: Meteor.user().wardUnitNo};
-      musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
-    }
-    else if (Session.get("memberSelectType") == "musicalNumberAccompanist") {
-      var updateObject = {};
-      updateObject.$set = {accompanist: this, wardUnitNo: Meteor.user().wardUnitNo};
-      musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
-    }
-
-    history.back();
-  },
+    doUpdate (this);
+  }
 });
 
 /*
