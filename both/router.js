@@ -175,8 +175,6 @@ Router.map(function() {
       ]
     },
     data: function() {
-      //console.log(this.params._id);
-      //console.log(callingChangeCollection.find({"meeting._id": this.params._id}).fetch());
       return {
         meetingData: meetingCollection.findOne(this.params._id),
         musicalNumberData: musicalNumberCollection.find({meetingId: this.params._id}),
@@ -373,8 +371,6 @@ Router.map(function() {
       distanceFromTop += verticalPositionIncrement;
     }
 
-    console.log(recognitionArray);
-
     if (recognitionArray.length > 0) {
       doc.text("Ordinances and Recognitions", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
       distanceFromTop += verticalPositionIncrement;
@@ -385,8 +381,6 @@ Router.map(function() {
           doc.text("_____________________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
           distanceFromTop += verticalPositionIncrement;
           for(var recognitionMemberIndex in recognitionArray[recognitionIndex].members) {
-            console.log(recognitionMemberIndex);
-            console.log(recognitionArray[recognitionIndex].members[recognitionMemberIndex]);
             doc.text(recognitionArray[recognitionIndex].members[recognitionMemberIndex].switchedPreferredName, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
             doc.text("_____________________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
             distanceFromTop += verticalPositionIncrement;
