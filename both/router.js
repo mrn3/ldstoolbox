@@ -363,15 +363,17 @@ Router.map(function() {
       distanceFromTop += verticalPositionIncrement;
     }
 
-    doc.text("Ordinances and Recognitions: ____________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-    distanceFromTop += verticalPositionIncrement;
+    if (recognitionArray.length > 0) {
+      doc.text("Ordinances and Recognitions", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+      distanceFromTop += verticalPositionIncrement;
 
-    if (typeof recognitionArray != "undefined") {
-      for(var recognitionIndex in recognitionArray) {
-        doc.text(recognitionArray[recognitionIndex].recognitionType.typeName, distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-        doc.text(recognitionArray[recognitionIndex].member.switchedPreferredName, distanceFromLeft4, distanceFromTop, {align: "left", width: pageWidth});
-        doc.text("_____________________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-        distanceFromTop += verticalPositionIncrement;
+      if (typeof recognitionArray != "undefined") {
+        for(var recognitionIndex in recognitionArray) {
+          doc.text(recognitionArray[recognitionIndex].recognitionType.typeName, distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+          doc.text(recognitionArray[recognitionIndex].member.switchedPreferredName, distanceFromLeft4, distanceFromTop, {align: "left", width: pageWidth});
+          doc.text("_____________________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+          distanceFromTop += verticalPositionIncrement;
+        }
       }
     }
 
@@ -396,9 +398,16 @@ Router.map(function() {
 
     doc.fontSize(14);
     distanceFromTop += 5;
-    doc.text("Program", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+    doc.text("Gospel Messages, Testimonies, and Music", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
     distanceFromTop += verticalPositionIncrement+5;
     doc.fontSize(12);
+
+    if (meeting.fastAndTestimony) {
+      doc.text("Bear own testimony then turn time over to members of congregation to bear testimonies.", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+      distanceFromTop += verticalPositionIncrement;
+      doc.text('"We will end at X minutes after the hour."', distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+      distanceFromTop += verticalPositionIncrement;
+    }
 
     if (typeof speakerArray != "undefined") {
       for(var speakerIndex in speakerArray) {
