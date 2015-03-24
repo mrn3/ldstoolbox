@@ -9,15 +9,20 @@
     <h1 class="title">Select Calling</h1>
   </div>
 
+
+
   {{#ionView}}
     {{#ionContent}}
-      <div class="bar bar-header item-input-inset">
-        <label class="item-input-wrapper">
-          <i class="icon ion-search placeholder-icon"></i>
-          <input id="searchInput" type="search" placeholder="Search">
-        </label>
-      </div>
       {{#ionList}}
+        <div class="item item-divider">
+          Search
+        </div>
+        <div class="bar bar-header item-input-inset">
+          <label class="item-input-wrapper">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input id="searchInput" type="search" placeholder="Search">
+          </label>
+        </div>
         {{#each callingData}}
           <label class="item item-radio">
             <input type="radio" name="group">
@@ -32,6 +37,17 @@
             <i class="radio-icon ion-checkmark"></i>
           </label>
         {{/each}}
+        <div class="item item-divider">
+          Custom Calling
+        </div>
+        <div class="item item-input-inset">
+          <label class="item-input-wrapper">
+            <input type="text" placeholder="Other" id="other">
+          </label>
+          <button class="button button-small" id="goButton">
+            Go
+          </button>
+        </div>
       {{/ionList}}
     {{/ionContent}}
   {{/ionView}}

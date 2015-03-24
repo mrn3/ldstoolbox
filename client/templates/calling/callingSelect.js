@@ -20,6 +20,11 @@ Template.callingSelect.helpers({
   }
 });
 
+function doUpdate (updateObject) {
+  Session.set('selectedCallingChangeCalling', updateObject);
+  history.back();
+}
+
 Template.callingSelect.events({
   "click #cancelButton": function(e, instance) {
     history.back();
@@ -28,14 +33,18 @@ Template.callingSelect.events({
     var text = $(e.target).val().trim();
     callingSearch.search(text);
   }, 200),
-  "click #callingRadioButton": function(e, instance) {
+  "click #goButton": function() {
+    var callingObject = {
+      "callingName": $('#other').val()
+    }
+    doUpdate(callingObject);
+  },
+  "click #callingRadioButton": function() {
     //strip out html tags
     this.callingName = jQuery('<p>' + this.callingName + '</p>').text();
     this.displayName = jQuery('<p>' + this.displayName + '</p>').text();
-
-    Session.set('selectedCallingChangeCalling', this);
-    history.back();
-  },
+    doUpdate(this);
+  }
 });
 
 /*
