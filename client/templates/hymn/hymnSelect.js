@@ -20,6 +20,29 @@ Template.hymnSelect.helpers({
   }
 });
 
+function doUpdate (inUpdateObject) {
+  if (Session.get("hymnSelectType") == "openingHymn") {
+    Session.set('selectedOpeningHymn', inUpdateObject);
+  }
+  else if (Session.get("hymnSelectType") == "sacramentHymn") {
+    Session.set('selectedSacramentHymn', inUpdateObject);
+  }
+  else if (Session.get("hymnSelectType") == "inUpdateObject") {
+    Session.set('selectedClosingHymn', hymnObject);
+  }
+  else if (Session.get("hymnSelectType") == "intermediateHymn") {
+    var updateObject = {};
+    updateObject.$set = {hymn: inUpdateObject, wardUnitNo: Meteor.user().wardUnitNo};
+    intermediateHymnCollection.update(Session.get("intermediateHymnId"), updateObject);
+  }
+  else if (Session.get("hymnSelectType") == "musicalNumberHymn") {
+    var updateObject = {};
+    updateObject.$set = {hymn: inUpdateObject, wardUnitNo: Meteor.user().wardUnitNo};
+    musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
+  }
+  history.back();
+}
+
 Template.hymnSelect.events({
   "click #cancelButton": function(e, instance) {
     history.back();
@@ -32,26 +55,7 @@ Template.hymnSelect.events({
     var hymnObject = {
       "name": $('#other').val()
     }
-    if (Session.get("hymnSelectType") == "openingHymn") {
-      Session.set('selectedOpeningHymn', hymnObject);
-    }
-    else if (Session.get("hymnSelectType") == "sacramentHymn") {
-      Session.set('selectedSacramentHymn', hymnObject);
-    }
-    else if (Session.get("hymnSelectType") == "closingHymn") {
-      Session.set('selectedClosingHymn', hymnObject);
-    }
-    else if (Session.get("hymnSelectType") == "intermediateHymn") {
-      var updateObject = {};
-      updateObject.$set = {hymn: hymnObject, wardUnitNo: Meteor.user().wardUnitNo};
-      intermediateHymnCollection.update(Session.get("intermediateHymnId"), updateObject);
-    }
-    else if (Session.get("hymnSelectType") == "musicalNumberHymn") {
-      var updateObject = {};
-      updateObject.$set = {hymn: hymnObject, wardUnitNo: Meteor.user().wardUnitNo};
-      musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
-    }
-    history.back();
+    doUpdate(hymnObject);
   },
   "click #hymnRadioButton": function(e, instance) {
     //strip out html tags
@@ -61,28 +65,8 @@ Template.hymnSelect.events({
     if (this.number) {
       this.numberText = jQuery('<p>' + this.number + '</p>').text();
     }
-
-    if (Session.get("hymnSelectType") == "openingHymn") {
-      Session.set('selectedOpeningHymn', this);
-    }
-    else if (Session.get("hymnSelectType") == "sacramentHymn") {
-      Session.set('selectedSacramentHymn', this);
-    }
-    else if (Session.get("hymnSelectType") == "closingHymn") {
-      Session.set('selectedClosingHymn', this);
-    }
-    else if (Session.get("hymnSelectType") == "intermediateHymn") {
-      var updateObject = {};
-      updateObject.$set = {hymn: this, wardUnitNo: Meteor.user().wardUnitNo};
-      intermediateHymnCollection.update(Session.get("intermediateHymnId"), updateObject);
-    }
-    else if (Session.get("hymnSelectType") == "musicalNumberHymn") {
-      var updateObject = {};
-      updateObject.$set = {hymn: this, wardUnitNo: Meteor.user().wardUnitNo};
-      musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
-    }
-    history.back();
-  },
+    doUpdate(this);
+  }
 });
 
 /*

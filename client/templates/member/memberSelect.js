@@ -144,7 +144,7 @@ Template.memberSelect.events({
     var memberObject = {
       "switchedPreferredName": $('#other').val()
     }
-    doUpdate (memberObject);
+    doUpdate(memberObject);
   },
   "click #memberRadioButton": function(e, instance) {
     //strip out html tags
@@ -154,7 +154,7 @@ Template.memberSelect.events({
     if (this.callings) {
       this.callings.callingName = jQuery('<p>' + this.callings.callingName + '</p>').text();
     }
-    doUpdate (this);
+    doUpdate(this);
   }
 });
 
