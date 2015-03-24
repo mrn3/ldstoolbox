@@ -21,6 +21,15 @@
   <div class="item item-divider">
     Administration
   </div>
+  <div class="item item-toggle">
+     Fast and Testimony
+     <label class="toggle toggle-assertive">
+       <input type="checkbox" id="fastAndTestimony" checked="{{isChecked fastAndTestimony}}">
+       <div class="track">
+         <div class="handle"></div>
+       </div>
+     </label>
+  </div>
   <a id="presidingItem" class="item item-icon-right" href="{{pathFor 'memberSelect'}}">
     Presiding
     <span class="item-note">{{{presidingSession}}}</span>

@@ -47,7 +47,7 @@
               </a>
               <label class="item item-input item-select">
                 <div class="input-label">
-                  Performed After How Many Speakers
+                  Performed After Speaker
                 </div>
                 <select id="{{_id}}" class="intermediateHymnAfterSpeakerSelect">
                   <option {{isSelected afterSpeaker 1}}>1</option>
@@ -80,7 +80,7 @@
           {{#each musicalNumberData}}
             <div class="list list-inset">
               <a class="item item-icon-right musicalNumberHymnItem" href="{{pathFor 'hymnSelect'}}">
-                Hymn
+                Song
                 <span class="item-note">
                   {{#if hymn.number}}
                     {{hymn.number}} -
@@ -101,7 +101,7 @@
               </a>
               <label class="item item-input item-select">
                 <div class="input-label">
-                  Performed After How Many Speakers
+                  Performed After Speaker
                 </div>
                 <select id="{{_id}}" class="musicalNumberAfterSpeakerSelect">
                   <option {{isSelected afterSpeaker 1}}>1</option>

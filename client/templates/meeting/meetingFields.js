@@ -1,4 +1,9 @@
 Template.meetingFields.helpers({
+  isChecked: function(inFastAndTestimony) {
+    if (inFastAndTestimony) {
+      return "checked";
+    }
+  },
   organistSession: function() {
     if ((Session.get("selectedOrganist")) && (Session.get("selectedOrganist").switchedPreferredName)) {
       return Session.get("selectedOrganist").switchedPreferredName;

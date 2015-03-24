@@ -419,13 +419,25 @@ Router.map(function() {
         }
         for(var musicalNumberIndex in musicalNumberArray) {
           if ((musicalNumberArray[musicalNumberIndex].afterSpeaker - 1) == speakerIndex) {
-            doc.text("Musical Number: _______________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+            doc.text("Musical Number", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+            distanceFromTop += verticalPositionIncrement;
+            doc.text("Song: ________________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
             if (musicalNumberArray[musicalNumberIndex].hymn.number) {
               doc.text(musicalNumberArray[musicalNumberIndex].hymn.number + " - " + musicalNumberArray[musicalNumberIndex].hymn.name, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
             } else {
               doc.text(musicalNumberArray[musicalNumberIndex].hymn.name, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
             }
             distanceFromTop += verticalPositionIncrement;
+            if (musicalNumberArray[musicalNumberIndex].performer.switchedPreferredName) {
+              doc.text(musicalNumberArray[musicalNumberIndex].performer.switchedPreferredName, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
+              doc.text("Performer: ____________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+              distanceFromTop += verticalPositionIncrement;
+            }
+            if (musicalNumberArray[musicalNumberIndex].accompanist.switchedPreferredName) {
+              doc.text(musicalNumberArray[musicalNumberIndex].accompanist.switchedPreferredName, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
+              doc.text("Accompanist: __________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+              distanceFromTop += verticalPositionIncrement;
+            }
           }
         }
       }

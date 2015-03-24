@@ -126,6 +126,7 @@ Template.meetingEdit.events({
       createdAt:            new Date(),
       wardUnitNo:           Meteor.user().wardUnitNo,
       meetingDate:          $('#meetingDate').val(),
+      fastAndTestimony:     $('#fastAndTestimony').prop("checked"),
       presiding:            Session.get("selectedPresiding"),
       conducting:           Session.get("selectedConducting"),
       visitingAuthority:    Session.get("selectedVisitingAuthority"),
