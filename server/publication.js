@@ -1,4 +1,24 @@
-Meteor.publish('memberPublication', function() {
+Meteor.publish('likelyOptionsMemberPublication', function() {
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    var selector = {$or: [
+      //bishopric, chorister, or organist
+      {"callings.positionId": {$in: [4, 54, 55, 234, 1585]}, "wardUnitNo": user.wardUnitNo},
+      //stake presidency or high council
+      {"callings.positionId": {$in: [1, 2, 3, 94]}, "stakeUnitNo": user.stakeUnitNo}
+    ]};
+    return memberCollection.find(selector);
+  }
+});
+
+Meteor.publish('wardMemberPublication', function() {
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    return memberCollection.find({wardUnitNo: user.wardUnitNo});
+  }
+});
+
+Meteor.publish('stakeMemberPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
     return memberCollection.find({stakeUnitNo: user.stakeUnitNo});

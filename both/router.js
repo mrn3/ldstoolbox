@@ -26,13 +26,13 @@ Router.map(function() {
     name: "memberList",
     waitOn: function () {
       return [
-        Meteor.subscribe("memberPublication"),
+        Meteor.subscribe("wardMemberPublication"),
         Meteor.subscribe("userPublication")
       ]
     },
     data: function() {
       return {
-        memberData: memberCollection.find({})
+        memberData: memberCollection.find({}, {sort: {preferredName: 1}})
       };
     },
     fastRender: true
@@ -41,7 +41,7 @@ Router.map(function() {
     name: "memberSelect",
     waitOn: function () {
       return [
-        Meteor.subscribe("memberPublication"),
+        Meteor.subscribe("likelyOptionsMemberPublication"),
         Meteor.subscribe("userPublication")
       ]
     },
@@ -51,7 +51,7 @@ Router.map(function() {
     name: "member",
     waitOn: function () {
       return [
-        Meteor.subscribe("memberPublication"),
+        Meteor.subscribe("stakeMemberPublication"),
         Meteor.subscribe("householdPublication")
       ]
     },
@@ -228,7 +228,7 @@ Router.map(function() {
     waitOn: function () {
       return [
         Meteor.subscribe("userPublication"),
-        Meteor.subscribe("memberPublication"),
+        Meteor.subscribe("stakeMemberPublication"),
         Meteor.subscribe("stakeCallingPublication"),
         Meteor.subscribe("reportPublication")
       ]
