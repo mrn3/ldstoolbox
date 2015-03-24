@@ -166,6 +166,7 @@ Router.map(function() {
         Meteor.subscribe("meetingPublication"),
         Meteor.subscribe("musicalNumberPublication"),
         Meteor.subscribe("intermediateHymnPublication"),
+        Meteor.subscribe("visitorPublication"),
         Meteor.subscribe("announcementPublication"),
         Meteor.subscribe("speakerPublication"),
         Meteor.subscribe("recognitionPublication"),
@@ -180,6 +181,7 @@ Router.map(function() {
         meetingData: meetingCollection.findOne(this.params._id),
         musicalNumberData: musicalNumberCollection.find({meetingId: this.params._id}),
         intermediateHymnData: intermediateHymnCollection.find({meetingId: this.params._id}),
+        visitorData: visitorCollection.find({meetingId: this.params._id}),
         announcementData: announcementCollection.find({meetingId: this.params._id}),
         speakerData: speakerCollection.find({meetingId: this.params._id}),
         recognitionData: recognitionCollection.find({meetingId: this.params._id}),
@@ -245,6 +247,7 @@ Router.map(function() {
     releaseResultArray = callingChangeCollection.find({"meeting._id" : this.params._id, type: "Release"}).fetch();
     callingResultArray = callingChangeCollection.find({"meeting._id" : this.params._id, type: "Call"}).fetch();
     intermediateHymnArray = intermediateHymnCollection.find({meetingId : this.params._id}).fetch();
+    visitorArray = visitorCollection.find({meetingId : this.params._id}).fetch();
     musicalNumberArray = musicalNumberCollection.find({meetingId : this.params._id}).fetch();
     announcementArray = announcementCollection.find({meetingId : this.params._id}).fetch();
     speakerArray = speakerCollection.find({meetingId : this.params._id}).fetch();
@@ -291,14 +294,21 @@ Router.map(function() {
     }
     distanceFromTop += verticalPositionIncrement;
 
-    doc.text("Visiting Authorities: _____________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-    if (typeof meeting.visitingAuthority.switchedPreferredName != "undefined") {
-      doc.text(meeting.visitingAuthority.switchedPreferredName, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
-    }
-    distanceFromTop += verticalPositionIncrement;
-
     doc.text("Welcome Visitors", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
     distanceFromTop += verticalPositionIncrement;
+
+    if (visitorArray.length > 0) {
+      for(var visitorIndex in visitorArray) {
+        doc.text("Visitor: _____________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+        if (visitorArray[visitorIndex].visitor.switchedPreferredName) {
+          var callingList = visitorArray[visitorIndex].visitor.callings.reduce(function(acquiredCallingList, newCalling) {
+              return acquiredCallingList + ", " + newCalling.callingName; // return previous acquiredCallingList plus current newCalling
+          }, "");
+          doc.text(visitorArray[visitorIndex].visitor.switchedPreferredName + callingList, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
+        }
+        distanceFromTop += verticalPositionIncrement;
+      }
+    }
 
     doc.text("Announcements: _______________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
     distanceFromTop += verticalPositionIncrement;

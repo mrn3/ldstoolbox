@@ -24,7 +24,7 @@ Template.memberSelect.helpers({
       (Session.get("memberSelectType") == "chorister") ||
       (Session.get("memberSelectType") == "presiding") ||
       (Session.get("memberSelectType") == "conducting") ||
-      (Session.get("memberSelectType") == "visitingAuthority")
+      (Session.get("memberSelectType") == "visitor")
     );
   },
   memberSelectTypeIs: function (inMemberSelectType) {
@@ -55,7 +55,7 @@ Template.memberSelect.helpers({
     var options = {sort: {"callings.positionId": 1}};
     return memberCollection.find(selector, options);
   },
-  visitingAuthorityData: function() {
+  visitorData: function() {
     //get Visiting Authority position - Stake Presidency, High Council
     var selector = {$or: [
       {"callings.positionId": {$in: [1, 2, 3, 94]}, "stakeUnitNo": Meteor.user().stakeUnitNo}
@@ -99,8 +99,10 @@ Template.memberSelect.events({
     else if (Session.get("memberSelectType") == "conducting") {
       Session.set('selectedConducting', memberObject);
     }
-    else if (Session.get("memberSelectType") == "visitingAuthority") {
-      Session.set('selectedVisitingAuthority', memberObject);
+    else if (Session.get("memberSelectType") == "visitor") {
+      var updateObject = {};
+      updateObject.$set = {visitor: memberObject};
+      visitorCollection.update(Session.get("visitorId"), updateObject);
     }
     else if (Session.get("memberSelectType") == "speaker") {
       var updateObject = {};
@@ -153,8 +155,10 @@ Template.memberSelect.events({
     else if (Session.get("memberSelectType") == "conducting") {
       Session.set('selectedConducting', this);
     }
-    else if (Session.get("memberSelectType") == "visitingAuthority") {
-      Session.set('selectedVisitingAuthority', this);
+    else if (Session.get("memberSelectType") == "visitor") {
+      var updateObject = {};
+      updateObject.$set = {visitor: this, wardUnitNo: Meteor.user().wardUnitNo};
+      visitorCollection.update(Session.get("visitorId"), updateObject);
     }
     else if (Session.get("memberSelectType") == "speaker") {
       var updateObject = {};

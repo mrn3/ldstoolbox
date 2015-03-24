@@ -82,13 +82,6 @@ Template.meetingFields.helpers({
       return "";
     }
   },
-  visitingAuthoritySession: function() {
-    if ((Session.get("selectedVisitingAuthority")) && (Session.get("selectedVisitingAuthority").switchedPreferredName)) {
-      return Session.get("selectedVisitingAuthority").switchedPreferredName;
-    } else {
-      return "";
-    }
-  },
   attendanceSession: function() {
     if (Session.get("selectedAttendance")) {
       return Session.get("selectedAttendance");
@@ -128,9 +121,6 @@ Template.meetingFields.events({
   },
   'click #conductingItem': function(e, instance) {
     Session.set("memberSelectType", "conducting");
-  },
-  'click #visitingAuthorityItem': function(e, instance) {
-    Session.set("memberSelectType", "visitingAuthority");
   }
 });
 
@@ -183,11 +173,6 @@ Template.meetingFields.rendered = function() {
   if ((this.data) && (typeof this.data.conducting != "undefined")) {
     if ((typeof Session.get("selectedConducting") == "undefined") || (Session.get("selectedConducting") == "")) {
       Session.set("selectedConducting", this.data.conducting);
-    }
-  }
-  if ((this.data) && (typeof this.data.visitingAuthority != "undefined")) {
-    if ((typeof Session.get("selectedVisitingAuthority") == "undefined") || (Session.get("selectedVisitingAuthority") == "")) {
-      Session.set("selectedVisitingAuthority", this.data.visitingAuthority);
     }
   }
   if ((this.data) && (typeof this.data.attendance != "undefined")) {

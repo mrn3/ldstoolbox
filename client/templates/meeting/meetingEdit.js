@@ -68,6 +68,16 @@ Template.meetingEdit.events({
     updateObject.$set = {afterSpeaker: afterSpeakerValue, wardUnitNo: Meteor.user().wardUnitNo};
     musicalNumberCollection.update(this._id, updateObject);
   },
+  'click #addVisitorButton': function(e, instance) {
+    visitorCollection.insert({meetingId: this._id, wardUnitNo: Meteor.user().wardUnitNo});
+  },
+  'click .removeVisitorButton': function(e, instance) {
+    visitorCollection.remove({_id: this._id});
+  },
+  'click .visitorItem': function(e, instance) {
+    Session.set("memberSelectType", "visitor");
+    Session.set("visitorId", this._id);
+  },
   'click #addSpeakerButton': function(e, instance) {
     speakerCollection.insert({meetingId: this._id, wardUnitNo: Meteor.user().wardUnitNo});
   },
@@ -129,7 +139,6 @@ Template.meetingEdit.events({
       fastAndTestimony:     $('#fastAndTestimony').prop("checked"),
       presiding:            Session.get("selectedPresiding"),
       conducting:           Session.get("selectedConducting"),
-      visitingAuthority:    Session.get("selectedVisitingAuthority"),
       attendance:           Session.get("selectedAttendance"),
       organist:             Session.get("selectedOrganist"),
       chorister:            Session.get("selectedChorister"),

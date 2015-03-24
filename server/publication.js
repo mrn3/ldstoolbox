@@ -141,6 +141,13 @@ Meteor.publish('intermediateHymnPublication', function() {
   }
 });
 
+Meteor.publish('visitorPublication', function() {
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    return visitorCollection.find({wardUnitNo: user.wardUnitNo});
+  }
+});
+
 Meteor.publish('unitPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
