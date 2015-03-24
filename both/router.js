@@ -297,7 +297,7 @@ Router.map(function() {
 
     if (visitorArray.length > 0) {
       for(var visitorIndex in visitorArray) {
-        doc.text("Visitor: _____________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+        doc.text("Visitor: _______________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
         if (visitorArray[visitorIndex].visitor.switchedPreferredName) {
           var callingList = visitorArray[visitorIndex].visitor.callings.reduce(function(acquiredCallingList, newCalling) {
               return acquiredCallingList + ", " + newCalling.callingName; // return previous acquiredCallingList plus current newCalling
@@ -308,18 +308,13 @@ Router.map(function() {
       }
     }
 
-    doc.text("Announcements: _______________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-    distanceFromTop += verticalPositionIncrement;
-
     if (typeof announcementArray != "undefined") {
       for(var announcementIndex in announcementArray) {
-        doc.text(announcementArray[announcementIndex].text, distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-        doc.text("_____________________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+        doc.text("Announcement: ________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+        doc.text(announcementArray[announcementIndex].text, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
         distanceFromTop += verticalPositionIncrement;
       }
     }
-    doc.text("_____________________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-    distanceFromTop += verticalPositionIncrement;
 
     doc.text("Opening Hymn: ________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
     if (typeof meeting.openingHymn.name != "undefined") {
