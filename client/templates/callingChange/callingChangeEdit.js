@@ -116,8 +116,7 @@ Template.callingChangeEdit.events({
             if (error) {
               console.log(error);
             } else {
-              Router.go("callingChangeList");
-
+              history.back();
             }
           });
         }
@@ -135,7 +134,7 @@ Template.callingChangeEdit.events({
       cancel: function() {},
       destructiveButtonClicked: function() {
         callingChangeCollection.remove(callingChange._id);
-        Router.go("callingChangeList");
+        history.back();
         return true;
       }
     });
@@ -153,7 +152,7 @@ Template.callingChangeEdit.events({
         if (error) {
           console.log(error);
         } else {
-          Router.go("callingChangeList");
+          history.back();
         }
       });
     }
@@ -175,7 +174,7 @@ Template.callingChangeEdit.events({
         if (error) {
           console.log(error);
         } else {
-          Router.go("callingChangeList");
+          history.back();
         }
       });
     }
@@ -193,7 +192,7 @@ Template.callingChangeEdit.events({
         if (error) {
           console.log(error);
         } else {
-          Router.go("callingChangeList");
+          history.back();
         }
       });
     }
@@ -217,7 +216,7 @@ Template.callingChangeEdit.events({
         if (error) {
           console.log(error);
         } else {
-          Router.go("callingChangeList");
+          history.back();
         }
       });
     }
@@ -235,7 +234,7 @@ Template.callingChangeEdit.events({
         if (error) {
           console.log(error);
         } else {
-          Router.go("callingChangeList");
+          history.back();
         }
       });
     }
@@ -253,7 +252,7 @@ Template.callingChangeEdit.events({
         if (error) {
           console.log(error);
         } else {
-          Router.go("callingChangeList");
+          history.back();
         }
       });
     }

@@ -147,7 +147,7 @@ Template.meetingEdit.events({
           if(error) {
             console.log(error.reason);
           } else {
-            Router.go("meetingList");
+            history.back();
           }
         });
         return true;
