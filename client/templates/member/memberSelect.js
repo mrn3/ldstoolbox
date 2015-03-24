@@ -166,8 +166,24 @@ Template.memberSelect.events({
       speakerCollection.update(Session.get("speakerId"), updateObject);
     }
     else if (Session.get("memberSelectType") == "recognition") {
-      var updateObject = {};
-      updateObject.$set = {member: this, wardUnitNo: Meteor.user().wardUnitNo};
+      //first delete
+      var updateObject = {
+        $pull:
+          {
+            "members":
+              {
+                _id: Session.get("recognitionMemberId")
+              }
+          }
+      }
+      recognitionCollection.update(Session.get("recognitionId"), updateObject);
+      //then add back
+      var updateObject = {
+        $addToSet:
+          {
+            "members": this
+          }
+      }
       recognitionCollection.update(Session.get("recognitionId"), updateObject);
     }
     else if (Session.get("memberSelectType") == "musicalNumberPerformer") {

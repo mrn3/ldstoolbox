@@ -373,6 +373,8 @@ Router.map(function() {
       distanceFromTop += verticalPositionIncrement;
     }
 
+    console.log(recognitionArray);
+
     if (recognitionArray.length > 0) {
       doc.text("Ordinances and Recognitions", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
       distanceFromTop += verticalPositionIncrement;
@@ -380,9 +382,15 @@ Router.map(function() {
       if (typeof recognitionArray != "undefined") {
         for(var recognitionIndex in recognitionArray) {
           doc.text(recognitionArray[recognitionIndex].recognitionType.typeName, distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-          doc.text(recognitionArray[recognitionIndex].member.switchedPreferredName, distanceFromLeft4, distanceFromTop, {align: "left", width: pageWidth});
           doc.text("_____________________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
           distanceFromTop += verticalPositionIncrement;
+          for(var recognitionMemberIndex in recognitionArray[recognitionIndex].members) {
+            console.log(recognitionMemberIndex);
+            console.log(recognitionArray[recognitionIndex].members[recognitionMemberIndex]);
+            doc.text(recognitionArray[recognitionIndex].members[recognitionMemberIndex].switchedPreferredName, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
+            doc.text("_____________________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+            distanceFromTop += verticalPositionIncrement;
+          }
         }
       }
     }

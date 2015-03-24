@@ -89,17 +89,45 @@ Template.meetingEdit.events({
     Session.set("speakerId", this._id);
   },
   'click #addRecognitionButton': function(e, instance) {
-    recognitionCollection.insert({meetingId: this._id, wardUnitNo: Meteor.user().wardUnitNo});
+    recognitionCollection.insert({meetingId: this._id, "members": [{_id: Random.id()}], wardUnitNo: Meteor.user().wardUnitNo});
   },
   'click .removeRecognitionButton': function(e, instance) {
     recognitionCollection.remove({_id: this._id});
   },
-  'click .recognitionItem': function(e, instance) {
+  'click .recognitionMemberItem': function(e, instance) {
     Session.set("memberSelectType", "recognition");
-    Session.set("recognitionId", this._id);
+    Session.set("recognitionMemberId", this._id);
   },
   'click .recognitionTypeItem': function(e, instance) {
     Session.set("recognitionId", this._id);
+  },
+  'click .addRecognitionMemberButton': function(e, instance) {
+    var updateObject = {
+      $addToSet:
+        {
+          "members":
+            {
+              _id: Random.id(),
+              "switchedPreferredName": ""
+            }
+        }
+    }
+    recognitionCollection.update(this._id, updateObject);
+  },
+  'click .recognitionItem': function(e, instance) {
+    Session.set("recognitionId", this._id);
+  },
+  'click .removeRecognitionMemberButton': function(e, instance) {
+    var updateObject = {
+      $pull:
+        {
+          "members":
+            {
+              _id: this._id
+            }
+        }
+    }
+    recognitionCollection.update(Session.get("recognitionId"), updateObject);
   },
   'click [data-action=showActionSheet]': function(e, instance){
     var meeting = this;
@@ -122,6 +150,7 @@ Template.meetingEdit.events({
             Router.go("meetingList");
           }
         });
+        return true;
       }
     });
   },

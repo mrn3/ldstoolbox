@@ -209,21 +209,40 @@
 
           {{#each recognitionData}}
             <div class="list list-inset">
-              <a id="{{_id}}" class="item item-icon-right recognitionTypeItem" href="{{pathFor 'recognitionTypeSelect'}}">
-                Type
-                <span class="item-note">{{recognitionType.typeName}}</span>
-                <i class="icon ion-ios-arrow-right"></i>
-              </a>
-              <a id="{{_id}}" class="item item-icon-right recognitionItem" href="{{pathFor 'memberSelect'}}">
-                Member
-                <span class="item-note">{{member.switchedPreferredName}}</span>
-                <i class="icon ion-ios-arrow-right"></i>
-              </a>
-              <div class="item item-divider">
-                <button type="button" class="button button-clear button-small pull-right removeRecognitionButton">
-                  Remove
-                  <span class="icon ion-close"></span>
-                </button>
+              <div id="{{_id}}" class="recognitionItem">
+                <a class="item item-icon-right recognitionTypeItem" href="{{pathFor 'recognitionTypeSelect'}}">
+                  Type
+                  <span class="item-note">{{recognitionType.typeName}}</span>
+                  <i class="icon ion-ios-arrow-right"></i>
+                </a>
+                <div class="item item-divider">
+                  Members
+                  <button type="button" class="button button-clear button-small pull-right addRecognitionMemberButton">
+                    Add
+                    <span class="icon ion-plus"></span>
+                  </button>
+                </div>
+                <div class="list list-inset">
+                  {{#each members}}
+                    <a class="item item-icon-right recognitionMemberItem" href="{{pathFor 'memberSelect'}}">
+                      Member
+                      <span class="item-note">{{switchedPreferredName}}</span>
+                      <i class="icon ion-ios-arrow-right"></i>
+                    </a>
+                    <div class="item item-divider">
+                      <button type="button" class="button button-clear button-small pull-right removeRecognitionMemberButton">
+                        Remove
+                        <span class="icon ion-close"></span>
+                      </button>
+                    </div>
+                  {{/each}}
+                </div>
+                <div class="item item-divider">
+                  <button type="button" class="button button-clear button-small pull-right removeRecognitionButton">
+                    Remove
+                    <span class="icon ion-close"></span>
+                  </button>
+                </div>
               </div>
             </div>
           {{/each}}
