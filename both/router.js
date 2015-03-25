@@ -195,7 +195,7 @@ Router.map(function() {
     },
     data: function() {
       return {
-        meetingData: meetingCollection.find({}, {sort: {meetingDate: 1}})
+        meetingData: meetingCollection.find({}, {sort: {meetingDate: -1}})
       };
     },
     fastRender: true
