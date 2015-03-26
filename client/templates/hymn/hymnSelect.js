@@ -27,8 +27,8 @@ function doUpdate (inUpdateObject) {
   else if (Session.get("hymnSelectType") == "sacramentHymn") {
     Session.set('selectedSacramentHymn', inUpdateObject);
   }
-  else if (Session.get("hymnSelectType") == "inUpdateObject") {
-    Session.set('selectedClosingHymn', hymnObject);
+  else if (Session.get("hymnSelectType") == "closingHymn") {
+    Session.set('selectedClosingHymn', inUpdateObject);
   }
   else if (Session.get("hymnSelectType") == "intermediateHymn") {
     var updateObject = {};
