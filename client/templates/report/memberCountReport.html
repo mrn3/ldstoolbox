@@ -1,4 +1,4 @@
-<template name="sync">
+<template name="memberCountReport">
 
   {{#contentFor "headerButtonLeft"}}
     <button class="button button-clear pull-left" data-ion-menu-toggle="left">
@@ -11,34 +11,16 @@
   {{/contentFor}}
 
   {{#contentFor "headerTitle"}}
-    <h1 class="title">Sync</h1>
+    <h1 class="title">Member Count Report</h1>
   {{/contentFor}}
 
   {{#ionView}}
     {{#ionContent}}
-      {{#if ldsAccountUserNotAuthenticated}}
-        <div class="list">
-          <label class="item item-input">
-            <input type="text" placeholder="LDS Account Username" id="ldsAccountUsername" value="{{user.ldsAccount.username}}">
-          </label>
-          <label class="item item-input">
-            <input type="password" placeholder="LDS Account Password" id="ldsAccountPassword">
-          </label>
-        </div>
-        <div class="padding">
-          <input class="button button-block button-positive" id="authenticateLdsAccountUserButton" value="Authenticate" />
-        </div>
-      {{else}}
-        <div class="padding">
-          <input class="button button-block button-positive" id="syncWardButton" value="Sync Ward" />
-          <input class="button button-block button-positive" id="syncStakeButton" value="Sync Stake" />
-        </div>
-      {{/if}}
       <div class="list">
         <label class="item item-input">
           <div class="row">
             <div class="col">
-              <strong>Ward</strong>
+              <strong>Unit</strong>
             </div>
             <div class="col">
               <strong>Members</strong>
@@ -74,6 +56,20 @@
             </div>
           </div>
         </label>
+        {{#each reportData}}
+        <label class="item item-input">
+          <div class="row">
+            <div class="col">
+              {{wardUnitNo}}
+            </div>
+            <div class="col">
+              {{count}}
+            </div>
+            <div class="col">
+            </div>
+          </div>
+        </label>
+        {{/each}}
       </div>
     {{/ionContent}}
   {{/ionView}}

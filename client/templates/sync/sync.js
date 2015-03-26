@@ -21,9 +21,6 @@ Template.sync.helpers({
   },
   stakeCallingCount: function() {
     return callingCollection.find({stakeUnitNo: Meteor.user().stakeUnitNo}).count();
-  },
-  reportData: function() {
-    return memberClientCollection.find();
   }
 });
 

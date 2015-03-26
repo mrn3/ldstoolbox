@@ -229,6 +229,21 @@ Router.map(function() {
       return [
         Meteor.subscribe("userPublication"),
         Meteor.subscribe("stakeMemberPublication"),
+        Meteor.subscribe("stakeCallingPublication")
+      ]
+    },
+    fastRender: true
+  });
+  this.route("/reportList/", {
+    name: "reportList",
+    fastRender: true
+  });
+  this.route("/memberCountReport/", {
+    name: "memberCountReport",
+    waitOn: function () {
+      return [
+        Meteor.subscribe("userPublication"),
+        Meteor.subscribe("stakeMemberPublication"),
         Meteor.subscribe("stakeCallingPublication"),
         Meteor.subscribe("reportPublication")
       ]
