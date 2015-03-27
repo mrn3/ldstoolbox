@@ -1,13 +1,11 @@
 Template.callingChangeList.helpers({
   callingChangeData: function(){
-
     if (typeof Session.get("typeSelector") == "undefined") {
       Session.set("typeSelector", "All");
     }
     if (typeof Session.get("statusSelector") == "undefined") {
       Session.set("statusSelector", "Incomplete");
     }
-
     if ((Session.get("statusSelector") == "Incomplete")) {
       if (Session.get("typeSelector") == "All") {
         return callingChangeCollection.find({status: { $not : "Complete"}});

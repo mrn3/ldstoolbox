@@ -1,5 +1,10 @@
 Router.configure({
-  layoutTemplate: "layout"
+  layoutTemplate: "layout",
+  waitOn: function () {
+    return [
+      Meteor.subscribe("userPublication")
+    ]
+  }
 });
 
 Meteor.startup(function () {
