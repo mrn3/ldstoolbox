@@ -173,9 +173,6 @@ Template.meetingEdit.events({
       }
     });
   },
-  'click #cancelButton': function(e, instance) {
-    history.back();
-  },
   'click #doneButton': function(e, instance){
     var meeting = this;
     var updateObject = {};

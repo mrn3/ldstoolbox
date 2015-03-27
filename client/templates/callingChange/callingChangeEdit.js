@@ -58,9 +58,6 @@ Template.callingChangeEdit.helpers({
 });
 
 Template.callingChangeEdit.events({
-  'click #cancelButton': function(e, instance) {
-    history.back();
-  },
   'click #meetingItem': function(e, instance) {
     Session.set("meetingId", this._id);
   },

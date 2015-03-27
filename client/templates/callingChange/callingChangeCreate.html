@@ -1,18 +1,6 @@
 <template name="callingChangeCreate">
 
-  <div class="bar bar-header bar-light">
-    <div class="buttons">
-      <a id="cancelButton" class="button button-clear pull-left button-positive">
-        Cancel
-      </a>
-    </div>
-    <h1 class="title">Create Calling Change</h1>
-    <div class="buttons">
-      <a id="doneButton" class="button button-clear pull-right button-positive">
-        <strong>Done</strong>
-      </a>
-    </div>
-  </div>
+  {{>cancelAndDoneHeader title="Create Calling Change"}}
 
   {{#ionView}}
     {{#ionContent}}

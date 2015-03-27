@@ -26,9 +26,6 @@ function doUpdate (inUpdateObject) {
 }
 
 Template.callingSelect.events({
-  "click #cancelButton": function(e, instance) {
-    history.back();
-  },
   "keyup #searchInput": _.throttle(function(e) {
     var text = $(e.target).val().trim();
     callingSearch.search(text);
@@ -46,9 +43,3 @@ Template.callingSelect.events({
     doUpdate(this);
   }
 });
-
-/*
-Template.callingSelect.rendered = function() {
-  $('#searchInput').focus();
-};
-*/

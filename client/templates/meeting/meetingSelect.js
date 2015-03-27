@@ -9,9 +9,6 @@ Template.meetingSelect.helpers({
 });
 
 Template.meetingSelect.events({
-  "click #cancelButton": function(e, instance) {
-    history.back();
-  },
   "click #meetingItem": function(e, instance) {
     var updateObject = {};
     updateObject.$set = {meeting: this};

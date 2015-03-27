@@ -1,18 +1,6 @@
 <template name="attendanceSelect">
 
-  <div class="bar bar-header bar-light">
-    <div class="buttons">
-      <a id="cancelButton" class="button button-clear button-positive">
-        Cancel
-      </a>
-    </div>
-    <h1 class="title">Select Attendance</h1>
-    <div class="buttons">
-      <a id="doneButton" class="button button-clear button-positive">
-        <strong>Done</strong>
-      </a>
-    </div>
-  </div>
+  {{>cancelAndDoneHeader title="Select Attendance"}}
 
   {{#ionView}}
     {{#ionContent}}

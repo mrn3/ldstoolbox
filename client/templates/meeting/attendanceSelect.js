@@ -21,9 +21,6 @@ Template.attendanceSelect.events({
   'click #decrementTenAttendanceButton': function(e, instance){
     Session.set("selectedAttendance", Session.get("selectedAttendance") - 10);
   },
-  "click #cancelButton": function(e, instance) {
-    history.back();
-  },
   "click #doneButton": function(e, instance) {
     history.back();
   }

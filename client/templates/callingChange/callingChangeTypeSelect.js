@@ -9,9 +9,6 @@ Template.callingChangeTypeSelect.helpers({
 });
 
 Template.callingChangeTypeSelect.events({
-  "click #cancelButton": function(e, instance) {
-    history.back();
-  },
   "click #callingRadioButtonCall": function(e, instance) {
     Session.set('selectedCallingChangeType', "Call");
     history.back();

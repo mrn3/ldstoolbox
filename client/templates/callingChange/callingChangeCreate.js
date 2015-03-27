@@ -1,7 +1,4 @@
 Template.callingChangeCreate.events({
-  'click #cancelButton': function(e, instance) {
-    history.back();
-  },
   'click #doneButton': function(e, instance) {
     e.preventDefault();
 

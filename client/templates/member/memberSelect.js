@@ -132,9 +132,6 @@ function doUpdate (inUpdateObject) {
 }
 
 Template.memberSelect.events({
-  "click #cancelButton": function(e, instance) {
-    history.back();
-  },
   "keyup #searchInput": _.throttle(function(e) {
     var text = $(e.target).val().trim();
     memberSearch.search(text);

@@ -44,9 +44,6 @@ function doUpdate (inUpdateObject) {
 }
 
 Template.hymnSelect.events({
-  "click #cancelButton": function(e, instance) {
-    history.back();
-  },
   "keyup #searchInput": _.throttle(function(e) {
     var text = $(e.target).val().trim();
     hymnSearch.search(text);

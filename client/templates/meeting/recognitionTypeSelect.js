@@ -9,9 +9,6 @@ Template.recognitionTypeSelect.helpers({
 });
 
 Template.recognitionTypeSelect.events({
-  "click #cancelButton": function(e, instance) {
-    history.back();
-  },
   "click #recognitionTypeItem": function(e, instance) {
     var updateObject = {};
     updateObject.$set = {recognitionType: this};

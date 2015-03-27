@@ -1,6 +1,15 @@
 <template name="callingGroupList">
 
-  {{>backHeader title="Callings"}}
+  <div class="bar bar-header bar-stable">
+    <button class="button button-clear pull-left" data-ion-menu-toggle="left">
+      {{#if isAndroid}}
+        {{> ionIcon icon='android-more-vertical'}}
+      {{else}}
+        {{> ionIcon icon='navicon'}}
+      {{/if}}
+    </button>
+    <h1 class="title">Callings</h1>
+  </div>
 
   {{#ionView}}
     {{#ionContent}}

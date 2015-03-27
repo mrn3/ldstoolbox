@@ -2,15 +2,7 @@
 
   {{#with callingData}}
 
-    {{#contentFor "headerButtonLeft"}}
-      <button class="button button-clear pull-left" data-ion-menu-toggle="left">
-        {{>ionNavBackButton path="callingGroupList"}}
-      </button>
-    {{/contentFor}}
-
-    {{#contentFor "headerTitle"}}
-      <h1 class="title">Callings</h1>
-    {{/contentFor}}
+    {{>backHeader title="Callings"}}
 
     {{#ionView}}
       {{#ionContent}}
