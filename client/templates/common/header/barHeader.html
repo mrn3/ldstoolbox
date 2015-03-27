@@ -2,6 +2,7 @@
 
   <div class="bar bar-header bar-light">
     <div class="buttons">
+
       {{#if isEqual leftType "mainMenu"}}
         <button class="button button-clear pull-left" data-ion-menu-toggle="left">
           {{#if isAndroid}}
@@ -11,6 +12,13 @@
           {{/if}}
         </button>
       {{/if}}
+
+      {{#if isEqual leftType "back"}}
+        <a id="backButton" class="button button-clear pull-left button-positive">
+          Back
+        </a>
+      {{/if}}
+
       {{#if isEqual leftType "cancel"}}
         <a id="cancelButton" class="button button-clear pull-left button-positive">
           Cancel
@@ -21,12 +29,13 @@
     <h1 class="title">{{title}}</h1>
 
     <div class="buttons">
+      
       {{#if isEqual rightType "done"}}
         <a id="doneButton" class="button button-clear pull-right button-positive">
           <strong>Done</strong>
         </a>
       {{/if}}
-      
+
       {{#if isEqual rightType "meetingList"}}
         {{#if userCanCreateMeeting}}
           <a class="button button-clear pull-right button-positive" href="/meetingCreate/">

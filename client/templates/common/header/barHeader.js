@@ -26,5 +26,8 @@ Template.barHeader.helpers({
 Template.barHeader.events({
   "click #cancelButton": function(e, instance) {
     history.back();
+  },
+  "click #backButton": function(e, instance) {
+    history.back();
   }
 });
