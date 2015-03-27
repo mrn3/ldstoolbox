@@ -1,20 +1,10 @@
 <template name="meetingEdit">
 
-  {{#with meetingData}}
-    <div class="bar bar-header bar-light">
-      <div class="buttons">
-        <a id="cancelButton" class="button button-clear pull-left button-positive">
-          Cancel
-        </a>
-      </div>
-      <h1 class="title">Edit Meeting</h1>
-      <div class="buttons">
-        <a id="doneButton" class="button button-clear pull-right button-positive">
-          <strong>Done</strong>
-        </a>
-      </div>
-    </div>
-  {{/with}}
+  {{#if userCanEditMeeting}}
+
+    {{#with meetingData}}
+      {{>cancelAndDoneHeader title="Edit Meeting"}}
+    {{/with}}
 
     {{#ionView}}
       {{#ionContent}}
@@ -277,5 +267,16 @@
         {{/ionList}}
       {{/ionContent}}
     {{/ionView}}
+
+  {{else}}
+    {{>cancelHeader title="Edit Meeting"}}
+
+    {{#ionView}}
+      {{#ionContent}}
+        You are not allowed to edit meetings.  Please <a href="/sync">sync</a>
+        on an LDS Account that is allowed to edit meetings.
+      {{/ionContent}}
+    {{/ionView}}
+  {{/if}}
 
 </template>

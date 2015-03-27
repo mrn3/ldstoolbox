@@ -11,11 +11,13 @@
       </button>
     </div>
     <h1 class="title">Sacrament Meeting</h1>
+    {{#if userCanCreateMeeting}}
     <div class="buttons">
       <a class="button button-clear pull-right button-positive" href="/meetingCreate/">
         {{> ionIcon icon='ios-plus-empty'}}
       </a>
     </div>
+    {{/if}}
   </div>
 
   {{#ionView}}

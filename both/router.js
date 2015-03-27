@@ -141,7 +141,10 @@ Router.map(function() {
   this.route("/meetingList/", {
     name: "meetingList",
     waitOn: function () {
-      return Meteor.subscribe("meetingPublication")
+      return [
+        Meteor.subscribe("meetingPublication"),
+        Meteor.subscribe("userPublication")
+      ]
     },
     data: function() {
       return {

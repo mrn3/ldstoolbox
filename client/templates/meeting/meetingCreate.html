@@ -1,24 +1,27 @@
 <template name="meetingCreate">
 
-  <div class="bar bar-header bar-light">
-    <div class="buttons">
-      <a id="cancelButton" class="button button-clear pull-left button-positive">
-        Cancel
-      </a>
-    </div>
-    <h1 class="title">Create Meeting</h1>
-    <div class="buttons">
-      <a id="doneButton" class="button button-clear pull-right button-positive">
-        <strong>Done</strong>
-      </a>
-    </div>
-  </div>
+  {{#if userCanCreateMeeting}}
 
-  {{#ionView}}
-    {{#ionContent}}
-      {{#ionList}}
-        {{>meetingFields}}
-      {{/ionList}}
-    {{/ionContent}}
-  {{/ionView}}
+    {{>cancelAndDoneHeader title="Create Meeting"}}
+
+    {{#ionView}}
+      {{#ionContent}}
+        {{#ionList}}
+          {{>meetingFields}}
+        {{/ionList}}
+      {{/ionContent}}
+    {{/ionView}}
+
+  {{else}}
+
+    {{>cancelHeader title="Create Meeting"}}
+
+    {{#ionView}}
+      {{#ionContent}}
+        You are not allowed to create meetings.  Please <a href="/sync">sync</a>
+        on an LDS Account that is allowed to create meetings.
+      {{/ionContent}}
+    {{/ionView}}
+
+  {{/if}}
 </template>
