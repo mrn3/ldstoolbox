@@ -1,0 +1,16 @@
+<template name="notAllowed">
+
+  {{> backHeader title=title}}
+
+  {{#ionView}}
+    {{#ionContent}}
+      <div class="padding" align="center">
+        <h3>Action Not Allowed</h3>
+        <p>
+          You are not allowed to access {{title}}.  Please <a href="/sync">sync</a>
+          on an LDS Account that is allowed to access {{title}}.
+        </p>
+      </div>
+    {{/ionContent}}
+  {{/ionView}}
+</template>

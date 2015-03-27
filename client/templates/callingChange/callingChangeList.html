@@ -14,19 +14,7 @@
     {{/ionView}}
 
   {{else}}
-    {{>backHeader title="Calling Changes"}}
-
-    {{#ionView}}
-      {{#ionContent}}
-        <div class="padding" align="center">
-          <h3>Action Not Allowed</h3>
-          <p>
-            You are not allowed to view calling changes.  Please <a href="/sync">sync</a>
-            on an LDS Account that is allowed to view calling changes.
-          </p>
-        </div>
-      {{/ionContent}}
-    {{/ionView}}
+    {{> notAllowed title="Calling Changes"}}
   {{/if}}
 
 </template>

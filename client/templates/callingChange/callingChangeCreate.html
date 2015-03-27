@@ -1,12 +1,16 @@
 <template name="callingChangeCreate">
 
-  {{>cancelAndDoneHeader title="Create Calling Change"}}
+  {{#if userCanCreateCallingChange}}
+    {{>cancelAndDoneHeader title="Create Calling Change"}}
 
-  {{#ionView}}
-    {{#ionContent}}
-      {{#ionList}}
-        {{>callingChangeFields}}
-      {{/ionList}}
-    {{/ionContent}}
-  {{/ionView}}
+    {{#ionView}}
+      {{#ionContent}}
+        {{#ionList}}
+          {{>callingChangeFields}}
+        {{/ionList}}
+      {{/ionContent}}
+    {{/ionView}}
+  {{else}}
+    {{> notAllowed title="Create Calling Change"}}
+  {{/if}}
 </template>

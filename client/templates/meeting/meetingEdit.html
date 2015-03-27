@@ -267,21 +267,8 @@
         {{/ionList}}
       {{/ionContent}}
     {{/ionView}}
-
   {{else}}
-    {{>backHeader title="Edit Meeting"}}
-
-    {{#ionView}}
-      {{#ionContent}}
-        <div class="padding" align="center">
-          <h3>Action Not Allowed</h3>
-          <p>
-            You are not allowed to edit meetings.  Please <a href="/sync">sync</a>
-            on an LDS Account that is allowed to edit meetings.
-          </p>
-        </div>
-      {{/ionContent}}
-    {{/ionView}}
+    {{> notAllowed title="Edit Meeting"}}
   {{/if}}
 
 </template>

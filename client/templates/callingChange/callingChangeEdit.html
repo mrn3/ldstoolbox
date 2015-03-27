@@ -1,109 +1,114 @@
 <template name="callingChangeEdit">
 
-  {{#with callingChangeData}}
-    {{>cancelAndDoneHeader title="Edit Calling Change"}}
+  {{#if userCanEditCallingChange}}
+    {{#with callingChangeData}}
+      {{>cancelAndDoneHeader title="Edit Calling Change"}}
 
-    {{#ionView}}
-      {{#ionContent}}
-        {{#ionList}}
-          {{>callingChangeFields}}
+      {{#ionView}}
+        {{#ionContent}}
+          {{#ionList}}
+            {{>callingChangeFields}}
 
-          {{#if isInterviewed status}}
+            {{#if isInterviewed status}}
+              <div class="item item-divider">
+                &nbsp;
+              </div>
+              <a id="meetingItem" class="item item-icon-right" href="{{pathFor 'meetingSelect'}}">
+                Meeting
+                <span class="item-note">{{{meeting.meetingDate}}}</span>
+                <i class="icon ion-ios-arrow-right"></i>
+              </a>
+            {{/if}}
+
+            {{#if isPresented status}}
+              <div class="item item-divider">
+                &nbsp;
+              </div>
+              <a id="meetingItem" class="item item-icon-right" href="{{pathFor 'meetingSelect'}}">
+                Meeting
+                <span class="item-note">{{{meeting.meetingDate}}}</span>
+                <i class="icon ion-ios-arrow-right"></i>
+              </a>
+            {{/if}}
+
+            {{#if isDiscussed status}}
+              <div class="item item-divider">
+                &nbsp;
+              </div>
+              <a class="button button-positive button-full button-clear" data-action="markApproved">
+                Mark Approved
+              </a>
+            {{/if}}
+
+            {{#if isApproved status}}
+              <div class="item item-divider">
+                &nbsp;
+              </div>
+              <a class="button button-positive button-full button-clear" data-action="markInterviewed">
+                Mark Interviewed
+              </a>
+            {{/if}}
+
+            {{#if isInterviewed status}}
+              <div class="item item-divider">
+                &nbsp;
+              </div>
+              <a class="button button-positive button-full button-clear" data-action="markPresented">
+                Mark Presented
+              </a>
+            {{/if}}
+
+            {{#if isPresented status}}
+              <div class="item item-divider">
+                &nbsp;
+              </div>
+              <a class="button button-positive button-full button-clear" data-action="markRecorded">
+                Mark Recorded
+              </a>
+            {{/if}}
+
+            {{#if isRecorded status}}
+              <div class="item item-divider">
+                &nbsp;
+              </div>
+              <a class="button button-positive button-full button-clear" data-action="markSetApart">
+                Mark Set Apart
+              </a>
+            {{/if}}
+
+            {{#if isSetApart status}}
+              <div class="item item-divider">
+                &nbsp;
+              </div>
+              <a class="button button-positive button-full button-clear" data-action="markSetApartRecorded">
+                Mark Set Apart Recorded
+              </a>
+            {{/if}}
+
+            {{#if isNotCanceled status}}
+              <div class="item item-divider">
+                &nbsp;
+              </div>
+              <a class="button button-positive button-full button-clear" data-action="showCancelActionSheet">
+                Mark Canceled
+              </a>
+            {{/if}}
+
             <div class="item item-divider">
               &nbsp;
             </div>
-            <a id="meetingItem" class="item item-icon-right" href="{{pathFor 'meetingSelect'}}">
-              Meeting
-              <span class="item-note">{{{meeting.meetingDate}}}</span>
-              <i class="icon ion-ios-arrow-right"></i>
+            <a class="button button-positive button-full button-clear" data-action="showDeleteActionSheet">
+              Delete Calling Change
             </a>
-          {{/if}}
-
-          {{#if isPresented status}}
             <div class="item item-divider">
               &nbsp;
             </div>
-            <a id="meetingItem" class="item item-icon-right" href="{{pathFor 'meetingSelect'}}">
-              Meeting
-              <span class="item-note">{{{meeting.meetingDate}}}</span>
-              <i class="icon ion-ios-arrow-right"></i>
-            </a>
-          {{/if}}
+          {{/ionList}}
+        {{/ionContent}}
+      {{/ionView}}
+    {{/with}}
+  {{else}}
+    {{> notAllowed title="Edit Calling Change"}}
+  {{/if}}
 
-          {{#if isDiscussed status}}
-            <div class="item item-divider">
-              &nbsp;
-            </div>
-            <a class="button button-positive button-full button-clear" data-action="markApproved">
-              Mark Approved
-            </a>
-          {{/if}}
-
-          {{#if isApproved status}}
-            <div class="item item-divider">
-              &nbsp;
-            </div>
-            <a class="button button-positive button-full button-clear" data-action="markInterviewed">
-              Mark Interviewed
-            </a>
-          {{/if}}
-
-          {{#if isInterviewed status}}
-            <div class="item item-divider">
-              &nbsp;
-            </div>
-            <a class="button button-positive button-full button-clear" data-action="markPresented">
-              Mark Presented
-            </a>
-          {{/if}}
-
-          {{#if isPresented status}}
-            <div class="item item-divider">
-              &nbsp;
-            </div>
-            <a class="button button-positive button-full button-clear" data-action="markRecorded">
-              Mark Recorded
-            </a>
-          {{/if}}
-
-          {{#if isRecorded status}}
-            <div class="item item-divider">
-              &nbsp;
-            </div>
-            <a class="button button-positive button-full button-clear" data-action="markSetApart">
-              Mark Set Apart
-            </a>
-          {{/if}}
-
-          {{#if isSetApart status}}
-            <div class="item item-divider">
-              &nbsp;
-            </div>
-            <a class="button button-positive button-full button-clear" data-action="markSetApartRecorded">
-              Mark Set Apart Recorded
-            </a>
-          {{/if}}
-
-          {{#if isNotCanceled status}}
-            <div class="item item-divider">
-              &nbsp;
-            </div>
-            <a class="button button-positive button-full button-clear" data-action="showCancelActionSheet">
-              Mark Canceled
-            </a>
-          {{/if}}
-
-          <div class="item item-divider">
-            &nbsp;
-          </div>
-          <a class="button button-positive button-full button-clear" data-action="showDeleteActionSheet">
-            Delete Calling Change
-          </a>
-          <div class="item item-divider">
-            &nbsp;
-          </div>
-        {{/ionList}}
-      {{/ionContent}}
-    {{/ionView}}
-  {{/with}}
 </template>
