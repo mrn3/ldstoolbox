@@ -1,18 +1,6 @@
 <template name="memberCountReport">
 
-  {{#contentFor "headerButtonLeft"}}
-    <button class="button button-clear pull-left" data-ion-menu-toggle="left">
-      {{#if isAndroid}}
-        {{> ionIcon icon='android-more-vertical'}}
-      {{else}}
-        {{> ionIcon icon='navicon'}}
-      {{/if}}
-    </button>
-  {{/contentFor}}
-
-  {{#contentFor "headerTitle"}}
-    <h1 class="title">Member Count Report</h1>
-  {{/contentFor}}
+  {{> barHeader title="Member Count Report" leftType="back"}}
 
   {{#ionView}}
     {{#ionContent}}

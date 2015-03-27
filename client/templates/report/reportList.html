@@ -1,18 +1,6 @@
 <template name="reportList">
 
-  {{#contentFor "headerButtonLeft"}}
-    <button class="button button-clear pull-left" data-ion-menu-toggle="left">
-      {{#if isAndroid}}
-        {{> ionIcon icon='android-more-vertical'}}
-      {{else}}
-        {{> ionIcon icon='navicon'}}
-      {{/if}}
-    </button>
-  {{/contentFor}}
-
-  {{#contentFor "headerTitle"}}
-    <h1 class="title">Reports</h1>
-  {{/contentFor}}
+  {{> barHeader title="Reports" leftType="mainMenu"}}
 
   {{#ionView}}
     {{#ionContent}}

@@ -1,18 +1,6 @@
 <template name="home">
 
-  {{#contentFor "headerButtonLeft"}}
-    <button class="button button-clear pull-left" data-ion-menu-toggle="left">
-      {{#if isAndroid}}
-        {{> ionIcon icon='android-more-vertical'}}
-      {{else}}
-        {{> ionIcon icon='navicon'}}
-      {{/if}}
-    </button>
-  {{/contentFor}}
-
-  {{#contentFor "headerTitle"}}
-    <h1 class="title">LDS Toolbox</h1>
-  {{/contentFor}}
+  {{> barHeader title="LDS Toolbox" leftType="mainMenu"}}
 
   {{#ionView}}
     {{#ionContent}}
