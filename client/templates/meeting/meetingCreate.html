@@ -14,14 +14,18 @@
 
   {{else}}
 
-    {{>cancelHeader title="Create Meeting"}}
+    {{>backHeader title="Create Meeting"}}
 
     {{#ionView}}
       {{#ionContent}}
-        You are not allowed to create meetings.  Please <a href="/sync">sync</a>
-        on an LDS Account that is allowed to create meetings.
+        <div class="padding" align="center">
+          <h3>Action Not Allowed</h3>
+          <p>
+            You are not allowed to create meetings.  Please <a href="/sync">sync</a>
+            on an LDS Account that is allowed to create meetings.
+          </p>
+        </div>
       {{/ionContent}}
     {{/ionView}}
-
   {{/if}}
 </template>

@@ -1,16 +1,6 @@
-<template name="callingChangeList">
-
+<template name="callingChangeListHeader">
   <div class="bar bar-header bar-stable">
-    <div class="buttons">
-      <button class="button button-clear pull-left" data-ion-menu-toggle="left">
-        {{#if isAndroid}}
-          {{> ionIcon icon='android-more-vertical'}}
-        {{else}}
-          {{> ionIcon icon='navicon'}}
-        {{/if}}
-      </button>
-    </div>
-    <h1 class="title">Calling Changes</h1>
+    {{>mainMenuContent title=title}}
     <div class="buttons">
       <button class="button button-clear pull-right" data-ion-menu-toggle="right">
         {{#if isAndroid}}
@@ -28,15 +18,4 @@
       </a>
     </div>
   </div>
-
-  {{#ionView}}
-    {{#ionContent}}
-      {{#ionList}}
-        {{#each callingChangeData}}
-          {{>callingChangeItem}}
-        {{/each}}
-      {{/ionList}}
-    {{/ionContent}}
-  {{/ionView}}
-
 </template>

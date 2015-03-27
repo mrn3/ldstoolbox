@@ -104,7 +104,10 @@ Router.map(function() {
   this.route("/callingChangeList/", {
     name: "callingChangeList",
     waitOn: function () {
-      return Meteor.subscribe("callingChangePublication")
+      return [
+        Meteor.subscribe("callingChangePublication"),
+        Meteor.subscribe("userPublication")
+      ]
     },
     fastRender: true
   });
