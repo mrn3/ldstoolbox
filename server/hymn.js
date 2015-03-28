@@ -1,6 +1,6 @@
 SearchSource.defineSource('hymns', function(searchText, options) {
   var options = {sort: {"number": 1}, limit: 20};
-
+ 
   if(searchText) {
     var regExp = buildRegExp(searchText);
     var selector = {$or: [
