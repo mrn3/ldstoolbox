@@ -2,7 +2,17 @@
 
   {{#if userCanEditCallingChange}}
     {{#with callingChangeData}}
-      {{> barHeader title="Edit Calling Change" leftType="cancel" rightType="done"}}
+
+      <div class="bar bar-header bar-light">
+        {{> barHeaderLeft leftType="cancel"}}
+
+        {{> barHeaderTitle title="Edit Calling Change"}}
+        <div class="buttons">
+          <a id="doneButton" class="button button-clear pull-right button-positive">
+            <strong>Done</strong>
+          </a>
+        </div>
+      </div>
 
       {{#ionView}}
         {{#ionContent}}

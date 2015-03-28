@@ -2,15 +2,98 @@
 
   {{#if userCanEditMeeting}}
 
-    {{#with meetingData}}
-      {{> barHeader title="Edit Meeting" leftType="cancel" rightType="done"}}
-    {{/with}}
+    <div class="bar bar-header bar-light">
+      {{> barHeaderLeft leftType="cancel"}}
+
+      {{> barHeaderTitle title="Edit Meeting"}}
+      <div class="buttons">
+        {{#with meetingData}}
+          <a id="doneButton" class="button button-clear pull-right button-positive">
+            <strong>Done</strong>
+          </a>
+        {{/with}}
+      </div>
+    </div>
 
     {{#ionView}}
       {{#ionContent}}
         {{#ionList}}
           {{#with meetingData}}
-            {{>meetingFields}}
+            <label class="item item-input">
+              <span class="input-label">Meeting Date</span>
+              <input type="date" id="meetingDate" placeholder="Meeting Date" value="{{meetingDate}}">
+            </label>
+
+            <div class="item item-divider">
+              Prayers
+            </div>
+            <a id="invocationItem" class="item item-icon-right" href="{{pathFor 'memberSelect'}}">
+              Invocation
+              <span class="item-note">{{{invocationSession}}}</span>
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
+            <a id="benedictionItem" class="item item-icon-right" href="{{pathFor 'memberSelect'}}">
+              Benediction
+              <span class="item-note">{{{benedictionSession}}}</span>
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
+
+            <div class="item item-divider">
+              Administration
+            </div>
+            <div class="item item-toggle">
+               Fast and Testimony
+               <label class="toggle toggle-assertive">
+                 <input type="checkbox" id="fastAndTestimony" checked="{{isChecked fastAndTestimony}}">
+                 <div class="track">
+                   <div class="handle"></div>
+                 </div>
+               </label>
+            </div>
+            <a id="presidingItem" class="item item-icon-right" href="{{pathFor 'memberSelect'}}">
+              Presiding
+              <span class="item-note">{{{presidingSession}}}</span>
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
+            <a id="conductingItem" class="item item-icon-right" href="{{pathFor 'memberSelect'}}">
+              Conducting
+              <span class="item-note">{{{conductingSession}}}</span>
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
+            <a id="attendanceItem" class="item item-icon-right" href="{{pathFor 'attendanceSelect'}}">
+              Attendance
+              <span class="item-note">{{{attendanceSession}}}</span>
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
+
+            <div class="item item-divider">
+              Music
+            </div>
+            <a id="organistItem" class="item item-icon-right" href="{{pathFor 'memberSelect'}}">
+              Organist
+              <span class="item-note">{{{organistSession}}}</span>
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
+            <a id="choristerItem" class="item item-icon-right" href="{{pathFor 'memberSelect'}}">
+              Chorister
+              <span class="item-note">{{{choristerSession}}}</span>
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
+            <a id="openingHymnItem" class="item item-icon-right" href="{{pathFor 'hymnSelect'}}">
+              Opening Hymn
+              <span class="item-note">{{{openingHymnSession}}}</span>
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
+            <a id="sacramentHymnItem" class="item item-icon-right" href="{{pathFor 'hymnSelect'}}">
+              Sacrament Hymn
+              <span class="item-note">{{{sacramentHymnSession}}}</span>
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
+            <a id="closingHymnItem" class="item item-icon-right" href="{{pathFor 'hymnSelect'}}">
+              Closing Hymn
+              <span class="item-note">{{{closingHymnSession}}}</span>
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
           {{/with}}
 
           {{#with meetingData}}

@@ -22,12 +22,3 @@ Template.barHeader.helpers({
     return (inValue1 == inValue2);
   }
 });
-
-Template.barHeader.events({
-  "click #cancelButton": function(e, instance) {
-    history.back();
-  },
-  "click #backButton": function(e, instance) {
-    history.back();
-  }
-});
