@@ -300,6 +300,7 @@ Template.meetingEdit.events({
       createdBy:            Meteor.userId(),
       createdAt:            new Date(),
       wardUnitNo:           Meteor.user().wardUnitNo,
+      stakeUnitNo:          Meteor.user().stakeUnitNo,
       meetingDate:          $('#meetingDate').val(),
       fastAndTestimony:     $('#fastAndTestimony').prop("checked"),
       presiding:            Session.get("selectedPresiding"),

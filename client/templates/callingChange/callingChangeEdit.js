@@ -73,10 +73,34 @@ Template.callingChangeEdit.helpers({
 
       return (callingIntersection.length > 0);
     }
+  },
+  callingChangeTypeSession: function() {
+    if (Session.get("selectedCallingChangeType")) {
+      return Session.get("selectedCallingChangeType")
+    } else {
+      return "";
+    }
+  },
+  callingChangeMemberSession: function() {
+    if (Session.get("selectedCallingChangeMember") && Session.get("selectedCallingChangeMember").switchedPreferredName) {
+      return Session.get("selectedCallingChangeMember").switchedPreferredName;
+    } else {
+      return "";
+    }
+  },
+  callingChangeCallingSession: function() {
+    if (Session.get("selectedCallingChangeCalling") && Session.get("selectedCallingChangeCalling").callingName) {
+      return Session.get("selectedCallingChangeCalling").callingName;
+    } else {
+      return "";
+    }
   }
 });
 
 Template.callingChangeEdit.events({
+  'click #callingChangeMemberItem': function(e, instance) {
+    Session.set("memberSelectType", "callingChangeMember");
+  },
   'click #meetingItem': function(e, instance) {
     Session.set("meetingId", this._id);
   },
@@ -93,8 +117,9 @@ Template.callingChangeEdit.events({
 
     var properties = {
       updatedBy:            Meteor.userId(),
-      wardUnitNo:           Meteor.user().wardUnitNo,
       updatedAt:            new Date(),
+      wardUnitNo:           Meteor.user().wardUnitNo,
+      stakeUnitNo:          Meteor.user().stakeUnitNo,
       type:                 Session.get("selectedCallingChangeType"),
       member:               Session.get("selectedCallingChangeMember"),
       calling:              Session.get("selectedCallingChangeCalling"),
@@ -274,3 +299,23 @@ Template.callingChangeEdit.events({
     }
   }
 });
+
+Template.callingChangeEdit.rendered = function() {
+  if (this.data && this.data.callingChangeData) {
+    if (this.data.callingChangeData.member) {
+      if ((typeof Session.get("selectedCallingChangeMember") == "undefined") || (Session.get("selectedCallingChangeMember") == "")) {
+        Session.set("selectedCallingChangeMember", this.data.callingChangeData.member);
+      }
+    }
+    if (this.data.callingChangeData.calling) {
+      if ((typeof Session.get("selectedCallingChangeCalling") == "undefined") || (Session.get("selectedCallingChangeCalling") == "")) {
+        Session.set("selectedCallingChangeCalling", this.data.callingChangeData.calling);
+      }
+    }
+    if (this.data.callingChangeData.type) {
+      if ((typeof Session.get("selectedCallingChangeType") == "undefined") || (Session.get("selectedCallingChangeType") == "")) {
+        Session.set("selectedCallingChangeType", this.data.callingChangeData.type);
+      }
+    }
+  }
+};

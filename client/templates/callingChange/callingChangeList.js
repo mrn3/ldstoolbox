@@ -48,10 +48,10 @@ Template.callingChangeList.helpers({
 });
 
 Template.callingChangeList.events({
-  'click #createMeetingButton': function(e, instance) {
+  'click #createCallingChangeButton': function(e, instance) {
     e.preventDefault();
 
-    var meeting = this;
+    var callingChange = this;
     var insertObject = {};
 
     if(!Meteor.user()){
@@ -62,15 +62,18 @@ Template.callingChangeList.events({
     var properties = {
       createdBy:            Meteor.userId(),
       createdAt:            new Date(),
-      wardUnitNo:           Meteor.user().wardUnitNo
+      wardUnitNo:           Meteor.user().wardUnitNo,
+      stakeUnitNo:          Meteor.user().stakeUnitNo,
+      dateDiscussed:        new Date(),
+      status:               "Discussed"
     };
 
     if (properties) {
-      Meteor.call('insertMeeting', properties, function(error, meeting) {
+      Meteor.call('insertCallingChange', properties, function(error, callingChange) {
         if (error) {
           console.log(error.reason);
         } else {
-          Router.go("/meetingEdit/" + meeting._id);
+          Router.go("/callingChangeEdit/" + callingChange._id);
         }
       });
     }

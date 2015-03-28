@@ -35,7 +35,8 @@ Template.meetingList.events({
     var properties = {
       createdBy:            Meteor.userId(),
       createdAt:            new Date(),
-      wardUnitNo:           Meteor.user().wardUnitNo
+      wardUnitNo:           Meteor.user().wardUnitNo,
+      stakeUnitNo:          Meteor.user().stakeUnitNo
     };
 
     if (properties) {
