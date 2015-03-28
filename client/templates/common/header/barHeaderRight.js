@@ -1,4 +1,4 @@
-Template.barHeader.helpers({
+Template.barHeaderRight.helpers({
   userCanCreateMeeting: function () {
     if (Meteor.user().callings) {
 

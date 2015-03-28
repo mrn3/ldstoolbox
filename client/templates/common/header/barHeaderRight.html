@@ -1,0 +1,29 @@
+<template name="barHeaderRight">
+  <div class="buttons">
+
+    {{#if isEqual rightType "done"}}
+      <a id="doneButton" class="button button-clear pull-right button-positive">
+        <strong>Done</strong>
+      </a>
+    {{/if}}
+
+    {{#if isEqual rightType "meetingList"}}
+      {{#if userCanCreateMeeting}}
+        <a id="createMeetingButton" class="button button-clear pull-right button-positive">
+          {{> ionIcon icon='ios-plus-empty'}}
+        </a>
+      {{/if}}
+    {{/if}}
+
+    {{#if isEqual rightType "callingChangeList"}}
+      <a class="button button-clear pull-right button-positive" href="/callingChangeCreate/">
+        {{#if isAndroid}}
+          <i class="icon ion-android-add positive"></i>
+        {{else}}
+          <i class="icon ion-ios-plus-empty positive"></i>
+        {{/if}}
+      </a>
+    {{/if}}
+
+  </div>
+</template>

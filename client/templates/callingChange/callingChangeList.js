@@ -47,6 +47,36 @@ Template.callingChangeList.helpers({
   }
 });
 
+Template.callingChangeList.events({
+  'click #createMeetingButton': function(e, instance) {
+    e.preventDefault();
+
+    var meeting = this;
+    var insertObject = {};
+
+    if(!Meteor.user()){
+      console.log('You must be logged in.');
+      return false;
+    }
+
+    var properties = {
+      createdBy:            Meteor.userId(),
+      createdAt:            new Date(),
+      wardUnitNo:           Meteor.user().wardUnitNo
+    };
+
+    if (properties) {
+      Meteor.call('insertMeeting', properties, function(error, meeting) {
+        if (error) {
+          console.log(error.reason);
+        } else {
+          Router.go("/meetingEdit/" + meeting._id);
+        }
+      });
+    }
+  }
+});
+
 Template.callingChangeList.rendered = function() {
   Session.set("memberSelectType", "");
   Session.set("selectedCallingChangeMember", "");
