@@ -1,20 +1,6 @@
 <template name="householdList">
 
-  <div class="bar bar-header bar-stable">
-    <button class="button button-clear pull-left" data-ion-menu-toggle="left">
-      {{#if isAndroid}}
-        {{> ionIcon icon='android-more-vertical'}}
-      {{else}}
-        {{> ionIcon icon='navicon'}}
-      {{/if}}
-    </button>
-    <h1 class="title">Directory</h1>
-    <div class="buttons">
-      <a class="button button-clear pull-right button-positive" data-action="showSortActionSheet">
-        <i class="icon ion-ios-list-outline positive"></i>
-      </a>
-    </div>
-  </div>
+  {{> barHeader title="Directory" leftType="mainMenu" rightType="memberList"}}
 
   {{#ionView}}
     {{#ionContent}}
