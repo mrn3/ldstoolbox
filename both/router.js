@@ -2,7 +2,7 @@ Router.configure({
   layoutTemplate: "layout",
   waitOn: function () {
     return [
-      Meteor.subscribe("userPublication")
+      //Meteor.subscribe("userPublication")
     ]
   }
 });
@@ -236,13 +236,6 @@ Router.map(function() {
   });
   this.route("/sync/", {
     name: "sync",
-    waitOn: function () {
-      return [
-        Meteor.subscribe("userPublication"),
-        Meteor.subscribe("stakeMemberPublication"),
-        Meteor.subscribe("stakeCallingPublication")
-      ]
-    },
     fastRender: true
   });
   this.route("/reportList/", {

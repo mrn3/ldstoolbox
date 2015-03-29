@@ -30,6 +30,8 @@ Template.layout.helpers({
         });
 
       return (callingIntersection.length > 0);
+    } else {
+      return false;
     }
   }
 });
@@ -43,7 +45,7 @@ Template.layout.events({
   }
 });
 
-Template.layout.rendered = function(){
+Template.layout.rendered = function() { 
   if (typeof Session.get("typeSelector") == "undefined") {
     Session.set("typeSelector", "All");
   }

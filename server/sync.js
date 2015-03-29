@@ -6,7 +6,7 @@ function switchName(inName) {
 }
 
 Meteor.methods({
-  authenticateLdsAccountUser: function(inUsername, inPassword) {
+  signInLdsAccountUser: function(inUsername, inPassword) {
     this.unblock();
     try {
       var authUrl="https://signin.lds.org/login.html";
@@ -23,8 +23,38 @@ Meteor.methods({
 
       var properties = {
         ldsAccount: {
+          statusCode:       result.statusCode,
           username:         inUsername,
           cookieValue:      ldsAccountCookieValue,
+          updatedAt:        new Date()
+        }
+      };
+
+      Meteor.users.update(Meteor.user()._id, {
+        $set: properties
+      }, function(error) {
+        if (error) {
+          console.log(error.reason);
+        }
+      });
+
+      //if successful, get the user info needed
+      if (result.statusCode == 200) {
+        Meteor.call("getUserIndividualId");
+        Meteor.call("getUserUnitInfo");
+      }
+
+    } catch (e) {
+      // Got a network error, time-out or HTTP error in the 400 or 500 range.
+      console.log(e);
+      return e;
+    }
+  },
+  signOutLdsAccountUser: function() {
+    this.unblock();
+    try {
+      var properties = {
+        ldsAccount: {
           updatedAt:  new Date()
         }
       };
@@ -59,6 +89,7 @@ Meteor.methods({
           "Accept": "application/json"
         },
       });
+
       unit = JSON.parse(result.content);
 
       //update the user to have additional fields to link
@@ -328,16 +359,12 @@ Meteor.methods({
     });
   },
   syncWard: function () {
-    Meteor.call("getUserIndividualId");
-    Meteor.call("getUserUnitInfo");
     Meteor.call("getUnits");
     Meteor.call("getWardMembers", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo);
     Meteor.call("getWardCallings", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo);
     Meteor.call("getUserCallingInfo");
   },
   syncStake: function () {
-    Meteor.call("getUserIndividualId");
-    Meteor.call("getUserUnitInfo");
     Meteor.call("getUnits");
     Meteor.call("getStakeMembers", Meteor.user().stakeUnitNo);
     Meteor.call("getStakeCallings", Meteor.user().stakeUnitNo);
