@@ -16,6 +16,16 @@ Meteor.startup(function () {
   }
 });
 
+var requireLogin = function() {
+	if (! Meteor.user()) {
+	 // If user is not logged in render landingpage
+		this.render('userAccounts');
+	} else {
+	 //if user is logged in render whatever route was requested
+		this.next();
+	}
+}
+
 Router.map(function() {
   this.route("home", {
     path: "/"
@@ -25,10 +35,12 @@ Router.map(function() {
   });
   this.route("/householdList/", {
     name: "householdList",
+    onBeforeAction: requireLogin,
     fastRender: true
   });
   this.route("/memberList/", {
     name: "memberList",
+    onBeforeAction: requireLogin,
     waitOn: function () {
       return [
         Meteor.subscribe("wardMemberPublication"),
@@ -44,6 +56,7 @@ Router.map(function() {
   });
   this.route("/memberSelect/", {
     name: "memberSelect",
+    onBeforeAction: requireLogin,
     waitOn: function () {
       return [
         Meteor.subscribe("likelyOptionsMemberPublication"),
@@ -54,6 +67,7 @@ Router.map(function() {
   });
   this.route("/member/:individualId", {
     name: "member",
+    onBeforeAction: requireLogin,
     waitOn: function () {
       return [
         Meteor.subscribe("stakeMemberPublication"),
@@ -77,6 +91,7 @@ Router.map(function() {
   });
   this.route("/callingSelect/", {
     name: "callingSelect",
+    onBeforeAction: requireLogin,
     waitOn: function () {
       return Meteor.subscribe("callingPublication")
     },
@@ -84,6 +99,7 @@ Router.map(function() {
   });
   this.route("/callingGroupList/", {
     name: "callingGroupList",
+    onBeforeAction: requireLogin,
     waitOn: function () {
       return Meteor.subscribe("callingGroupPublication")
     },
@@ -96,6 +112,7 @@ Router.map(function() {
   });
   this.route("/callingGroup/:_id", {
     name: "callingGroup",
+    onBeforeAction: requireLogin,
     waitOn: function () {
       return Meteor.subscribe("callingGroupPublication")
     },
@@ -108,6 +125,7 @@ Router.map(function() {
   });
   this.route("/organizationList/", {
     name: "organizationList",
+    onBeforeAction: requireLogin,
     waitOn: function () {
       return Meteor.subscribe("organizationPublication")
     },
@@ -120,6 +138,7 @@ Router.map(function() {
   });
   this.route("/organization/:_id", {
     name: "organization",
+    onBeforeAction: requireLogin,
     waitOn: function () {
       return Meteor.subscribe("wardMemberPublication")
     },
@@ -132,6 +151,7 @@ Router.map(function() {
   });
   this.route("/callingChangeList/", {
     name: "callingChangeList",
+    onBeforeAction: requireLogin,
     waitOn: function () {
       return [
         Meteor.subscribe("callingChangePublication"),
@@ -142,6 +162,7 @@ Router.map(function() {
   });
   this.route("/callingChangeCreate/", {
     name: "callingChangeCreate",
+    onBeforeAction: requireLogin,
     waitOn: function () {
       return [
         Meteor.subscribe("callingChangePublication"),
@@ -152,6 +173,7 @@ Router.map(function() {
   });
   this.route("/callingChangeEdit/:_id", {
     name: "callingChangeEdit",
+    onBeforeAction: requireLogin,
     waitOn: function () {
       return [
         Meteor.subscribe("callingChangePublication"),
@@ -168,10 +190,12 @@ Router.map(function() {
   });
   this.route("/callingChangeTypeSelect/", {
     name: "callingChangeTypeSelect",
+    onBeforeAction: requireLogin,
     fastRender: true
   });
   this.route("/meetingList/", {
     name: "meetingList",
+    onBeforeAction: requireLogin,
     waitOn: function () {
       return [
         Meteor.subscribe("meetingPublication"),
@@ -187,6 +211,7 @@ Router.map(function() {
   });
   this.route("/meetingCreate/", {
     name: "meetingCreate",
+    onBeforeAction: requireLogin,
     waitOn: function () {
       return [
         Meteor.subscribe("meetingPublication"),
@@ -196,6 +221,7 @@ Router.map(function() {
   });
   this.route("/meetingEdit/:_id", {
     name: "meetingEdit",
+    onBeforeAction: requireLogin,
     waitOn: function () {
       return [
         Meteor.subscribe("meetingPublication"),
@@ -225,6 +251,7 @@ Router.map(function() {
   });
   this.route("/meetingSelect/", {
     name: "meetingSelect",
+    onBeforeAction: requireLogin,
     waitOn: function () {
       return Meteor.subscribe("meetingPublication")
     },
@@ -237,6 +264,7 @@ Router.map(function() {
   });
   this.route("/hymnSelect/", {
     name: "hymnSelect",
+    onBeforeAction: requireLogin,
     waitOn: function () {
       return Meteor.subscribe("hymnPublication")
     },
@@ -244,10 +272,12 @@ Router.map(function() {
   });
   this.route("/attendanceSelect/", {
     name: "attendanceSelect",
+    onBeforeAction: requireLogin,
     fastRender: true
   });
   this.route("/recognitionTypeSelect/", {
     name: "recognitionTypeSelect",
+    onBeforeAction: requireLogin,
     waitOn: function () {
       return Meteor.subscribe("recognitionTypePublication")
     },
@@ -260,14 +290,17 @@ Router.map(function() {
   });
   this.route("/sync/", {
     name: "sync",
+    onBeforeAction: requireLogin,
     fastRender: true
   });
   this.route("/reportList/", {
     name: "reportList",
+    onBeforeAction: requireLogin,
     fastRender: true
   });
   this.route("/memberCountReport/", {
     name: "memberCountReport",
+    onBeforeAction: requireLogin,
     waitOn: function () {
       return [
         Meteor.subscribe("userPublication"),
@@ -278,7 +311,11 @@ Router.map(function() {
     },
     fastRender: true
   });
-  this.route("userAccounts");
+  this.route("/userAccounts/", {
+    name: "userAccounts",
+    onBeforeAction: requireLogin,
+    fastRender: true
+  });
   this.route("/meetingPrint/:_id", function() {
 
     meeting = meetingCollection.findOne(this.params._id);

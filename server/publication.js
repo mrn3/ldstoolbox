@@ -8,6 +8,8 @@ Meteor.publish('likelyOptionsMemberPublication', function() {
       {"callings.positionId": {$in: [1, 2, 3, 94]}, "stakeUnitNo": user.stakeUnitNo}
     ]};
     return memberCollection.find(selector);
+  } else {
+    return [];
   }
 });
 
@@ -15,6 +17,8 @@ Meteor.publish('wardMemberPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
     return memberCollection.find({wardUnitNo: user.wardUnitNo});
+  } else {
+    return [];
   }
 });
 
@@ -22,6 +26,8 @@ Meteor.publish('stakeMemberPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
     return memberCollection.find({stakeUnitNo: user.stakeUnitNo});
+  } else {
+    return [];
   }
 });
 
@@ -70,6 +76,8 @@ Meteor.publish("reportPublication", function () {
         }
       )
     );
+  } else {
+    return [];
   }
 });
 
@@ -77,6 +85,8 @@ Meteor.publish('householdPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
     return householdCollection.find({wardUnitNo: user.wardUnitNo});
+  } else {
+    return [];
   }
 });
 
@@ -88,6 +98,8 @@ Meteor.publish('callingPublication', function() {
       {"wardUnitNo": -1}
     ]};
     return callingCollection.find(selector);
+  } else {
+    return [];
   }
 });
 
@@ -98,6 +110,8 @@ Meteor.publish('stakeCallingPublication', function() {
       {"stakeUnitNo": user.stakeUnitNo}
     ]};
     return callingCollection.find(selector);
+  } else {
+    return [];
   }
 });
 
@@ -105,6 +119,8 @@ Meteor.publish('callingGroupPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
     return callingGroupCollection.find({wardUnitNo: user.wardUnitNo});
+  } else {
+    return [];
   }
 });
 
@@ -112,6 +128,8 @@ Meteor.publish('organizationPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
     return organizationCollection.find({});
+  } else {
+    return [];
   }
 });
 
@@ -119,6 +137,8 @@ Meteor.publish('callingChangePublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
     return callingChangeCollection.find({wardUnitNo: user.wardUnitNo});
+  } else {
+    return [];
   }
 });
 
@@ -126,6 +146,8 @@ Meteor.publish('meetingPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
     return meetingCollection.find({wardUnitNo: user.wardUnitNo});
+  } else {
+    return [];
   }
 });
 
@@ -133,6 +155,8 @@ Meteor.publish('speakerPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
     return speakerCollection.find({wardUnitNo: user.wardUnitNo});
+  } else {
+    return [];
   }
 });
 
@@ -140,6 +164,8 @@ Meteor.publish('recognitionPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
     return recognitionCollection.find({wardUnitNo: user.wardUnitNo});
+  } else {
+    return [];
   }
 });
 
@@ -151,6 +177,8 @@ Meteor.publish('announcementPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
     return announcementCollection.find({wardUnitNo: user.wardUnitNo});
+  } else {
+    return [];
   }
 });
 
@@ -158,6 +186,8 @@ Meteor.publish('musicalNumberPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
     return musicalNumberCollection.find({wardUnitNo: user.wardUnitNo});
+  } else {
+    return [];
   }
 });
 
@@ -165,6 +195,8 @@ Meteor.publish('intermediateHymnPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
     return intermediateHymnCollection.find({wardUnitNo: user.wardUnitNo});
+  } else {
+    return [];
   }
 });
 
@@ -172,6 +204,8 @@ Meteor.publish('visitorPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
     return visitorCollection.find({wardUnitNo: user.wardUnitNo});
+  } else {
+    return [];
   }
 });
 
@@ -179,6 +213,8 @@ Meteor.publish('unitPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
     return unitCollection.find({stakeUnitNo: user.stakeUnitNo});
+  } else {
+    return [];
   }
 });
 
@@ -194,5 +230,7 @@ Meteor.publish("userPublication", function () {
                                         individualId: 1,
                                         callings: 1,
                                         ldsAccount: 1}});
+  } else {
+    return [];
   }
 });
