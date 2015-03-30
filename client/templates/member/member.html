@@ -81,23 +81,23 @@
           <div class="item item-divider">
             Household Members
           </div>
-          <a class="item item-icon-right item-avatar" href="/member/{{headOfHousehold.individualId}}">
-            <img src="https://www.lds.org/{{headOfHousehold.photoUrl}}">
+          <a class="item item-icon-right" href="/member/{{headOfHousehold.individualId}}">
+            <!--<img src="https://www.lds.org/{{headOfHousehold.photoUrl}}">//-->
             <p>Head of Household</p>
             <h2>{{headOfHousehold.name}}</h2>
             <i class="icon ion-ios-arrow-right"></i>
           </a>
           {{#if spouse.name}}
-            <a class="item item-icon-right item-avatar" href="/member/{{spouse.individualId}}">
-              <img src="https://www.lds.org/{{spouse.photoUrl}}">
+            <a class="item item-icon-right" href="/member/{{spouse.individualId}}">
+              <!--<img src="https://www.lds.org/{{spouse.photoUrl}}">//-->
               <p>Spouse</p>
               <h2>{{spouse.name}}</h2>
               <i class="icon ion-ios-arrow-right"></i>
             </a>
           {{/if}}
           {{#each otherHouseholdMembers}}
-            <a class="item item-icon-right item-avatar" href="/member/{{individualId}}">
-              <img src="https://www.lds.org/{{photoUrl}}">
+            <a class="item item-icon-right" href="/member/{{individualId}}">
+              <!--<img src="https://www.lds.org/{{photoUrl}}">//-->
               <p>Child</p>
               <h2>{{name}}</h2>
               <i class="icon ion-ios-arrow-right"></i>

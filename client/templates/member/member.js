@@ -1,4 +1,5 @@
 Template.member.rendered = function() {
+  /*
   if (this.data
     && this.data.householdData
     && this.data.householdData.headOfHousehold
@@ -8,4 +9,5 @@ Template.member.rendered = function() {
       console.log(error);
     }
   });
+  */
 }
