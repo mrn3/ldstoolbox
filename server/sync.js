@@ -368,7 +368,6 @@ Meteor.methods({
       var organizationTypeList = organizationTypeCollection.find().fetch();
 
       for(var organizationTypeIndex in organizationTypeList) {
-        //console.log(organizationTypeList[organizationTypeIndex].typeKey);
         var organizationList;
 
         var organizationListUrl="https://www.lds.org/directory/services/ludrs/1.1/unit/roster/" + inWardUnitNo + "/" + organizationTypeList[organizationTypeIndex].typeKey;
@@ -387,19 +386,7 @@ Meteor.methods({
 
         //for each group of positions
         for(var organizationIndex in organizationList) {
-          //console.log(organizationList[organizationIndex]);
           organizationCollection.insert(_.extend(organizationList[organizationIndex], {organizationType: organizationTypeList[organizationTypeIndex], wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo}));
-          memberCollection.update(
-            {
-              individualId: organizationList[organizationIndex].individualId
-            },
-            {
-              $addToSet:
-                {
-                  "organizationTypes": organizationTypeList[organizationTypeIndex]
-                }
-            }
-          );
         }
       }
     } catch (e) {
@@ -417,12 +404,6 @@ Meteor.methods({
         }
       });
     }
-    //get stake organizations too
-    Meteor.call("getWardOrganizations", inStakeUnitNo, inStakeUnitNo, function(error) {
-      if (error) {
-        console.log(error);
-      }
-    });
   },
   syncWard: function () {
     Meteor.call("getUnits");
