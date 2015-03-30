@@ -106,6 +106,30 @@ Router.map(function() {
     },
     fastRender: true
   });
+  this.route("/organizationTypeList/", {
+    name: "organizationTypeList",
+    waitOn: function () {
+      return Meteor.subscribe("organizationTypePublication")
+    },
+    data: function() {
+      return {
+        organizationTypeData: organizationTypeCollection.find({})
+      };
+    },
+    fastRender: true
+  });
+  this.route("/organization/:_id", {
+    name: "organization",
+    waitOn: function () {
+      return Meteor.subscribe("organizationPublication")
+    },
+    data: function() {
+      return {
+        organizationData: organizationCollection.find({"organizationType._id": this.params._id}, {sort: {preferredName: 1}})
+      };
+    },
+    fastRender: true
+  });
   this.route("/callingChangeList/", {
     name: "callingChangeList",
     waitOn: function () {

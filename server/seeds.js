@@ -588,4 +588,16 @@ Meteor.startup(function () {
     callingCollection.insert({callingName: "Ward Disability Specialist", wardUnitNo: -1});
   }
 
+  if (organizationTypeCollection.find().count() === 0) {
+    organizationTypeCollection.insert({typeKey: "HIGH_PRIEST", typeName: "High Priests"});
+    organizationTypeCollection.insert({typeKey: "ELDER", typeName: "Elders"});
+    organizationTypeCollection.insert({typeKey: "RELIEF_SOCIETY", typeName: "Relief Society"});
+    organizationTypeCollection.insert({typeKey: "PRIEST", typeName: "Priests"});
+    organizationTypeCollection.insert({typeKey: "TEACHER", typeName: "Teachers"});
+    organizationTypeCollection.insert({typeKey: "DEACON", typeName: "Deacons"});
+    organizationTypeCollection.insert({typeKey: "LAUREL", typeName: "Laurels"});
+    organizationTypeCollection.insert({typeKey: "MIA_MAID", typeName: "Mia Maids"});
+    organizationTypeCollection.insert({typeKey: "BEEHIVE", typeName: "Beehives"});
+    organizationTypeCollection.insert({typeKey: "ADULTS", typeName: "Adults"});
+  }
 });

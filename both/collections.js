@@ -13,14 +13,12 @@ musicalNumberCollection = new Meteor.Collection("musicalNumber");
 intermediateHymnCollection = new Meteor.Collection("intermediateHymn");
 visitorCollection = new Meteor.Collection("visitor");
 speakerCollection = new Meteor.Collection("speaker");
-
 recognitionCollection = new Meteor.Collection("recognition");
 recognitionTypeCollection = new Meteor.Collection("recognitionType");
-
 householdCollection = new Meteor.Collection("household");
 memberCollection = new Meteor.Collection("member");
 unitCollection = new Meteor.Collection("unit");
-
 hymnCollection = new Meteor.Collection("hymn");
-
 memberClientCollection = new Meteor.Collection("memberClient");
+organizationCollection = new Meteor.Collection("organization");
+organizationTypeCollection = new Meteor.Collection("organizationType");

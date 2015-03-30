@@ -19,6 +19,10 @@
                 <i class="icon ion-ios-albums-outline"></i>
                 Callings
               </a>
+              <a href="{{pathFor 'organizationTypeList'}}" class="item item-icon-left" data-ion-menu-close>
+                <i class="icon ion-ios-color-filter-outline"></i>
+                Organizations
+              </a>
               {{#if userCanViewCallingChangeList}}
               <a href="{{pathFor 'callingChangeList'}}" class="item item-icon-left" data-ion-menu-close>
                 <i class="icon ion-log-in"></i>
@@ -38,7 +42,7 @@
                 Sync
               </a>
               <a href="{{pathFor 'userAccounts'}}" class="item item-icon-left" data-ion-menu-close>
-                <i class="icon ion-ios-unlocked-outline"></i> 
+                <i class="icon ion-ios-unlocked-outline"></i>
                 Sign In/Out
               </a>
               <a href="{{pathFor 'about'}}" class="item item-icon-left" data-ion-menu-close>

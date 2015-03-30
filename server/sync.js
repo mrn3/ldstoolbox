@@ -358,16 +358,84 @@ Meteor.methods({
       }
     });
   },
+  getWardOrganizations: function(inWardUnitNo, inStakeUnitNo) {
+    this.unblock();
+    try {
+
+      //remove all positions in the ward
+      organizationCollection.remove({wardUnitNo: inWardUnitNo});
+
+      var organizationTypeList = organizationTypeCollection.find().fetch();
+
+      for(var organizationTypeIndex in organizationTypeList) {
+        //console.log(organizationTypeList[organizationTypeIndex].typeKey);
+        var organizationList;
+
+        var organizationListUrl="https://www.lds.org/directory/services/ludrs/1.1/unit/roster/" + inWardUnitNo + "/" + organizationTypeList[organizationTypeIndex].typeKey;
+        result = Meteor.http.call("GET", organizationListUrl, {
+          params: {
+            timeout: 30000
+          },
+          headers: {
+            "cookie": Meteor.user().ldsAccount.cookieValue,
+            "content-type": "application/json",
+            "Accept": "application/json"
+          },
+        });
+
+        organizationList = JSON.parse(result.content);
+
+        //for each group of positions
+        for(var organizationIndex in organizationList) {
+          //console.log(organizationList[organizationIndex]);
+          organizationCollection.insert(_.extend(organizationList[organizationIndex], {organizationType: organizationTypeList[organizationTypeIndex], wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo}));
+          memberCollection.update(
+            {
+              individualId: organizationList[organizationIndex].individualId
+            },
+            {
+              $addToSet:
+                {
+                  "organizationTypes": organizationTypeList[organizationTypeIndex]
+                }
+            }
+          );
+        }
+      }
+    } catch (e) {
+      // Got a network error, time-out or HTTP error in the 400 or 500 range.
+      console.log(e);
+      return e;
+    }
+  },
+  getStakeOrganizations: function(inStakeUnitNo) {
+    var unitList = unitCollection.find({stakeUnitNo: inStakeUnitNo}).fetch();
+    for (var unitIndex in unitList) {
+      Meteor.call("getWardOrganizations", unitList[unitIndex].wardUnitNo, inStakeUnitNo, function(error) {
+        if (error) {
+          console.log(error);
+        }
+      });
+    }
+    //get stake organizations too
+    Meteor.call("getWardOrganizations", inStakeUnitNo, inStakeUnitNo, function(error) {
+      if (error) {
+        console.log(error);
+      }
+    });
+  },
   syncWard: function () {
     Meteor.call("getUnits");
     Meteor.call("getWardMembers", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo);
     Meteor.call("getWardCallings", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo);
+    Meteor.call("getWardOrganizations", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo);
     Meteor.call("getUserCallingInfo");
   },
   syncStake: function () {
     Meteor.call("getUnits");
     Meteor.call("getStakeMembers", Meteor.user().stakeUnitNo);
     Meteor.call("getStakeCallings", Meteor.user().stakeUnitNo);
+    Meteor.call("getStakeOrganizations", Meteor.user().stakeUnitNo);
     Meteor.call("getUserCallingInfo");
   }
 });
