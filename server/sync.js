@@ -212,6 +212,35 @@ Meteor.methods({
       return e;
     }
   },
+  getHousehold: function(inHeadOfHouseholdInvidualId) {
+    this.unblock();
+    try {
+      householdCollection.remove({"headOfHousehold.individualId": inHeadOfHouseholdInvidualId});
+      var household;
+      var householdUrl="https://www.lds.org/directory/services/ludrs/mem/householdProfile/" + inHeadOfHouseholdInvidualId;
+      result = Meteor.http.call("GET", householdUrl, {
+        params: {
+          timeout: 30000
+        },
+        headers: {
+          "cookie": Meteor.user().ldsAccount.cookieValue,
+          "content-type": "application/json",
+          "Accept": "application/json"
+        },
+      });
+      household = JSON.parse(result.content);
+      householdCollection.insert(_.extend(household,
+        {
+          wardUnitNo: household.ward.wardUnitNo,
+          stakeUnitNo: household.ward.stakeUnitNo
+        }
+        ));
+    } catch (e) {
+      // Got a network error, time-out or HTTP error in the 400 or 500 range.
+      console.log(e);
+      return e;
+    }
+  },
   getWardMembers: function(inWardUnitNo, inStakeUnitNo) {
     this.unblock();
     try {
@@ -232,19 +261,22 @@ Meteor.methods({
       householdList = JSON.parse(result.content);
 
       //remove all households and members currently in the ward
-      householdCollection.remove({wardUnitNo: inWardUnitNo});
       memberCollection.remove({wardUnitNo: inWardUnitNo});
 
       //add all households in ward
-      for(var householdIndex in householdList) {
-        householdCollection.insert(_.extend(householdList[householdIndex], {wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo}));
-
+      for(var householdListIndex in householdList) {
+        //householdCollection.insert(_.extend(householdList[householdListIndex], {wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo}));
         //insert head of household, spouse, and children, and append on the ward unit number
-        memberCollection.insert(_.extend(householdList[householdIndex].headOfHouse, {wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo, switchedPreferredName: switchName(householdList[householdIndex].headOfHouse.preferredName)}));
-        memberCollection.insert(_.extend(householdList[householdIndex].spouse, {wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo, switchedPreferredName: switchName(householdList[householdIndex].spouse.preferredName)}));
-        for(var childrenIndex in householdList[householdIndex].children) {
-          memberCollection.insert(_.extend(householdList[householdIndex].children[childrenIndex], {wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo, switchedPreferredName: switchName(householdList[householdIndex].children[childrenIndex].preferredName)}));
+        memberCollection.insert(_.extend(householdList[householdListIndex].headOfHouse, {wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo, switchedPreferredName: switchName(householdList[householdListIndex].headOfHouse.preferredName)}));
+        memberCollection.insert(_.extend(householdList[householdListIndex].spouse, {wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo, switchedPreferredName: switchName(householdList[householdListIndex].spouse.preferredName)}));
+        for(var childrenIndex in householdList[householdListIndex].children) {
+          memberCollection.insert(_.extend(householdList[householdListIndex].children[childrenIndex], {wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo, switchedPreferredName: switchName(householdList[householdListIndex].children[childrenIndex].preferredName)}));
         }
+        Meteor.call("getHousehold", householdList[householdListIndex].headOfHouse.individualId, function(error) {
+          if (error) {
+            console.log(error);
+          }
+        });
       }
       //remove all the junk records
       memberCollection.remove({preferredName: "", wardUnitNo: inWardUnitNo});

@@ -75,13 +75,11 @@ Router.map(function() {
       ]
     },
     data: function() {
-
       var selector = {$or: [
-        {"headOfHouse.individualId": parseInt(this.params.individualId)},
+        {"headOfHousehold.individualId": parseInt(this.params.individualId)},
         {"spouse.individualId": parseInt(this.params.individualId)},
         {"children.individualId": parseInt(this.params.individualId)}
       ]};
-
       return {
         memberData: memberCollection.findOne({individualId: parseInt(this.params.individualId)}),
         householdData: householdCollection.findOne(selector)

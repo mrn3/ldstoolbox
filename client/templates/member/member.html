@@ -50,25 +50,56 @@
           {{/each}}
         {{/with}}
         {{#with householdData}}
+          <a class="item item-icon-right" href="#">
+            Phone
+            <span class="item-note">{{householdInfo.phone}}</span>
+            <i class="icon ion-ios-arrow-right"></i>
+          </a>
+          <div class="item item-divider">
+            Address
+          </div>
+          {{#if householdInfo.address.addr1}}
+          <a class="item item-icon-right" href="/householdMap/{{_id}}">
+            {{#if householdInfo.address.addr1}}
+              {{householdInfo.address.addr1}}
+            {{/if}}
+            {{#if householdInfo.address.addr2}}
+              <br />{{householdInfo.address.addr2}}
+            {{/if}}
+            {{#if householdInfo.address.addr3}}
+              <br />{{householdInfo.address.addr3}}
+            {{/if}}
+            {{#if householdInfo.address.addr4}}
+              <br />{{householdInfo.address.addr4}}
+            {{/if}}
+            {{#if householdInfo.address.addr5}}
+              <br />{{householdInfo.address.addr5}}
+            {{/if}}
+            <i class="icon ion-ios-arrow-right"></i>
+          </a>
+          {{/if}}
           <div class="item item-divider">
             Household Members
           </div>
-          <a class="item item-icon-right" href="/member/{{headOfHouse.individualId}}">
-            Head of Household
-            <span class="item-note">{{headOfHouse.directoryName}} {{headOfHouse.surname}}</span>
+          <a class="item item-icon-right item-avatar" href="/member/{{headOfHousehold.individualId}}">
+            <img src="https://www.lds.org/{{headOfHousehold.photoUrl}}">
+            <p>Head of Household</p>
+            <h2>{{headOfHousehold.name}}</h2>
             <i class="icon ion-ios-arrow-right"></i>
           </a>
-          {{#if spouse.directoryName}}
-            <a class="item item-icon-right" href="/member/{{spouse.individualId}}">
-              Spouse
-              <span class="item-note">{{spouse.directoryName}} {{spouse.surname}}</span>
+          {{#if spouse.name}}
+            <a class="item item-icon-right item-avatar" href="/member/{{spouse.individualId}}">
+              <img src="https://www.lds.org/{{spouse.photoUrl}}">
+              <p>Spouse</p>
+              <h2>{{spouse.name}}</h2>
               <i class="icon ion-ios-arrow-right"></i>
             </a>
           {{/if}}
-          {{#each children}}
-            <a class="item item-icon-right" href="/member/{{individualId}}">
-              Child
-              <span class="item-note">{{directoryName}} {{surname}}</span>
+          {{#each otherHouseholdMembers}}
+            <a class="item item-icon-right item-avatar" href="/member/{{individualId}}">
+              <img src="https://www.lds.org/{{photoUrl}}">
+              <p>Child</p>
+              <h2>{{name}}</h2>
               <i class="icon ion-ios-arrow-right"></i>
             </a>
           {{/each}}
