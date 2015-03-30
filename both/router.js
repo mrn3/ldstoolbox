@@ -57,8 +57,7 @@ Router.map(function() {
     waitOn: function () {
       return [
         Meteor.subscribe("stakeMemberPublication"),
-        Meteor.subscribe("householdPublication"),
-        Meteor.subscribe("organizationPublication")
+        Meteor.subscribe("householdPublication")
       ]
     },
     data: function() {
@@ -71,8 +70,7 @@ Router.map(function() {
 
       return {
         memberData: memberCollection.findOne({individualId: parseInt(this.params.individualId)}),
-        householdData: householdCollection.findOne(selector),
-        organizationData: organizationCollection.find({individualId: parseInt(this.params.individualId)})
+        householdData: householdCollection.findOne(selector)
       };
     },
     fastRender: true
@@ -108,14 +106,14 @@ Router.map(function() {
     },
     fastRender: true
   });
-  this.route("/organizationTypeList/", {
-    name: "organizationTypeList",
+  this.route("/organizationList/", {
+    name: "organizationList",
     waitOn: function () {
-      return Meteor.subscribe("organizationTypePublication")
+      return Meteor.subscribe("organizationPublication")
     },
     data: function() {
       return {
-        organizationTypeData: organizationTypeCollection.find({})
+        organizationData: organizationCollection.find({})
       };
     },
     fastRender: true
@@ -123,11 +121,11 @@ Router.map(function() {
   this.route("/organization/:_id", {
     name: "organization",
     waitOn: function () {
-      return Meteor.subscribe("organizationPublication")
+      return Meteor.subscribe("wardMemberPublication")
     },
     data: function() {
       return {
-        organizationData: organizationCollection.find({"organizationType._id": this.params._id}, {sort: {preferredName: 1}})
+        organizationData: memberCollection.find({"organizations._id": this.params._id}, {sort: {preferredName: 1}})
       };
     },
     fastRender: true

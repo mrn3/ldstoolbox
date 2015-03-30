@@ -21,4 +21,3 @@ unitCollection = new Meteor.Collection("unit");
 hymnCollection = new Meteor.Collection("hymn");
 memberClientCollection = new Meteor.Collection("memberClient");
 organizationCollection = new Meteor.Collection("organization");
-organizationTypeCollection = new Meteor.Collection("organizationType");

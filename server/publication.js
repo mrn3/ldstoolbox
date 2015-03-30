@@ -108,17 +108,10 @@ Meteor.publish('callingGroupPublication', function() {
   }
 });
 
-Meteor.publish('organizationTypePublication', function() {
-  if (this.userId) {
-    var user = Meteor.users.findOne(this.userId);
-    return organizationTypeCollection.find({});
-  }
-});
-
 Meteor.publish('organizationPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
-    return organizationCollection.find({wardUnitNo: user.wardUnitNo});
+    return organizationCollection.find({});
   }
 });
 

@@ -362,16 +362,14 @@ Meteor.methods({
     this.unblock();
     try {
 
-      //remove all positions in the ward
-      organizationCollection.remove({wardUnitNo: inWardUnitNo});
+      var organizationList = organizationCollection.find().fetch();
 
-      var organizationTypeList = organizationTypeCollection.find().fetch();
+      for(var organizationListIndex in organizationList) {
 
-      for(var organizationTypeIndex in organizationTypeList) {
-        var organizationList;
+        var organization;
 
-        var organizationListUrl="https://www.lds.org/directory/services/ludrs/1.1/unit/roster/" + inWardUnitNo + "/" + organizationTypeList[organizationTypeIndex].typeKey;
-        result = Meteor.http.call("GET", organizationListUrl, {
+        var organizationUrl="https://www.lds.org/directory/services/ludrs/1.1/unit/roster/" + inWardUnitNo + "/" + organizationList[organizationListIndex].key;
+        result = Meteor.http.call("GET", organizationUrl, {
           params: {
             timeout: 30000
           },
@@ -382,37 +380,36 @@ Meteor.methods({
           },
         });
 
-        organizationList = JSON.parse(result.content);
+        organization = JSON.parse(result.content);
 
         //for each group of positions
-        for(var organizationIndex in organizationList) {
-          organizationCollection.insert(_.extend(organizationList[organizationIndex], {organizationType: organizationTypeList[organizationTypeIndex], wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo}));
+        for(var organizationIndex in organization) {
           memberCollection.update(
             {
-              individualId: organizationList[organizationIndex].individualId
+              individualId: organization[organizationIndex].individualId
             },
             {
               $addToSet:
                 {
-                  "organizationTypes": organizationTypeList[organizationTypeIndex]
+                  "organizations": organizationList[organizationListIndex]
                 }
             }
           );
 
           memberCollection.update(
             {
-              individualId: organizationList[organizationIndex].individualId
+              individualId: organization[organizationIndex].individualId
             },
             {
               $set:
                 {
-                  birthdate:        organizationList[organizationIndex].birthdate,
-                  email:            organizationList[organizationIndex].email,
-                  formattedName:    organizationList[organizationIndex].formattedName,
-                  givenName1:       organizationList[organizationIndex].givenName1,
-                  memberId:         organizationList[organizationIndex].memberId,
-                  phone:            organizationList[organizationIndex].phone,
-                  photoUrl:         organizationList[organizationIndex].photoUrl
+                  birthdate:        organization[organizationIndex].birthdate,
+                  email:            organization[organizationIndex].email,
+                  formattedName:    organization[organizationIndex].formattedName,
+                  givenName1:       organization[organizationIndex].givenName1,
+                  memberId:         organization[organizationIndex].memberId,
+                  phone:            organization[organizationIndex].phone,
+                  photoUrl:         organization[organizationIndex].photoUrl
                 }
             }
           );
