@@ -1,7 +1,7 @@
 <template name="barHeaderLeft">
   <div class="buttons">
     {{#if isEqual leftType "mainMenu"}}
-      <button class="button button-clear pull-left" data-ion-menu-toggle="left">
+      <button class="button button-clear pull-left button-positive" data-ion-menu-toggle="left">
         {{#if isAndroid}}
           {{> ionIcon icon='android-more-vertical'}}
         {{else}}
@@ -11,9 +11,7 @@
     {{/if}}
 
     {{#if isEqual leftType "back"}}
-      <a id="backButton" class="button button-clear pull-left button-positive">
-        Back
-      </a>
+      <a id="backButton" class="button icon-left ion-ios-arrow-left button-clear button-positive"></a>
     {{/if}}
 
     {{#if isEqual leftType "cancel"}}

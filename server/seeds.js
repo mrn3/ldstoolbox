@@ -588,16 +588,16 @@ Meteor.startup(function () {
     callingCollection.insert({callingName: "Ward Disability Specialist", wardUnitNo: -1});
   }
 
-  if (organizationCollection.find().count() === 0) {
-    organizationCollection.insert({key: "HIGH_PRIEST", name: "High Priests"});
-    organizationCollection.insert({key: "ELDER", name: "Elders"});
-    organizationCollection.insert({key: "RELIEF_SOCIETY", name: "Relief Society"});
-    organizationCollection.insert({key: "PRIEST", name: "Priests"});
-    organizationCollection.insert({key: "TEACHER", name: "Teachers"});
-    organizationCollection.insert({key: "DEACON", name: "Deacons"});
-    organizationCollection.insert({key: "LAUREL", name: "Laurels"});
-    organizationCollection.insert({key: "MIA_MAID", name: "Mia Maids"});
-    organizationCollection.insert({key: "BEEHIVE", name: "Beehives"});
-    organizationCollection.insert({key: "ADULTS", name: "Adults"});
+  if (organizationCollection.find().count() === 0) { 
+    organizationCollection.insert({key: "HIGH_PRIEST", name: "High Priests", order: 1});
+    organizationCollection.insert({key: "ELDER", name: "Elders", order: 2});
+    organizationCollection.insert({key: "RELIEF_SOCIETY", name: "Relief Society", order: 3});
+    organizationCollection.insert({key: "PRIEST", name: "Priests", order: 4});
+    organizationCollection.insert({key: "TEACHER", name: "Teachers", order: 5});
+    organizationCollection.insert({key: "DEACON", name: "Deacons", order: 6});
+    organizationCollection.insert({key: "LAUREL", name: "Laurels", order: 7});
+    organizationCollection.insert({key: "MIA_MAID", name: "Mia Maids", order: 8});
+    organizationCollection.insert({key: "BEEHIVE", name: "Beehives", order: 9});
+    organizationCollection.insert({key: "ADULTS", name: "Adults", order: 10});
   }
 });

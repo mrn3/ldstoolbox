@@ -113,7 +113,7 @@ Router.map(function() {
     },
     data: function() {
       return {
-        organizationData: organizationCollection.find({})
+        organizationData: organizationCollection.find({}, {sort: {order: 1}})
       };
     },
     fastRender: true
@@ -125,7 +125,7 @@ Router.map(function() {
     },
     data: function() {
       return {
-        organizationData: memberCollection.find({"organizations._id": this.params._id}, {sort: {preferredName: 1}})
+        memberData: memberCollection.find({"organizations._id": this.params._id}, {sort: {preferredName: 1}})
       };
     },
     fastRender: true
