@@ -387,6 +387,35 @@ Meteor.methods({
         //for each group of positions
         for(var organizationIndex in organizationList) {
           organizationCollection.insert(_.extend(organizationList[organizationIndex], {organizationType: organizationTypeList[organizationTypeIndex], wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo}));
+          memberCollection.update(
+            {
+              individualId: organizationList[organizationIndex].individualId
+            },
+            {
+              $addToSet:
+                {
+                  "organizationTypes": organizationTypeList[organizationTypeIndex]
+                }
+            }
+          );
+
+          memberCollection.update(
+            {
+              individualId: organizationList[organizationIndex].individualId
+            },
+            {
+              $set:
+                {
+                  birthdate:        organizationList[organizationIndex].birthdate,
+                  email:            organizationList[organizationIndex].email,
+                  formattedName:    organizationList[organizationIndex].formattedName,
+                  givenName1:       organizationList[organizationIndex].givenName1,
+                  memberId:         organizationList[organizationIndex].memberId,
+                  phone:            organizationList[organizationIndex].phone,
+                  photoUrl:         organizationList[organizationIndex].photoUrl
+                }
+            }
+          );
         }
       }
     } catch (e) {

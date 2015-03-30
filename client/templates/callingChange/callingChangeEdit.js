@@ -56,7 +56,7 @@ Template.callingChangeEdit.helpers({
     }
   },
   userCanEditCallingChange: function () {
-    if (Meteor.user().callings) {
+    if (Meteor.user() && Meteor.user().callings) {
 
       //bishop, counselors, executive secretary, ward clerk, membership clerk
       var allowedCallingList = [4, 54, 55, 56, 57, 787];

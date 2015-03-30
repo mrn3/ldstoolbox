@@ -57,7 +57,8 @@ Router.map(function() {
     waitOn: function () {
       return [
         Meteor.subscribe("stakeMemberPublication"),
-        Meteor.subscribe("householdPublication")
+        Meteor.subscribe("householdPublication"),
+        Meteor.subscribe("organizationPublication")
       ]
     },
     data: function() {
@@ -70,7 +71,8 @@ Router.map(function() {
 
       return {
         memberData: memberCollection.findOne({individualId: parseInt(this.params.individualId)}),
-        householdData: householdCollection.findOne(selector)
+        householdData: householdCollection.findOne(selector),
+        organizationData: organizationCollection.find({individualId: parseInt(this.params.individualId)})
       };
     },
     fastRender: true

@@ -5,13 +5,18 @@
   {{#ionView}}
     {{#ionContent}}
       {{#ionList}}
+        <div class="item item-divider">
+          Contact Information
+        </div>
         {{#with memberData}}
-          <div class="item item-divider">
-            Contact Information
-          </div>
           <a class="item item-icon-right" href="#">
             Name
             <span class="item-note">{{switchedPreferredName}}</span>
+            <i class="icon ion-ios-arrow-right"></i>
+          </a>
+          <a class="item item-icon-right" href="#">
+            Email
+            <span class="item-note">{{email}}</span>
             <i class="icon ion-ios-arrow-right"></i>
           </a>
           <a class="item item-icon-right" href="#">
@@ -54,6 +59,17 @@
             </a>
           {{/each}}
         {{/with}}
+
+        <div class="item item-divider">
+          Organizations
+        </div>
+        {{#each organizationData}}
+          <a class="item item-icon-right" href="#">
+            {{organizationType.typeName}}
+            <i class="icon ion-ios-arrow-right"></i>
+          </a>
+        {{/each}}
+
       {{/ionList}}
     {{/ionContent}}
   {{/ionView}}
