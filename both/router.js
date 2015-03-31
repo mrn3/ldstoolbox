@@ -87,6 +87,24 @@ Router.map(function() {
     },
     fastRender: true
   });
+  this.route("/householdMap/:_id", {
+    name: "householdMap",
+    onBeforeAction: function() {
+      GoogleMaps.load();
+      this.next();
+    },
+    waitOn: function () {
+      return [
+        Meteor.subscribe("householdPublication")
+      ]
+    },
+    data: function() {
+      return {
+        householdData: householdCollection.findOne({_id: this.params._id})
+      };
+    },
+    fastRender: true
+  });
   this.route("/callingSelect/", {
     name: "callingSelect",
     onBeforeAction: requireLogin,
