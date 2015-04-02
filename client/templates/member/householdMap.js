@@ -3,10 +3,21 @@ Template.householdMap.helpers({
     // Make sure the maps API has loaded
     if (GoogleMaps.loaded()) {
       // Map initialization options
-      return {
-        center: new google.maps.LatLng(-37.8136, 144.9631),
-        zoom: 8
-      };
+      if (this.householdData
+        && this.householdData.householdInfo
+        && this.householdData.householdInfo.address
+        && this.householdData.householdInfo.address.latitude
+        && this.householdData.householdInfo.address.longitude) {
+          return {
+            center: new google.maps.LatLng(
+              this.householdData.householdInfo.address.latitude,
+              this.householdData.householdInfo.address.longitude
+            ),
+            zoom: 17
+          };
+      } else {
+        return {};
+      }
     }
   }
 });
