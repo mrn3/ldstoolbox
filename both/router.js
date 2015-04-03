@@ -75,9 +75,17 @@ Router.map(function() {
       ]
     },
     data: function() {
+      var selector =
+        {$or:
+          [
+            {"headOfHousehold.individualId": parseInt(this.params.individualId)},
+            {"spouse.individualId": parseInt(this.params.individualId)},
+            {"children.individualId": parseInt(this.params.individualId)}
+          ]
+        };
       return {
-        memberData: memberCollection.findOne({}),
-        householdData: householdCollection.findOne({})
+        memberData: memberCollection.findOne({individualId: parseInt(this.params.individualId)}),
+        householdData: householdCollection.findOne(selector)
       };
     },
     fastRender: true

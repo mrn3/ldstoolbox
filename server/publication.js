@@ -24,8 +24,16 @@ Meteor.publish('singleMemberPublication', function(inIndividualId) {
 
 Meteor.publish('wardMemberPublication', function() {
   if (this.userId) {
+    var projection =
+      {fields:
+        {
+          "preferredName": 1,
+          "individualId": 1,
+          "callings.callingName": 1
+        }
+      }
     var user = Meteor.users.findOne(this.userId);
-    return memberCollection.find({wardUnitNo: user.wardUnitNo});
+    return memberCollection.find({wardUnitNo: user.wardUnitNo}, projection);
   } else {
     return [];
   }
@@ -93,7 +101,15 @@ Meteor.publish("reportPublication", function () {
 Meteor.publish('wardHouseholdPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
-    return householdCollection.find({wardUnitNo: user.wardUnitNo});
+    var projection =
+      {fields:
+        {
+          "coupleName": 1,
+          "headOfHouse.individualId": 1,
+          "headOfHousehold.individualId": 1
+        }
+      }
+    return householdCollection.find({wardUnitNo: user.wardUnitNo}, projection);
   } else {
     return [];
   }
@@ -118,24 +134,28 @@ Meteor.publish('singleHouseholdByIdPublication', function(inId) {
 });
 
 Meteor.publish('singleHouseholdByIndividualIdPublication', function(inIndividualId) {
-  if (this.userId) {
-    var user = Meteor.users.findOne(this.userId);
-    var selector =
-      {$and:
-        [
-          {$or:
-            [
-              {"headOfHousehold.individualId": inIndividualId},
-              {"spouse.individualId": inIndividualId},
-              {"children.individualId": inIndividualId}
-            ]
-          },
-          {stakeUnitNo: user.stakeUnitNo}
-        ]
-      };
-    return householdCollection.find(selector);
+  if (inIndividualId) {
+    if (this.userId) {
+      var user = Meteor.users.findOne(this.userId);
+      var selector =
+        {$and:
+          [
+            {$or:
+              [
+                {"headOfHousehold.individualId": inIndividualId},
+                {"spouse.individualId": inIndividualId},
+                {"children.individualId": inIndividualId}
+              ]
+            },
+            {stakeUnitNo: user.stakeUnitNo}
+          ]
+        };
+      return householdCollection.find(selector);
+    } else {
+      return [];
+    }
   } else {
-    return [];
+    return this.stop();
   }
 });
 
