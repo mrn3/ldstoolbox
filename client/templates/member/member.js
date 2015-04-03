@@ -34,10 +34,10 @@ Template.member.events({
             && household.householdInfo.address.latitude
             && household.householdInfo.address.longitude) {
               var theLocation = "comgooglemaps-x-callback://?" +
-                //"saddr=" +
-                //"&daddr=" + household.householdInfo.address.addr1 + "," + household.householdInfo.address.addr2 +
-                "center=" + household.householdInfo.address.latitude + "," + household.householdInfo.address.longitude +
-                //"&zoom=17&views=traffic" +
+                "saddr=" +
+                "&daddr=" + household.householdInfo.address.addr1 + "," + household.householdInfo.address.addr2 +
+                "&center=" + household.householdInfo.address.latitude + "," + household.householdInfo.address.longitude +
+                "&zoom=17&views=traffic" +
                 "&x-success=sourceapp://?resume=true" +
                 "&x-source=LDS+Toolbox";
               //console.log(theLocation);
