@@ -16,6 +16,7 @@ speakerCollection = new Meteor.Collection("speaker");
 recognitionCollection = new Meteor.Collection("recognition");
 recognitionTypeCollection = new Meteor.Collection("recognitionType");
 householdCollection = new Meteor.Collection("household");
+Ground.Collection(householdCollection);
 memberCollection = new Meteor.Collection("member");
 unitCollection = new Meteor.Collection("unit");
 hymnCollection = new Meteor.Collection("hymn");

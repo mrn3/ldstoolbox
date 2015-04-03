@@ -30,3 +30,4 @@ meteorhacks:kadira@2.20.1
 meteorhacks:aggregate@1.2.0
 dburles:google-maps
 percolate:paginated-subscription
+ground:db
