@@ -15,11 +15,10 @@ Template.member.rendered = function() {
 Template.member.events({
   'click [data-action=showAddressActionSheet]': function (event, template) {
     var household = this;
-    console.log(household);
     IonActionSheet.show({
       buttons: [
         { text: "View Map"},
-        { text: 'Get Directions in Google Maps' },
+        { text: "Get Directions in Google Maps" }
       ],
       cancelText: 'Cancel',
       cancel: function() {},
@@ -33,15 +32,25 @@ Template.member.events({
             && household.householdInfo.address
             && household.householdInfo.address.latitude
             && household.householdInfo.address.longitude) {
-              var theLocation = "comgooglemaps-x-callback://?" +
+              var theLocation;
+              var iOS = /(iPad|iPhone|iPod)/g.test( navigator.userAgent );
+              if (iOS) {
+                theLocation = "comgooglemaps-x-callback://?";
+              } else {
+                theLocation = "https://www.google.com/maps?";
+              }
+              theLocation +=
                 "saddr=" +
-                "&daddr=" + household.householdInfo.address.addr1 + "," + household.householdInfo.address.addr2 +
+                "&daddr=" + household.householdInfo.address.addr1 + "," + household.householdInfo.address.addr2 + "," + household.householdInfo.address.addr3 + "," + household.householdInfo.address.addr4 +
                 "&center=" + household.householdInfo.address.latitude + "," + household.householdInfo.address.longitude +
-                "&zoom=17&views=traffic" +
+                "&zoom=17" +
+                "&views=traffic" +
+                "&directionsmode=driving" +
+                "&dirflg=d" +
                 "&x-success=sourceapp://?resume=true" +
                 "&x-source=LDS+Toolbox";
               //console.log(theLocation);
-              window.location = theLocation;
+              window.open(theLocation);
           }
         }
         return true;
