@@ -155,7 +155,7 @@ Router.map(function() {
     name: "organization",
     onBeforeAction: requireLogin,
     waitOn: function () {
-      return Meteor.subscribe("wardMemberPublication")
+      return Meteor.subscribe("wardMemberOrganizationPublication")
     },
     data: function() {
       return {

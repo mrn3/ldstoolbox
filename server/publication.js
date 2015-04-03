@@ -42,6 +42,27 @@ Meteor.publish('wardMemberPublication', function(inLimit) {
   }
 });
 
+Meteor.publish('wardMemberOrganizationPublication', function() {
+
+  if (this.userId) {
+    var options =
+      {
+        fields:
+          {
+            "preferredName": 1,
+            "individualId": 1,
+            "callings.callingName": 1,
+            "organizations._id": 1
+          }
+      }
+
+    var user = Meteor.users.findOne(this.userId);
+    return memberCollection.find({wardUnitNo: user.wardUnitNo}, options);
+  } else {
+    return [];
+  }
+});
+
 Meteor.publish('stakeMemberPublication', function() {
   if (this.userId) {
     var projection =
