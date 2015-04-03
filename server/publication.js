@@ -22,18 +22,21 @@ Meteor.publish('singleMemberPublication', function(inIndividualId) {
   }
 });
 
-Meteor.publish('wardMemberPublication', function() {
+Meteor.publish('wardMemberPublication', function(inLimit) {
   if (this.userId) {
-    var projection =
-      {fields:
-        {
-          "preferredName": 1,
-          "individualId": 1,
-          "callings.callingName": 1
-        }
+    var options =
+      {
+        limit: inLimit,
+        sort: {preferredName: 1},
+        fields:
+          {
+            "preferredName": 1,
+            "individualId": 1,
+            "callings.callingName": 1
+          }
       }
     var user = Meteor.users.findOne(this.userId);
-    return memberCollection.find({wardUnitNo: user.wardUnitNo}, projection);
+    return memberCollection.find({wardUnitNo: user.wardUnitNo}, options);
   } else {
     return [];
   }

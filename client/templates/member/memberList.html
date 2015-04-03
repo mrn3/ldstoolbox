@@ -2,8 +2,9 @@
 
   {{> barHeader title="Directory" leftType="mainMenu" rightType="memberList"}}
 
+
   {{#ionView}}
-    {{#ionContent}}
+    {{#ionContent id="theContent"}}
         {{#ionList}}
           {{#each memberData}}
             <a href="{{pathFor 'member'}}" class="item item-icon-right">

@@ -1,5 +1,11 @@
+var theHandle;
+
+Deps.autorun(function() {
+  theHandle = Meteor.subscribeWithPagination("wardMemberPublication", 20);
+});
+
 Template.memberList.events({
-  'click [data-action=showSortActionSheet]': function (event, template) {
+  "click [data-action=showSortActionSheet]": function (event, template) {
     IonActionSheet.show({
       buttons: [
         { text: "Households"},
@@ -17,5 +23,18 @@ Template.memberList.events({
         return true;
       }
     });
+  },
+  "scroll .content": function (event, template) {
+    var scrollTop = $("div.content.overflow-scroll.has-header")[0].scrollTop;
+    var scrollHeight = $("div.content.overflow-scroll.has-header")[0].scrollHeight;
+
+    //console.log(scrollTop);
+    //console.log(scrollHeight);
+    //console.log(scrollTop / scrollHeight);
+
+    //if within 60%, load more
+    if ((scrollTop / scrollHeight) > 0.4) {
+      theHandle.loadNextPage();
+    }
   }
 });

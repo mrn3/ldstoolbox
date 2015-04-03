@@ -43,13 +43,12 @@ Router.map(function() {
     onBeforeAction: requireLogin,
     waitOn: function () {
       return [
-        Meteor.subscribe("wardMemberPublication"),
         Meteor.subscribe("userPublication")
       ]
     },
     data: function() {
       return {
-        memberData: memberCollection.find({}, {sort: {preferredName: 1}})
+        memberData: memberCollection.find({})
       };
     },
     fastRender: true
