@@ -55,7 +55,7 @@
             Address
           </div>
           {{#if householdInfo.address.addr1}}
-          <a class="item item-icon-right" href="/householdMap/{{_id}}">
+          <a class="item item-icon-right" data-action=showAddressActionSheet>
             {{#if householdInfo.address.addr1}}
               {{householdInfo.address.addr1}}
             {{/if}}
