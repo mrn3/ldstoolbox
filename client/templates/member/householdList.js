@@ -1,5 +1,5 @@
 Template.householdList.rendered = function() {
-  Meteor.subscribe("householdPublication");
+  Meteor.subscribe("wardHouseholdPublication");
 }
 
 Template.householdList.helpers({

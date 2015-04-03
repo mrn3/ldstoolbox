@@ -15,6 +15,7 @@ Template.member.rendered = function() {
 Template.member.events({
   'click [data-action=showAddressActionSheet]': function (event, template) {
     var household = this;
+    console.log(household);
     IonActionSheet.show({
       buttons: [
         { text: "View Map"},
@@ -27,7 +28,19 @@ Template.member.events({
           Router.go("/householdMap/" + household._id);
         }
         if (index === 1) {
-          window.location = "comgooglemaps://?center=40.765819,-73.975866&zoom=14&views=traffic";
+          if (household
+            && household.householdInfo
+            && household.householdInfo.address
+            && household.householdInfo.address.latitude
+            && household.householdInfo.address.longitude) {
+              var theLocation = "comgooglemaps://?" +
+                "saddr=" +
+                "&daddr=" + household.householdInfo.address.addr1 + "," + household.householdInfo.address.addr2 +
+                "&center=" + household.householdInfo.address.latitude + "," + household.householdInfo.address.longitude +
+                "&zoom=17&views=traffic";
+              //console.log(theLocation);
+              window.location = theLocation;
+          }
         }
         return true;
       }

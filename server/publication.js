@@ -13,6 +13,15 @@ Meteor.publish('likelyOptionsMemberPublication', function() {
   }
 });
 
+Meteor.publish('singleMemberPublication', function(inIndividualId) {
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    return memberCollection.find({individualId: inIndividualId, stakeUnitNo: user.stakeUnitNo});
+  } else {
+    return [];
+  }
+});
+
 Meteor.publish('wardMemberPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
@@ -81,7 +90,7 @@ Meteor.publish("reportPublication", function () {
   }
 });
 
-Meteor.publish('householdPublication', function() {
+Meteor.publish('wardHouseholdPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
     return householdCollection.find({wardUnitNo: user.wardUnitNo});
@@ -90,7 +99,47 @@ Meteor.publish('householdPublication', function() {
   }
 });
 
-Meteor.publish('callingPublication', function() {
+Meteor.publish('stakeHouseholdPublication', function() {
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    return householdCollection.find({stakeUnitNo: user.stakeUnitNo});
+  } else {
+    return [];
+  }
+});
+
+Meteor.publish('singleHouseholdByIdPublication', function(inId) {
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    return householdCollection.find({_id: inId, stakeUnitNo: user.stakeUnitNo});
+  } else {
+    return [];
+  }
+});
+
+Meteor.publish('singleHouseholdByIndividualIdPublication', function(inIndividualId) {
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    var selector =
+      {$and:
+        [
+          {$or:
+            [
+              {"headOfHousehold.individualId": inIndividualId},
+              {"spouse.individualId": inIndividualId},
+              {"children.individualId": inIndividualId}
+            ]
+          },
+          {stakeUnitNo: user.stakeUnitNo}
+        ]
+      };
+    return householdCollection.find(selector);
+  } else {
+    return [];
+  }
+});
+
+Meteor.publish('wardCallingPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
     var selector = {$or: [

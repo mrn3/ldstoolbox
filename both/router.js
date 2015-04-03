@@ -70,19 +70,14 @@ Router.map(function() {
     onBeforeAction: requireLogin,
     waitOn: function () {
       return [
-        Meteor.subscribe("stakeMemberPublication"),
-        Meteor.subscribe("householdPublication")
+        Meteor.subscribe("singleMemberPublication", parseInt(this.params.individualId)),
+        Meteor.subscribe("singleHouseholdByIndividualIdPublication", parseInt(this.params.individualId))
       ]
     },
     data: function() {
-      var selector = {$or: [
-        {"headOfHousehold.individualId": parseInt(this.params.individualId)},
-        {"spouse.individualId": parseInt(this.params.individualId)},
-        {"children.individualId": parseInt(this.params.individualId)}
-      ]};
       return {
-        memberData: memberCollection.findOne({individualId: parseInt(this.params.individualId)}),
-        householdData: householdCollection.findOne(selector)
+        memberData: memberCollection.findOne({}),
+        householdData: householdCollection.findOne({})
       };
     },
     fastRender: true
@@ -95,7 +90,7 @@ Router.map(function() {
     },
     waitOn: function () {
       return [
-        Meteor.subscribe("householdPublication")
+        Meteor.subscribe("singleHouseholdByIdPublication", this.params._id)
       ]
     },
     data: function() {
@@ -108,9 +103,6 @@ Router.map(function() {
   this.route("/callingSelect/", {
     name: "callingSelect",
     onBeforeAction: requireLogin,
-    waitOn: function () {
-      return Meteor.subscribe("callingPublication")
-    },
     fastRender: true
   });
   this.route("/callingGroupList/", {
@@ -281,9 +273,6 @@ Router.map(function() {
   this.route("/hymnSelect/", {
     name: "hymnSelect",
     onBeforeAction: requireLogin,
-    waitOn: function () {
-      return Meteor.subscribe("hymnPublication")
-    },
     fastRender: true
   });
   this.route("/attendanceSelect/", {
