@@ -239,6 +239,7 @@ Router.map(function() {
     onBeforeAction: requireLogin,
     waitOn: function () {
       return [
+        Meteor.subscribe("userPublication"),
         Meteor.subscribe("meetingPublication"),
         Meteor.subscribe("musicalNumberPublication"),
         Meteor.subscribe("intermediateHymnPublication"),
@@ -247,7 +248,6 @@ Router.map(function() {
         Meteor.subscribe("speakerPublication"),
         Meteor.subscribe("recognitionPublication"),
         Meteor.subscribe("callingChangePublication"),
-        Meteor.subscribe("userPublication")
       ]
     },
     data: function() {
