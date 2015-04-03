@@ -4,7 +4,7 @@ Template.householdList.rendered = function() {
 
 Template.householdList.helpers({
   householdData: function() {
-    return householdCollection.find({}, {sort: {householdName: 1}})
+    return householdCollection.find({}, {sort: {coupleName: 1}})
   }
 });
 
