@@ -13,14 +13,14 @@ Template.member.rendered = function() {
 }
 
 Template.member.events({
-  'click [data-action=showAddressActionSheet]': function (event, template) {
+  "click [data-action=showAddressActionSheet]": function (event, template) {
     var household = this;
     IonActionSheet.show({
       buttons: [
         { text: "View Map"},
         { text: "Get Directions in Google Maps" }
       ],
-      cancelText: 'Cancel',
+      cancelText: "Cancel",
       cancel: function() {},
       buttonClicked: function(index) {
         if (index === 0) {
@@ -61,14 +61,14 @@ Template.member.events({
       }
     });
   },
-  'click [data-action=showIndividualPhoneActionSheet]': function (event, template) {
+  "click [data-action=showIndividualPhoneActionSheet]": function (event, template) {
     var member = this;
     IonActionSheet.show({
       buttons: [
         { text: "Call"},
         { text: "Send Text Message" }
       ],
-      cancelText: 'Cancel',
+      cancelText: "Cancel",
       cancel: function() {},
       buttonClicked: function(index) {
         if (index === 0) {
@@ -81,14 +81,14 @@ Template.member.events({
       }
     });
   },
-  'click [data-action=showHouseholdPhoneActionSheet]': function (event, template) {
+  "click [data-action=showHouseholdPhoneActionSheet]": function (event, template) {
     var household = this;
     IonActionSheet.show({
       buttons: [
         { text: "Call"},
         { text: "Send Text Message" }
       ],
-      cancelText: 'Cancel',
+      cancelText: "Cancel",
       cancel: function() {},
       buttonClicked: function(index) {
         if (index === 0) {

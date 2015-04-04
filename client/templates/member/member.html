@@ -29,29 +29,37 @@
           <div class="item item-divider">
             Contact Information
           </div>
-          <a class="item item-icon-right" href="#" data-action=showIndividualPhoneActionSheet>
-            Individual Phone
-            <span class="item-note">{{phone}}</span>
-            <i class="icon ion-ios-arrow-right"></i>
-          </a>
-          <a class="item item-icon-right" href="mailto:{{email}}">
-            Individual Email
-            <span class="item-note">{{email}}</span>
-            <i class="icon ion-ios-arrow-right"></i>
-          </a>
-        {{/with}}
-        {{#with householdData}}
-          {{#with householdInfo}}
-            <a class="item item-icon-right" data-action=showHouseholdPhoneActionSheet>
-              Household Phone
+          {{#if phone}}
+            <a class="item item-icon-right" href="#" data-action=showIndividualPhoneActionSheet>
+              Individual Phone
               <span class="item-note">{{phone}}</span>
               <i class="icon ion-ios-arrow-right"></i>
             </a>
+          {{/if}}
+          {{#if email}}
             <a class="item item-icon-right" href="mailto:{{email}}">
-              Household Email
+              Individual Email
               <span class="item-note">{{email}}</span>
               <i class="icon ion-ios-arrow-right"></i>
             </a>
+          {{/if}}
+        {{/with}}
+        {{#with householdData}}
+          {{#with householdInfo}}
+            {{#if phone}}
+              <a class="item item-icon-right" data-action=showHouseholdPhoneActionSheet>
+                Household Phone
+                <span class="item-note">{{phone}}</span>
+                <i class="icon ion-ios-arrow-right"></i>
+              </a>
+            {{/if}}
+            {{#if email}}
+              <a class="item item-icon-right" href="mailto:{{email}}">
+                Household Email
+                <span class="item-note">{{email}}</span>
+                <i class="icon ion-ios-arrow-right"></i>
+              </a>
+            {{/if}}
             {{#with address}}
               <div class="item item-divider">
                 Address
@@ -92,13 +100,13 @@
             <a class="item item-icon-right" href="/member/{{individualId}}">
             <p>Head of Household</p>
             <h2>
-              {{directoryName}}
+              {{name}}
             </h2>
             <i class="icon ion-ios-arrow-right"></i>
           </a>
           {{/with}}
           {{#with spouse}}
-            <a class="item item-icon-right" href="/member/{{spouse.individualId}}">
+            <a class="item item-icon-right" href="/member/{{individualId}}">
               <p>Spouse</p>
               <h2>{{name}}</h2>
               <i class="icon ion-ios-arrow-right"></i>

@@ -78,7 +78,9 @@ Router.map(function() {
         {$or:
           [
             {"headOfHousehold.individualId": parseInt(this.params.individualId)},
+            {"headOfHouse.individualId": parseInt(this.params.individualId)},
             {"spouse.individualId": parseInt(this.params.individualId)},
+            {"otherHouseholdMembers.individualId": parseInt(this.params.individualId)},
             {"children.individualId": parseInt(this.params.individualId)}
           ]
         };
@@ -125,7 +127,7 @@ Router.map(function() {
     },
     fastRender: true
   });
-  this.route("/callingGroup/:_id", {
+  this.route("/callingGroup/:groupKey", {
     name: "callingGroup",
     onBeforeAction: requireLogin,
     waitOn: function () {
