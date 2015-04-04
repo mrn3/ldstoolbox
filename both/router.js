@@ -127,7 +127,7 @@ Router.map(function() {
     },
     fastRender: true
   });
-  this.route("/callingGroup/:groupKey", {
+  this.route("/callingGroup/:_id", {
     name: "callingGroup",
     onBeforeAction: requireLogin,
     waitOn: function () {
