@@ -9,9 +9,9 @@ Template.memberList.events({
     IonActionSheet.show({
       buttons: [
         { text: "Households"},
-        { text: 'Members' },
+        { text: "Members" },
       ],
-      cancelText: 'Cancel',
+      cancelText: "Cancel",
       cancel: function() {},
       buttonClicked: function(index) {
         if (index === 0) {
@@ -28,7 +28,7 @@ Template.memberList.events({
     var scrollTop = $("div.content.overflow-scroll.has-header")[0].scrollTop;
     var scrollHeight = $("div.content.overflow-scroll.has-header")[0].scrollHeight;
 
-    //console.log(scrollTop);
+    //wconsole.log(scrollTop);
     //console.log(scrollHeight);
     //console.log(scrollTop / scrollHeight);
 

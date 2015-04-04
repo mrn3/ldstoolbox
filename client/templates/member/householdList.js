@@ -1,21 +1,17 @@
-Template.householdList.rendered = function() {
-  Meteor.subscribe("wardHouseholdPublication");
-}
+var theHandle;
 
-Template.householdList.helpers({
-  householdData: function() {
-    return householdCollection.find({}, {sort: {coupleName: 1}})
-  }
+Deps.autorun(function() {
+  theHandle = Meteor.subscribeWithPagination("wardHouseholdPublication", 20);
 });
 
 Template.householdList.events({
-  'click [data-action=showSortActionSheet]': function (event, template) {
+  "click [data-action=showSortActionSheet]": function (event, template) {
     IonActionSheet.show({
       buttons: [
         { text: "Households"},
-        { text: 'Members' },
+        { text: "Members" },
       ],
-      cancelText: 'Cancel',
+      cancelText: "Cancel",
       cancel: function() {},
       buttonClicked: function(index) {
         if (index === 0) {
@@ -27,5 +23,18 @@ Template.householdList.events({
         return true;
       }
     });
+  },
+  "scroll .content": function (event, template) {
+    var scrollTop = $("div.content.overflow-scroll.has-header")[0].scrollTop;
+    var scrollHeight = $("div.content.overflow-scroll.has-header")[0].scrollHeight;
+
+    //console.log(scrollTop);
+    //console.log(scrollHeight);
+    //console.log(scrollTop / scrollHeight);
+
+    //if within 60%, load more
+    if ((scrollTop / scrollHeight) > 0.4) {
+      theHandle.loadNextPage();
+    }
   }
 });

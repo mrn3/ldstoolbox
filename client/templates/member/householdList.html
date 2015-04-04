@@ -11,12 +11,13 @@
                 {{coupleName}}
                 <i class="icon ion-ios-arrow-right"></i>
               </a>
-            {{else}}
+            {{/if}}
+            {{#if headOfHouse.individualId}}
               <a class="item item-icon-right" href="/member/{{headOfHouse.individualId}}">
                 {{coupleName}}
                 <i class="icon ion-ios-arrow-right"></i>
               </a>
-            {{/if}}  
+            {{/if}}
           {{/each}}
         {{/ionList}}
     {{/ionContent}}

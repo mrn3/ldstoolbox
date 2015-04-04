@@ -170,15 +170,16 @@ Meteor.publish('singleHouseholdByIndividualIdPublication', function(inIndividual
 Meteor.publish('wardHouseholdPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
-    var projection =
-      {fields:
+    var options =
+      {sort: {coupleName: 1},
+      fields:
         {
           "coupleName": 1,
           "headOfHouse.individualId": 1,
           "headOfHousehold.individualId": 1
         }
       }
-    return householdCollection.find({wardUnitNo: user.wardUnitNo}, projection);
+    return householdCollection.find({wardUnitNo: user.wardUnitNo}, options);
   } else {
     return [];
   }
