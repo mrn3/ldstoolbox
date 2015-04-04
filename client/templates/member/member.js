@@ -50,8 +50,52 @@ Template.member.events({
                 "&x-success=sourceapp://?resume=true" +
                 "&x-source=LDS+Toolbox";
               //console.log(theLocation);
-              window.open(theLocation);
+              if (iOS) {
+                window.location = theLocation;
+              } else {
+                window.open(theLocation);
+              }
           }
+        }
+        return true;
+      }
+    });
+  },
+  'click [data-action=showIndividualPhoneActionSheet]': function (event, template) {
+    var member = this;
+    IonActionSheet.show({
+      buttons: [
+        { text: "Call"},
+        { text: "Send Text Message" }
+      ],
+      cancelText: 'Cancel',
+      cancel: function() {},
+      buttonClicked: function(index) {
+        if (index === 0) {
+          window.location = "tel:" + member.phone;
+        }
+        if (index === 1) {
+          window.location = "sms:" + member.phone;
+        }
+        return true;
+      }
+    });
+  },
+  'click [data-action=showHouseholdPhoneActionSheet]': function (event, template) {
+    var household = this;
+    IonActionSheet.show({
+      buttons: [
+        { text: "Call"},
+        { text: "Send Text Message" }
+      ],
+      cancelText: 'Cancel',
+      cancel: function() {},
+      buttonClicked: function(index) {
+        if (index === 0) {
+          window.location = "tel:" + household.phone;
+        }
+        if (index === 1) {
+          window.location = "sms:" + household.phone;
         }
         return true;
       }
