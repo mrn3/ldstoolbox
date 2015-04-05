@@ -146,7 +146,6 @@ Template.memberSelect.events({
     var text = $(e.target).val().trim();
     memberSearch.search(text);
   }, 200),
-
   "click #goButton": function() {
     var memberObject = {
       "switchedPreferredName": $('#other').val()
@@ -170,7 +169,6 @@ Template.memberSelect.events({
     memberSearch.search(text);
   },
 });
-
 
 Template.memberSelect.rendered = function() {
   var user = Meteor.users.findOne(Meteor.user()._id);
