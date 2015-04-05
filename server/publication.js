@@ -350,7 +350,8 @@ Meteor.publish("userPublication", function () {
                                         stakeName: 1,
                                         individualId: 1,
                                         callings: 1,
-                                        ldsAccount: 1}});
+                                        ldsAccount: 1,
+                                        selectedWardUnitNo: 1}});
   } else {
     return [];
   }

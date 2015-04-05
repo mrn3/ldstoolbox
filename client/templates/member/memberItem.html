@@ -1,0 +1,13 @@
+<template name="memberItem">
+  <a href="{{pathFor 'member'}}" class="item item-icon-right">
+    <h2>
+      {{preferredName}}
+    </h2>
+    <p>
+    {{#each callings}}
+      {{callingName}}
+    {{/each}}
+    </p>
+    <i class="icon ion-ios-arrow-right"></i>
+  </a>
+</template>

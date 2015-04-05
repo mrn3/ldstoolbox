@@ -1,10 +1,10 @@
 var options = {
-  keepHistory: 1000 * 60 * 5,
-  localSearch: true
+  //keepHistory: 1000 * 60 * 5,
+  //localSearch: true
 };
 var fields = ['switchedPreferredName', "callings.callingName"];
 
-memberSearch = new SearchSource('members', fields, options);
+memberSearch = new SearchSource("members", fields, options, 5);
 
 Template.memberSelect.helpers({
   memberData: function(){
@@ -14,6 +14,16 @@ Template.memberSelect.helpers({
       },
       sort: {isoScore: -1}
     });
+  },
+  userData: function() {
+    return Meteor.user();
+  },
+  isSelectedUnit: function(inWardUnitNo) {
+    if (Session.get("selectedWardUnitNo") == inWardUnitNo) {
+      return "selected";
+    } else {
+      return "";
+    }
   },
   isLoading: function() {
     return memberSearch.getStatus().loading;
@@ -152,11 +162,17 @@ Template.memberSelect.events({
       this.callings.callingName = jQuery('<p>' + this.callings.callingName + '</p>').text();
     }
     doUpdate(this);
-  }
+  },
+  "change #unitSelect": function(e, instance) {
+    Session.set("selectedWardUnitNo", $("#unitSelect").val());
+    Meteor.call("setUserSelectedWardUnitNo", parseInt($("#unitSelect").val()));
+    var text = $("#searchInput").val().trim();
+    memberSearch.search(text);
+  },
 });
 
-/*
+
 Template.memberSelect.rendered = function() {
-  $('#searchInput').focus();
+  var user = Meteor.users.findOne(Meteor.user()._id);
+  Session.set("selectedWardUnitNo", user.selectedWardUnitNo);
 };
-*/

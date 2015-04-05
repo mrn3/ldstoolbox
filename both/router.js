@@ -74,8 +74,14 @@ Router.map(function() {
     waitOn: function () {
       return [
         Meteor.subscribe("likelyOptionsMemberPublication"),
+        Meteor.subscribe("unitPublication"),
         Meteor.subscribe("userPublication")
       ]
+    },
+    data: function() {
+      return {
+        unitData: unitCollection.find({})
+      };
     },
     fastRender: true
   });
