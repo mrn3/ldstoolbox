@@ -1,5 +1,5 @@
 Template.sync.helpers({
-  user: function() {
+  userData: function() {
     return Meteor.user();
   },
   ldsAccountUserNotAuthenticated: function() {
@@ -12,26 +12,6 @@ Template.sync.helpers({
       return oneHourAgo.isAfter(Meteor.user().ldsAccount.updatedAt);
     } else {
       return true;
-    }
-  },
-  wardMemberCount: function() {
-    if (Meteor.user() && Meteor.user().wardUnitNo) {
-      return memberCollection.find({wardUnitNo: Meteor.user().wardUnitNo}).count();
-    }
-  },
-  wardCallingCount: function() {
-    if (Meteor.user() && Meteor.user().wardUnitNo) {
-      return callingCollection.find({wardUnitNo: Meteor.user().wardUnitNo}).count();
-    }
-  },
-  stakeMemberCount: function() {
-    if (Meteor.user() && Meteor.user().stakeUnitNo) {
-      return memberCollection.find({stakeUnitNo: Meteor.user().stakeUnitNo}).count();
-    }
-  },
-  stakeCallingCount: function() {
-    if (Meteor.user() && Meteor.user().stakeUnitNo) {
-      return callingCollection.find({stakeUnitNo: Meteor.user().stakeUnitNo}).count();
     }
   }
 });

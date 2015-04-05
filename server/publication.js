@@ -65,6 +65,21 @@ Meteor.publish('wardMemberOrganizationPublication', function() {
 
 Meteor.publish('stakeMemberPublication', function() {
   if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    var selector = {$or: [
+      {"stakeUnitNo": user.stakeUnitNo}
+    ]};
+    return memberCollection.find(selector);
+  } else {
+    return [];
+  }
+});
+
+Meteor.publish('stakeMemberTrimmedPublication', function() {
+  if (this.userId) {
+    var selector = {$or: [
+      {"stakeUnitNo": user.stakeUnitNo}
+    ]};
     var options =
       {fields:
         {
@@ -74,7 +89,7 @@ Meteor.publish('stakeMemberPublication', function() {
         }
       }
     var user = Meteor.users.findOne(this.userId);
-    return memberCollection.find({stakeUnitNo: user.stakeUnitNo}, options);
+    return memberCollection.find(selector, options);
   } else {
     return [];
   }

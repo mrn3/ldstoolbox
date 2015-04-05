@@ -313,14 +313,23 @@ Router.map(function() {
       return [
         Meteor.subscribe("userPublication"),
         Meteor.subscribe("stakeMemberPublication"),
+        Meteor.subscribe("stakeHouseholdPublication"),
         Meteor.subscribe("stakeCallingPublication")
       ]
     },
     data: function() {
-      console.log(Meteor.users.findOne(Meteor.user()._id));
-      return {
-        userData: Meteor.users.findOne(Meteor.user()._id)
-      };
+      if (Meteor.user() && Meteor.user().wardUnitNo) {
+        return {
+          stakeMemberCount: memberCollection.find({stakeUnitNo: Meteor.user().stakeUnitNo}).count(),
+          wardMemberCount: memberCollection.find({wardUnitNo: Meteor.user().wardUnitNo}).count(),
+          stakeHouseholdCount: householdCollection.find({stakeUnitNo: Meteor.user().stakeUnitNo}).count(),
+          wardHouseholdCount: householdCollection.find({wardUnitNo: Meteor.user().wardUnitNo}).count(),
+          stakeCallingCount: callingCollection.find({stakeUnitNo: Meteor.user().stakeUnitNo}).count(),
+          wardCallingCount: callingCollection.find({wardUnitNo: Meteor.user().wardUnitNo}).count()
+        };
+      } else {
+        return [];
+      }
     },
     onBeforeAction: requireLogin,
     fastRender: true
@@ -337,9 +346,24 @@ Router.map(function() {
       return [
         Meteor.subscribe("userPublication"),
         Meteor.subscribe("stakeMemberPublication"),
+        Meteor.subscribe("stakeHouseholdPublication"),
         Meteor.subscribe("stakeCallingPublication"),
         Meteor.subscribe("reportPublication")
       ]
+    },
+    data: function() {
+      if (Meteor.user() && Meteor.user().wardUnitNo) {
+        return {
+          stakeMemberCount: memberCollection.find({stakeUnitNo: Meteor.user().stakeUnitNo}).count(),
+          wardMemberCount: memberCollection.find({wardUnitNo: Meteor.user().wardUnitNo}).count(),
+          stakeHouseholdCount: householdCollection.find({stakeUnitNo: Meteor.user().stakeUnitNo}).count(),
+          wardHouseholdCount: householdCollection.find({wardUnitNo: Meteor.user().wardUnitNo}).count(),
+          stakeCallingCount: callingCollection.find({stakeUnitNo: Meteor.user().stakeUnitNo}).count(),
+          wardCallingCount: callingCollection.find({wardUnitNo: Meteor.user().wardUnitNo}).count()
+        };
+      } else {
+        return [];
+      }
     },
     fastRender: true
   });

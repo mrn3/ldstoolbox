@@ -7,7 +7,7 @@
       {{#if ldsAccountUserNotAuthenticated}}
         <div class="list">
           <label class="item item-input">
-            <input type="text" placeholder="LDS Account Username" id="ldsAccountUsername" value="{{user.ldsAccount.username}}">
+            <input type="text" placeholder="LDS Account Username" id="ldsAccountUsername" value="{{userData.ldsAccount.username}}">
           </label>
           <label class="item item-input">
             <input type="password" placeholder="LDS Account Password" id="ldsAccountPassword">
@@ -33,6 +33,9 @@
               <strong>Members</strong>
             </div>
             <div class="col">
+              <strong>Households</strong>
+            </div>
+            <div class="col">
               <strong>Callings</strong>
             </div>
           </div>
@@ -44,6 +47,9 @@
             </div>
             <div class="col" id="wardMemberCount">
               {{wardMemberCount}}
+            </div>
+            <div class="col" id="wardMemberCount">
+              {{wardHouseholdCount}}
             </div>
             <div class="col">
               {{wardCallingCount}}
@@ -57,6 +63,9 @@
             </div>
             <div class="col">
               {{stakeMemberCount}}
+            </div>
+            <div class="col">
+              {{stakeHouseholdCount}}
             </div>
             <div class="col">
               {{stakeCallingCount}}
@@ -100,6 +109,8 @@
           </div>
         </label>
         {{/with}}
+        {{memberData}}
+
       </div>
     {{/ionContent}}
   {{/ionView}}
