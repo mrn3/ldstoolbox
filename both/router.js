@@ -359,7 +359,7 @@ Router.map(function() {
           stakeHouseholdCount: householdCollection.find({stakeUnitNo: Meteor.user().stakeUnitNo}).count(),
           wardHouseholdCount: householdCollection.find({wardUnitNo: Meteor.user().wardUnitNo}).count(),
           stakeCallingCount: callingCollection.find({stakeUnitNo: Meteor.user().stakeUnitNo}).count(),
-          wardCallingCount: callingCollection.find({wardUnitNo: Meteor.user().wardUnitNo}).count()
+          wardCallingCount: callingCollection.find({wardUnitNo: Meteor.user().wardUnitNo}).count(),
           reportData: memberClientCollection.find({});
         };
       } else {
