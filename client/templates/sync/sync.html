@@ -24,54 +24,7 @@
         </div>
       {{/if}}
       <div class="list">
-        <label class="item item-input">
-          <div class="row">
-            <div class="col">
-              <strong>Ward</strong>
-            </div>
-            <div class="col">
-              <strong>Members</strong>
-            </div>
-            <div class="col">
-              <strong>Households</strong>
-            </div>
-            <div class="col">
-              <strong>Callings</strong>
-            </div>
-          </div>
-        </label>
-        <label class="item item-input">
-          <div class="row">
-            <div class="col">
-              My Ward
-            </div>
-            <div class="col" id="wardMemberCount">
-              {{wardMemberCount}}
-            </div>
-            <div class="col" id="wardMemberCount">
-              {{wardHouseholdCount}}
-            </div>
-            <div class="col">
-              {{wardCallingCount}}
-            </div>
-          </div>
-        </label>
-        <label class="item item-input">
-          <div class="row">
-            <div class="col">
-              My Stake
-            </div>
-            <div class="col">
-              {{stakeMemberCount}}
-            </div>
-            <div class="col">
-              {{stakeHouseholdCount}}
-            </div>
-            <div class="col">
-              {{stakeCallingCount}}
-            </div>
-          </div>
-        </label>
+        {{> countReportInner}}
         <div class="item item-divider">
           My Information
         </div>

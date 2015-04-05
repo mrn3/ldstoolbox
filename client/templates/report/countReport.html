@@ -1,0 +1,27 @@
+<template name="countReport">
+
+  {{> barHeader title="Count Report" leftType="back"}}
+
+  {{#ionView}}
+    {{#ionContent}}
+      <div class="list">
+        {{> countReportInner}}
+        {{#each reportData}}
+        <label class="item item-input">
+          <div class="row">
+            <div class="col">
+              {{wardUnitNo}}
+            </div>
+            <div class="col">
+              {{count}}
+            </div>
+            <div class="col">
+            </div>
+          </div>
+        </label>
+        {{/each}}
+      </div>
+    {{/ionContent}}
+  {{/ionView}}
+
+</template>
