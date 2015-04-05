@@ -1,0 +1,22 @@
+<template name="memberList">
+
+  {{> barHeader title="Directory" leftType="mainMenu" rightType="memberList"}}
+
+
+  {{#ionView}}
+    {{#ionContent}}
+        {{#ionList}}
+          <div class="bar bar-header item-input-inset">
+            <label class="item-input-wrapper">
+              <i class="icon ion-search placeholder-icon"></i>
+              <input id="searchInput" type="search" placeholder="Search">
+            </label>
+          </div>
+          {{#each memberData}}
+            {{>memberItem}}
+          {{/each}}
+        {{/ionList}}
+    {{/ionContent}}
+  {{/ionView}}
+
+</template>
