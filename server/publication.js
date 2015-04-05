@@ -65,7 +65,7 @@ Meteor.publish('wardMemberOrganizationPublication', function() {
 
 Meteor.publish('stakeMemberPublication', function() {
   if (this.userId) {
-    var projection =
+    var options =
       {fields:
         {
           "preferredName": 1,
@@ -74,7 +74,7 @@ Meteor.publish('stakeMemberPublication', function() {
         }
       }
     var user = Meteor.users.findOne(this.userId);
-    return memberCollection.find({stakeUnitNo: user.stakeUnitNo}, projection);
+    return memberCollection.find({stakeUnitNo: user.stakeUnitNo}, options);
   } else {
     return [];
   }

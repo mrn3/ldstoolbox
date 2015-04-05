@@ -309,6 +309,13 @@ Router.map(function() {
   });
   this.route("/sync/", {
     name: "sync",
+    waitOn: function () {
+      return [
+        Meteor.subscribe("userPublication"),
+        Meteor.subscribe("stakeMemberPublication"),
+        Meteor.subscribe("stakeCallingPublication")
+      ]
+    },  
     onBeforeAction: requireLogin,
     fastRender: true
   });

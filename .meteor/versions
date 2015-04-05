@@ -20,6 +20,7 @@ callback-hook@1.0.3
 check@1.0.5
 coffeescript@1.0.6
 dburles:google-maps@1.0.8
+dburles:mongo-collection-instances@0.2.6
 ddp@1.1.0
 deps@1.0.7
 ejson@1.0.6
@@ -36,6 +37,7 @@ ground:minimax@1.1.2
 ground:servertime@0.0.3
 ground:store@0.1.1
 ground:util@0.1.13
+houston:admin@2.0.3
 html-tools@1.0.4
 htmljs@1.0.4
 http@1.1.0
@@ -101,6 +103,7 @@ spacebars@1.0.6
 spacebars-compiler@1.0.6
 srp@1.0.3
 templating@1.1.1
+tmeasday:paginated-subscription@0.2.4
 tracker@1.0.7
 twitter@1.1.4
 ui@1.0.6

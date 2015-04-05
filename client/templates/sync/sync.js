@@ -116,9 +116,3 @@ Template.sync.events({
     });
   }
 });
-
-Template.sync.rendered = function() {
-  Meteor.subscribe("userPublication"),
-  Meteor.subscribe("stakeMemberPublication"),
-  Meteor.subscribe("stakeCallingPublication")
-}
