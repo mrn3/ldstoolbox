@@ -78,6 +78,7 @@ momentjs:moment@2.8.4
 mongo@1.1.0
 mongo-livedata@1.0.8
 mrt:moment@2.8.1
+multiply:iron-router-progress@1.0.1
 npm-bcrypt@0.7.8_2
 oauth@1.1.4
 oauth1@1.1.4

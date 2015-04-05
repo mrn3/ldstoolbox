@@ -26,12 +26,22 @@ var requireLogin = function() {
 	}
 }
 
+var hideLoading = function () {
+  if (this.ready()) {
+    this.render();
+    IonLoading.hide();
+  }
+}
+
 Router.map(function() {
   this.route("home", {
     path: "/"
   });
   this.route("/about/", {
     name: "about"
+  });
+  this.route("/loading/", {
+    name: "loading"
   });
   this.route("/householdList/", {
     name: "householdList",

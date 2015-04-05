@@ -1,18 +1,9 @@
 <template name="loading">
-  {{#contentFor "headerButtonLeft"}}
-    {{>ionNavBackButton path="index"}}
-  {{/contentFor}}
-  {{#contentFor "headerTitle"}}
-    <h1 class="title">Loading</h1>
-  {{/contentFor}}
+  {{> barHeader title="Loading" leftType="mainMenu"}}
 
   {{#ionView}}
     {{#ionContent}}
-      <div class="padding">
-        <button class="button button-large button-stable" data-action="showLoading">
-          Show Loading (3s)
-        </button>
-      </div>
     {{/ionContent}}
   {{/ionView}}
+
 </template>
