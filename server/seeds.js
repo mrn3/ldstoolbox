@@ -3,6 +3,9 @@ Kadira.connect("pvBC29Y6Tu8fjkn7R", "27e67b07-c1e1-4784-9681-834a00969d3e");
 
 Meteor.startup(function () {
 
+  //add hidden collection to Houson admin console
+  Houston.add_collection(Meteor.users);
+
   if (hymnCollection.find().count() === 0) {
     hymnCollection.insert({number: 1, numberText: "1", name: "The Morning Breaks"});
     hymnCollection.insert({number: 2, numberText: "2", name: "The Spirit of God"});
@@ -588,7 +591,7 @@ Meteor.startup(function () {
     callingCollection.insert({callingName: "Ward Disability Specialist", wardUnitNo: -1});
   }
 
-  if (organizationCollection.find().count() === 0) { 
+  if (organizationCollection.find().count() === 0) {
     organizationCollection.insert({key: "HIGH_PRIEST", name: "High Priests", order: 1});
     organizationCollection.insert({key: "ELDER", name: "Elders", order: 2});
     organizationCollection.insert({key: "RELIEF_SOCIETY", name: "Relief Society", order: 3});

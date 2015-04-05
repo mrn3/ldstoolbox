@@ -315,7 +315,13 @@ Router.map(function() {
         Meteor.subscribe("stakeMemberPublication"),
         Meteor.subscribe("stakeCallingPublication")
       ]
-    },  
+    },
+    data: function() {
+      console.log(Meteor.users.findOne(Meteor.user()._id));
+      return {
+        userData: Meteor.users.findOne(Meteor.user()._id)
+      };
+    },
     onBeforeAction: requireLogin,
     fastRender: true
   });

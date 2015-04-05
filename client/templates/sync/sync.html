@@ -63,6 +63,43 @@
             </div>
           </div>
         </label>
+        <div class="item item-divider">
+          My Information
+        </div>
+        {{#with userData}}
+        <label class="item item-input">
+          <div class="row">
+            <div class="col">
+              My Ward
+            </div>
+            <div class="col">
+              {{wardName}} ({{wardUnitNo}})
+            </div>
+          </div>
+        </label>
+        <label class="item item-input">
+          <div class="row">
+            <div class="col">
+              My Stake
+            </div>
+            <div class="col">
+              {{stakeName}} ({{stakeUnitNo}})
+            </div>
+          </div>
+        </label>
+        <label class="item item-input">
+          <div class="row">
+            <div class="col">
+              My Calling(s)
+            </div>
+            <div class="col">
+              {{#each callings}}
+                {{callingName}} ({{positionId}})
+              {{/each}}
+            </div>
+          </div>
+        </label>
+        {{/with}}
       </div>
     {{/ionContent}}
   {{/ionView}}
