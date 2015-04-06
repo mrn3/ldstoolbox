@@ -45,45 +45,43 @@
           {{/if}}
         {{/with}}
         {{#with householdData}}
-          {{#with householdInfo}}
-            {{#if phone}}
-              <a class="item item-icon-right" data-action=showHouseholdPhoneActionSheet>
-                Household Phone
-                <span class="item-note">{{phone}}</span>
-                <i class="icon ion-ios-arrow-right"></i>
-              </a>
-            {{/if}}
-            {{#if email}}
-              <a class="item item-icon-right" href="mailto:{{email}}">
-                Household Email
-                <span class="item-note">{{email}}</span>
-                <i class="icon ion-ios-arrow-right"></i>
-              </a>
-            {{/if}}
-            {{#with address}}
-              <div class="item item-divider">
-                Address
-              </div>
-              <a class="item item-icon-right" data-action=showAddressActionSheet>
-                {{#if addr1}}
-                  {{addr1}}
-                {{/if}}
-                {{#if addr2}}
-                  <br />{{addr2}}
-                {{/if}}
-                {{#if addr3}}
-                  <br />{{addr3}}
-                {{/if}}
-                {{#if addr4}}
-                  <br />{{addr4}}
-                {{/if}}
-                {{#if addr5}}
-                  <br />{{addr5}}
-                {{/if}}
-                <i class="icon ion-ios-arrow-right"></i>
-              </a>
-            {{/with}}
-          {{/with}}
+          {{#if householdInfo.phone}}
+            <a class="item item-icon-right" data-action=showHouseholdPhoneActionSheet>
+              Household Phone
+              <span class="item-note">{{householdInfo.phone}}</span>
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
+          {{/if}}
+          {{#if householdInfo.email}}
+            <a class="item item-icon-right" href="mailto:{{householdInfo.email}}">
+              Household Email
+              <span class="item-note">{{householdInfo.email}}</span>
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
+          {{/if}}
+          {{#if householdInfo.address}}
+            <div class="item item-divider">
+              Address
+            </div>
+            <a class="item item-icon-right" data-action=showAddressActionSheet>
+              {{#if householdInfo.address.addr1}}
+                {{householdInfo.address.addr1}}
+              {{/if}}
+              {{#if householdInfo.address.addr2}}
+                <br />{{householdInfo.address.addr2}}
+              {{/if}}
+              {{#if householdInfo.address.addr3}}
+                <br />{{householdInfo.address.addr3}}
+              {{/if}}
+              {{#if householdInfo.address.addr4}}
+                <br />{{householdInfo.address.addr4}}
+              {{/if}}
+              {{#if householdInfo.address.addr5}}
+                <br />{{householdInfo.address.addr5}}
+              {{/if}}
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
+          {{/if}}
           <div class="item item-divider">
             Household Members
           </div>
@@ -98,9 +96,10 @@
           {{/with}}
           {{#with headOfHouse}}
             <a class="item item-icon-right" href="/member/{{individualId}}">
-            <p>Head of Household</p>
+            <p>Head of House</p>
             <h2>
               {{name}}
+              {{directoryName}}
             </h2>
             <i class="icon ion-ios-arrow-right"></i>
           </a>

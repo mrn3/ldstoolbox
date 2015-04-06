@@ -187,6 +187,24 @@ Router.map(function() {
     },
     fastRender: true
   });
+  this.route("/organizationMap/:_id", {
+    name: "organizationMap",
+    onBeforeAction: function() {
+      GoogleMaps.load();
+      this.next();
+    },
+    waitOn: function () {
+      return [
+        Meteor.subscribe("organizationPublication", this.params._id)
+      ]
+    },
+    data: function() {
+      return {
+        organizationData: organizationCollection.findOne({_id: this.params._id})
+      };
+    },
+    fastRender: true
+  });
   this.route("/callingChangeList/", {
     name: "callingChangeList",
     onBeforeAction: requireLogin,
