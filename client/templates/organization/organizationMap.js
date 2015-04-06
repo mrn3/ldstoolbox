@@ -13,7 +13,7 @@ Template.organizationMap.helpers({
           householdArray[0].householdInfo.address.latitude,
           householdArray[0].householdInfo.address.longitude
         ),
-        zoom: 18
+        zoom: 17
       };
     }
   }
@@ -72,6 +72,34 @@ Template.organizationMap.onCreated(function() {
         }
         if (householdArray[householdIndex].householdInfo.address.addr5) {
           contentString += householdArray[householdIndex].householdInfo.address.addr5 + "<br />";
+        }
+
+        //create directions link
+        var theLocation;
+        var iOS = /(iPad|iPhone|iPod)/g.test( navigator.userAgent );
+        if (iOS) {
+          theLocation = "comgooglemaps-x-callback://?";
+        } else {
+          theLocation = "https://www.google.com/maps?";
+        }
+        theLocation +=
+          "saddr=" +
+          "&daddr=" + householdArray[householdIndex].householdInfo.address.addr1 + "," +
+                      householdArray[householdIndex].householdInfo.address.addr2 + "," +
+                      householdArray[householdIndex].householdInfo.address.addr3 + "," +
+                      householdArray[householdIndex].householdInfo.address.addr4 +
+          "&center=" + householdArray[householdIndex].householdInfo.address.latitude + "," +
+                      householdArray[householdIndex].householdInfo.address.longitude +
+          "&zoom=17" +
+          "&views=traffic" +
+          "&directionsmode=driving" +
+          "&dirflg=d" +
+          "&x-success=sourceapp://?resume=true" +
+          "&x-source=LDS+Toolbox";
+        if (iOS) {
+          contentString += "<a class='button button-block button-positive' href='javascript: window.location = " + "\"" + theLocation + "\";'>Get Directions in Google Maps</a>";
+        } else {
+          contentString += "<a class='button button-block button-positive' href='javascript: window.open(\"" + theLocation + "\");'>Get Directions in Google Maps</a>";
         }
       }
 

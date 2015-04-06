@@ -1,3 +1,9 @@
+Template.organization.helpers({
+  memberCount: function () {
+    return this.memberData.count();
+  }
+});
+
 Template.organization.events({
   "click [data-action=showOrganizationActionSheet]": function (event, template) {
     //console.log(template);

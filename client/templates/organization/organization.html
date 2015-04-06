@@ -7,11 +7,10 @@
   {{#ionView}}
     {{#ionContent}}
       {{#ionList}}
-        {{#with organizationData}}
-          <div class="item item-divider">
-            {{name}}
-          </div>
-        {{/with}}
+        <div class="item item-divider">
+          {{#with organizationData}}{{name}}{{/with}}
+          ({{memberCount}} Members)
+        </div>
         {{#each memberData}}
           <a href="/member/{{individualId}}" class="item item-icon-right">
             <h2>

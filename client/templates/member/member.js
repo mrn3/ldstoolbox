@@ -41,15 +41,18 @@ Template.member.events({
               }
               theLocation +=
                 "saddr=" +
-                "&daddr=" + household.householdInfo.address.addr1 + "," + household.householdInfo.address.addr2 + "," + household.householdInfo.address.addr3 + "," + household.householdInfo.address.addr4 +
-                "&center=" + household.householdInfo.address.latitude + "," + household.householdInfo.address.longitude +
+                "&daddr=" + household.householdInfo.address.addr1 + "," +
+                            household.householdInfo.address.addr2 + "," +
+                            household.householdInfo.address.addr3 + "," +
+                            household.householdInfo.address.addr4 +
+                "&center=" + household.householdInfo.address.latitude + "," +
+                              household.householdInfo.address.longitude +
                 "&zoom=17" +
                 "&views=traffic" +
                 "&directionsmode=driving" +
                 "&dirflg=d" +
                 "&x-success=sourceapp://?resume=true" +
                 "&x-source=LDS+Toolbox";
-              //console.log(theLocation);
               if (iOS) {
                 window.location = theLocation;
               } else {
