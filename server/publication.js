@@ -191,9 +191,13 @@ Meteor.publish('wardHouseholdPublication', function() {
         {
           "coupleName": 1,
           "headOfHouse.individualId": 1,
+          "headOfHouse.directoryName": 1,
           "headOfHousehold.individualId": 1,
+          "headOfHousehold.name": 1,
           "spouse.individualId": 1,
+          "spouse.name": 1,
           "otherHouseholdMembers.individualId": 1,
+          "otherHouseholdMembers.name": 1,
           "householdInfo.address.latitude": 1,
           "householdInfo.address.longitude": 1
         }

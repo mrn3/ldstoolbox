@@ -197,19 +197,6 @@ Router.map(function() {
       GoogleMaps.load();
       this.next();
     },
-    waitOn: function () {
-      return [
-        Meteor.subscribe("wardMemberOrganizationPublication"),
-        Meteor.subscribe("organizationPublication"),
-        Meteor.subscribe("wardHouseholdPublication")
-      ]
-    },
-    data: function() {
-      return {
-        memberData: memberCollection.find({"organizations._id": this.params._id}, {sort: {preferredName: 1}}),
-        organizationData: organizationCollection.findOne({_id: this.params._id})
-      };
-    },
     fastRender: true
   });
   this.route("/callingChangeList/", {
