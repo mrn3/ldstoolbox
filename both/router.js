@@ -178,11 +178,15 @@ Router.map(function() {
     name: "organization",
     onBeforeAction: requireLogin,
     waitOn: function () {
-      return Meteor.subscribe("wardMemberOrganizationPublication")
+      return [
+        Meteor.subscribe("wardMemberOrganizationPublication"),
+        Meteor.subscribe("organizationPublication")
+      ]
     },
     data: function() {
       return {
-        memberData: memberCollection.find({"organizations._id": this.params._id}, {sort: {preferredName: 1}})
+        memberData: memberCollection.find({"organizations._id": this.params._id}, {sort: {preferredName: 1}}),
+        organizationData: organizationCollection.findOne({_id: this.params._id})
       };
     },
     fastRender: true
@@ -195,11 +199,14 @@ Router.map(function() {
     },
     waitOn: function () {
       return [
-        Meteor.subscribe("organizationPublication", this.params._id)
+        Meteor.subscribe("wardMemberOrganizationPublication"),
+        Meteor.subscribe("organizationPublication"),
+        Meteor.subscribe("wardHouseholdPublication")
       ]
     },
     data: function() {
       return {
+        memberData: memberCollection.find({"organizations._id": this.params._id}, {sort: {preferredName: 1}}),
         organizationData: organizationCollection.findOne({_id: this.params._id})
       };
     },
