@@ -21,6 +21,7 @@ Template.organization.events({
       cancel: function() {},
       buttonClicked: function(index) {
         if (index === 0) {
+          Session.set("individualIdArray", individualIdArray);
           Session.set("householdArray", householdArray);
           Router.go("/organizationMap/" + template.data.organizationData._id);
         }
