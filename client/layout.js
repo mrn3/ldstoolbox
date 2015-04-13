@@ -12,27 +12,6 @@ Template.layout.helpers({
     } else {
       return "";
     }
-  },
-  userCanViewCallingChangeList: function () {
-    if (Meteor.user() && Meteor.user().callings) {
-
-      //bishop, counselors, executive secretary, ward clerk, membership clerk
-      var allowedCallingList = [4, 54, 55, 56, 57, 787];
-      var userCallingList = Meteor.user().callings.reduce(
-        function(total, calling){
-          return total.concat(calling.positionId);
-        },
-      []);
-
-      var callingIntersection =
-        userCallingList.filter(function(n) {
-          return allowedCallingList.indexOf(n) != -1
-        });
-
-      return (callingIntersection.length > 0);
-    } else {
-      return false;
-    }
   }
 });
 
@@ -45,7 +24,7 @@ Template.layout.events({
   }
 });
 
-Template.layout.rendered = function() { 
+Template.layout.rendered = function() {
   if (typeof Session.get("typeSelector") == "undefined") {
     Session.set("typeSelector", "All");
   }

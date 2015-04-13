@@ -4,6 +4,24 @@
 
   {{#ionView}}
     {{#ionContent}}
+      <div class="padding" align="center">
+        <p>
+          Here you can synchronize your account with the information in your ward and stake.
+          To do this, first sign in using your LDS Account information.  If you don't have an
+          LDS Account or you have forgotten your LDS Account information, click
+          <a href="https://ldsaccount.lds.org/" target="_blank">here</a>.
+        </p>
+        <p>
+          Once you have successfully signed into your LDS Account, you can synchronize just your
+          information if your ward has already signed up.
+
+          If you are the first user from your ward, you will probably need to sychronize your ward
+          (this takes about 3-4 minutes).
+
+          You may also want to sychronize your stake
+          (this takes about 10 minutes).
+        </p>
+      </div>
       {{#if ldsAccountUserNotAuthenticated}}
         <div class="list">
           <label class="item item-input">
@@ -18,13 +36,14 @@
         </div>
       {{else}}
         <div class="padding">
-          <input class="button button-block button-positive" id="syncWardButton" value="Sync Ward" />
-          <input class="button button-block button-positive" id="syncStakeButton" value="Sync Stake" />
+          <input class="button button-block button-positive" id="syncMyInfoButton" value="Sync My Information" />
+          <input class="button button-block button-positive" id="syncWardButton" value="Sync Ward Information" />
+          <input class="button button-block button-positive" id="syncStakeButton" value="Sync Stake Information" />
           <input class="button button-block button-positive" id="signOutLdsAccountUserButton" value="Sign Out" />
         </div>
       {{/if}}
       <div class="list">
-        {{> countReportInner}}
+        <!--{{> countReportInner}}//-->
         <div class="item item-divider">
           My Information
         </div>

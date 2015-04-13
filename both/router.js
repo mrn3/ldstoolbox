@@ -339,10 +339,7 @@ Router.map(function() {
     name: "sync",
     waitOn: function () {
       return [
-        Meteor.subscribe("userPublication"),
-        Meteor.subscribe("stakeMemberPublication"),
-        Meteor.subscribe("stakeHouseholdPublication"),
-        Meteor.subscribe("stakeCallingPublication")
+        Meteor.subscribe("userPublication")
       ]
     },
     onBeforeAction: requireLogin,

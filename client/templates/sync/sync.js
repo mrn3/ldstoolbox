@@ -67,32 +67,46 @@ Template.sync.events({
       $("#signOutLdsAccountUserButton").val("Sign Out");
     });
   },
+  'click #syncMyInfoButton': function(e){
+    e.preventDefault();
+
+    $("#syncMyInfoButton").prop('disabled', true);
+    $("#syncMyInfoButton").val("Syncing My Information, please wait...");
+
+    Meteor.call("syncMyInfo", function(error) {
+      if (error) {
+        console.log(error);
+      }
+      $("#syncMyInfoButton").prop('disabled', false);
+      $("#syncMyInfoButton").val("Sync My Information");
+    });
+  },
   'click #syncWardButton': function(e){
     e.preventDefault();
 
     $("#syncWardButton").prop('disabled', true);
-    $("#syncWardButton").val("Syncing Ward, please wait...");
+    $("#syncWardButton").val("Syncing Ward Information, please wait...");
 
     Meteor.call("syncWard", function(error) {
       if (error) {
         console.log(error);
       }
       $("#syncWardButton").prop('disabled', false);
-      $("#syncWardButton").val("Sync Ward");
+      $("#syncWardButton").val("Sync Ward Information");
     });
   },
   'click #syncStakeButton': function(e){
     e.preventDefault();
 
     $("#syncStakeButton").prop('disabled', true);
-    $("#syncStakeButton").val("Syncing Stake, please wait...");
+    $("#syncStakeButton").val("Syncing Stake Information, please wait...");
 
     Meteor.call("syncStake", function(error) {
       if (error) {
         console.log(error);
       }
       $("#syncStakeButton").prop('disabled', false);
-      $("#syncStakeButton").val("Sync Stake");
+      $("#syncStakeButton").val("Sync Stake Information");
     });
   }
 });

@@ -463,6 +463,10 @@ Meteor.methods({
       });
     }
   },
+  syncMyInfo: function () {
+    Meteor.call("getUnits");
+    Meteor.call("getUserCallingInfo");
+  },
   syncWard: function () {
     Meteor.call("getUnits");
     Meteor.call("getWardMembers", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo);
