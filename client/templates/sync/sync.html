@@ -48,41 +48,33 @@
           My Information
         </div>
         {{#with userData}}
-        <label class="item item-input">
-          <div class="row">
-            <div class="col">
-              My Ward
-            </div>
-            <div class="col">
-              {{wardName}} ({{wardUnitNo}})
-            </div>
-          </div>
+        <label class="item item-input item-stacked-label">
+          <p>
+            My Ward
+          </p>
+          <h2>
+            {{wardName}} ({{wardUnitNo}})
+          </h2>
         </label>
-        <label class="item item-input">
-          <div class="row">
-            <div class="col">
-              My Stake
-            </div>
-            <div class="col">
-              {{stakeName}} ({{stakeUnitNo}})
-            </div>
-          </div>
+        <label class="item item-input item-stacked-label">
+          <p>
+            My Stake
+          </p>
+          <h2>
+            {{stakeName}} ({{stakeUnitNo}})
+          </h2>
         </label>
-        <label class="item item-input">
-          <div class="row">
-            <div class="col">
-              My Calling(s)
-            </div>
-            <div class="col">
-              {{#each callings}}
-                {{callingName}} ({{positionId}})
-              {{/each}}
-            </div>
-          </div>
+        <label class="item item-input item-stacked-label">
+          <p>
+            My Calling(s)
+          </p>
+          <h2>
+            {{#each callings}}
+              {{callingName}} ({{positionId}})
+            {{/each}}
+          </h2>
         </label>
         {{/with}}
-        {{memberData}}
-
       </div>
     {{/ionContent}}
   {{/ionView}}
