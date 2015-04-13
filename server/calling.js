@@ -27,11 +27,24 @@ SearchSource.defineSource('callings', function(searchText, options) {
     if (Meteor.user().selectedWardUnitNo) {
       selector =
         {
-          stakeUnitNo: Meteor.user().stakeUnitNo,
-          wardUnitNo: Meteor.user().selectedWardUnitNo,
-          $or: [
-            {"displayName": regExp},
-            {"callingName": regExp}
+          $and: [
+            {
+              $or: [
+                {wardUnitNo: -1},
+                {
+                  $and: [
+                    {stakeUnitNo: Meteor.user().stakeUnitNo},
+                    {wardUnitNo: Meteor.user().selectedWardUnitNo}
+                  ]
+                }
+              ]
+            },
+            {
+              $or: [
+                {"displayName": regExp},
+                {"callingName": regExp}
+              ]
+            }
           ]
         };
     } else {

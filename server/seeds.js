@@ -359,7 +359,7 @@ Meteor.startup(function () {
     recognitionTypeCollection.insert({typeName: "Mission Call"});
   }
 
-  if (callingCollection.find().count() === 0) {
+  if (callingCollection.find({wardUnitNo: -1}).count() === 0) {
     //dump in generic callings too
     //callingCollection.insert({callingName: "Bishopric", wardUnitNo: -1});
     callingCollection.insert({callingName: "Bishop", wardUnitNo: -1});
