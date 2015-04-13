@@ -25,6 +25,7 @@ SearchSource.defineSource('callings', function(searchText, options) {
   if (searchText) {
     var regExp = buildRegExp(searchText);
     if (Meteor.user().selectedWardUnitNo) {
+      //filter on search term - ward and stake, or generic calling
       selector =
         {
           $and: [
@@ -48,27 +49,64 @@ SearchSource.defineSource('callings', function(searchText, options) {
           ]
         };
     } else {
+      //filter on search term - stake only, or generic calling
       selector =
         {
-          stakeUnitNo: Meteor.user().stakeUnitNo,
-          $or: [
-            {"displayName": regExp},
-            {"callingName": regExp}
+          $and: [
+            {
+              $or: [
+                {wardUnitNo: -1},
+                {
+                  $and: [
+                    {stakeUnitNo: Meteor.user().stakeUnitNo}
+                  ]
+                }
+              ]
+            },
+            {
+              $or: [
+                {"displayName": regExp},
+                {"callingName": regExp}
+              ]
+            }
           ]
         };
     }
     return callingCollection.find(selector, options).fetch();
   } else {
     if (Meteor.user().selectedWardUnitNo) {
+      //filter on ward and stake or generic calling
       selector =
         {
-          stakeUnitNo: Meteor.user().stakeUnitNo,
-          wardUnitNo: Meteor.user().selectedWardUnitNo
+          $and: [
+            {
+              $or: [
+                {wardUnitNo: -1},
+                {
+                  $and: [
+                    {stakeUnitNo: Meteor.user().stakeUnitNo},
+                    {wardUnitNo: Meteor.user().selectedWardUnitNo}
+                  ]
+                }
+              ]
+            }
+          ]
         };
     } else {
-      selector =
-        {
-          stakeUnitNo: Meteor.user().stakeUnitNo
+      //filter on stake only or generic calling
+      selector = {
+          $and: [
+            {
+              $or: [
+                {wardUnitNo: -1},
+                {
+                  $and: [
+                    {stakeUnitNo: Meteor.user().stakeUnitNo}
+                  ]
+                }
+              ]
+            }
+          ]
         };
     }
     return callingCollection.find(selector, options).fetch();
