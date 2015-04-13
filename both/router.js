@@ -74,12 +74,13 @@ Router.map(function() {
     waitOn: function () {
       return [
         Meteor.subscribe("likelyOptionsMemberPublication"),
-        Meteor.subscribe("unitPublication"),
-        Meteor.subscribe("userPublication")
+        Meteor.subscribe("userPublication"),
+        Meteor.subscribe("unitPublication")
       ]
     },
     data: function() {
       return {
+        userData: Meteor.user(),
         unitData: unitCollection.find({})
       };
     },
@@ -133,6 +134,16 @@ Router.map(function() {
   this.route("/callingSelect/", {
     name: "callingSelect",
     onBeforeAction: requireLogin,
+    waitOn: function () {
+      return Meteor.subscribe("userPublication"),
+      Meteor.subscribe("unitPublication")
+    },
+    data: function() {
+      return {
+        userData: Meteor.user(),
+        unitData: unitCollection.find({})
+      };
+    },
     fastRender: true
   });
   this.route("/callingGroupList/", {

@@ -34,7 +34,6 @@ SearchSource.defineSource("members", function(searchText) {
         };
     } else {
       selector =
-      selector =
         {
           stakeUnitNo: Meteor.user().stakeUnitNo
         };

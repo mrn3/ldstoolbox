@@ -21,53 +21,44 @@ Meteor.methods({
 SearchSource.defineSource('callings', function(searchText, options) {
   var options = {sort: {"callingName": 1}, limit: 20};
 
-  if(searchText) {
+  var selector;
+  if (searchText) {
     var regExp = buildRegExp(searchText);
-    var selector = {$or: [
-      {"displayName": regExp},
-      {"callingName": regExp}
-    ]};
-
-    /*
-    var pipeline = [
-
-      {$project:{thePositionName:'$positions.positionName'} },
-      {$unwind:'$thePositionId'},
-      {$match:{ thePositionName: regExp}}
-
-    ];
-    */
-    //var options = {"leaders.callingName": regExp};
-    //var selector = {"leaders.callingName": regExp};
-    //{$project:{thePositionName:'$positions.positionName', thePositionId:'$positions.positionId'} },
-    //{$group:{_id:'a',res:{$addToSet:'$a'}}},
-    //{$match: { "positions" : { "$elemMatch" : {"positionName": "Bishop"}}}}
-    //db.calling.find( { positions: { $elemMatch: { positionName: "Bishop" } } } )
-
-    //console.log(callingGroupCollection.find({"leaders.callingName": "Bishop"}, {fields: {leaders: {$elemMatch: {callingName: "/(bish)/gi"}}}}).fetch());
-
-    //return callingGroupCollection.find({"leaders.callingName": "Bishop"}, {fields: {leaders: {$elemMatch: {callingName: "/(bish)/gi"}}}}).fetch();
-
-    //{fields: {"leaders.callingName": "/(bish)/gi"}
-    //console.log(callingGroupCollection.find({"leaders.callingName": regExp}, {fields: {leaders: {$elemMatch: {"callingName": regExp}}}}).fetch());
-
-    //return callingGroupCollection.find({"leaders.callingName": regExp}, {fields: {leaders: {$elemMatch: {"callingName": regExp}}}}).fetch();
-
-    //console.log(pipeline);
-    //console.log(callingGroupCollection);
-    //console.log(callingGroupCollection.aggregate(pipeline));
-
-
-    //console.log(selector);
-    //console.log(callingGroupCollection.find(selector, options).fetch());
-
-    //console.log(options);
-    //console.log(selector);
-
-    //console.log(callingGroupCollection.find(selector, options).fetch());
+    if (Meteor.user().selectedWardUnitNo) {
+      selector =
+        {
+          stakeUnitNo: Meteor.user().stakeUnitNo,
+          wardUnitNo: Meteor.user().selectedWardUnitNo,
+          $or: [
+            {"displayName": regExp},
+            {"callingName": regExp}
+          ]
+        };
+    } else {
+      selector =
+        {
+          stakeUnitNo: Meteor.user().stakeUnitNo,
+          $or: [
+            {"displayName": regExp},
+            {"callingName": regExp}
+          ]
+        };
+    }
     return callingCollection.find(selector, options).fetch();
   } else {
-    return callingCollection.find({}, options).fetch();
+    if (Meteor.user().selectedWardUnitNo) {
+      selector =
+        {
+          stakeUnitNo: Meteor.user().stakeUnitNo,
+          wardUnitNo: Meteor.user().selectedWardUnitNo
+        };
+    } else {
+      selector =
+        {
+          stakeUnitNo: Meteor.user().stakeUnitNo
+        };
+    }
+    return callingCollection.find(selector, options).fetch();
   }
 });
 

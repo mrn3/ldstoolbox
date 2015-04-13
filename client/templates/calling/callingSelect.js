@@ -17,7 +17,14 @@ Template.callingSelect.helpers({
   },
   isLoading: function() {
     return callingSearch.getStatus().loading;
-  }
+  },
+  isSelectedUnit: function(inWardUnitNo) {
+    if (Session.get("selectedWardUnitNo") == inWardUnitNo) {
+      return "selected";
+    } else {
+      return "";
+    }
+  },
 });
 
 function doUpdate (inUpdateObject) {
@@ -41,5 +48,16 @@ Template.callingSelect.events({
     this.callingName = jQuery('<p>' + this.callingName + '</p>').text();
     this.displayName = jQuery('<p>' + this.displayName + '</p>').text();
     doUpdate(this);
-  }
+  },
+  "change #unitSelect": function(e, instance) {
+    Session.set("selectedWardUnitNo", $("#unitSelect").val());
+    Meteor.call("setUserSelectedWardUnitNo", parseInt($("#unitSelect").val()));
+    var text = $("#searchInput").val().trim();
+    callingSearch.search(text);
+  },
 });
+
+Template.callingSelect.rendered = function() {
+  var user = Meteor.users.findOne(Meteor.user()._id);
+  Session.set("selectedWardUnitNo", user.selectedWardUnitNo);
+};

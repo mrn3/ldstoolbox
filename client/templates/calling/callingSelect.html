@@ -8,6 +8,17 @@
         <div class="item item-divider">
           Search
         </div>
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Unit
+          </div>
+          <select id="unitSelect">
+            <option value="" {{isSelectedUnit ""}}>{{userData.stakeName}}</option>
+            {{#each unitData}}
+              <option value="{{wardUnitNo}}" {{isSelectedUnit wardUnitNo}}>{{wardName}}</option>
+            {{/each}}
+         </select>
+       </label>
         <div class="bar bar-header item-input-inset">
           <label class="item-input-wrapper">
             <i class="icon ion-search placeholder-icon"></i>

@@ -15,9 +15,6 @@ Template.memberSelect.helpers({
       sort: {isoScore: -1}
     });
   },
-  userData: function() {
-    return Meteor.user();
-  },
   isSelectedUnit: function(inWardUnitNo) {
     if (Session.get("selectedWardUnitNo") == inWardUnitNo) {
       return "selected";
