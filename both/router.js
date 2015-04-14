@@ -221,6 +221,10 @@ Router.map(function() {
     },
     fastRender: true
   });
+  this.route("/callingChangeHelp/", {
+    name: "callingChangeHelp",
+    fastRender: true
+  });
   this.route("/callingChangeCreate/", {
     name: "callingChangeCreate",
     onBeforeAction: requireLogin,

@@ -27,7 +27,7 @@
             </a>
             <a id="callingChangeMemberItem" class="item item-icon-right" href="{{pathFor 'memberSelect'}}">
               Member Name
-              <span class="item-note">{{{callingChangeMemberSession}}}</span>
+              <span class="item-note">{{callingChangeMemberSession.switchedPreferredName}}</span>
               <i class="icon ion-ios-arrow-right"></i>
             </a>
             <a class="item item-icon-right" href="{{pathFor 'callingSelect'}}">
@@ -42,10 +42,19 @@
               <textarea id="notes" placeholder="Notes" rows="3">{{notes}}</textarea>
             </label>
 
+            <div class="item item-divider">
+              &nbsp;
+            </div>
+            <label class="item">
+              Status
+              <span class="item-note">{{status}}</span>
+            </label>
+            <a class="item item-icon-right" href="/member/{{callingChangeMemberSession.individualId}}">
+              View Member
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
+
             {{#if isInterviewed status}}
-              <div class="item item-divider">
-                &nbsp;
-              </div>
               <a id="meetingItem" class="item item-icon-right" href="{{pathFor 'meetingSelect'}}">
                 Meeting
                 <span class="item-note">{{{meeting.meetingDate}}}</span>

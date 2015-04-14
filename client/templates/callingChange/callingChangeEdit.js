@@ -82,8 +82,8 @@ Template.callingChangeEdit.helpers({
     }
   },
   callingChangeMemberSession: function() {
-    if (Session.get("selectedCallingChangeMember") && Session.get("selectedCallingChangeMember").switchedPreferredName) {
-      return Session.get("selectedCallingChangeMember").switchedPreferredName;
+    if (Session.get("selectedCallingChangeMember")) {
+      return Session.get("selectedCallingChangeMember");
     } else {
       return "";
     }
