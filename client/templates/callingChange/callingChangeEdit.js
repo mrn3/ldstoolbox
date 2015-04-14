@@ -63,46 +63,11 @@ Template.callingChangeEdit.events({
   'click #meetingItem': function(e, instance) {
     Session.set("meetingId", this._id);
   },
-  'click #doneButton': function(e, instance) {
-    e.preventDefault();
-
-    var callingChange = this;
-    var updateObject = {};
-
-    if(!Meteor.user()){
-      console.log('You must be logged in.');
-      return false;
-    }
-
-    var properties = {
-      updatedBy:            Meteor.userId(),
-      updatedAt:            new Date(),
-      wardUnitNo:           Meteor.user().wardUnitNo,
-      stakeUnitNo:          Meteor.user().stakeUnitNo,
-      type:                 Session.get("selectedCallingChangeType"),
-      member:               Session.get("selectedCallingChangeMember"),
-      calling:              Session.get("selectedCallingChangeCalling"),
-      interviewDate:        $("#interviewDate").val(),
-      interviewTime:        $("#interviewTime").val(),
-      notes:                $("#notes").val()
-    };
-
-    if (properties) {
-      updateObject.$set = properties;
-      callingChangeCollection.update(callingChange._id, updateObject, function(error){
-        if (error) {
-          console.log(error);
-        } else {
-          history.back();
-        }
-      });
-    }
-  },
   "click .button": function(event, instance) {
-    if (event.target.id) {
+    if (event.target.id && event.target.id != "cancelButton") {
       var callingChange = this;
       var updateObject = {};
-      var properties;
+      var properties = {};
 
       if (event.target.id == "markDiscussed") {
         properties = {

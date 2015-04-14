@@ -6,11 +6,81 @@ Template.callingChangeList.helpers({
     if (typeof Session.get("statusSelector") == "undefined") {
       Session.set("statusSelector", "Incomplete");
     }
-    if ((Session.get("statusSelector") == "Incomplete")) {
+    if ((Session.get("statusSelector") == "Complete")) {
+      var selector =
+        {
+          $or:
+            [
+              {
+                $and:
+                  [
+                    {
+                      type: "Call"
+                    },
+                    {
+                      status: "Set Apart Recorded"
+                    }
+                  ]
+              },
+              {
+                $and:
+                  [
+                    {
+                      type: "Release"
+                    },
+                    {
+                      status: "Recorded"
+                    }
+                  ]
+              }
+            ]
+        };
       if (Session.get("typeSelector") == "All") {
-        return callingChangeCollection.find({status: { $not : "Complete"}});
+        return callingChangeCollection.find(selector);
       } else {
-        return callingChangeCollection.find({status: { $not : "Complete"}, type: Session.get("typeSelector")});
+        selector.type = Session.get("typeSelector");
+        return callingChangeCollection.find(selector);
+      }
+    } else if ((Session.get("statusSelector") == "Incomplete")) {
+      var selector =
+        {
+          $or:
+            [
+              {
+                $and:
+                  [
+                    {
+                      type: "Call"
+                    },
+                    {
+                      status:
+                        {
+                          $not: "Set Apart Recorded"
+                        }
+                    }
+                  ]
+              },
+              {
+                $and:
+                  [
+                    {
+                      type: "Release"
+                    },
+                    {
+                      status:
+                        {
+                          $not: "Recorded"
+                        }
+                    }
+                  ]
+              }
+            ]
+        };
+      if (Session.get("typeSelector") == "All") {
+        return callingChangeCollection.find(selector);
+      } else {
+        selector.type = Session.get("typeSelector");
+        return callingChangeCollection.find(selector);
       }
     } else if (Session.get("statusSelector") == "All") {
       if (Session.get("typeSelector") == "All") {
@@ -22,6 +92,7 @@ Template.callingChangeList.helpers({
       if (Session.get("typeSelector") == "All") {
         return callingChangeCollection.find({status: Session.get("statusSelector")});
       } else {
+        selector.type = Session.get("typeSelector");
         return callingChangeCollection.find({status: Session.get("statusSelector"), type: Session.get("typeSelector")});
       }
     }
