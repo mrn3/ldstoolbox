@@ -1,59 +1,18 @@
 Template.callingChangeEdit.helpers({
-  isDiscussed: function (status) {
-    if (status == "Discussed") {
-      return true;
-    } else {
-      return false;
-    }
+  isEqual: function (inValue1, inValue2) {
+    return (inValue1 == inValue2);
   },
-  isApproved: function (status) {
-    if (status == "Approved") {
-      return true;
-    } else {
-      return false;
-    }
+  isNotEqual: function (inValue1, inValue2) {
+    return (inValue1 != inValue2);
   },
-  isInterviewed: function (status) {
-    if (status == "Interviewed") {
-      return true;
-    } else {
-      return false;
+  isIn: function (inValue, inList) {
+    inListArray = inList.split(",");
+    for (inListArrayIndex in inListArray) {
+      if (inValue == inListArray[inListArrayIndex]) {
+        return true;
+      }
     }
-  },
-  isPresented: function (status) {
-    if (status == "Presented") {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  isRecorded: function (status) {
-    if (status == "Recorded") {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  isSetApart: function (status) {
-    if (status == "Set Apart") {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  isSetApartRecorded: function (status) {
-    if (status == "Set Apart Recorded") {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  isNotCanceled: function (status) {
-    if (status == "Canceled") {
-      return false;
-    } else {
-      return true;
-    }
+    return false;
   },
   userCanEditCallingChange: function () {
     if (Meteor.user() && Meteor.user().callings) {
@@ -123,7 +82,9 @@ Template.callingChangeEdit.events({
       type:                 Session.get("selectedCallingChangeType"),
       member:               Session.get("selectedCallingChangeMember"),
       calling:              Session.get("selectedCallingChangeCalling"),
-      notes:                $('#notes').val()
+      interviewDate:        $("#interviewDate").val(),
+      interviewTime:        $("#interviewTime").val(),
+      notes:                $("#notes").val()
     };
 
     if (properties) {
@@ -137,33 +98,160 @@ Template.callingChangeEdit.events({
       });
     }
   },
-  'click [data-action=showCancelActionSheet]': function(e, instance){
-    var callingChange = this;
-    IonActionSheet.show({
-      titleText: '',
-      buttons: [],
-      destructiveText: 'Mark Canceled',
-      cancelText: 'Cancel',
-      cancel: function() {},
-      destructiveButtonClicked: function() {
-        var updateObject = {};
-        var properties = {
-          status:         "Canceled",
-          dateCanceled:   new Date()
+  "click .button": function(event, instance) {
+    if (event.target.id) {
+      var callingChange = this;
+      var updateObject = {};
+      var properties;
+
+      if (event.target.id == "markDiscussed") {
+        properties = {
+          status:                   "Discussed",
+          dateDiscussed:            new Date()
         };
-        if (properties) {
-          updateObject.$set = properties;
-          callingChangeCollection.update(callingChange._id, updateObject, function(error){
-            if (error) {
-              console.log(error);
-            } else {
-              history.back();
-            }
-          });
+      } else if (event.target.id == "unmarkDiscussed") {
+        properties = {
+          status:                   "New",
+          dateDiscussed:            null
+        };
+      } else if (event.target.id == "markApproved") {
+        properties = {
+          status:                   "Approved",
+          dateApproved:             new Date()
+        };
+      } else if (event.target.id == "unmarkApproved") {
+        properties = {
+          status:                   "Discussed",
+          dateApproved:             null
+        };
+      } else if (event.target.id == "markInterviewScheduled") {
+        properties = {
+          status:                   "Interview Scheduled",
+          dateInterviewScheduled:   new Date()
+        };
+      } else if (event.target.id == "unmarkInterviewScheduled") {
+        properties = {
+          status:                   "Approved",
+          dateInterviewScheduled:   null
+        };
+      } else if (event.target.id == "markInterviewed") {
+        properties = {
+          status:                   "Interviewed",
+          dateInterviewed:          new Date()
+        };
+      } else if (event.target.id == "unmarkInterviewed") {
+        properties = {
+          status:                   "Interview Scheduled",
+          dateInterviewed:          null
+        };
+      } else if (event.target.id == "markPresented") {
+        properties = {
+          status:                   "Presented",
+          datePresented:            new Date()
+        };
+      } else if (event.target.id == "unmarkPresented") {
+        properties = {
+          status:                   "Interviewed",
+          datePresented:            null
+        };
+      } else if (event.target.id == "markRecorded") {
+        properties = {
+          status:                   "Recorded",
+          dateRecorded:             new Date()
+        };
+      } else if (event.target.id == "unmarkRecorded") {
+        properties = {
+          status:                   "Presented",
+          dateRecorded:             null
+        };
+      } else if (event.target.id == "markSetApart") {
+        properties = {
+          status:                   "Set Apart",
+          dateSetApart:             new Date()
+        };
+      } else if (event.target.id == "unmarkSetApart") {
+        properties = {
+          status:                   "Recorded",
+          dateSetApart:             null
+        };
+      } else if (event.target.id == "markSetApartRecorded") {
+        properties = {
+          status:                   "Set Apart Recorded",
+          dateSetApartRecorded:     new Date()
+        };
+      } else if (event.target.id == "unmarkSetApartRecorded") {
+        properties = {
+          status:                   "Set Apart",
+          dateSetApartRecorded:     null
+        };
+      } else if (event.target.id == "markCanceled") {
+        properties = {
+          status:                   "Canceled",
+          dateCanceled:             new Date()
+        };
+      } else if (event.target.id == "markOnHold") {
+        properties = {
+          status:                   "On Hold",
+          dateOnHold:               new Date()
+        };
+      } else if ((event.target.id == "unmarkCanceled") || (event.target.id == "unmarkOnHold")) {
+        var restoredStatus;
+        if (callingChange.dateSetApartRecorded) {
+          restoredStatus =          "Set Apart Recorded"
+        } else if (callingChange.dateSetApart) {
+          restoredStatus =          "Set Apart"
+        } else if (callingChange.dateRecorded) {
+          restoredStatus =          "Recorded"
+        } else if (callingChange.datePresented) {
+          restoredStatus =          "Presented"
+        } else if (callingChange.dateInterviewed) {
+          restoredStatus =          "Interviewed"
+        } else if (callingChange.dateInterviewScheduled) {
+          restoredStatus =          "Interview Scheduled"
+        } else if (callingChange.dateApproved) {
+          restoredStatus =          "Approved"
+        } else if (callingChange.dateDiscussed) {
+          restoredStatus =          "Discussed"
+        } else {
+          restoredStatus = "New";
         }
-        return true;
+
+        if (event.target.id == "unmarkCanceled") {
+          properties = {
+            status:                   restoredStatus,
+            dateCanceled:             null
+          };
+        } else if (event.target.id == "unmarkOnHold") {
+          properties = {
+            status:                   restoredStatus,
+            dateOnHold:               null
+          };
+        }
       }
-    });
+
+      //update other values too in case user input some other information
+      properties.updatedBy =          Meteor.userId(),
+      properties.updatedAt =          new Date(),
+      properties.wardUnitNo =         Meteor.user().wardUnitNo,
+      properties.stakeUnitNo =        Meteor.user().stakeUnitNo,
+      properties.type =               Session.get("selectedCallingChangeType"),
+      properties.member =             Session.get("selectedCallingChangeMember"),
+      properties.calling =            Session.get("selectedCallingChangeCalling"),
+      properties.interviewDate =      $("#interviewDate").val(),
+      properties.interviewTime =      $("#interviewTime").val(),
+      properties.notes =              $("#notes").val()
+
+      if (properties) {
+        updateObject.$set = properties;
+        callingChangeCollection.update(callingChange._id, updateObject, function(error){
+          if (error) {
+            console.log(error);
+          } else {
+            history.back();
+          }
+        });
+      }
+    }
   },
   'click [data-action=showDeleteActionSheet]': function(e, instance){
     var callingChange = this;
@@ -180,124 +268,6 @@ Template.callingChangeEdit.events({
       }
     });
   },
-  'click [data-action=markApproved]': function(e, instance){
-    var callingChange = this;
-    var updateObject = {};
-    var properties = {
-      status:         "Approved",
-      dateApproved:   new Date()
-    };
-    if (properties) {
-      updateObject.$set = properties;
-      callingChangeCollection.update(callingChange._id, updateObject, function(error){
-        if (error) {
-          console.log(error);
-        } else {
-          history.back();
-        }
-      });
-    }
-  },
-  'click [data-action=markInterviewed]': function(e, instance){
-    var callingChange = this;
-    var updateObject = {};
-    var meetingDate = moment().subtract(1, "days").day(7).format("YYYY-MM-DD");
-    var foundMeeting = meetingCollection.findOne({"meetingDate": meetingDate});
-
-    var properties = {
-      status:           "Interviewed",
-      dateInterviewed:  new Date(),
-      meeting:          foundMeeting
-    };
-    if (properties) {
-      updateObject.$set = properties;
-      callingChangeCollection.update(callingChange._id, updateObject, function(error){
-        if (error) {
-          console.log(error);
-        } else {
-          history.back();
-        }
-      });
-    }
-  },
-  'click [data-action=markPresented]': function(e, instance){
-    var callingChange = this;
-    var updateObject = {};
-    var properties = {
-      status:           "Presented",
-      datePresented:    new Date()
-    };
-    if (properties) {
-      updateObject.$set = properties;
-      callingChangeCollection.update(callingChange._id, updateObject, function(error){
-        if (error) {
-          console.log(error);
-        } else {
-          history.back();
-        }
-      });
-    }
-  },
-  'click [data-action=markRecorded]': function(e, instance){
-    var callingChange = this;
-    var updateObject = {};
-    var calculatedStatus;
-    if (callingChange.type == "Release") {
-      calculatedStatus = "Complete";
-    } else {
-      calculatedStatus = "Recorded"
-    }
-    var properties = {
-      status:           calculatedStatus,
-      dateRecorded:     new Date()
-    };
-    if (properties) {
-      updateObject.$set = properties;
-      callingChangeCollection.update(callingChange._id, updateObject, function(error){
-        if (error) {
-          console.log(error);
-        } else {
-          history.back();
-        }
-      });
-    }
-  },
-  'click [data-action=markSetApart]': function(e, instance){
-    var callingChange = this;
-    var updateObject = {};
-    var properties = {
-      status:           "Set Apart",
-      dateSetApart:     new Date()
-    };
-    if (properties) {
-      updateObject.$set = properties;
-      callingChangeCollection.update(callingChange._id, updateObject, function(error){
-        if (error) {
-          console.log(error);
-        } else {
-          history.back();
-        }
-      });
-    }
-  },
-  'click [data-action=markSetApartRecorded]': function(e, instance){
-    var callingChange = this;
-    var updateObject = {};
-    var properties = {
-      status:               "Complete",
-      dateSetApartRecorded: new Date()
-    };
-    if (properties) {
-      updateObject.$set = properties;
-      callingChangeCollection.update(callingChange._id, updateObject, function(error){
-        if (error) {
-          console.log(error);
-        } else {
-          history.back();
-        }
-      });
-    }
-  }
 });
 
 Template.callingChangeEdit.rendered = function() {

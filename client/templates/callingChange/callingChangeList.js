@@ -64,8 +64,7 @@ Template.callingChangeList.events({
       createdAt:            new Date(),
       wardUnitNo:           Meteor.user().wardUnitNo,
       stakeUnitNo:          Meteor.user().stakeUnitNo,
-      dateDiscussed:        new Date(),
-      status:               "Discussed"
+      status:               "New"
     };
 
     if (properties) {

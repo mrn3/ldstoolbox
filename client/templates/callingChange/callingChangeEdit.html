@@ -54,84 +54,169 @@
               <i class="icon ion-ios-arrow-right"></i>
             </a>
 
-            {{#if isInterviewed status}}
+            {{#if isIn status "Approved,Interview Scheduled,Interviewed"}}
+              <label class="item item-input">
+                <span class="input-label">Interview Date</span>
+                <input type="date" id="interviewDate" placeholder="Interview Date" value="{{interviewDate}}">
+              </label>
+              <label class="item item-input">
+                <span class="input-label">Interview Time</span>
+                <input type="time" id="interviewTime" placeholder="Interview Time" value="{{interviewTime}}">
+              </label>
+            {{/if}}
+
+            {{#if isIn status "Interviewed,Presented"}}
               <a id="meetingItem" class="item item-icon-right" href="{{pathFor 'meetingSelect'}}">
-                Meeting
+                Meeting Date
                 <span class="item-note">{{{meeting.meetingDate}}}</span>
                 <i class="icon ion-ios-arrow-right"></i>
               </a>
             {{/if}}
 
-            {{#if isPresented status}}
+            {{#if isEqual status "New"}}
               <div class="item item-divider">
                 &nbsp;
               </div>
-              <a id="meetingItem" class="item item-icon-right" href="{{pathFor 'meetingSelect'}}">
-                Meeting
-                <span class="item-note">{{{meeting.meetingDate}}}</span>
-                <i class="icon ion-ios-arrow-right"></i>
+              <a class="button button-positive button-full button-clear" id="markDiscussed">
+                Mark Discussed
               </a>
             {{/if}}
 
-            {{#if isDiscussed status}}
+            {{#if isEqual status "Discussed"}}
               <div class="item item-divider">
                 &nbsp;
               </div>
-              <a class="button button-positive button-full button-clear" data-action="markApproved">
+              <a class="button button-positive button-full button-clear" id="markApproved">
                 Mark Approved
               </a>
-            {{/if}}
-
-            {{#if isApproved status}}
               <div class="item item-divider">
                 &nbsp;
               </div>
-              <a class="button button-positive button-full button-clear" data-action="markInterviewed">
+              <a class="button button-positive button-full button-clear" id="unmarkDiscussed">
+                Unmark Discussed
+              </a>
+            {{/if}}
+
+            {{#if isEqual status "Approved"}}
+              <div class="item item-divider">
+                &nbsp;
+              </div>
+              <a class="button button-positive button-full button-clear" id="markInterviewScheduled">
+                Mark Interview Scheduled
+              </a>
+              <div class="item item-divider">
+                &nbsp;
+              </div>
+              <a class="button button-positive button-full button-clear" id="unmarkApproved">
+                Unmark Approved
+              </a>
+            {{/if}}
+
+            {{#if isEqual status "Interview Scheduled"}}
+              <div class="item item-divider">
+                &nbsp;
+              </div>
+              <a class="button button-positive button-full button-clear" id="markInterviewed">
                 Mark Interviewed
               </a>
-            {{/if}}
-
-            {{#if isInterviewed status}}
               <div class="item item-divider">
                 &nbsp;
               </div>
-              <a class="button button-positive button-full button-clear" data-action="markPresented">
+              <a class="button button-positive button-full button-clear" id="unmarkInterviewScheduled">
+                Unmark Interview Scheduled
+              </a>
+            {{/if}}
+
+            {{#if isEqual status "Interviewed"}}
+              <div class="item item-divider">
+                &nbsp;
+              </div>
+              <a class="button button-positive button-full button-clear" id="markPresented">
                 Mark Presented
               </a>
-            {{/if}}
-
-            {{#if isPresented status}}
               <div class="item item-divider">
                 &nbsp;
               </div>
-              <a class="button button-positive button-full button-clear" data-action="markRecorded">
+              <a class="button button-positive button-full button-clear" id="unmarkInterviewed">
+                Unmark Interviewed
+              </a>
+            {{/if}}
+
+            {{#if isEqual status "Presented"}}
+              <div class="item item-divider">
+                &nbsp;
+              </div>
+              <a class="button button-positive button-full button-clear" id="markRecorded">
                 Mark Recorded
               </a>
-            {{/if}}
-
-            {{#if isRecorded status}}
               <div class="item item-divider">
                 &nbsp;
               </div>
-              <a class="button button-positive button-full button-clear" data-action="markSetApart">
+              <a class="button button-positive button-full button-clear" id="unmarkPresented">
+                Unmark Presented
+              </a>
+            {{/if}}
+
+            {{#if isEqual status "Recorded"}}
+              <div class="item item-divider">
+                &nbsp;
+              </div>
+              <a class="button button-positive button-full button-clear" id="markSetApart">
                 Mark Set Apart
               </a>
-            {{/if}}
-
-            {{#if isSetApart status}}
               <div class="item item-divider">
                 &nbsp;
               </div>
-              <a class="button button-positive button-full button-clear" data-action="markSetApartRecorded">
-                Mark Set Apart Recorded
+              <a class="button button-positive button-full button-clear" id="unmarkRecorded">
+                Unmark Recorded
               </a>
             {{/if}}
 
-            {{#if isNotCanceled status}}
+            {{#if isEqual status "Set Apart"}}
               <div class="item item-divider">
                 &nbsp;
               </div>
-              <a class="button button-positive button-full button-clear" data-action="showCancelActionSheet">
+              <a class="button button-positive button-full button-clear" id="markSetApartRecorded">
+                Mark Set Apart Recorded
+              </a>
+              <div class="item item-divider">
+                &nbsp;
+              </div>
+              <a class="button button-positive button-full button-clear" id="unmarkSetApart">
+                Unmark Set Apart
+              </a>
+            {{/if}}
+
+            {{#if isEqual status "On Hold"}}
+              <div class="item item-divider">
+                &nbsp;
+              </div>
+              <a class="button button-positive button-full button-clear" id="unmarkOnHold">
+                Unmark On Hold
+              </a>
+            {{else}}
+              {{#if isNotEqual status "Canceled"}}
+                <div class="item item-divider">
+                  &nbsp;
+                </div>
+                <a class="button button-positive button-full button-clear" id="markOnHold">
+                  Mark On Hold
+                </a>
+              {{/if}}
+            {{/if}}
+
+            {{#if isEqual status "Canceled"}}
+              <div class="item item-divider">
+                &nbsp;
+              </div>
+              <a class="button button-positive button-full button-clear" id="unmarkCanceled">
+                Unmark Canceled
+              </a>
+            {{else}}
+              <div class="item item-divider">
+                &nbsp;
+              </div>
+              <a class="button button-positive button-full button-clear" id="markCanceled">
                 Mark Canceled
               </a>
             {{/if}}
