@@ -190,8 +190,6 @@ Template.callingChangeList.helpers({
         selector.type = Session.get("typeSelector");
       }
     }
-    console.log(selector);
-
     return callingChangeCollection.find(selector);
   },
   userCanViewCallingChangeList: function () {
