@@ -1,101 +1,195 @@
+function buildRegExp(searchText) {
+  // this is a dumb implementation
+  var parts = searchText.trim().split(/[ \-\:]+/);
+  return new RegExp("(" + parts.join('|') + ")", "ig");
+}
+
 Template.callingChangeList.helpers({
   callingChangeData: function(){
-    if (typeof Session.get("typeSelector") == "undefined") {
-      Session.set("typeSelector", "All");
-    }
-    if (typeof Session.get("statusSelector") == "undefined") {
-      Session.set("statusSelector", "Incomplete");
-    }
-    if ((Session.get("statusSelector") == "Complete")) {
-      var selector =
-        {
-          $or:
-            [
-              {
-                $and:
-                  [
-                    {
-                      type: "Call"
-                    },
-                    {
-                      status: "Set Apart Recorded"
-                    }
+    var selector = {};
+    var regExp;
+
+    if (Session.get("searchInput")) {
+      regExp = buildRegExp(Session.get("searchInput"));
+
+      if ((Session.get("statusSelector") == "Complete")) {
+        selector =
+          {
+            $and:
+              [
+                {
+                  $or: [
+                    {"member.switchedPreferredName": regExp},
+                    {"calling.callingName": regExp}
                   ]
-              },
-              {
-                $and:
-                  [
-                    {
-                      type: "Release"
-                    },
-                    {
-                      status: "Recorded"
-                    }
+                },
+                {
+                  $or:
+                    [
+                      {
+                        $and:
+                          [
+                            {
+                              type: "Call"
+                            },
+                            {
+                              status: "Set Apart Recorded"
+                            }
+                          ]
+                      },
+                      {
+                        $and:
+                          [
+                            {
+                              type: "Release"
+                            },
+                            {
+                              status: "Recorded"
+                            }
+                          ]
+                      }
+                    ]
+                }
+              ]
+          };
+      } else if ((Session.get("statusSelector") == "Incomplete")) {
+        selector =
+          {
+            $and:
+              [
+                {
+                  $or: [
+                    {"member.switchedPreferredName": regExp},
+                    {"calling.callingName": regExp}
                   ]
-              }
+                },
+                {
+                  $or:
+                    [
+                      {
+                        $and:
+                          [
+                            {
+                              type: "Call"
+                            },
+                            {
+                              status:
+                                {
+                                  $not: "Set Apart Recorded"
+                                }
+                            }
+                          ]
+                      },
+                      {
+                        $and:
+                          [
+                            {
+                              type: "Release"
+                            },
+                            {
+                              status:
+                                {
+                                  $not: "Recorded"
+                                }
+                            }
+                          ]
+                      }
+                    ]
+                }
+              ]
+          };
+      } else {
+        selector =
+          {
+            $or: [
+              {"member.switchedPreferredName": regExp},
+              {"calling.callingName": regExp}
             ]
-        };
-      if (Session.get("typeSelector") == "All") {
-        return callingChangeCollection.find(selector);
-      } else {
-        selector.type = Session.get("typeSelector");
-        return callingChangeCollection.find(selector);
-      }
-    } else if ((Session.get("statusSelector") == "Incomplete")) {
-      var selector =
-        {
-          $or:
-            [
-              {
-                $and:
-                  [
-                    {
-                      type: "Call"
-                    },
-                    {
-                      status:
-                        {
-                          $not: "Set Apart Recorded"
-                        }
-                    }
-                  ]
-              },
-              {
-                $and:
-                  [
-                    {
-                      type: "Release"
-                    },
-                    {
-                      status:
-                        {
-                          $not: "Recorded"
-                        }
-                    }
-                  ]
-              }
-            ]
-        };
-      if (Session.get("typeSelector") == "All") {
-        return callingChangeCollection.find(selector);
-      } else {
-        selector.type = Session.get("typeSelector");
-        return callingChangeCollection.find(selector);
-      }
-    } else if (Session.get("statusSelector") == "All") {
-      if (Session.get("typeSelector") == "All") {
-        return callingChangeCollection.find({});
-      } else {
-        return callingChangeCollection.find({type: Session.get("typeSelector")});
+          };
       }
     } else {
-      if (Session.get("typeSelector") == "All") {
-        return callingChangeCollection.find({status: Session.get("statusSelector")});
-      } else {
+      if ((Session.get("statusSelector") == "Complete")) {
+        selector =
+          {
+            $or:
+              [
+                {
+                  $and:
+                    [
+                      {
+                        type: "Call"
+                      },
+                      {
+                        status: "Set Apart Recorded"
+                      }
+                    ]
+                },
+                {
+                  $and:
+                    [
+                      {
+                        type: "Release"
+                      },
+                      {
+                        status: "Recorded"
+                      }
+                    ]
+                }
+              ]
+          };
+        } else if ((Session.get("statusSelector") == "Incomplete")) {
+          selector =
+            {
+              $or:
+                [
+                  {
+                    $and:
+                      [
+                        {
+                          type: "Call"
+                        },
+                        {
+                          status:
+                            {
+                              $not: "Set Apart Recorded"
+                            }
+                        }
+                      ]
+                  },
+                  {
+                    $and:
+                      [
+                        {
+                          type: "Release"
+                        },
+                        {
+                          status:
+                            {
+                              $not: "Recorded"
+                            }
+                        }
+                      ]
+                  }
+                ]
+            };
+        }
+    }
+
+    if ((Session.get("statusSelector") == "Complete")
+      || (Session.get("statusSelector") == "Incomplete")
+      || (Session.get("statusSelector") == "All")) {
+      if (Session.get("typeSelector") != "All") {
         selector.type = Session.get("typeSelector");
-        return callingChangeCollection.find({status: Session.get("statusSelector"), type: Session.get("typeSelector")});
+      }
+    } else {
+      selector.status = Session.get("statusSelector");
+      if (Session.get("typeSelector") != "All") {
+        selector.type = Session.get("typeSelector");
       }
     }
+    console.log(selector);
+    
+    return callingChangeCollection.find(selector);
   },
   userCanViewCallingChangeList: function () {
     if (Meteor.user() && Meteor.user().callings) {
@@ -155,4 +249,15 @@ Template.callingChangeList.rendered = function() {
   Session.set("selectedCallingChangeMember", "");
   Session.set("selectedCallingChangeCalling", "");
   Session.set("selectedCallingChangeType", "");
+
+  //defaults
+  if (typeof Session.get("typeSelector") == "undefined") {
+    Session.set("typeSelector", "All");
+  }
+  if (typeof Session.get("statusSelector") == "undefined") {
+    Session.set("statusSelector", "Incomplete");
+  }
+  if (typeof Session.get("searchInput") == "undefined") {
+    Session.set("searchInput", "");
+  }
 };
