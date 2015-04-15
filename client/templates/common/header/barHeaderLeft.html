@@ -10,6 +10,19 @@
       </button>
     {{/if}}
 
+    {{#if isEqual leftType "callingChangeList"}}
+      <button class="button button-clear pull-left button-positive" data-ion-menu-toggle="left">
+        {{#if isAndroid}}
+          {{> ionIcon icon='android-more-vertical'}}
+        {{else}}
+          {{> ionIcon icon='navicon'}}
+        {{/if}}
+      </button>
+      <a class="button button-clear pull-left" href="/callingChangeHelp">
+        <i class="icon ion-ios-help-outline positive"></i>
+      </a>
+    {{/if}}
+
     {{#if isEqual leftType "back"}}
       <a id="backButton" class="button icon-left ion-ios-arrow-left button-clear button-positive"></a>
     {{/if}}
