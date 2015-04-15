@@ -5,6 +5,9 @@ function buildRegExp(searchText) {
 }
 
 Template.callingChangeList.helpers({
+  searchInputValue: function() {
+    return Session.get("searchInput");
+  },
   callingChangeData: function(){
     var selector = {};
     var regExp;
@@ -188,7 +191,7 @@ Template.callingChangeList.helpers({
       }
     }
     console.log(selector);
-    
+
     return callingChangeCollection.find(selector);
   },
   userCanViewCallingChangeList: function () {
@@ -241,6 +244,9 @@ Template.callingChangeList.events({
         }
       });
     }
+  },
+  "keyup #searchInput": function(e, instance){
+    Session.set("searchInput", $("#searchInput").val());
   }
 });
 

@@ -12,9 +12,6 @@ Template.layout.helpers({
     } else {
       return "";
     }
-  },
-  searchInputValue: function() {
-    return Session.get("searchInput");
   }
 });
 
@@ -24,9 +21,6 @@ Template.layout.events({
   },
   "change #typeSelector": function(e, instance){
     Session.set("typeSelector", $("#typeSelector").val());
-  },
-  "keyup #searchInput": function(e, instance){
-    Session.set("searchInput", $("#searchInput").val());
   }
 });
 
