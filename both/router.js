@@ -46,11 +46,6 @@ Router.map(function() {
   this.route("/householdList/", {
     name: "householdList",
     onBeforeAction: requireLogin,
-    data: function() {
-      return {
-        householdData: householdCollection.find({})
-      };
-    },
     fastRender: true
   });
   this.route("/memberList/", {

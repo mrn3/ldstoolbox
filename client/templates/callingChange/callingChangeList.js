@@ -5,15 +5,15 @@ function buildRegExp(searchText) {
 }
 
 Template.callingChangeList.helpers({
-  searchInputValue: function() {
-    return Session.get("searchInput");
+  callingChangeSearchInputValue: function() {
+    return Session.get("callingChangeSearchInput");
   },
   callingChangeData: function(){
     var selector = {};
     var regExp;
 
-    if (Session.get("searchInput")) {
-      regExp = buildRegExp(Session.get("searchInput"));
+    if (Session.get("callingChangeSearchInput")) {
+      regExp = buildRegExp(Session.get("callingChangeSearchInput"));
 
       if ((Session.get("statusSelector") == "Complete")) {
         selector =
@@ -243,8 +243,8 @@ Template.callingChangeList.events({
       });
     }
   },
-  "keyup #searchInput": function(e, instance){
-    Session.set("searchInput", $("#searchInput").val());
+  "keyup #callingChangeSearchInput": function(e, instance){
+    Session.set("callingChangeSearchInput", $("#callingChangeSearchInput").val());
   }
 });
 
@@ -261,7 +261,7 @@ Template.callingChangeList.rendered = function() {
   if (typeof Session.get("statusSelector") == "undefined") {
     Session.set("statusSelector", "Incomplete");
   }
-  if (typeof Session.get("searchInput") == "undefined") {
-    Session.set("searchInput", "");
+  if (typeof Session.get("callingChangeSearchInput") == "undefined") {
+    Session.set("callingChangeSearchInput", "");
   }
 };
