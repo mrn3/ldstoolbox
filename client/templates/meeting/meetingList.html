@@ -8,7 +8,7 @@
           {{#each meetingData}}
             <a href="{{pathFor 'meetingEdit'}}" class="item item-icon-right">
               <h2>
-                {{meetingDate}}
+                {{formattedMeetingDate}}
               </h2>
               {{> ionIcon icon="ios-arrow-right"}}
             </a>

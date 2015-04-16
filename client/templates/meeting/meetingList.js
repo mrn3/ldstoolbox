@@ -1,3 +1,9 @@
+Template.meetingList.helpers({
+  formattedMeetingDate: function() {
+    return moment(this.meetingDate).format("dddd, MMMM D, YYYY");
+  }
+});
+
 Template.meetingList.events({
   'click #createMeetingButton': function(e, instance) {
     e.preventDefault();
