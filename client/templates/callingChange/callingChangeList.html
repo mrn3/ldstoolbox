@@ -3,15 +3,16 @@
   {{#if userCanViewCallingChangeList}}
     {{>barHeader title="Calling Changes" leftType="callingChangeList" rightType="callingChangeList"}}
 
+    <div id="searchBarSubHeader" class="bar bar-subheader item-input-inset">
+      <label class="item-input-wrapper">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input id="callingChangeSearchInput" type="search" placeholder="Search Text" value="{{callingChangeSearchInputValue}}">
+      </label>
+    </div>
+
     {{#ionView}}
-      {{#ionContent}}
+      {{#ionContent class="has-subheader mainContentArea"}}
         {{#ionList}}
-          <div class="bar bar-header item-input-inset">
-            <label class="item-input-wrapper">
-              <i class="icon ion-search placeholder-icon"></i>
-              <input id="callingChangeSearchInput" type="search" placeholder="Search Text" value="{{callingChangeSearchInputValue}}">
-            </label>
-          </div>
           {{#each callingChangeData}}
             {{>callingChangeItem}}
           {{/each}}

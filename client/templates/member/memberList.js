@@ -23,12 +23,11 @@ Template.memberList.helpers({
       selector =
         {
           $or: [
-            {"switchedPreferredName": regExp},
+            {"preferredName": regExp},
             {"callings.callingName": regExp}
           ]
         };
     }
-    //console.log(selector);
     return memberCollection.find(selector);
   }
 });
@@ -56,23 +55,33 @@ Template.memberList.events({
       }
     });
   },
-  "scroll .content": function (event, template) {
-    var scrollTop = $("div.content.overflow-scroll.has-header")[0].scrollTop;
-    var scrollHeight = $("div.content.overflow-scroll.has-header")[0].scrollHeight;
-
-    //console.log(scrollTop);
-    //console.log(scrollHeight);
-    //console.log(scrollTop / scrollHeight);
+  "scroll .mainContentArea": function (event, template) {
+    //console.log(event.target.scrollTop);
+    //console.log(event.target.scrollHeight);
+    //console.log(event.target.scrollTop / event.target.scrollHeight);
 
     //if within 60%, load more
-    if ((scrollTop / scrollHeight) > 0.4) {
+    if ((event.target.scrollTop / event.target.scrollHeight) > 0.4) {
       theHandle.loadNextPage();
     }
+
+    //hide searchbar on scroll down, show on scroll up
+    if (event.target.scrollTop < Session.get("previousScrollTop")) {
+      $(".mainContentArea").addClass("has-subheader")
+      $("#searchBarSubHeader").slideDown();
+    } else {
+      $(".mainContentArea").removeClass("has-subheader")
+      $("#searchBarSubHeader").slideUp();
+    }
+    Session.set("previousScrollTop", event.target.scrollTop);
   }
 });
 
 Template.memberList.rendered = function() {
   if (typeof Session.get("memberSearchInput") == "undefined") {
     Session.set("memberSearchInput", "");
+  }
+  if (typeof Session.get("previousScrollTop") == "undefined") {
+    Session.set("previousScrollTop", 0);
   }
 };

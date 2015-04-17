@@ -245,6 +245,17 @@ Template.callingChangeList.events({
   },
   "keyup #callingChangeSearchInput": function(e, instance){
     Session.set("callingChangeSearchInput", $("#callingChangeSearchInput").val());
+  },
+  "scroll .mainContentArea": function (event, template) {
+    //hide searchbar on scroll down, show on scroll up
+    if (event.target.scrollTop < Session.get("previousScrollTop")) {
+      $(".mainContentArea").addClass("has-subheader")
+      $("#searchBarSubHeader").slideDown();
+    } else {
+      $(".mainContentArea").removeClass("has-subheader")
+      $("#searchBarSubHeader").slideUp();
+    }
+    Session.set("previousScrollTop", event.target.scrollTop);
   }
 });
 
@@ -263,5 +274,8 @@ Template.callingChangeList.rendered = function() {
   }
   if (typeof Session.get("callingChangeSearchInput") == "undefined") {
     Session.set("callingChangeSearchInput", "");
+  }
+  if (typeof Session.get("previousScrollTop") == "undefined") {
+    Session.set("previousScrollTop", 0);
   }
 };

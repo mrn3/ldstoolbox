@@ -2,15 +2,16 @@
 
   {{> barHeader title="Directory" leftType="mainMenu" rightType="memberList"}}
 
+  <div id="searchBarSubHeader" class="bar bar-subheader item-input-inset">
+    <label class="item-input-wrapper">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input id="householdSearchInput" type="search" placeholder="Search Text" value="{{householdSearchInputValue}}">
+    </label>
+  </div>
+
   {{#ionView}}
-    {{#ionContent}}
+    {{#ionContent class="has-subheader mainContentArea"}}
         {{#ionList}}
-          <div class="bar bar-header item-input-inset">
-            <label class="item-input-wrapper">
-              <i class="icon ion-search placeholder-icon"></i>
-              <input id="householdSearchInput" type="search" placeholder="Search Text" value="{{householdSearchInputValue}}">
-            </label>
-          </div>
           {{#each householdData}}
             {{#if headOfHousehold.individualId}}
               <a class="item item-icon-right" href="/member/{{headOfHousehold.individualId}}">
