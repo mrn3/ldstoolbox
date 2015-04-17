@@ -6,7 +6,7 @@ function buildRegExp(searchText) {
 var theHandle;
 
 Deps.autorun(function() {
-  theHandle = Meteor.subscribeWithPagination("wardMemberPublication", 20, Session.get("selectedWardUnitNo"));
+  theHandle = Meteor.subscribeWithPagination("wardMemberPublication", 20);
 });
 
 Template.memberList.helpers({

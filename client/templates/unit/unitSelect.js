@@ -24,6 +24,10 @@ Template.unitSelect.events({
     } else if (Router.current().route.getName() === "callingSelect") {
       var text = $("#callingSearchInput").val().trim();
       callingSearch.search(text);
+    } else if (Router.current().route.getName() === "householdList") {
+      window.location = "/householdList";
+    } else if (Router.current().route.getName() === "memberList") {
+      window.location = "/memberList";
     }
   }
 });
