@@ -6,7 +6,7 @@ function buildRegExp(searchText) {
 var theHandle;
 
 Deps.autorun(function() {
-  theHandle = Meteor.subscribeWithPagination("wardHouseholdPublication", 20);
+  theHandle = Meteor.subscribeWithPagination("wardLimitedHouseholdPublication", 20);
 });
 
 Template.householdList.helpers({
@@ -58,17 +58,15 @@ Template.householdList.events({
     });
   },
   "scroll .mainContentArea": function (event, template) {
-    //if within 60%, load more
-    if ((event.target.scrollTop / event.target.scrollHeight) > 0.4) {
-      theHandle.loadNextPage();
-    }
-    //hide searchbar on scroll down, show on scroll up
     if (event.target.scrollTop < Session.get("previousScrollTop")) {
+      //scrolling up - show searchbar
       $(".mainContentArea").addClass("has-subheader")
       $("#searchBarSubHeader").slideDown();
     } else {
+      //scrolling down - hide searchbar and load more results
       $(".mainContentArea").removeClass("has-subheader")
       $("#searchBarSubHeader").slideUp();
+      theHandle.loadNextPage();
     }
     Session.set("previousScrollTop", event.target.scrollTop);
   }

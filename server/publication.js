@@ -182,12 +182,44 @@ Meteor.publish('singleHouseholdByIndividualIdPublication', function(inIndividual
   }
 });
 
-Meteor.publish('wardHouseholdPublication', function(inLimit) {
+Meteor.publish('wardLimitedHouseholdPublication', function(inLimit) {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
     var options =
       {
         limit: inLimit,
+        sort: {coupleName: 1},
+        fields:
+          {
+            "coupleName": 1,
+            "headOfHouse.individualId": 1,
+            "headOfHouse.directoryName": 1,
+            "headOfHousehold.individualId": 1,
+            "headOfHousehold.name": 1,
+            "spouse.individualId": 1,
+            "spouse.name": 1,
+            "otherHouseholdMembers.individualId": 1,
+            "otherHouseholdMembers.name": 1,
+            "householdInfo.address.addr1": 1,
+            "householdInfo.address.addr2": 1,
+            "householdInfo.address.addr3": 1,
+            "householdInfo.address.addr4": 1,
+            "householdInfo.address.addr5": 1,
+            "householdInfo.address.latitude": 1,
+            "householdInfo.address.longitude": 1
+          }
+      };
+    return householdCollection.find({stakeUnitNo: user.stakeUnitNo, wardUnitNo: user.selectedWardUnitNo}, options);
+  } else {
+    return [];
+  }
+});
+
+Meteor.publish('wardAllHouseholdPublication', function() {
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    var options =
+      {
         sort: {coupleName: 1},
         fields:
           {

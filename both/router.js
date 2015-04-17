@@ -169,7 +169,9 @@ Router.map(function() {
     name: "organizationList",
     onBeforeAction: requireLogin,
     waitOn: function () {
-      return Meteor.subscribe("organizationPublication")
+      return [
+        Meteor.subscribe("organizationPublication"),
+      ]
     },
     data: function() {
       return {
@@ -184,7 +186,8 @@ Router.map(function() {
     waitOn: function () {
       return [
         Meteor.subscribe("wardMemberOrganizationPublication"),
-        Meteor.subscribe("organizationPublication")
+        Meteor.subscribe("organizationPublication"),
+        Meteor.subscribe("wardAllHouseholdPublication")
       ]
     },
     data: function() {

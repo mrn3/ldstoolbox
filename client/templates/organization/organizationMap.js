@@ -107,7 +107,20 @@ Template.organizationMap.onCreated(function() {
         content: contentString
       });
 
+      /*
+      var image = {
+        url: "https://chart.googleapis.com/chart?chst=d_bubble_text_small&chld=bb|" + householdArray[householdIndex].headOfHousehold.name + "|FFFFFF|000000",
+        // This marker is 20 pixels wide by 32 pixels tall.
+        //size: new google.maps.Size(20, 32),
+        // The origin for this image is 0,0.
+        //origin: new google.maps.Point(0,0),
+        // The anchor for this image is the base of the flagpole at 0,32.
+        //anchor: new google.maps.Point(0, 32)
+      };
+      */
+
       marker = new google.maps.Marker({
+        //icon: image,
         position: latlng,
         map: map.instance,
         title: householdArray[householdIndex].headOfHousehold.name

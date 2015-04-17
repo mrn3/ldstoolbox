@@ -59,19 +59,15 @@ Template.memberList.events({
     //console.log(event.target.scrollTop);
     //console.log(event.target.scrollHeight);
     //console.log(event.target.scrollTop / event.target.scrollHeight);
-
-    //if within 60%, load more
-    if ((event.target.scrollTop / event.target.scrollHeight) > 0.4) {
-      theHandle.loadNextPage();
-    }
-
-    //hide searchbar on scroll down, show on scroll up
     if (event.target.scrollTop < Session.get("previousScrollTop")) {
+      //scrolling up - show searchbar
       $(".mainContentArea").addClass("has-subheader")
       $("#searchBarSubHeader").slideDown();
     } else {
+      //scrolling down - hide searchbar and load more results
       $(".mainContentArea").removeClass("has-subheader")
       $("#searchBarSubHeader").slideUp();
+      theHandle.loadNextPage();
     }
     Session.set("previousScrollTop", event.target.scrollTop);
   }
