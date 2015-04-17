@@ -51,16 +51,6 @@ Router.map(function() {
   this.route("/memberList/", {
     name: "memberList",
     onBeforeAction: requireLogin,
-    waitOn: function () {
-      return [
-        Meteor.subscribe("userPublication")
-      ]
-    },
-    data: function() {
-      return {
-        memberData: memberCollection.find({})
-      };
-    },
     fastRender: true
   });
   this.route("/memberSelect/", {
