@@ -46,11 +46,21 @@ Router.map(function() {
   this.route("/householdList/", {
     name: "householdList",
     onBeforeAction: requireLogin,
+    waitOn: function () {
+      return [
+        Meteor.subscribe("userPublication")
+      ]
+    },
     fastRender: true
   });
   this.route("/memberList/", {
     name: "memberList",
     onBeforeAction: requireLogin,
+    waitOn: function () {
+      return [
+        Meteor.subscribe("userPublication")
+      ]
+    },
     fastRender: true
   });
   this.route("/memberSelect/", {
@@ -59,14 +69,12 @@ Router.map(function() {
     waitOn: function () {
       return [
         Meteor.subscribe("likelyOptionsMemberPublication"),
-        Meteor.subscribe("userPublication"),
-        Meteor.subscribe("unitPublication")
+        Meteor.subscribe("userPublication")
       ]
     },
     data: function() {
       return {
-        userData: Meteor.user(),
-        unitData: unitCollection.find({})
+        userData: Meteor.user()
       };
     },
     fastRender: true

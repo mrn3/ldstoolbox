@@ -22,7 +22,7 @@ Meteor.publish('singleMemberPublication', function(inIndividualId) {
   }
 });
 
-Meteor.publish('wardMemberPublication', function(inLimit) {
+Meteor.publish('wardMemberPublication', function(inLimit, inWardUnitNo) {
   if (this.userId) {
     var options =
       {
@@ -36,7 +36,7 @@ Meteor.publish('wardMemberPublication', function(inLimit) {
           }
       }
     var user = Meteor.users.findOne(this.userId);
-    return memberCollection.find({wardUnitNo: user.wardUnitNo}, options);
+    return memberCollection.find({stakeUnitNo: user.stakeUnitNo, wardUnitNo: inWardUnitNo}, options);
   } else {
     return [];
   }

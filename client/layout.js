@@ -12,6 +12,15 @@ Template.layout.helpers({
     } else {
       return "";
     }
+  },
+  routeIn: function (inRouteList) {
+    var inRouteListArray = inRouteList.split(",");
+    for (inRouteListArrayIndex in inRouteListArray) {
+      if (Router.current().route.getName() === inRouteListArray[inRouteListArrayIndex]) {
+        return true;
+      }
+    }
+    return false;
   }
 });
 

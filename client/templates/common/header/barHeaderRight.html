@@ -35,6 +35,13 @@
     {{/if}}
 
     {{#if isEqual rightType "memberList"}}
+      <button class="button button-clear pull-left" data-ion-menu-toggle="right">
+        {{#if isAndroid}}
+          <i class="icon ion-android-search positive"></i>
+        {{else}}
+          <i class="icon ion-ios-search positive"></i>
+        {{/if}}
+      </button>
       <a class="button button-clear pull-right button-positive" data-action="showSortActionSheet">
         <i class="icon ion-ios-list-outline positive"></i>
       </a>

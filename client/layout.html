@@ -58,38 +58,44 @@
           <div class="content has-header">
             <div class="list">
 
-              <label class="item item-input item-select">
-                <div class="input-label">
-                  Type
-                </div>
-                <select id="typeSelector" name="typeSelector">
-                  <option value="All" {{selectedTypeOption "All"}}>All</option>
-                  <option value="Call" {{selectedTypeOption "Call"}}>Call</option>
-                  <option value="Release" {{selectedTypeOption "Release"}}>Release</option>
-                </select>
-              </label>
+              {{#if routeIn "callingChangeList"}}
+                <label class="item item-input item-select">
+                  <div class="input-label">
+                    Type
+                  </div>
+                  <select id="typeSelector" name="typeSelector">
+                    <option value="All" {{selectedTypeOption "All"}}>All</option>
+                    <option value="Call" {{selectedTypeOption "Call"}}>Call</option>
+                    <option value="Release" {{selectedTypeOption "Release"}}>Release</option>
+                  </select>
+                </label>
 
-              <label class="item item-input item-select">
-                <div class="input-label">
-                  Status
-                </div>
-                <select id="statusSelector" name="statusSelector">
-                  <option value="All" {{selectedStatusOption "All"}}>All</option>
-                  <option value="Incomplete" {{selectedStatusOption "Incomplete"}}>Incomplete</option>
-                  <option value="Complete" {{selectedStatusOption "Complete"}}>Complete</option>
-                  <option value="New" {{selectedStatusOption "New"}}>New</option>
-                  <option value="Discussed" {{selectedStatusOption "Discussed"}}>Discussed</option>
-                  <option value="Approved" {{selectedStatusOption "Approved"}}>Approved</option>
-                  <option value="Interview Scheduled" {{selectedStatusOption "Interview Scheduled"}}>Interview Scheduled</option>
-                  <option value="Interviewed" {{selectedStatusOption "Interviewed"}}>Interviewed</option>
-                  <option value="Presented" {{selectedStatusOption "Presented"}}>Presented</option>
-                  <option value="Recorded" {{selectedStatusOption "Recorded"}}>Recorded</option>
-                  <option value="Set Apart" {{selectedStatusOption "Set Apart"}}>Set Apart</option>
-                  <option value="Set Apart Recorded" {{selectedStatusOption "Set Apart Recorded"}}>Set Apart Recorded</option>
-                  <option value="Canceled" {{selectedStatusOption "Canceled"}}>Canceled</option>
-                  <option value="On Hold" {{selectedStatusOption "On Hold"}}>On Hold</option>
-                </select>
-              </label>
+                <label class="item item-input item-select">
+                  <div class="input-label">
+                    Status
+                  </div>
+                  <select id="statusSelector" name="statusSelector">
+                    <option value="All" {{selectedStatusOption "All"}}>All</option>
+                    <option value="Incomplete" {{selectedStatusOption "Incomplete"}}>Incomplete</option>
+                    <option value="Complete" {{selectedStatusOption "Complete"}}>Complete</option>
+                    <option value="New" {{selectedStatusOption "New"}}>New</option>
+                    <option value="Discussed" {{selectedStatusOption "Discussed"}}>Discussed</option>
+                    <option value="Approved" {{selectedStatusOption "Approved"}}>Approved</option>
+                    <option value="Interview Scheduled" {{selectedStatusOption "Interview Scheduled"}}>Interview Scheduled</option>
+                    <option value="Interviewed" {{selectedStatusOption "Interviewed"}}>Interviewed</option>
+                    <option value="Presented" {{selectedStatusOption "Presented"}}>Presented</option>
+                    <option value="Recorded" {{selectedStatusOption "Recorded"}}>Recorded</option>
+                    <option value="Set Apart" {{selectedStatusOption "Set Apart"}}>Set Apart</option>
+                    <option value="Set Apart Recorded" {{selectedStatusOption "Set Apart Recorded"}}>Set Apart Recorded</option>
+                    <option value="Canceled" {{selectedStatusOption "Canceled"}}>Canceled</option>
+                    <option value="On Hold" {{selectedStatusOption "On Hold"}}>On Hold</option>
+                  </select>
+                </label>
+              {{/if}}
+
+              {{#if routeIn "householdList,memberList"}}
+                {{> unitSelect}}
+              {{/if}}
 
               <div class="item item-icon-left" data-ion-menu-close>
                 {{> ionIcon icon="ios-arrow-left"}} Return

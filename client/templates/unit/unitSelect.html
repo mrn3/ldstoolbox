@@ -1,0 +1,15 @@
+<template name="unitSelect">
+
+  <label class="item item-input item-select">
+    <div class="input-label">
+      Unit
+    </div>
+    <select id="unitSelect">
+      <option value="" {{isSelectedUnit ""}}>{{userData.stakeName}}</option>
+      {{#each unitData}}
+        <option value="{{wardUnitNo}}" {{isSelectedUnit wardUnitNo}}>{{wardName}}</option>
+      {{/each}}
+    </select>
+  </label>
+
+</template>

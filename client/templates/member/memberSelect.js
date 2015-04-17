@@ -15,13 +15,6 @@ Template.memberSelect.helpers({
       sort: {isoScore: -1}
     });
   },
-  isSelectedUnit: function(inWardUnitNo) {
-    if (Session.get("selectedWardUnitNo") == inWardUnitNo) {
-      return "selected";
-    } else {
-      return "";
-    }
-  },
   isLoading: function() {
     return memberSearch.getStatus().loading;
   },
@@ -139,7 +132,7 @@ function doUpdate (inUpdateObject) {
 }
 
 Template.memberSelect.events({
-  "keyup #searchInput": _.throttle(function(e) {
+  "keyup #memberSearchInput": _.throttle(function(e) {
     var text = $(e.target).val().trim();
     memberSearch.search(text);
   }, 200),
@@ -159,15 +152,4 @@ Template.memberSelect.events({
     }
     doUpdate(this);
   },
-  "change #unitSelect": function(e, instance) {
-    Session.set("selectedWardUnitNo", $("#unitSelect").val());
-    Meteor.call("setUserSelectedWardUnitNo", parseInt($("#unitSelect").val()));
-    var text = $("#searchInput").val().trim();
-    memberSearch.search(text);
-  },
 });
-
-Template.memberSelect.rendered = function() {
-  var user = Meteor.users.findOne(Meteor.user()._id);
-  Session.set("selectedWardUnitNo", user.selectedWardUnitNo);
-};
