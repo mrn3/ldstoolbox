@@ -30,28 +30,9 @@ Template.memberList.helpers({
     });
   },
   memberData: function() {
-    /*
-    var selector = {};
-    var regExp;
-
-    if (Session.get("memberSearchInput")) {
-      regExp = buildRegExp(Session.get("memberSearchInput"));
-
-      selector =
-        {
-          $or: [
-            {"preferredName": regExp},
-            {"callings.callingName": regExp}
-          ]
-        };
-    }
-    return memberCollection.find(selector);
-    */
-
     if (Session.get("memberSearchInput") == "") {
       return memberCollection.find({});
-    } 
-
+    }
   }
 });
 

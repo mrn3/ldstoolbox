@@ -1,3 +1,11 @@
+var options = {
+  //keepHistory: 1000 * 60 * 5,
+  //localSearch: true
+};
+var fields = ['coupleName', "headOfHousehold.name", "spouse.name", "otherHouseholdMembers.name"];
+
+householdSearch = new SearchSource("households", fields, options, 5);
+
 function buildRegExp(searchText) {
   var parts = searchText.trim().split(/[ \-\:]+/);
   return new RegExp("(" + parts.join('|') + ")", "ig");
@@ -13,31 +21,27 @@ Template.householdList.helpers({
   householdSearchInputValue: function() {
     return Session.get("householdSearchInput");
   },
+  householdSearchData: function(){
+    return householdSearch.getData({
+      transform: function(matchText, regExp) {
+        return matchText.replace(regExp, "<strong>$&</strong>")
+      },
+      sort: {isoScore: -1}
+    });
+  },
   householdData: function() {
-    var selector = {};
-    var regExp;
-
-    if (Session.get("householdSearchInput")) {
-      regExp = buildRegExp(Session.get("householdSearchInput"));
-
-      selector =
-        {
-          $or: [
-            {"coupleName": regExp},
-            {"headOfHousehold.name": regExp},
-            {"spouse.name": regExp},
-            {"otherHouseholdMembers.name": regExp}
-          ]
-        };
+    if (Session.get("householdSearchInput") == "") {
+      return householdCollection.find({});
     }
-    return householdCollection.find(selector);
   }
 });
 
 Template.householdList.events({
-  "keyup #householdSearchInput": function(e, instance){
+  "keyup #householdSearchInput": _.throttle(function(e) {
     Session.set("householdSearchInput", $("#householdSearchInput").val());
-  },
+    var text = $(e.target).val().trim();
+    householdSearch.search(text);
+  }, 200),
   "click [data-action=showSortActionSheet]": function (event, template) {
     IonActionSheet.show({
       buttons: [
@@ -79,4 +83,5 @@ Template.householdList.rendered = function() {
   if (typeof Session.get("previousScrollTop") == "undefined") {
     Session.set("previousScrollTop", 0);
   }
+  Session.set("selectedWardUnitNo", Meteor.user().selectedWardUnitNo);
 };

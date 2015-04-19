@@ -12,19 +12,11 @@
   {{#ionView}}
     {{#ionContent class="has-subheader mainContentArea"}}
         {{#ionList}}
+          {{#each householdSearchData}}
+            {{> householdItem}}
+          {{/each}}
           {{#each householdData}}
-            {{#if headOfHousehold.individualId}}
-              <a class="item item-icon-right" href="/member/{{headOfHousehold.individualId}}">
-                {{coupleName}}
-                <i class="icon ion-ios-arrow-right"></i>
-              </a>
-            {{/if}}
-            {{#if headOfHouse.individualId}}
-              <a class="item item-icon-right" href="/member/{{headOfHouse.individualId}}">
-                {{coupleName}}
-                <i class="icon ion-ios-arrow-right"></i>
-              </a>
-            {{/if}}
+            {{> householdItem}}
           {{/each}}
         {{/ionList}}
     {{/ionContent}}
