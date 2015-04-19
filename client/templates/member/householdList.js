@@ -14,7 +14,12 @@ function buildRegExp(searchText) {
 var theHandle;
 
 Deps.autorun(function() {
-  theHandle = Meteor.subscribeWithPagination("wardLimitedHouseholdPublication", 20);
+  //if it is stake, subscribe to stake one
+  if (Session.get("selectedWardUnitNo") == "" || isNaN(Session.get("selectedWardUnitNo"))) {
+    theHandle = Meteor.subscribeWithPagination("householdLimitedPublication", "stake", 20);
+  } else {
+    theHandle = Meteor.subscribeWithPagination("householdLimitedPublication", "ward", 20);
+  }
 });
 
 Template.householdList.helpers({
@@ -25,8 +30,7 @@ Template.householdList.helpers({
     return householdSearch.getData({
       transform: function(matchText, regExp) {
         return matchText.replace(regExp, "<strong>$&</strong>")
-      },
-      sort: {isoScore: -1}
+      }
     });
   },
   householdData: function() {

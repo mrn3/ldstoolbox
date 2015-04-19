@@ -368,7 +368,7 @@ Router.map(function() {
       return [
         Meteor.subscribe("userPublication"),
         Meteor.subscribe("stakeMemberPublication"),
-        Meteor.subscribe("stakeHouseholdPublication"),
+        Meteor.subscribe("stakeAllHouseholdPublication"),
         Meteor.subscribe("stakeCallingPublication"),
         Meteor.subscribe("reportPublication")
       ]

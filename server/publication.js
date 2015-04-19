@@ -22,8 +22,9 @@ Meteor.publish('singleMemberPublication', function(inIndividualId) {
   }
 });
 
-Meteor.publish('wardMemberPublication', function(inLimit) {
+Meteor.publish('memberLimitedPublication', function(inLevel, inLimit) {
   if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
     var options =
       {
         limit: inLimit,
@@ -35,9 +36,12 @@ Meteor.publish('wardMemberPublication', function(inLimit) {
             "individualId": 1,
             "callings.callingName": 1
           }
-      }
-    var user = Meteor.users.findOne(this.userId);
-    return memberCollection.find({stakeUnitNo: user.stakeUnitNo, wardUnitNo: user.selectedWardUnitNo}, options);
+      };
+    if (inLevel == "stake") {
+      return memberCollection.find({stakeUnitNo: user.stakeUnitNo}, options);
+    } else {
+      return memberCollection.find({stakeUnitNo: user.stakeUnitNo, wardUnitNo: user.selectedWardUnitNo}, options);
+    }
   } else {
     return [];
   }
@@ -183,7 +187,7 @@ Meteor.publish('singleHouseholdByIndividualIdPublication', function(inIndividual
   }
 });
 
-Meteor.publish('wardLimitedHouseholdPublication', function(inLimit) {
+Meteor.publish('householdLimitedPublication', function(inLevel, inLimit) {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
     var options =
@@ -210,7 +214,11 @@ Meteor.publish('wardLimitedHouseholdPublication', function(inLimit) {
             "householdInfo.address.longitude": 1
           }
       };
-    return householdCollection.find({stakeUnitNo: user.stakeUnitNo, wardUnitNo: user.selectedWardUnitNo}, options);
+    if (inLevel == "stake") {
+      return householdCollection.find({stakeUnitNo: user.stakeUnitNo}, options);
+    } else {
+      return householdCollection.find({stakeUnitNo: user.stakeUnitNo, wardUnitNo: user.selectedWardUnitNo}, options);
+    }
   } else {
     return [];
   }
@@ -248,7 +256,7 @@ Meteor.publish('wardAllHouseholdPublication', function() {
   }
 });
 
-Meteor.publish('stakeHouseholdPublication', function() {
+Meteor.publish('stakeAllHouseholdPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
     return householdCollection.find({stakeUnitNo: user.stakeUnitNo});
