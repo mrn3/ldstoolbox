@@ -1,3 +1,11 @@
+var options = {
+  //keepHistory: 1000 * 60 * 5,
+  //localSearch: true
+};
+var fields = ['switchedPreferredName', "callings.callingName"];
+
+memberSearch = new SearchSource("members", fields, options, 5);
+
 function buildRegExp(searchText) {
   var parts = searchText.trim().split(/[ \-\:]+/);
   return new RegExp("(" + parts.join('|') + ")", "ig");
@@ -13,7 +21,16 @@ Template.memberList.helpers({
   memberSearchInputValue: function() {
     return Session.get("memberSearchInput");
   },
+  memberSearchData: function(){
+    return memberSearch.getData({
+      transform: function(matchText, regExp) {
+        return matchText.replace(regExp, "<strong>$&</strong>")
+      },
+      sort: {isoScore: -1}
+    });
+  },
   memberData: function() {
+    /*
     var selector = {};
     var regExp;
 
@@ -29,13 +46,21 @@ Template.memberList.helpers({
         };
     }
     return memberCollection.find(selector);
+    */
+
+    if (Session.get("memberSearchInput") == "") {
+      return memberCollection.find({});
+    } 
+
   }
 });
 
 Template.memberList.events({
-  "keyup #memberSearchInput": function(e, instance){
+  "keyup #memberSearchInput": _.throttle(function(e) {
     Session.set("memberSearchInput", $("#memberSearchInput").val());
-  },
+    var text = $(e.target).val().trim();
+    memberSearch.search(text);
+  }, 200),
   "click [data-action=showSortActionSheet]": function (event, template) {
     IonActionSheet.show({
       buttons: [

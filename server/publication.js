@@ -31,6 +31,7 @@ Meteor.publish('wardMemberPublication', function(inLimit) {
         fields:
           {
             "preferredName": 1,
+            "switchedPreferredName": 1,
             "individualId": 1,
             "callings.callingName": 1
           }

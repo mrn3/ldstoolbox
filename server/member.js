@@ -26,6 +26,8 @@ SearchSource.defineSource("members", function(searchText) {
     }
     return memberCollection.find(selector, options).fetch();
   } else {
+    return [];
+    /*
     if (Meteor.user().selectedWardUnitNo) {
       selector =
         {
@@ -39,6 +41,7 @@ SearchSource.defineSource("members", function(searchText) {
         };
     }
     return memberCollection.find(selector, options).fetch();
+    */
   }
 });
 

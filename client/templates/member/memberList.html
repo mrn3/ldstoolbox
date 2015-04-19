@@ -12,6 +12,9 @@
   {{#ionView}}
     {{#ionContent class="has-subheader mainContentArea"}}
         {{#ionList}}
+          {{#each memberSearchData}}
+            {{>memberItem}}
+          {{/each}}
           {{#each memberData}}
             {{>memberItem}}
           {{/each}}
