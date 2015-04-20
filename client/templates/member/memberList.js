@@ -65,7 +65,7 @@ Template.memberList.events({
       }
     });
   },
-  "scroll .mainContentArea": function (event, template) {
+  "scroll .mainContentArea": _.throttle(function (event, template) {
     //console.log(event.target.scrollTop);
     //console.log(event.target.scrollHeight);
     //console.log(event.target.scrollTop / event.target.scrollHeight);
@@ -80,7 +80,7 @@ Template.memberList.events({
       theHandle.loadNextPage();
     }
     Session.set("previousScrollTop", event.target.scrollTop);
-  }
+  }, 10),
 });
 
 Template.memberList.rendered = function() {

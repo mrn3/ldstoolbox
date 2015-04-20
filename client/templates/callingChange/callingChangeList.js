@@ -50,6 +50,9 @@ Template.callingChangeList.helpers({
                               status: "Recorded"
                             }
                           ]
+                      },
+                      {
+                        status: "Canceled"
                       }
                     ]
                 }
@@ -76,10 +79,21 @@ Template.callingChangeList.helpers({
                               type: "Call"
                             },
                             {
-                              status:
-                                {
-                                  $not: "Set Apart Recorded"
-                                }
+                              $and:
+                                [
+                                  {
+                                    status:
+                                      {
+                                        $not: "Set Apart Recorded"
+                                      }
+                                  },
+                                  {
+                                    status:
+                                      {
+                                        $not: "Canceled"
+                                      }
+                                  }
+                                ]
                             }
                           ]
                       },
@@ -90,10 +104,21 @@ Template.callingChangeList.helpers({
                               type: "Release"
                             },
                             {
-                              status:
-                                {
-                                  $not: "Recorded"
-                                }
+                              $and:
+                                [
+                                  {
+                                    status:
+                                      {
+                                        $not: "Recorded"
+                                      }
+                                  },
+                                  {
+                                    status:
+                                      {
+                                        $not: "Canceled"
+                                      }
+                                  }
+                                ]
                             }
                           ]
                       }
@@ -137,6 +162,9 @@ Template.callingChangeList.helpers({
                         status: "Recorded"
                       }
                     ]
+                },
+                {
+                  status: "Canceled"
                 }
               ]
           };
@@ -152,10 +180,21 @@ Template.callingChangeList.helpers({
                           type: "Call"
                         },
                         {
-                          status:
-                            {
-                              $not: "Set Apart Recorded"
-                            }
+                          $and:
+                            [
+                              {
+                                status:
+                                  {
+                                    $not: "Set Apart Recorded"
+                                  }
+                              },
+                              {
+                                status:
+                                  {
+                                    $not: "Canceled"
+                                  }
+                              }
+                            ]
                         }
                       ]
                   },
@@ -166,10 +205,21 @@ Template.callingChangeList.helpers({
                           type: "Release"
                         },
                         {
-                          status:
-                            {
-                              $not: "Recorded"
-                            }
+                          $and:
+                            [
+                              {
+                                status:
+                                  {
+                                    $not: "Recorded"
+                                  }
+                              },
+                              {
+                                status:
+                                  {
+                                    $not: "Canceled"
+                                  }
+                              }
+                            ]
                         }
                       ]
                   }
