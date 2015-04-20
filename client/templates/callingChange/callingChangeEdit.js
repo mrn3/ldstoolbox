@@ -100,9 +100,26 @@ Template.callingChangeEdit.events({
           dateInterviewScheduled:   null
         };
       } else if (event.target.id == "markInterviewed") {
+        var meetingDate;
+        var foundMeeting;
+        
+        meetingDate = moment().subtract(1, "days").day(7).format("YYYY-MM-DD");
+        foundMeeting = meetingCollection.findOne({"meetingDate": meetingDate});
+        //if meeting not found, try next week
+        if (!foundMeeting) {
+          meetingDate = moment().add(6, "days").day(7).format("YYYY-MM-DD");
+          foundMeeting = meetingCollection.findOne({"meetingDate": meetingDate});
+        }
+        //if meeting still not found, try one more week
+        if (!foundMeeting) {
+          meetingDate = moment().add(13, "days").day(7).format("YYYY-MM-DD");
+          foundMeeting = meetingCollection.findOne({"meetingDate": meetingDate});
+        }
+
         properties = {
           status:                   "Interviewed",
-          dateInterviewed:          new Date()
+          dateInterviewed:          new Date(),
+          meeting:                  foundMeeting
         };
       } else if (event.target.id == "unmarkInterviewed") {
         properties = {
