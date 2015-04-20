@@ -143,11 +143,14 @@ Router.map(function() {
     name: "callingGroupList",
     onBeforeAction: requireLogin,
     waitOn: function () {
-      return Meteor.subscribe("callingGroupPublication")
+      return [
+        Meteor.subscribe("callingGroupPublication"),
+        Meteor.subscribe("userPublication")
+      ]
     },
     data: function() {
       return {
-        callingData: callingGroupCollection.find({})
+        callingGroupData: callingGroupCollection.find({}, {sort: {groupName: 1}})
       };
     },
     fastRender: true

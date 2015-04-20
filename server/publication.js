@@ -293,7 +293,11 @@ Meteor.publish('stakeCallingPublication', function() {
 Meteor.publish('callingGroupPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
-    return callingGroupCollection.find({wardUnitNo: user.wardUnitNo});
+    if (user.selectedWardUnitNo == "" || isNaN(user.selectedWardUnitNo)) {
+      return callingGroupCollection.find({stakeUnitNo: user.stakeUnitNo, wardUnitNo: user.stakeUnitNo});
+    } else {
+      return callingGroupCollection.find({stakeUnitNo: user.stakeUnitNo, wardUnitNo: user.selectedWardUnitNo});
+    }
   } else {
     return [];
   }

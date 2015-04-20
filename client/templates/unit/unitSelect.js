@@ -28,6 +28,8 @@ Template.unitSelect.events({
       window.location = "/householdList";
     } else if (Router.current().route.getName() === "memberList") {
       window.location = "/memberList";
+    } else if (Router.current().route.getName() === "callingGroupList") {
+      window.location = "/callingGroupList";
     }
   }
 });

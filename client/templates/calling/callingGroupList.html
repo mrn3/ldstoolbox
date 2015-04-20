@@ -1,11 +1,11 @@
 <template name="callingGroupList">
 
-  {{> barHeader title="Callings" leftType="mainMenu"}}
+  {{> barHeader title="Callings" leftType="mainMenu" rightType="callingGroupList"}}
 
   {{#ionView}}
     {{#ionContent}}
         {{#ionList}}
-          {{#each callingData}}
+          {{#each callingGroupData}}
             <a href="{{pathFor 'callingGroup'}}" class="item item-icon-right">
               <h2>
                 {{groupName}}
