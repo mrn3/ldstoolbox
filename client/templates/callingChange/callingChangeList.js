@@ -8,9 +8,21 @@ Template.callingChangeList.helpers({
   callingChangeSearchInputValue: function() {
     return Session.get("callingChangeSearchInput");
   },
+  isSelected: function(inStatus) {
+    return (Session.get("statusSelector") == inStatus);
+  },
+  formattedDateTime: function() {
+    if (this.interviewDate && this.interviewTime) {
+      return moment(this.interviewDate + " " + this.interviewTime).format("dddd, MMMM D, YYYY, h:mm A");
+    } else {
+      return "Missing Interview Date/Time"
+    }
+  },
   callingChangeData: function(){
     var selector = {};
     var regExp;
+
+    var options = {sort: {interviewDate: 1, interviewTime: 1}};
 
     if (Session.get("callingChangeSearchInput")) {
       regExp = buildRegExp(Session.get("callingChangeSearchInput"));
@@ -240,7 +252,7 @@ Template.callingChangeList.helpers({
         selector.type = Session.get("typeSelector");
       }
     }
-    return callingChangeCollection.find(selector);
+    return callingChangeCollection.find(selector, options);
   },
   userCanViewCallingChangeList: function () {
     if (Meteor.user() && Meteor.user().callings) {

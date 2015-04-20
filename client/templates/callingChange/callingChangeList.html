@@ -14,6 +14,11 @@
       {{#ionContent class="has-subheader mainContentArea"}}
         {{#ionList}}
           {{#each callingChangeData}}
+            {{#if isSelected "Interview Scheduled"}}
+              <div class="item item-divider">
+                {{formattedDateTime}}
+              </div>
+            {{/if}}
             {{>callingChangeItem}}
           {{/each}}
         {{/ionList}}
