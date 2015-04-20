@@ -47,8 +47,7 @@ Meteor.publish('memberLimitedPublication', function(inLevel, inLimit) {
   }
 });
 
-Meteor.publish('wardMemberOrganizationPublication', function() {
-
+Meteor.publish('memberOrganizationPublication', function() {
   if (this.userId) {
     var options =
       {
@@ -59,10 +58,13 @@ Meteor.publish('wardMemberOrganizationPublication', function() {
             "callings.callingName": 1,
             "organizations._id": 1
           }
-      }
-
+      };
     var user = Meteor.users.findOne(this.userId);
-    return memberCollection.find({wardUnitNo: user.wardUnitNo}, options);
+    if (user.selectedWardUnitNo == "" || isNaN(user.selectedWardUnitNo)) {
+      return memberCollection.find({stakeUnitNo: user.stakeUnitNo, wardUnitNo: user.stakeUnitNo});
+    } else {
+      return memberCollection.find({stakeUnitNo: user.stakeUnitNo, wardUnitNo: user.selectedWardUnitNo});
+    }
   } else {
     return [];
   }

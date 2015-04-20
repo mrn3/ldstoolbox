@@ -30,6 +30,8 @@ Template.unitSelect.events({
       window.location = "/memberList";
     } else if (Router.current().route.getName() === "callingGroupList") {
       window.location = "/callingGroupList";
+    } else if (Router.current().route.getName() === "organizationList") {
+      window.location = "/organizationList";
     }
   }
 });
