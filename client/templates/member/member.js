@@ -69,7 +69,8 @@ Template.member.events({
     IonActionSheet.show({
       buttons: [
         { text: "Call"},
-        { text: "Send Text Message" }
+        { text: "Send Text Message" },
+        { text: "Copy To Clipboard" }
       ],
       cancelText: "Cancel",
       cancel: function() {},
@@ -80,6 +81,13 @@ Template.member.events({
         if (index === 1) {
           window.location = "sms:" + member.phone;
         }
+        if (index === 2) {
+          IonPopup.alert({
+            title: 'Press Ctrl-C (or Command-C) to copy',
+            template: "<input type='text' value='" + member.phone + "' onClick='this.setSelectionRange(0, this.value.length)'>",
+            okText: 'Okay',
+          });
+        }
         return true;
       }
     });
@@ -89,7 +97,8 @@ Template.member.events({
     IonActionSheet.show({
       buttons: [
         { text: "Call"},
-        { text: "Send Text Message" }
+        { text: "Send Text Message" },
+        { text: "Copy To Clipboard" }
       ],
       cancelText: "Cancel",
       cancel: function() {},
@@ -99,6 +108,13 @@ Template.member.events({
         }
         if (index === 1) {
           window.location = "sms:" + household.phone;
+        }
+        if (index === 2) {
+          IonPopup.alert({
+            title: 'Press Ctrl-C (or Command-C) to copy',
+            template: "<input type='text' value='" + member.phone + "' onClick='this.setSelectionRange(0, this.value.length)'>",
+            okText: 'Okay',
+          });
         }
         return true;
       }
