@@ -328,10 +328,13 @@ Template.callingChangeList.events({
       cancel: function() {},
       buttonClicked: function(index) {
         if (index === 0) {
+          //get approved names and remove duplicates
           callingChangeArray = callingChangeCollection.find({status: "Approved"}).fetch();
           var memberNameString = "";
-          for (callingChangeArrayIndex in callingChangeArray) {
-            memberNameString += callingChangeArray[callingChangeArrayIndex]["member"].switchedPreferredName + "\n";
+          var callingChangeArrayStripped = callingChangeArray.map(function(obj) { return obj["member"].switchedPreferredName });
+          callingChangeArrayStripped = callingChangeArrayStripped.filter(function(v,i) { return callingChangeArrayStripped.indexOf(v) == i; });
+          for (callingChangeArrayStrippedIndex in callingChangeArrayStripped) {
+            memberNameString += callingChangeArrayStripped[callingChangeArrayStrippedIndex] + "\n";
           }
           IonPopup.alert({
             title: 'Press Ctrl-C (or Command-C) to copy',
