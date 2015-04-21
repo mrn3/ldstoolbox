@@ -253,6 +253,23 @@ Router.map(function() {
     },
     fastRender: true
   });
+  this.route("/callingChangeHistory/:_id", {
+    name: "callingChangeHistory",
+    onBeforeAction: requireLogin,
+    waitOn: function () {
+      return [
+        Meteor.subscribe("callingChangePublication"),
+        Meteor.subscribe("userPublication"),
+        Meteor.subscribe("stakeMemberPublication")
+      ]
+    },
+    data: function() {
+      return {
+        callingChangeData: callingChangeCollection.findOne(this.params._id)
+      };
+    },
+    fastRender: true
+  });
   this.route("/callingChangeTypeSelect/", {
     name: "callingChangeTypeSelect",
     onBeforeAction: requireLogin,

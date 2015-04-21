@@ -1,0 +1,89 @@
+<template name="callingChangeHistory">
+
+  {{>barHeader title="Calling Change History" leftType="back"}}
+
+  {{#ionView}}
+    {{#ionContent}}
+      {{#ionList}}
+        {{#with callingChangeData}}
+          <div class="item item-divider">
+            Created
+          </div>
+          <a class="item item-icon-right" href="/member/{{createdByMember.individualId}}">
+            By
+            <span class="item-note">{{createdByMember.switchedPreferredName}}</span>
+            <i class="icon ion-ios-arrow-right"></i>
+          </a>
+          <label class="item">
+            Date
+            <span class="item-note">{{formatDate createdAt ""}}</span>
+          </label>
+          <div class="item item-divider">
+            Last Updated
+          </div>
+          <a class="item item-icon-right" href="/member/{{updatedByMember.individualId}}">
+            By
+            <span class="item-note">{{updatedByMember.switchedPreferredName}}</span>
+            <i class="icon ion-ios-arrow-right"></i>
+          </a>
+          <label class="item">
+            Date
+            <span class="item-note">{{formatDate updatedAt ""}}</span>
+          </label>
+          <div class="item item-divider">
+            Status Changes
+          </div>
+          <label class="item">
+            Marked Discussed
+            <span class="item-note">{{formatDate dateDiscussed ""}}</span>
+          </label>
+          <label class="item">
+            Marked Approved
+            <span class="item-note">{{formatDate dateApproved ""}}</span>
+          </label>
+          <label class="item">
+            Marked Interview Scheduled
+            <span class="item-note">{{formatDate dateInterviewScheduled ""}}</span>
+          </label>
+          <label class="item">
+            Interview Date
+            <span class="item-note">{{formatDate interviewDate interviewTime}}</span>
+          </label>
+          <label class="item">
+            Marked Interviewed
+            <span class="item-note">{{formatDate dateInterviewed ""}}</span>
+          </label>
+          <label class="item">
+            Marked Presented
+            <span class="item-note">{{formatDate datePresented ""}}</span>
+          </label>
+          <label class="item">
+            Meeting Date
+            <span class="item-note">{{formatDate meeting.meetingDate ""}}</span>
+          </label>
+          <label class="item">
+            Marked Recorded
+            <span class="item-note">{{formatDate dateRecorded ""}}</span>
+          </label>
+          <label class="item">
+            Marked Set Apart
+            <span class="item-note">{{formatDate dateSetApart ""}}</span>
+          </label>
+          <label class="item">
+            Marked Set Apart Recorded
+            <span class="item-note">{{formatDate dateSetApartRecorded ""}}</span>
+          </label>
+          <label class="item">
+            Marked Canceled
+            <span class="item-note">{{formatDate dateCanceled ""}}</span>
+          </label>
+          <label class="item">
+            Marked On Hold
+            <span class="item-note">{{formatDate dateOnHold ""}}</span>
+          </label>
+        {{/with}}
+      {{/ionList}}
+    {{/ionContent}}
+  {{/ionView}}
+
+</template>
