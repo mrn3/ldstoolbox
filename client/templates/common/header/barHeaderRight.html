@@ -16,6 +16,9 @@
     {{/if}}
 
     {{#if isEqual rightType "callingChangeList"}}
+      <a class="button button-clear pull-right button-positive" data-action="showCallingChangeActionSheet">
+        <i class="icon ion-ios-list-outline positive"></i>
+      </a>
       <button class="button button-clear pull-left" data-ion-menu-toggle="right">
         {{#if isAndroid}}
           <i class="icon ion-android-search positive"></i>

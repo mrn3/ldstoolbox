@@ -318,6 +318,30 @@ Template.callingChangeList.events({
       $("#searchBarSubHeader").slideUp();
     }
     Session.set("previousScrollTop", event.target.scrollTop);
+  },
+  "click [data-action=showCallingChangeActionSheet]": function (event, template) {
+    IonActionSheet.show({
+      buttons: [
+        { text: "Copy Approved Calling Changes"}
+      ],
+      cancelText: "Cancel",
+      cancel: function() {},
+      buttonClicked: function(index) {
+        if (index === 0) {
+          callingChangeArray = callingChangeCollection.find({status: "Approved"}).fetch();
+          var memberNameString = "";
+          for (callingChangeArrayIndex in callingChangeArray) {
+            memberNameString += callingChangeArray[callingChangeArrayIndex]["member"].switchedPreferredName + "\n";
+          }
+          IonPopup.alert({
+            title: 'Press Ctrl-C (or Command-C) to copy',
+            template: "<textarea rows='10' onClick='this.setSelectionRange(0, this.value.length)'>" + memberNameString + "</textarea>",
+            okText: 'Okay',
+          });
+        }
+        return true;
+      }
+    });
   }
 });
 
