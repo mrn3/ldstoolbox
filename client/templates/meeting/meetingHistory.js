@@ -1,4 +1,4 @@
-Template.callingChangeHistory.helpers({
+Template.meetingHistory.helpers({
   formatDate: function (inDate, inTime) {
     if (inDate) {
       if (inTime) {

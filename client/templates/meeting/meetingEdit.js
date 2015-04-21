@@ -297,8 +297,8 @@ Template.meetingEdit.events({
     var meeting = this;
     var updateObject = {};
     var properties = {
-      createdBy:            Meteor.userId(),
-      createdAt:            new Date(),
+      updatedBy:            Meteor.userId(),
+      updatedAt:            new Date(),
       wardUnitNo:           Meteor.user().wardUnitNo,
       stakeUnitNo:          Meteor.user().stakeUnitNo,
       meetingDate:          $('#meetingDate').val(),

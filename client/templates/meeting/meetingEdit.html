@@ -332,6 +332,13 @@
 
           {{#with meetingData}}
             <div class="item item-divider">
+              History
+            </div>
+            <a class="item item-icon-right" href="{{pathFor 'meetingHistory'}}">
+              History
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
+            <div class="item item-divider">
               &nbsp;
             </div>
             <a class="button button-positive button-full button-clear" href="/meetingPrint/{{_id}}">

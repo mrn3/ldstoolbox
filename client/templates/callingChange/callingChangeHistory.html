@@ -9,27 +9,35 @@
           <div class="item item-divider">
             Created
           </div>
-          <a class="item item-icon-right" href="/member/{{createdByMember.individualId}}">
-            By
-            <span class="item-note">{{createdByMember.switchedPreferredName}}</span>
-            <i class="icon ion-ios-arrow-right"></i>
-          </a>
-          <label class="item">
-            Date
-            <span class="item-note">{{formatDate createdAt ""}}</span>
-          </label>
+          {{#if createdBy}}
+            <a class="item item-icon-right" href="/member/{{createdByMember.individualId}}">
+              By
+              <span class="item-note">{{createdByMember.switchedPreferredName}}</span>
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
+          {{/if}}
+          {{#if createdAt}}
+            <label class="item">
+              Date
+              <span class="item-note">{{formatDate createdAt ""}}</span>
+            </label>
+          {{/if}}
           <div class="item item-divider">
             Last Updated
           </div>
+          {{#if updatedBy}}
           <a class="item item-icon-right" href="/member/{{updatedByMember.individualId}}">
             By
             <span class="item-note">{{updatedByMember.switchedPreferredName}}</span>
             <i class="icon ion-ios-arrow-right"></i>
           </a>
-          <label class="item">
-            Date
-            <span class="item-note">{{formatDate updatedAt ""}}</span>
-          </label>
+          {{/if}}
+          {{#if updatedAt}}
+            <label class="item">
+              Date
+              <span class="item-note">{{formatDate updatedAt ""}}</span>
+            </label>
+          {{/if}}
           <div class="item item-divider">
             Status Changes
           </div>

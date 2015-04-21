@@ -225,17 +225,6 @@ Router.map(function() {
     name: "callingChangeHelp",
     fastRender: true
   });
-  this.route("/callingChangeCreate/", {
-    name: "callingChangeCreate",
-    onBeforeAction: requireLogin,
-    waitOn: function () {
-      return [
-        Meteor.subscribe("callingChangePublication"),
-        Meteor.subscribe("userPublication")
-      ]
-    },
-    fastRender: true
-  });
   this.route("/callingChangeEdit/:_id", {
     name: "callingChangeEdit",
     onBeforeAction: requireLogin,
@@ -291,16 +280,6 @@ Router.map(function() {
     },
     fastRender: true
   });
-  this.route("/meetingCreate/", {
-    name: "meetingCreate",
-    onBeforeAction: requireLogin,
-    waitOn: function () {
-      return [
-        Meteor.subscribe("meetingPublication"),
-        Meteor.subscribe("userPublication")
-      ]
-    },
-  });
   this.route("/meetingEdit/:_id", {
     name: "meetingEdit",
     onBeforeAction: requireLogin,
@@ -327,6 +306,23 @@ Router.map(function() {
         speakerData: speakerCollection.find({meetingId: this.params._id}),
         recognitionData: recognitionCollection.find({meetingId: this.params._id}),
         callingChangeData: callingChangeCollection.find({"meeting._id": this.params._id}, {sort: {type: -1}})
+      };
+    },
+    fastRender: true
+  });
+  this.route("/meetingHistory/:_id", {
+    name: "meetingHistory",
+    onBeforeAction: requireLogin,
+    waitOn: function () {
+      return [
+        Meteor.subscribe("meetingPublication"),
+        Meteor.subscribe("userPublication"),
+        Meteor.subscribe("stakeMemberPublication")
+      ]
+    },
+    data: function() {
+      return {
+        meetingData: meetingCollection.findOne(this.params._id)
       };
     },
     fastRender: true
