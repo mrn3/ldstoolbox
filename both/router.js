@@ -459,9 +459,9 @@ Router.map(function() {
     if (visitorArray.length > 0) {
       for(var visitorIndex in visitorArray) {
         doc.text("Visitor: _______________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-        if (visitorArray[visitorIndex] && visitorArray[visitorIndex].visitor && visitorArray[visitorIndex].visitor.switchedPreferredName) {
+        if (visitorArray[visitorIndex] && visitorArray[visitorIndex].visitor && visitorArray[visitorIndex].visitor.callings) {
           var callingList = visitorArray[visitorIndex].visitor.callings.reduce(function(acquiredCallingList, newCalling) {
-              return acquiredCallingList + ", " + newCalling.callingName; // return previous acquiredCallingList plus current newCalling
+            return acquiredCallingList + ", " + newCalling.callingName; // return previous acquiredCallingList plus current newCalling
           }, "");
           if (visitorArray[visitorIndex] && visitorArray[visitorIndex].visitor && visitorArray[visitorIndex].visitor.switchedPreferredName) {
             doc.text(visitorArray[visitorIndex].visitor.switchedPreferredName + callingList, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});

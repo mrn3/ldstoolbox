@@ -38,14 +38,14 @@ Template.meetingEdit.helpers({
     }
   },
   organistSession: function() {
-    if ((Session.get("selectedOrganist")) && (Session.get("selectedOrganist").switchedPreferredName)) {
+    if (Session.get("selectedOrganist") && Session.get("selectedOrganist").switchedPreferredName) {
       return Session.get("selectedOrganist").switchedPreferredName;
     } else {
       return "";
     }
   },
   choristerSession: function() {
-    if ((Session.get("selectedChorister")) && (Session.get("selectedChorister").switchedPreferredName)) {
+    if (Session.get("selectedChorister") && Session.get("selectedChorister").switchedPreferredName) {
       return Session.get("selectedChorister").switchedPreferredName;
     } else {
       return "";
@@ -54,7 +54,7 @@ Template.meetingEdit.helpers({
   openingHymnSession: function() {
     if (Session.get("selectedOpeningHymn") && Session.get("selectedOpeningHymn").numberText) {
       return Session.get("selectedOpeningHymn").numberText + " - " + Session.get("selectedOpeningHymn").name;
-    } else if (Session.get("selectedOpeningHymn").name) {
+    } else if (Session.get("selectedOpeningHymn") && Session.get("selectedOpeningHymn").name) {
       return Session.get("selectedOpeningHymn").name;
     } else {
       return "";
@@ -63,7 +63,7 @@ Template.meetingEdit.helpers({
   sacramentHymnSession: function() {
     if (Session.get("selectedSacramentHymn") && Session.get("selectedSacramentHymn").numberText) {
       return Session.get("selectedSacramentHymn").numberText + " - " + Session.get("selectedSacramentHymn").name;
-    } else if (Session.get("selectedSacramentHymn").name) {
+    } else if (Session.get("selectedSacramentHymn") && Session.get("selectedSacramentHymn").name) {
       return Session.get("selectedSacramentHymn").name;
     } else {
       return "";
@@ -72,35 +72,35 @@ Template.meetingEdit.helpers({
   closingHymnSession: function() {
     if (Session.get("selectedClosingHymn") && Session.get("selectedClosingHymn").numberText) {
       return Session.get("selectedClosingHymn").numberText + " - " + Session.get("selectedClosingHymn").name;
-    } else if (Session.get("selectedClosingHymn").name) {
+    } else if (Session.get("selectedClosingHymn") && Session.get("selectedClosingHymn").name) {
       return Session.get("selectedClosingHymn").name;
     } else {
       return "";
     }
   },
   invocationSession: function() {
-    if ((Session.get("selectedInvocation")) && (Session.get("selectedInvocation").switchedPreferredName)) {
+    if (Session.get("selectedInvocation") && Session.get("selectedInvocation").switchedPreferredName) {
       return Session.get("selectedInvocation").switchedPreferredName;
     } else {
       return "";
     }
   },
   benedictionSession: function() {
-    if ((Session.get("selectedBenediction")) && (Session.get("selectedBenediction").switchedPreferredName)) {
+    if (Session.get("selectedBenediction") && Session.get("selectedBenediction").switchedPreferredName) {
       return Session.get("selectedBenediction").switchedPreferredName;
     } else {
       return "";
     }
   },
   presidingSession: function() {
-    if ((Session.get("selectedPresiding")) && (Session.get("selectedPresiding").switchedPreferredName)) {
+    if (Session.get("selectedPresiding") && Session.get("selectedPresiding").switchedPreferredName) {
       return Session.get("selectedPresiding").switchedPreferredName;
     } else {
       return "";
     }
   },
   conductingSession: function() {
-    if ((Session.get("selectedConducting")) && (Session.get("selectedConducting").switchedPreferredName)) {
+    if (Session.get("selectedConducting") && Session.get("selectedConducting").switchedPreferredName) {
       return Session.get("selectedConducting").switchedPreferredName;
     } else {
       return "";
