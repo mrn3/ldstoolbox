@@ -398,6 +398,7 @@ Router.map(function() {
     fastRender: true
   });
   this.route("/meetingPrint/:_id", function() {
+    this.name = "meetingPrint";
 
     meeting = meetingCollection.findOne(this.params._id);
 
