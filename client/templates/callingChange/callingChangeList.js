@@ -258,18 +258,21 @@ Template.callingChangeList.helpers({
     if (Meteor.user() && Meteor.user().callings) {
 
       //bishop, counselors, executive secretary, ward clerk, membership clerk
-      var allowedCallingList = [4, 54, 55, 56, 57, 787];
+      var allowedCallingList = ["Bishop",
+                                "Bishopric First Counselor",
+                                "Bishopric Second Counselor",
+                                "Ward Executive Secretary",
+                                "Ward Clerk",
+                                "Ward Assistan Clerk--Membership"];
       var userCallingList = Meteor.user().callings.reduce(
         function(total, calling){
-          return total.concat(calling.positionId);
+          return total.concat(calling.callingName);
         },
       []);
-
       var callingIntersection =
         userCallingList.filter(function(n) {
           return allowedCallingList.indexOf(n) != -1
         });
-
       return (callingIntersection.length > 0);
     }
   }
