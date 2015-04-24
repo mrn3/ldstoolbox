@@ -52,7 +52,7 @@ Template.meetingEdit.helpers({
     }
   },
   openingHymnSession: function() {
-    if (Session.get("selectedOpeningHymn").numberText) {
+    if (Session.get("selectedOpeningHymn") && Session.get("selectedOpeningHymn").numberText) {
       return Session.get("selectedOpeningHymn").numberText + " - " + Session.get("selectedOpeningHymn").name;
     } else if (Session.get("selectedOpeningHymn").name) {
       return Session.get("selectedOpeningHymn").name;
@@ -61,7 +61,7 @@ Template.meetingEdit.helpers({
     }
   },
   sacramentHymnSession: function() {
-    if (Session.get("selectedSacramentHymn").numberText) {
+    if (Session.get("selectedSacramentHymn") && Session.get("selectedSacramentHymn").numberText) {
       return Session.get("selectedSacramentHymn").numberText + " - " + Session.get("selectedSacramentHymn").name;
     } else if (Session.get("selectedSacramentHymn").name) {
       return Session.get("selectedSacramentHymn").name;
@@ -69,17 +69,8 @@ Template.meetingEdit.helpers({
       return "";
     }
   },
-  intermediateHymnSession: function() {
-    if (Session.get("selectedIntermediateHymn").numberText) {
-      return Session.get("selectedIntermediateHymn").numberText + " - " + Session.get("selectedIntermediateHymn").name;
-    } else if (Session.get("selectedIntermediateHymn").name) {
-      return Session.get("selectedIntermediateHymn").name;
-    } else {
-      return "";
-    }
-  },
   closingHymnSession: function() {
-    if (Session.get("selectedClosingHymn").numberText) {
+    if (Session.get("selectedClosingHymn") && Session.get("selectedClosingHymn").numberText) {
       return Session.get("selectedClosingHymn").numberText + " - " + Session.get("selectedClosingHymn").name;
     } else if (Session.get("selectedClosingHymn").name) {
       return Session.get("selectedClosingHymn").name;
