@@ -1,10 +1,10 @@
 Router.configure({
   layoutTemplate: "layout",
-  waitOn: function () {
-    return [
+  //waitOn: function () {
+    //return [
       //Meteor.subscribe("userPublication")
-    ]
-  }
+    //]
+  //}
 });
 
 Meteor.startup(function () {
@@ -730,8 +730,6 @@ Router.map(function() {
     Administrative
     Attendance
     */
-
-
 
     this.response.writeHead(200, {
       "Content-type": "application/pdf"

@@ -4,9 +4,7 @@
       {{{switchedPreferredName}}}
     </h2>
     <p>
-    {{#each callings}}
-      {{callingName}}
-    {{/each}}
+      {{#each callingList callings}}{{#if index}}, {{/if}}{{callingName}}{{/each}}
     </p>
     <i class="icon ion-ios-arrow-right"></i>
   </a>
