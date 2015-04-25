@@ -462,7 +462,7 @@ Router.map(function() {
         doc.text("Visitor: _______________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
         if (visitorArray[visitorIndex] && visitorArray[visitorIndex].visitor && visitorArray[visitorIndex].visitor.callings) {
           var callingList = visitorArray[visitorIndex].visitor.callings.reduce(function(acquiredCallingList, newCalling) {
-            return acquiredCallingList + ", " + newCalling.callingName; // return previous acquiredCallingList plus current newCalling
+            return acquiredCallingList + ", " + newCalling.positionName; // return previous acquiredCallingList plus current newCalling
           }, "");
           if (visitorArray[visitorIndex] && visitorArray[visitorIndex].visitor && visitorArray[visitorIndex].visitor.preferredName) {
             doc.text(visitorArray[visitorIndex].visitor.preferredName + callingList, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
@@ -505,7 +505,7 @@ Router.map(function() {
       for(var releaseResultIndex in releaseResultArray) {
         doc.text("_____________________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
         doc.text(releaseResultArray[releaseResultIndex].member.preferredName, distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-        doc.text(releaseResultArray[releaseResultIndex].calling.callingName, distanceFromLeft4, distanceFromTop, {align: "left", width: pageWidth});
+        doc.text(releaseResultArray[releaseResultIndex].calling.positionName, distanceFromLeft4, distanceFromTop, {align: "left", width: pageWidth});
         distanceFromTop += verticalPositionIncrement;
       }
 
@@ -523,7 +523,7 @@ Router.map(function() {
         if (callingResultArray[callingResultIndex] && callingResultArray[callingResultIndex].member && callingResultArray[callingResultIndex].member.preferredName) {
           doc.text(callingResultArray[callingResultIndex].member.preferredName, distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
         }
-        doc.text(callingResultArray[callingResultIndex].calling.callingName, distanceFromLeft4, distanceFromTop, {align: "left", width: pageWidth});
+        doc.text(callingResultArray[callingResultIndex].calling.positionName, distanceFromLeft4, distanceFromTop, {align: "left", width: pageWidth});
         distanceFromTop += verticalPositionIncrement;
       }
 

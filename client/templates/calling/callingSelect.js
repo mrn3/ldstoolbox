@@ -2,7 +2,7 @@ var options = {
   //keepHistory: 1000 * 60 * 5,
   //localSearch: true
 };
-var fields = ["callingName", "displayName"];
+var fields = ["positionName", "displayName"];
 
 callingSearch = new SearchSource('callings', fields, options);
 
@@ -32,13 +32,13 @@ Template.callingSelect.events({
   }, 200),
   "click #goButton": function() {
     var callingObject = {
-      "callingName": $('#other').val()
+      "positionName": $('#other').val()
     }
     doUpdate(callingObject);
   },
   "click #callingRadioButton": function() {
     //strip out html tags
-    this.callingName = jQuery('<p>' + this.callingName + '</p>').text();
+    this.positionName = jQuery('<p>' + this.positionName + '</p>').text();
     this.displayName = jQuery('<p>' + this.displayName + '</p>').text();
     doUpdate(this);
   },

@@ -35,7 +35,7 @@ Template.callingChangeList.helpers({
                 {
                   $or: [
                     {"member.preferredName": regExp},
-                    {"calling.callingName": regExp}
+                    {"calling.positionName": regExp}
                   ]
                 },
                 {
@@ -78,7 +78,7 @@ Template.callingChangeList.helpers({
                 {
                   $or: [
                     {"member.preferredName": regExp},
-                    {"calling.callingName": regExp}
+                    {"calling.positionName": regExp}
                   ]
                 },
                 {
@@ -143,7 +143,7 @@ Template.callingChangeList.helpers({
           {
             $or: [
               {"member.preferredName": regExp},
-              {"calling.callingName": regExp}
+              {"calling.positionName": regExp}
             ]
           };
       }
@@ -266,7 +266,7 @@ Template.callingChangeList.helpers({
                                 "Ward Assistan Clerk--Membership"];
       var userCallingList = Meteor.user().callings.reduce(
         function(total, calling){
-          return total.concat(calling.callingName);
+          return total.concat(calling.positionName);
         },
       []);
       var callingIntersection =

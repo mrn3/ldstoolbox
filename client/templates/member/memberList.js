@@ -2,7 +2,7 @@ var options = {
   //keepHistory: 1000 * 60 * 5,
   //localSearch: true
 };
-var fields = ['preferredName', "callings.callingName"];
+var fields = ['preferredName', "callings.positionName"];
 
 memberSearch = new SearchSource("members", fields, options, 5);
 

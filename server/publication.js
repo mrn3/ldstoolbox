@@ -34,7 +34,7 @@ Meteor.publish('memberLimitedPublication', function(inLevel, inLimit) {
             "preferredName": 1,
             "preferredName": 1,
             "individualId": 1,
-            "callings.callingName": 1
+            "callings.positionName": 1
           }
       };
     if (inLevel == "stake") {
@@ -55,7 +55,7 @@ Meteor.publish('memberOrganizationPublication', function() {
           {
             "preferredName": 1,
             "individualId": 1,
-            "callings.callingName": 1,
+            "callings.positionName": 1,
             "organizations._id": 1
           }
       };
@@ -92,7 +92,7 @@ Meteor.publish('stakeMemberTrimmedPublication', function() {
         {
           "preferredName": 1,
           "individualId": 1,
-          "callings.callingName": 1
+          "callings.positionName": 1
         }
       }
     var user = Meteor.users.findOne(this.userId);

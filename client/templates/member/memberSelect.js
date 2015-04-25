@@ -2,7 +2,7 @@ var options = {
   //keepHistory: 1000 * 60 * 5,
   //localSearch: true
 };
-var fields = ['preferredName', "callings.callingName"];
+var fields = ['preferredName', "callings.positionName"];
 
 memberSearch = new SearchSource("members", fields, options, 5);
 
@@ -148,7 +148,7 @@ Template.memberSelect.events({
       this.preferredName = jQuery('<p>' + this.preferredName + '</p>').text();
     }
     if (this.callings) {
-      this.callings.callingName = jQuery('<p>' + this.callings.callingName + '</p>').text();
+      this.callings.positionName = jQuery('<p>' + this.callings.positionName + '</p>').text();
     }
     doUpdate(this);
   },

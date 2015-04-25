@@ -3,7 +3,7 @@ Meteor.methods({
     this.unblock();
     try {
       var pipeline = [
-        {$project:{a:'$leaders.callingName'}},
+        {$project:{a:'$leaders.positionName'}},
         {$unwind:'$a'},
         {$group:{_id:'a',res:{$addToSet:'$a'}}}
       ];
@@ -19,7 +19,7 @@ Meteor.methods({
 });
 
 SearchSource.defineSource('callings', function(searchText, options) {
-  var options = {sort: {"callingName": 1}, limit: 20};
+  var options = {sort: {"positionName": 1}, limit: 20};
 
   var selector;
   if (searchText) {
@@ -43,7 +43,7 @@ SearchSource.defineSource('callings', function(searchText, options) {
             {
               $or: [
                 {"displayName": regExp},
-                {"callingName": regExp}
+                {"positionName": regExp}
               ]
             }
           ]
@@ -66,7 +66,7 @@ SearchSource.defineSource('callings', function(searchText, options) {
             {
               $or: [
                 {"displayName": regExp},
-                {"callingName": regExp}
+                {"positionName": regExp}
               ]
             }
           ]

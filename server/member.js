@@ -11,7 +11,7 @@ SearchSource.defineSource("members", function(searchText) {
           wardUnitNo: Meteor.user().selectedWardUnitNo,
           $or: [
             {"preferredName": regExp},
-            {"callings.callingName": regExp}
+            {"callings.positionName": regExp}
           ]
         };
     } else {
@@ -20,7 +20,7 @@ SearchSource.defineSource("members", function(searchText) {
           stakeUnitNo: Meteor.user().stakeUnitNo,
           $or: [
             {"preferredName": regExp},
-            {"callings.callingName": regExp}
+            {"callings.positionName": regExp}
           ]
         };
     }

@@ -48,8 +48,8 @@ Template.callingChangeEdit.helpers({
     }
   },
   callingChangeCallingSession: function() {
-    if (Session.get("selectedCallingChangeCalling") && Session.get("selectedCallingChangeCalling").callingName) {
-      return Session.get("selectedCallingChangeCalling").callingName;
+    if (Session.get("selectedCallingChangeCalling") && Session.get("selectedCallingChangeCalling").positionName) {
+      return Session.get("selectedCallingChangeCalling").positionName;
     } else {
       return "";
     }
