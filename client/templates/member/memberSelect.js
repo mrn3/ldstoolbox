@@ -2,7 +2,7 @@ var options = {
   //keepHistory: 1000 * 60 * 5,
   //localSearch: true
 };
-var fields = ['switchedPreferredName', "callings.callingName"];
+var fields = ['preferredName', "callings.callingName"];
 
 memberSearch = new SearchSource("members", fields, options, 5);
 
@@ -138,14 +138,14 @@ Template.memberSelect.events({
   }, 200),
   "click #goButton": function() {
     var memberObject = {
-      "switchedPreferredName": $('#other').val()
+      "preferredName": $('#other').val()
     }
     doUpdate(memberObject);
   },
   "click #memberRadioButton": function(e, instance) {
     //strip out html tags
-    if (this.switchedPreferredName) {
-      this.switchedPreferredName = jQuery('<p>' + this.switchedPreferredName + '</p>').text();
+    if (this.preferredName) {
+      this.preferredName = jQuery('<p>' + this.preferredName + '</p>').text();
     }
     if (this.callings) {
       this.callings.callingName = jQuery('<p>' + this.callings.callingName + '</p>').text();

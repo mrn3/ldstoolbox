@@ -1,7 +1,7 @@
 <template name="memberItem">
   <a href="{{pathFor 'member'}}" class="item item-icon-right">
     <h2>
-      {{{switchedPreferredName}}}
+      {{{preferredName}}}
     </h2>
     <p>
       {{#each callingList callings}}{{#if index}}, {{/if}}{{callingName}}{{/each}}

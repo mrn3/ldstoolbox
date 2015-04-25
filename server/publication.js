@@ -32,7 +32,7 @@ Meteor.publish('memberLimitedPublication', function(inLevel, inLimit) {
         fields:
           {
             "preferredName": 1,
-            "switchedPreferredName": 1,
+            "preferredName": 1,
             "individualId": 1,
             "callings.callingName": 1
           }

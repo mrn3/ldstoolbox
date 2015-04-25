@@ -12,7 +12,7 @@
           {{#if createdBy}}
             <a class="item item-icon-right" href="/member/{{createdByMember.individualId}}">
               By
-              <span class="item-note">{{createdByMember.switchedPreferredName}}</span>
+              <span class="item-note">{{createdByMember.preferredName}}</span>
               <i class="icon ion-ios-arrow-right"></i>
             </a>
           {{/if}}
@@ -28,7 +28,7 @@
           {{#if updatedBy}}
           <a class="item item-icon-right" href="/member/{{updatedByMember.individualId}}">
             By
-            <span class="item-note">{{updatedByMember.switchedPreferredName}}</span>
+            <span class="item-note">{{updatedByMember.preferredName}}</span>
             <i class="icon ion-ios-arrow-right"></i>
           </a>
           {{/if}}

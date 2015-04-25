@@ -164,12 +164,12 @@
               </a>
               <a class="item item-icon-right musicalNumberPerformerItem" href="{{pathFor 'memberSelect'}}">
                 Performer
-                <span class="item-note">{{performer.switchedPreferredName}}</span>
+                <span class="item-note">{{performer.preferredName}}</span>
                 <i class="icon ion-ios-arrow-right"></i>
               </a>
               <a class="item item-icon-right musicalNumberAccompanistItem" href="{{pathFor 'memberSelect'}}">
                 Accompanist
-                <span class="item-note">{{accompanist.switchedPreferredName}}</span>
+                <span class="item-note">{{accompanist.preferredName}}</span>
                 <i class="icon ion-ios-arrow-right"></i>
               </a>
               <label class="item item-input item-select">
@@ -232,7 +232,7 @@
             <div class="list list-inset">
               <a id="{{_id}}" class="item item-icon-right visitorItem" href="{{pathFor 'memberSelect'}}">
                 Visitor
-                <span class="item-note">{{visitor.switchedPreferredName}}</span>
+                <span class="item-note">{{visitor.preferredName}}</span>
                 <i class="icon ion-ios-arrow-right"></i>
               </a>
               <div class="item item-divider">
@@ -258,7 +258,7 @@
             <div class="list list-inset">
               <a id="{{_id}}" class="item item-icon-right speakerItem" href="{{pathFor 'memberSelect'}}">
                 Speaker
-                <span class="item-note">{{speaker.switchedPreferredName}}</span>
+                <span class="item-note">{{speaker.preferredName}}</span>
                 <i class="icon ion-ios-arrow-right"></i>
               </a>
               <div class="item item-divider">
@@ -299,7 +299,7 @@
                   {{#each members}}
                     <a class="item item-icon-right recognitionMemberItem" href="{{pathFor 'memberSelect'}}">
                       Member
-                      <span class="item-note">{{switchedPreferredName}}</span>
+                      <span class="item-note">{{preferredName}}</span>
                       <i class="icon ion-ios-arrow-right"></i>
                     </a>
                     <div class="item item-divider">

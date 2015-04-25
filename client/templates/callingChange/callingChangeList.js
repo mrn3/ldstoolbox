@@ -34,7 +34,7 @@ Template.callingChangeList.helpers({
               [
                 {
                   $or: [
-                    {"member.switchedPreferredName": regExp},
+                    {"member.preferredName": regExp},
                     {"calling.callingName": regExp}
                   ]
                 },
@@ -77,7 +77,7 @@ Template.callingChangeList.helpers({
               [
                 {
                   $or: [
-                    {"member.switchedPreferredName": regExp},
+                    {"member.preferredName": regExp},
                     {"calling.callingName": regExp}
                   ]
                 },
@@ -142,7 +142,7 @@ Template.callingChangeList.helpers({
         selector =
           {
             $or: [
-              {"member.switchedPreferredName": regExp},
+              {"member.preferredName": regExp},
               {"calling.callingName": regExp}
             ]
           };
@@ -334,7 +334,7 @@ Template.callingChangeList.events({
           //get approved names and remove duplicates
           callingChangeArray = callingChangeCollection.find({status: "Approved"}).fetch();
           var memberNameString = "";
-          var callingChangeArrayStripped = callingChangeArray.map(function(obj) { return obj["member"].switchedPreferredName });
+          var callingChangeArrayStripped = callingChangeArray.map(function(obj) { return obj["member"].preferredName });
           callingChangeArrayStripped = callingChangeArrayStripped.filter(function(v,i) { return callingChangeArrayStripped.indexOf(v) == i; });
           for (callingChangeArrayStrippedIndex in callingChangeArrayStripped) {
             memberNameString += callingChangeArrayStripped[callingChangeArrayStrippedIndex] + "\n";

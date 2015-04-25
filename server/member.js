@@ -1,5 +1,5 @@
 SearchSource.defineSource("members", function(searchText) {
-  var options = {sort: {"switchedPreferredName": 1}, limit: 20};
+  var options = {sort: {"preferredName": 1}, limit: 20};
 
   var selector;
   if (searchText) {
@@ -10,7 +10,7 @@ SearchSource.defineSource("members", function(searchText) {
           stakeUnitNo: Meteor.user().stakeUnitNo,
           wardUnitNo: Meteor.user().selectedWardUnitNo,
           $or: [
-            {"switchedPreferredName": regExp},
+            {"preferredName": regExp},
             {"callings.callingName": regExp}
           ]
         };
@@ -19,7 +19,7 @@ SearchSource.defineSource("members", function(searchText) {
         {
           stakeUnitNo: Meteor.user().stakeUnitNo,
           $or: [
-            {"switchedPreferredName": regExp},
+            {"preferredName": regExp},
             {"callings.callingName": regExp}
           ]
         };

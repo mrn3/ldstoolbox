@@ -38,15 +38,15 @@ Template.meetingEdit.helpers({
     }
   },
   organistSession: function() {
-    if (Session.get("selectedOrganist") && Session.get("selectedOrganist").switchedPreferredName) {
-      return Session.get("selectedOrganist").switchedPreferredName;
+    if (Session.get("selectedOrganist") && Session.get("selectedOrganist").preferredName) {
+      return Session.get("selectedOrganist").preferredName;
     } else {
       return "";
     }
   },
   choristerSession: function() {
-    if (Session.get("selectedChorister") && Session.get("selectedChorister").switchedPreferredName) {
-      return Session.get("selectedChorister").switchedPreferredName;
+    if (Session.get("selectedChorister") && Session.get("selectedChorister").preferredName) {
+      return Session.get("selectedChorister").preferredName;
     } else {
       return "";
     }
@@ -79,29 +79,29 @@ Template.meetingEdit.helpers({
     }
   },
   invocationSession: function() {
-    if (Session.get("selectedInvocation") && Session.get("selectedInvocation").switchedPreferredName) {
-      return Session.get("selectedInvocation").switchedPreferredName;
+    if (Session.get("selectedInvocation") && Session.get("selectedInvocation").preferredName) {
+      return Session.get("selectedInvocation").preferredName;
     } else {
       return "";
     }
   },
   benedictionSession: function() {
-    if (Session.get("selectedBenediction") && Session.get("selectedBenediction").switchedPreferredName) {
-      return Session.get("selectedBenediction").switchedPreferredName;
+    if (Session.get("selectedBenediction") && Session.get("selectedBenediction").preferredName) {
+      return Session.get("selectedBenediction").preferredName;
     } else {
       return "";
     }
   },
   presidingSession: function() {
-    if (Session.get("selectedPresiding") && Session.get("selectedPresiding").switchedPreferredName) {
-      return Session.get("selectedPresiding").switchedPreferredName;
+    if (Session.get("selectedPresiding") && Session.get("selectedPresiding").preferredName) {
+      return Session.get("selectedPresiding").preferredName;
     } else {
       return "";
     }
   },
   conductingSession: function() {
-    if (Session.get("selectedConducting") && Session.get("selectedConducting").switchedPreferredName) {
-      return Session.get("selectedConducting").switchedPreferredName;
+    if (Session.get("selectedConducting") && Session.get("selectedConducting").preferredName) {
+      return Session.get("selectedConducting").preferredName;
     } else {
       return "";
     }
@@ -238,7 +238,7 @@ Template.meetingEdit.events({
           "members":
             {
               _id: Random.id(),
-              "switchedPreferredName": ""
+              "preferredName": ""
             }
         }
     }
