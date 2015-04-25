@@ -3,9 +3,9 @@ Meteor.publish('likelyOptionsMemberPublication', function() {
     var user = Meteor.users.findOne(this.userId);
     var selector = {$or: [
       //bishopric, chorister, or organist
-      {"callings.positionId": {$in: [4, 54, 55, 234, 1585]}, "wardUnitNo": user.wardUnitNo},
+      {"callings.positionTypeId": {$in: [4, 54, 55, 234, 1585]}, "wardUnitNo": user.wardUnitNo},
       //stake presidency or high council
-      {"callings.positionId": {$in: [1, 2, 3, 94]}, "stakeUnitNo": user.stakeUnitNo}
+      {"callings.positionTypeId": {$in: [1, 2, 3, 94]}, "stakeUnitNo": user.stakeUnitNo}
     ]};
     return memberCollection.find(selector);
   } else {

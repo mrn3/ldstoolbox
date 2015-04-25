@@ -32,35 +32,35 @@ Template.memberSelect.helpers({
   },
   organistData: function() {
     //get Organist or Pianist position
-    return memberCollection.find({"callings.positionId": 234, "wardUnitNo": Meteor.user().wardUnitNo});
+    return memberCollection.find({"callings.positionTypeId": 234, "wardUnitNo": Meteor.user().wardUnitNo});
   },
   choristerData: function() {
     //get Chorister position
-    return memberCollection.find({"callings.positionId": 1585, "wardUnitNo": Meteor.user().wardUnitNo});
+    return memberCollection.find({"callings.positionTypeId": 1585, "wardUnitNo": Meteor.user().wardUnitNo});
   },
   presidingData: function() {
     //get Presiding position - Stake Presidency, Bishopric
     var selector = {$or: [
-      {"callings.positionId": {$in: [4, 54, 55]}, "wardUnitNo": Meteor.user().wardUnitNo},
-      {"callings.positionId": {$in: [1, 2, 3]}, "stakeUnitNo": Meteor.user().stakeUnitNo}
+      {"callings.positionTypeId": {$in: [4, 54, 55]}, "wardUnitNo": Meteor.user().wardUnitNo},
+      {"callings.positionTypeId": {$in: [1, 2, 3]}, "stakeUnitNo": Meteor.user().stakeUnitNo}
     ]};
-    var options = {sort: {"callings.positionId": 1}};
+    var options = {sort: {"callings.positionTypeId": 1}};
     return memberCollection.find(selector, options);
   },
   conductingData: function() {
     //get Presiding position - Bishopric
     var selector = {$or: [
-      {"callings.positionId": {$in: [4, 54, 55]}, "wardUnitNo": Meteor.user().wardUnitNo}
+      {"callings.positionTypeId": {$in: [4, 54, 55]}, "wardUnitNo": Meteor.user().wardUnitNo}
     ]};
-    var options = {sort: {"callings.positionId": 1}};
+    var options = {sort: {"callings.positionTypeId": 1}};
     return memberCollection.find(selector, options);
   },
   visitorData: function() {
     //get Visiting Authority position - Stake Presidency, High Council
     var selector = {$or: [
-      {"callings.positionId": {$in: [1, 2, 3, 94]}, "stakeUnitNo": Meteor.user().stakeUnitNo}
+      {"callings.positionTypeId": {$in: [1, 2, 3, 94]}, "stakeUnitNo": Meteor.user().stakeUnitNo}
     ]};
-    var options = {sort: {"callings.positionId": 1}};
+    var options = {sort: {"callings.positionTypeId": 1}};
     return memberCollection.find(selector, options);
   }
 });

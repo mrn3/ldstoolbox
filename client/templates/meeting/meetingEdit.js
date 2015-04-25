@@ -20,7 +20,7 @@ Template.meetingEdit.helpers({
       var allowedCallingList = [4, 54, 55, 56, 57, 787];
       var userCallingList = Meteor.user().callings.reduce(
         function(total, calling){
-          return total.concat(calling.positionId);
+          return total.concat(calling.positionTypeId);
         },
       []);
 
