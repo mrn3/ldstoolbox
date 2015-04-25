@@ -1,10 +1,3 @@
-function switchName(inName) {
-  commaPosition = inName.indexOf(",");
-  lastName = inName.substr(0, commaPosition);
-  otherNames = inName.substr(commaPosition+2, inName.length);
-  return otherNames + " " + lastName;
-}
-
 Meteor.methods({
   signInLdsAccountUser: function(inUsername, inPassword) {
     this.unblock();
@@ -290,8 +283,6 @@ Meteor.methods({
 
       householdList = parsedResult.households;
 
-      var switchedPreferredName;
-
       //add all households in ward
       for(var householdListIndex in householdList) {
         householdCollection.insert(
@@ -306,47 +297,35 @@ Meteor.methods({
 
         //insert head of household, spouse, and children, and append on the ward unit number
         if (householdList[householdListIndex].headOfHouse) {
-          if (householdList[householdListIndex].headOfHouse.preferredName) {
-            switchedPreferredName = switchName(householdList[householdListIndex].headOfHouse.preferredName)
-          }
           memberCollection.insert(
             _.extend(
               householdList[householdListIndex].headOfHouse,
               {
                 wardUnitNo: inWardUnitNo,
-                stakeUnitNo: inStakeUnitNo,
-                switchedPreferredName: switchedPreferredName
+                stakeUnitNo: inStakeUnitNo
               }
             )
           );
         }
         if (householdList[householdListIndex].spouse) {
-          if (householdList[householdListIndex].spouse.preferredName) {
-            switchedPreferredName = switchName(householdList[householdListIndex].spouse.preferredName)
-          }
           memberCollection.insert(
             _.extend(
               householdList[householdListIndex].spouse,
               {
                 wardUnitNo: inWardUnitNo,
-                stakeUnitNo: inStakeUnitNo,
-                switchedPreferredName: switchedPreferredName
+                stakeUnitNo: inStakeUnitNo
               }
             )
           );
         }
         for(var childrenIndex in householdList[householdListIndex].children) {
           if (householdList[householdListIndex].children[childrenIndex]) {
-            if (householdList[householdListIndex].children[childrenIndex].preferredName) {
-              switchedPreferredName = switchName(householdList[householdListIndex].children[childrenIndex].preferredName)
-            }
             memberCollection.insert(
               _.extend(
                 householdList[householdListIndex].children[childrenIndex],
                 {
                   wardUnitNo: inWardUnitNo,
-                  stakeUnitNo: inStakeUnitNo,
-                  switchedPreferredName: switchedPreferredName
+                  stakeUnitNo: inStakeUnitNo
                 }
               )
             );
