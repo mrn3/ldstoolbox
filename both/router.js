@@ -150,7 +150,7 @@ Router.map(function() {
     },
     data: function() {
       return {
-        callingGroupData: callingGroupCollection.find({}, {sort: {groupName: 1}})
+        callingGroupData: callingGroupCollection.find({}, {sort: {displayOrder: 1}})
       };
     },
     fastRender: true
@@ -163,7 +163,7 @@ Router.map(function() {
     },
     data: function() {
       return {
-        callingData: callingGroupCollection.findOne(this.params._id)
+        callingData: callingGroupCollection.findOne({_id: this.params._id}, {sort: {"children.displayOrder": 1}})
       };
     },
     fastRender: true

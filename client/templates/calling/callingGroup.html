@@ -8,18 +8,35 @@
       {{#ionContent}}
         {{#ionList}}
           <div class="item item-divider">
-            {{groupName}}
+            {{name}}
           </div>
-          {{#each leaders}}
+          {{#each assignmentsInGroup}}
             <a href="/member/{{individualId}}" class="item item-icon-right">
               <h4>
-                {{callingName}}
+                {{positionName}}
               </h4>
               <h2>
-                {{displayName}}
+                {{individualId}}
               </h2>
               {{> ionIcon icon="ios-arrow-right"}}
             </a>
+          {{/each}}
+
+          {{#each children}}
+            <div class="item item-divider">
+              {{name}}
+            </div>
+            {{#each assignmentsInGroup}}
+              <a href="/member/{{individualId}}" class="item item-icon-right">
+                <h4>
+                  {{positionName}}
+                </h4>
+                <h2>
+                  {{individualId}}
+                </h2>
+                {{> ionIcon icon="ios-arrow-right"}}
+              </a>
+            {{/each}}
           {{/each}}
         {{/ionList}}
       {{/ionContent}}

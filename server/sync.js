@@ -225,104 +225,32 @@ Meteor.methods({
 
       parsedResult = JSON.parse(result.content);
 
-      callingList = parsedResult.callings;
+      //if it is not for the stake, then get the members (stake is only callings)
+      if (inWardUnitNo != inStakeUnitNo) {
 
-      //remove all positions in the ward
-      callingCollection.remove({wardUnitNo: inWardUnitNo});
-      callingGroupCollection.remove({wardUnitNo: inWardUnitNo});
+        //remove all households and members currently in the ward
+        memberCollection.remove({wardUnitNo: inWardUnitNo});
+        householdCollection.remove({wardUnitNo: inWardUnitNo});
 
-      var children;
-      //for each group of positions
-      for(var callingIndex in callingList) {
-        callingGroupCollection.insert(
-          _.extend(
-            callingList[callingIndex],
-            {
-              wardUnitNo: inWardUnitNo,
-              stakeUnitNo: inStakeUnitNo
-            }
-          )
-        );
+        householdList = parsedResult.households;
 
-        children = callingList.children;
-
-        for (var childrenIndex in children) {
-
-          callingCollection.insert(
+        //add all households in ward
+        for(var householdListIndex in householdList) {
+          householdCollection.insert(
             _.extend(
-              children[childrenIndex],
+              householdList[householdListIndex],
               {
                 wardUnitNo: inWardUnitNo,
                 stakeUnitNo: inStakeUnitNo
               }
             )
           );
-          /*
-          memberCollection.update({
-            individualId: groupList.leaders[leaderIndex].individualId},
-            {
-              $addToSet:
-                {
-                  "callings":
-                    {
-                      "callingName": groupList.leaders[leaderIndex].callingName,
-                      "positionId": groupList.leaders[leaderIndex].positionId,
-                      "groupKey": callingList.unitLeadership[callingIndex].groupKey,
-                      "groupName": callingList.unitLeadership[callingIndex].groupName
-                    }
-                }
-            }
-          );
-          */
-        }
-      }
 
-      //remove all households and members currently in the ward
-      memberCollection.remove({wardUnitNo: inWardUnitNo});
-      householdCollection.remove({wardUnitNo: inWardUnitNo});
-
-      householdList = parsedResult.households;
-
-      //add all households in ward
-      for(var householdListIndex in householdList) {
-        householdCollection.insert(
-          _.extend(
-            householdList[householdListIndex],
-            {
-              wardUnitNo: inWardUnitNo,
-              stakeUnitNo: inStakeUnitNo
-            }
-          )
-        );
-
-        //insert head of household, spouse, and children, and append on the ward unit number
-        if (householdList[householdListIndex].headOfHouse) {
-          memberCollection.insert(
-            _.extend(
-              householdList[householdListIndex].headOfHouse,
-              {
-                wardUnitNo: inWardUnitNo,
-                stakeUnitNo: inStakeUnitNo
-              }
-            )
-          );
-        }
-        if (householdList[householdListIndex].spouse) {
-          memberCollection.insert(
-            _.extend(
-              householdList[householdListIndex].spouse,
-              {
-                wardUnitNo: inWardUnitNo,
-                stakeUnitNo: inStakeUnitNo
-              }
-            )
-          );
-        }
-        for(var childrenIndex in householdList[householdListIndex].children) {
-          if (householdList[householdListIndex].children[childrenIndex]) {
+          //insert head of household, spouse, and children, and append on the ward unit number
+          if (householdList[householdListIndex].headOfHouse) {
             memberCollection.insert(
               _.extend(
-                householdList[householdListIndex].children[childrenIndex],
+                householdList[householdListIndex].headOfHouse,
                 {
                   wardUnitNo: inWardUnitNo,
                   stakeUnitNo: inStakeUnitNo
@@ -330,11 +258,133 @@ Meteor.methods({
               )
             );
           }
+          if (householdList[householdListIndex].spouse) {
+            memberCollection.insert(
+              _.extend(
+                householdList[householdListIndex].spouse,
+                {
+                  wardUnitNo: inWardUnitNo,
+                  stakeUnitNo: inStakeUnitNo
+                }
+              )
+            );
+          }
+          for(var childrenIndex in householdList[householdListIndex].children) {
+            if (householdList[householdListIndex].children[childrenIndex]) {
+              memberCollection.insert(
+                _.extend(
+                  householdList[householdListIndex].children[childrenIndex],
+                  {
+                    wardUnitNo: inWardUnitNo,
+                    stakeUnitNo: inStakeUnitNo
+                  }
+                )
+              );
+            }
+          }
+        }
+        //remove all the junk records
+        memberCollection.remove({preferredName: "", wardUnitNo: inWardUnitNo});
+      }
+
+      callingList = parsedResult.callings;
+
+      //remove all positions in the ward
+      callingCollection.remove({wardUnitNo: inWardUnitNo});
+      callingGroupCollection.remove({wardUnitNo: inWardUnitNo});
+
+      var member;
+      var children;
+      var assignmentsInGroup;
+      //for each group of positions
+      for(var callingListIndex in callingList) {
+        callingGroupCollection.insert(
+          _.extend(
+            callingList[callingListIndex],
+            {
+              wardUnitNo: inWardUnitNo,
+              stakeUnitNo: inStakeUnitNo
+            }
+          )
+        );
+
+        //sometimes assignmentsInGroup just at this level
+        assignmentsInGroup = callingList[callingListIndex].assignmentsInGroup;
+        for (var assignmentsInGroupIndex in assignmentsInGroup) {
+          member = memberCollection.findOne({individualId: assignmentsInGroup[assignmentsInGroupIndex].individualId});
+          callingCollection.insert(
+            _.extend(
+              assignmentsInGroup[assignmentsInGroupIndex],
+              {
+                wardUnitNo: inWardUnitNo,
+                stakeUnitNo: inStakeUnitNo,
+                member: member
+              }
+            )
+          );
+
+          memberCollection.update(
+            {
+              individualId: assignmentsInGroup[assignmentsInGroupIndex].individualId
+            },
+            {
+              $addToSet:
+                {
+                  callings:
+                    _.extend(
+                      assignmentsInGroup[assignmentsInGroupIndex],
+                      {
+                        orgTypeId:    callingList[callingListIndex].orgTypeId,
+                        name:         callingList[callingListIndex].name,
+                        displayOrder: callingList[callingListIndex].displayOrder,
+                        instanceId:   callingList[callingListIndex].instanceId
+                      }
+                    )
+                }
+            }
+          );
+        }
+
+        children = callingList[callingListIndex].children;
+        for (var childrenIndex in children) {
+          //other times assignmentsInGroup deeper at this level
+          assignmentsInGroup = children[childrenIndex].assignmentsInGroup;
+          for (var assignmentsInGroupIndex in assignmentsInGroup) {
+            member = memberCollection.findOne({individualId: assignmentsInGroup[assignmentsInGroupIndex].individualId});
+            callingCollection.insert(
+              _.extend(
+                assignmentsInGroup[assignmentsInGroupIndex],
+                {
+                  wardUnitNo: inWardUnitNo,
+                  stakeUnitNo: inStakeUnitNo,
+                  member: member
+                }
+              )
+            );
+
+            memberCollection.update(
+              {
+                individualId: assignmentsInGroup[assignmentsInGroupIndex].individualId
+              },
+              {
+                $addToSet:
+                  {
+                    callings:
+                      _.extend(
+                        assignmentsInGroup[assignmentsInGroupIndex],
+                        {
+                          orgTypeId:    children[childrenIndex].orgTypeId,
+                          name:         children[childrenIndex].name,
+                          displayOrder: children[childrenIndex].displayOrder,
+                          instanceId:   children[childrenIndex].instanceId
+                        }
+                      )
+                  }
+              }
+            );
+          }
         }
       }
-      //remove all the junk records
-      memberCollection.remove({preferredName: "", wardUnitNo: inWardUnitNo});
-
     } catch (e) {
       // Got a network error, time-out or HTTP error in the 400 or 500 range.
       console.log(e);
@@ -350,95 +400,8 @@ Meteor.methods({
         }
       });
     }
-  },
-  getWardCallings: function(inWardUnitNo, inStakeUnitNo) {
-    this.unblock();
-    try {
-      var callingList;
-
-      var callingListUrl="https://www.lds.org/directory/services/ludrs/1.1/unit/ward-leadership-positions/" + inWardUnitNo + "/true";
-      result = Meteor.http.call("GET", callingListUrl, {
-        params: {
-          timeout: 30000
-        },
-        headers: {
-          "cookie": Meteor.user().ldsAccount.cookieValue,
-          "content-type": "application/json",
-          "Accept": "application/json"
-        },
-      });
-
-      callingList = JSON.parse(result.content);
-
-      //remove all positions in the ward
-      callingCollection.remove({wardUnitNo: inWardUnitNo});
-      callingGroupCollection.remove({wardUnitNo: inWardUnitNo});
-
-      //for each group of positions
-      for(var callingIndex in callingList.unitLeadership) {
-
-        var groupList;
-
-        var groupListUrl="https://www.lds.org/directory/services/ludrs/1.1/unit/stake-leadership-group-detail/" + inWardUnitNo + "/" + callingList.unitLeadership[callingIndex].groupKey + "/" + callingList.unitLeadership[callingIndex].instance;
-        groupResult = Meteor.http.call("GET", groupListUrl, {
-          params: {
-            timeout: 30000
-          },
-          headers: {
-            "cookie": Meteor.user().ldsAccount.cookieValue,
-            "content-type": "application/json",
-            "Accept": "application/json"
-          },
-        });
-
-        groupList = JSON.parse(groupResult.content);
-
-        callingGroupCollection.insert(_.extend(callingList.unitLeadership[callingIndex], {leaders: groupList.leaders, wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo}));
-
-        for(var leaderIndex in groupList.leaders) {
-          memberCollection.update({
-            individualId: groupList.leaders[leaderIndex].individualId},
-            {
-              $addToSet:
-                {
-                  "callings":
-                    {
-                      "callingName": groupList.leaders[leaderIndex].callingName,
-                      "positionId": groupList.leaders[leaderIndex].positionId,
-                      "groupKey": callingList.unitLeadership[callingIndex].groupKey,
-                      "groupName": callingList.unitLeadership[callingIndex].groupName
-                    }
-                }
-            }
-          );
-          callingCollection.insert(
-            {
-              "callingName": groupList.leaders[leaderIndex].callingName,
-              "positionId": groupList.leaders[leaderIndex].positionId,
-              "displayName": groupList.leaders[leaderIndex].displayName,
-              wardUnitNo: inWardUnitNo,
-              stakeUnitNo: inStakeUnitNo
-            }
-          );
-        }
-      }
-    } catch (e) {
-      // Got a network error, time-out or HTTP error in the 400 or 500 range.
-      console.log(e);
-      return e;
-    }
-  },
-  getStakeCallings: function(inStakeUnitNo) {
-    var unitList = unitCollection.find({stakeUnitNo: inStakeUnitNo}).fetch();
-    for (var unitIndex in unitList) {
-      Meteor.call("getWardCallings", unitList[unitIndex].wardUnitNo, inStakeUnitNo, function(error) {
-        if (error) {
-          console.log(error);
-        }
-      });
-    }
     //get stake callings too
-    Meteor.call("getWardCallings", inStakeUnitNo, inStakeUnitNo, function(error) {
+    Meteor.call("getWardMembers", inStakeUnitNo, inStakeUnitNo, function(error) {
       if (error) {
         console.log(error);
       }
@@ -524,15 +487,13 @@ Meteor.methods({
   syncWard: function () {
     Meteor.call("getUnits");
     Meteor.call("getWardMembers", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo);
-    //Meteor.call("getWardCallings", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo);
     //Meteor.call("getWardOrganizations", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo);
-    //Meteor.call("getUserCallingInfo");
+    Meteor.call("getUserCallingInfo");
   },
   syncStake: function () {
     Meteor.call("getUnits");
     Meteor.call("getStakeMembers", Meteor.user().stakeUnitNo);
-    Meteor.call("getStakeCallings", Meteor.user().stakeUnitNo);
-    Meteor.call("getStakeOrganizations", Meteor.user().stakeUnitNo);
+    //Meteor.call("getStakeOrganizations", Meteor.user().stakeUnitNo);
     Meteor.call("getUserCallingInfo");
   }
 });
