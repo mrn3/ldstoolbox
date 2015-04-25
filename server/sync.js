@@ -212,41 +212,13 @@ Meteor.methods({
       return e;
     }
   },
-  getHousehold: function(inHeadOfHouseholdInvidualId) {
-    this.unblock();
-    try {
-      householdCollection.remove({"headOfHousehold.individualId": inHeadOfHouseholdInvidualId});
-      var household;
-      var householdUrl="https://www.lds.org/directory/services/ludrs/mem/householdProfile/" + inHeadOfHouseholdInvidualId;
-      result = Meteor.http.call("GET", householdUrl, {
-        params: {
-          timeout: 30000
-        },
-        headers: {
-          "cookie": Meteor.user().ldsAccount.cookieValue,
-          "content-type": "application/json",
-          "Accept": "application/json"
-        },
-      });
-      household = JSON.parse(result.content);
-      householdCollection.insert(_.extend(household,
-        {
-          wardUnitNo: household.ward.wardUnitNo,
-          stakeUnitNo: household.ward.stakeUnitNo
-        }
-        ));
-    } catch (e) {
-      // Got a network error, time-out or HTTP error in the 400 or 500 range.
-      console.log(e);
-      return e;
-    }
-  },
   getWardMembers: function(inWardUnitNo, inStakeUnitNo) {
     this.unblock();
     try {
       var householdList;
 
-      var householdListUrl="https://www.lds.org/directory/services/ludrs/mem/member-list/" + inWardUnitNo;
+      //var householdListUrl="https://www.lds.org/directory/services/ludrs/mem/member-list/" + inWardUnitNo;
+      var householdListUrl = "https://www.lds.org/mobiledirectory/services/v2/ldstools/member-detaillist-with-callings/" + inWardUnitNo;
       result = Meteor.http.call("GET", householdListUrl, {
         params: {
           timeout: 30000
@@ -258,25 +230,128 @@ Meteor.methods({
         },
       });
 
-      householdList = JSON.parse(result.content);
+      parsedResult = JSON.parse(result.content);
+
+      callingList = parsedResult.callings;
+
+      //remove all positions in the ward
+      callingCollection.remove({wardUnitNo: inWardUnitNo});
+      callingGroupCollection.remove({wardUnitNo: inWardUnitNo});
+
+      var children;
+      //for each group of positions
+      for(var callingIndex in callingList) {
+        callingGroupCollection.insert(
+          _.extend(
+            callingList[callingIndex],
+            {
+              wardUnitNo: inWardUnitNo,
+              stakeUnitNo: inStakeUnitNo
+            }
+          )
+        );
+
+        children = callingList.children;
+
+        for (var childrenIndex in children) {
+
+          callingCollection.insert(
+            _.extend(
+              children[childrenIndex],
+              {
+                wardUnitNo: inWardUnitNo,
+                stakeUnitNo: inStakeUnitNo
+              }
+            )
+          );
+          /*
+          memberCollection.update({
+            individualId: groupList.leaders[leaderIndex].individualId},
+            {
+              $addToSet:
+                {
+                  "callings":
+                    {
+                      "callingName": groupList.leaders[leaderIndex].callingName,
+                      "positionId": groupList.leaders[leaderIndex].positionId,
+                      "groupKey": callingList.unitLeadership[callingIndex].groupKey,
+                      "groupName": callingList.unitLeadership[callingIndex].groupName
+                    }
+                }
+            }
+          );
+          */
+        }
+      }
 
       //remove all households and members currently in the ward
       memberCollection.remove({wardUnitNo: inWardUnitNo});
+      householdCollection.remove({wardUnitNo: inWardUnitNo});
+
+      householdList = parsedResult.households;
+
+      var switchedPreferredName;
 
       //add all households in ward
       for(var householdListIndex in householdList) {
-        //householdCollection.insert(_.extend(householdList[householdListIndex], {wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo}));
+        householdCollection.insert(
+          _.extend(
+            householdList[householdListIndex],
+            {
+              wardUnitNo: inWardUnitNo,
+              stakeUnitNo: inStakeUnitNo
+            }
+          )
+        );
+
         //insert head of household, spouse, and children, and append on the ward unit number
-        memberCollection.insert(_.extend(householdList[householdListIndex].headOfHouse, {wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo, switchedPreferredName: switchName(householdList[householdListIndex].headOfHouse.preferredName)}));
-        memberCollection.insert(_.extend(householdList[householdListIndex].spouse, {wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo, switchedPreferredName: switchName(householdList[householdListIndex].spouse.preferredName)}));
-        for(var childrenIndex in householdList[householdListIndex].children) {
-          memberCollection.insert(_.extend(householdList[householdListIndex].children[childrenIndex], {wardUnitNo: inWardUnitNo, stakeUnitNo: inStakeUnitNo, switchedPreferredName: switchName(householdList[householdListIndex].children[childrenIndex].preferredName)}));
-        }
-        Meteor.call("getHousehold", householdList[householdListIndex].headOfHouse.individualId, function(error) {
-          if (error) {
-            console.log(error);
+        if (householdList[householdListIndex].headOfHouse) {
+          if (householdList[householdListIndex].headOfHouse.preferredName) {
+            switchedPreferredName = switchName(householdList[householdListIndex].headOfHouse.preferredName)
           }
-        });
+          memberCollection.insert(
+            _.extend(
+              householdList[householdListIndex].headOfHouse,
+              {
+                wardUnitNo: inWardUnitNo,
+                stakeUnitNo: inStakeUnitNo,
+                switchedPreferredName: switchedPreferredName
+              }
+            )
+          );
+        }
+        if (householdList[householdListIndex].spouse) {
+          if (householdList[householdListIndex].spouse.preferredName) {
+            switchedPreferredName = switchName(householdList[householdListIndex].spouse.preferredName)
+          }
+          memberCollection.insert(
+            _.extend(
+              householdList[householdListIndex].spouse,
+              {
+                wardUnitNo: inWardUnitNo,
+                stakeUnitNo: inStakeUnitNo,
+                switchedPreferredName: switchedPreferredName
+              }
+            )
+          );
+        }
+        for(var childrenIndex in householdList[householdListIndex].children) {
+          if (householdList[householdListIndex].children[childrenIndex]) {
+            if (householdList[householdListIndex].children[childrenIndex].preferredName) {
+              switchedPreferredName = switchName(householdList[householdListIndex].children[childrenIndex].preferredName)
+            }
+            memberCollection.insert(
+              _.extend(
+                householdList[householdListIndex].children[childrenIndex],
+                {
+                  wardUnitNo: inWardUnitNo,
+                  stakeUnitNo: inStakeUnitNo,
+                  switchedPreferredName: switchedPreferredName
+                }
+              )
+            );
+          }
+        }
       }
       //remove all the junk records
       memberCollection.remove({preferredName: "", wardUnitNo: inWardUnitNo});
@@ -470,9 +545,9 @@ Meteor.methods({
   syncWard: function () {
     Meteor.call("getUnits");
     Meteor.call("getWardMembers", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo);
-    Meteor.call("getWardCallings", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo);
-    Meteor.call("getWardOrganizations", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo);
-    Meteor.call("getUserCallingInfo");
+    //Meteor.call("getWardCallings", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo);
+    //Meteor.call("getWardOrganizations", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo);
+    //Meteor.call("getUserCallingInfo");
   },
   syncStake: function () {
     Meteor.call("getUnits");

@@ -359,6 +359,7 @@ Meteor.startup(function () {
     recognitionTypeCollection.insert({typeName: "Mission Call"});
   }
 
+  /*
   if (callingCollection.find({wardUnitNo: -1}).count() === 0) {
     //dump in generic callings too
     //callingCollection.insert({callingName: "Bishopric", wardUnitNo: -1});
@@ -590,6 +591,7 @@ Meteor.startup(function () {
     callingCollection.insert({callingName: "Magazine Representative", wardUnitNo: -1});
     callingCollection.insert({callingName: "Ward Disability Specialist", wardUnitNo: -1});
   }
+  */
 
   if (organizationCollection.find().count() === 0) {
     organizationCollection.insert({key: "HIGH_PRIEST", name: "High Priests", order: 1});
