@@ -114,7 +114,7 @@ Meteor.methods({
     try {
       //get current user's invidual id
       var currentUser;
-      var currentUserInfoUrl="https://www.lds.org/directory/services/ludrs/mem/current-user-info/";
+      var currentUserInfoUrl="https://www.lds.org/mobiledirectory/services/v2/ldstools/current-user-detail";
       result = Meteor.http.call("GET", currentUserInfoUrl, {
         params: {
           timeout: 30000

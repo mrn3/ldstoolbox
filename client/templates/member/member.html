@@ -41,39 +41,39 @@
           {{/if}}
         {{/with}}
         {{#with householdData}}
-          {{#if householdInfo.phone}}
+          {{#if phone}}
             <a class="item item-icon-right" data-action=showHouseholdPhoneActionSheet>
               Household Phone
-              <span class="item-note">{{householdInfo.phone}}</span>
+              <span class="item-note">{{phone}}</span>
               <i class="icon ion-ios-arrow-right"></i>
             </a>
           {{/if}}
-          {{#if householdInfo.email}}
+          {{#if email}}
             <a class="item item-icon-right" href="mailto:{{householdInfo.email}}">
               Household Email
-              <span class="item-note">{{householdInfo.email}}</span>
+              <span class="item-note">{{email}}</span>
               <i class="icon ion-ios-arrow-right"></i>
             </a>
           {{/if}}
-          {{#if householdInfo.address}}
+          {{#if desc1}}
             <div class="item item-divider">
               Address
             </div>
             <a class="item item-icon-right" data-action=showAddressActionSheet>
-              {{#if householdInfo.address.addr1}}
-                {{householdInfo.address.addr1}}
+              {{#if desc1}}
+                {{desc1}}
               {{/if}}
-              {{#if householdInfo.address.addr2}}
-                <br />{{householdInfo.address.addr2}}
+              {{#if desc2}}
+                <br />{{desc2}}
               {{/if}}
-              {{#if householdInfo.address.addr3}}
-                <br />{{householdInfo.address.addr3}}
+              {{#if desc3}}
+                <br />{{desc3}}
               {{/if}}
-              {{#if householdInfo.address.addr4}}
-                <br />{{householdInfo.address.addr4}}
+              {{#if desc4}}
+                <br />{{desc4}}
               {{/if}}
-              {{#if householdInfo.address.addr5}}
-                <br />{{householdInfo.address.addr5}}
+              {{#if desc5}}
+                <br />{{desc5}}
               {{/if}}
               <i class="icon ion-ios-arrow-right"></i>
             </a>
@@ -94,8 +94,7 @@
             <a class="item item-icon-right" href="/member/{{individualId}}">
             <p>Head of House</p>
             <h2>
-              {{name}}
-              {{directoryName}}
+              {{preferredName}}
             </h2>
             <i class="icon ion-ios-arrow-right"></i>
           </a>
@@ -103,14 +102,14 @@
           {{#with spouse}}
             <a class="item item-icon-right" href="/member/{{individualId}}">
               <p>Spouse</p>
-              <h2>{{name}}</h2>
+              <h2>{{preferredName}}</h2>
               <i class="icon ion-ios-arrow-right"></i>
             </a>
           {{/with}}
           {{#each otherHouseholdMembers}}
             <a class="item item-icon-right" href="/member/{{individualId}}">
               <p>Child</p>
-              <h2>{{name}}</h2>
+              <h2>{{preferredName}}</h2>
               <i class="icon ion-ios-arrow-right"></i>
             </a>
           {{/each}}
