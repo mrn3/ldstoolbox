@@ -42,7 +42,7 @@ SearchSource.defineSource('callings', function(searchText, options) {
             },
             {
               $or: [
-                {"displayName": regExp},
+                {"member.preferredName": regExp},
                 {"positionName": regExp}
               ]
             }
@@ -65,7 +65,7 @@ SearchSource.defineSource('callings', function(searchText, options) {
             },
             {
               $or: [
-                {"displayName": regExp},
+                {"member.preferredName": regExp},
                 {"positionName": regExp}
               ]
             }

@@ -487,13 +487,13 @@ Meteor.methods({
   syncWard: function () {
     Meteor.call("getUnits");
     Meteor.call("getWardMembers", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo);
-    //Meteor.call("getWardOrganizations", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo);
+    Meteor.call("getWardOrganizations", Meteor.user().wardUnitNo, Meteor.user().stakeUnitNo);
     Meteor.call("getUserCallingInfo");
   },
   syncStake: function () {
     Meteor.call("getUnits");
     Meteor.call("getStakeMembers", Meteor.user().stakeUnitNo);
-    //Meteor.call("getStakeOrganizations", Meteor.user().stakeUnitNo);
+    Meteor.call("getStakeOrganizations", Meteor.user().stakeUnitNo);
     Meteor.call("getUserCallingInfo");
   }
 });

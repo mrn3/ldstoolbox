@@ -630,7 +630,7 @@ Router.map(function() {
     }
 
     doc.text("Closing Hymn: _________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
-    if (meeting && meeting.closingHym && meeting.closingHymn.name) {
+    if (meeting && meeting.closingHymn && meeting.closingHymn.name) {
       doc.text(meeting.closingHymn.number + " - " + meeting.closingHymn.name, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
     }
     distanceFromTop += verticalPositionIncrement;
