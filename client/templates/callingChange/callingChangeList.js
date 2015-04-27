@@ -263,7 +263,7 @@ Template.callingChangeList.helpers({
                                 "Bishopric Second Counselor",
                                 "Ward Executive Secretary",
                                 "Ward Clerk",
-                                "Ward Assistan Clerk--Membership"];
+                                "Ward Assistant Clerk--Membership"];
       var userCallingList = Meteor.user().callings.reduce(
         function(total, calling){
           return total.concat(calling.positionName);
@@ -325,7 +325,8 @@ Template.callingChangeList.events({
   "click [data-action=showCallingChangeActionSheet]": function (event, template) {
     IonActionSheet.show({
       buttons: [
-        { text: "Copy Approved Calling Changes"}
+        {text: "Copy Approved Calling Changes"},
+        {text: "Calling Change Help"}
       ],
       cancelText: "Cancel",
       cancel: function() {},
@@ -344,6 +345,9 @@ Template.callingChangeList.events({
             template: "<textarea rows='10' onClick='this.setSelectionRange(0, this.value.length)'>" + memberNameString + "</textarea>",
             okText: 'Okay',
           });
+        }
+        else if (index === 1) {
+          Router.go("/callingChangeHelp");
         }
         return true;
       }

@@ -210,7 +210,6 @@ Meteor.methods({
     try {
       var householdList;
 
-      //var householdListUrl="https://www.lds.org/directory/services/ludrs/mem/member-list/" + inWardUnitNo;
       var householdListUrl = "https://www.lds.org/mobiledirectory/services/v2/ldstools/member-detaillist-with-callings/" + inWardUnitNo;
       result = Meteor.http.call("GET", householdListUrl, {
         params: {
