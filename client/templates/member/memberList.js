@@ -72,7 +72,8 @@ Template.memberList.events({
       //scrolling up - show searchbar
       $(".mainContentArea").addClass("has-subheader")
       $("#searchBarSubHeader").slideDown();
-    } else {
+    } else if ((Session.get("previousScrollTop") > Session.get("previous2ScrollTop"))
+      && (event.target.scrollTop > Session.get("previousScrollTop"))) {
       //scrolling down - hide searchbar and load more results
       $(".mainContentArea").removeClass("has-subheader")
       $("#searchBarSubHeader").slideUp();
