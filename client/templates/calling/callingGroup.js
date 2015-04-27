@@ -8,6 +8,6 @@ Template.callingGroup.helpers({
     }
   },
   formatDate: function(inDate) {
-    return moment(inDate).format("MM/DD/YYYY");
+    return moment(inDate).format("MM/DD/YY");
   }
 });
