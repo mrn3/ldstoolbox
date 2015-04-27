@@ -388,7 +388,8 @@ Router.map(function() {
         Meteor.subscribe("memberAllPublication", "stake"),
         Meteor.subscribe("stakeAllHouseholdPublication"),
         Meteor.subscribe("stakeCallingPublication"),
-        Meteor.subscribe("reportPublication")
+        Meteor.subscribe("reportPublication"),
+        Meteor.subscribe("unitPublication")
       ]
     },
     fastRender: true

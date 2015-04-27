@@ -8,16 +8,16 @@
         {{> countReportInner}}
         {{#each reportData}}
         <label class="item item-input">
-          <div class="row">
-            <div class="col">
-              {{wardUnitNo}}
+          <div class="row responsive-sm">
+            <div class="col col-40">
+              {{getWardName wardUnitNo}}
             </div>
-            <div class="col">
+            <div class="col col-20">
               {{count}}
             </div>
-            <div class="col">
+            <div class="col col-20">
             </div>
-            <div class="col">
+            <div class="col col-20">
             </div>
           </div>
         </label>
