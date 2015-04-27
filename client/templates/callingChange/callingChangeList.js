@@ -326,7 +326,7 @@ Template.callingChangeList.events({
     }
     Session.set("previous2ScrollTop", Session.get("previousScrollTop"));
     Session.set("previousScrollTop", event.target.scrollTop);
-  }
+  },
   "click [data-action=showCallingChangeActionSheet]": function (event, template) {
     IonActionSheet.show({
       buttons: [
