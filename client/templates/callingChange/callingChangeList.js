@@ -376,10 +376,6 @@ Template.callingChangeList.rendered = function() {
   if (typeof Session.get("callingChangeSearchInput") == "undefined") {
     Session.set("callingChangeSearchInput", "");
   }
-  if (typeof Session.get("previousScrollTop") == "undefined") {
-    Session.set("previousScrollTop", 0);
-  }
-  if (typeof Session.get("previous2ScrollTop") == "undefined") {
-    Session.set("previous2ScrollTop", 0);
-  }
+  Session.set("previousScrollTop", 0);
+  Session.set("previous2ScrollTop", 0);
 };

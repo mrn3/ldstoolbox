@@ -87,11 +87,7 @@ Template.memberList.rendered = function() {
   if (typeof Session.get("memberSearchInput") == "undefined") {
     Session.set("memberSearchInput", "");
   }
-  if (typeof Session.get("previousScrollTop") == "undefined") {
-    Session.set("previousScrollTop", 0);
-  }
-  if (typeof Session.get("previous2ScrollTop") == "undefined") {
-    Session.set("previous2ScrollTop", 0);
-  }
+  Session.set("previousScrollTop", 0);
+  Session.set("previous2ScrollTop", 0);
   Session.set("selectedWardUnitNo", Meteor.user().selectedWardUnitNo);
 };

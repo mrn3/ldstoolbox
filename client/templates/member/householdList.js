@@ -87,11 +87,7 @@ Template.householdList.rendered = function() {
   if (typeof Session.get("householdSearchInput") == "undefined") {
     Session.set("householdSearchInput", "");
   }
-  if (typeof Session.get("previousScrollTop") == "undefined") {
-    Session.set("previousScrollTop", 0);
-  }
-  if (typeof Session.get("previous2ScrollTop") == "undefined") {
-    Session.set("previous2ScrollTop", 0);
-  }
+  Session.set("previousScrollTop", 0);
+  Session.set("previous2ScrollTop", 0);
   Session.set("selectedWardUnitNo", Meteor.user().selectedWardUnitNo);
 };
