@@ -323,7 +323,6 @@ Template.callingChangeList.events({
       //scrolling down - hide searchbar and load more results
       $(".mainContentArea").removeClass("has-subheader")
       $("#searchBarSubHeader").slideUp();
-      theHandle.loadNextPage();
     }
     Session.set("previous2ScrollTop", Session.get("previousScrollTop"));
     Session.set("previousScrollTop", event.target.scrollTop);
