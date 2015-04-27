@@ -320,7 +320,7 @@ Template.callingChangeList.events({
       $("#searchBarSubHeader").slideDown();
     } else if ((Session.get("previousScrollTop") > Session.get("previous2ScrollTop"))
       && (event.target.scrollTop > Session.get("previousScrollTop"))) {
-      //scrolling down - hide searchbar and load more results
+      //scrolling down - hide searchbar
       $(".mainContentArea").removeClass("has-subheader")
       $("#searchBarSubHeader").slideUp();
     }
