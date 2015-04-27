@@ -2,9 +2,9 @@ Template.member.rendered = function() {
   /*
   if (this.data
     && this.data.householdData
-    && this.data.householdData.headOfHousehold
-    && this.data.householdData.headOfHousehold.indiviualId)
-  Meteor.call("getHousehold", parseInt(this.data.householdData.headOfHousehold.indiviualId), function(error) {
+    && this.data.householdData.headOfHouse
+    && this.data.householdData.headOfHouse.indiviualId)
+  Meteor.call("getHousehold", parseInt(this.data.householdData.headOfHouse.indiviualId), function(error) {
     if (error) {
       console.log(error);
     }
@@ -28,10 +28,10 @@ Template.member.events({
         }
         if (index === 1) {
           if (household
-            && household.householdInfo
-            && household.householdInfo.address
-            && household.householdInfo.address.latitude
-            && household.householdInfo.address.longitude) {
+            && household.desc1
+            && household.includeLatLong
+            && household.latitude
+            && household.longitude) {
               var theLocation;
               var iOS = /(iPad|iPhone|iPod)/g.test( navigator.userAgent );
               if (iOS) {
@@ -40,13 +40,24 @@ Template.member.events({
                 theLocation = "https://www.google.com/maps?";
               }
               theLocation +=
-                "saddr=" +
-                "&daddr=" + household.householdInfo.address.addr1 + "," +
-                            household.householdInfo.address.addr2 + "," +
-                            household.householdInfo.address.addr3 + "," +
-                            household.householdInfo.address.addr4 +
-                "&center=" + household.householdInfo.address.latitude + "," +
-                              household.householdInfo.address.longitude +
+                "saddr=";
+              theLocation +=
+                "&daddr=";
+              if (household.desc1) {
+                theLocation += household.desc1;
+              }
+              if (household.desc2) {
+                theLocation += "," + household.desc2;
+              }
+              if (household.desc3) {
+                theLocation += "," + household.desc3;
+              }
+              if (household.desc4) {
+                theLocation += "," + household.desc4;
+              }
+              theLocation +=
+                "&center=" + household.latitude + "," +
+                              household.longitude +
                 "&zoom=17" +
                 "&views=traffic" +
                 "&directionsmode=driving" +

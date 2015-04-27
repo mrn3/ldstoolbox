@@ -11,9 +11,9 @@ SearchSource.defineSource("households", function(searchText) {
           wardUnitNo: Meteor.user().selectedWardUnitNo,
           $or: [
             {"coupleName": regExp},
-            {"headOfHousehold.name": regExp},
-            {"spouse.name": regExp},
-            {"otherHouseholdMembers.name": regExp}
+            {"headOfHouse.preferredName": regExp},
+            {"spouse.preferredName": regExp},
+            {"children.preferredName": regExp}
           ]
         };
     } else {
@@ -22,9 +22,9 @@ SearchSource.defineSource("households", function(searchText) {
           stakeUnitNo: Meteor.user().stakeUnitNo,
           $or: [
             {"coupleName": regExp},
-            {"headOfHousehold.name": regExp},
-            {"spouse.name": regExp},
-            {"otherHouseholdMembers.name": regExp}
+            {"headOfHouse.preferredName": regExp},
+            {"spouse.preferredName": regExp},
+            {"children.preferredName": regExp}
           ]
         };
     }

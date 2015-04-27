@@ -10,8 +10,8 @@ Template.organizationMap.helpers({
       //just center on the first one in the list
       return {
         center: new google.maps.LatLng(
-          householdArray[0].householdInfo.address.latitude,
-          householdArray[0].householdInfo.address.longitude
+          householdArray[0].latitude,
+          householdArray[0].longitude
         ),
         zoom: 17
       };
@@ -29,49 +29,49 @@ Template.organizationMap.onCreated(function() {
     var infoWindowArray = [];
 
     for (householdIndex in householdArray) {
-      var latlng = new google.maps.LatLng(householdArray[householdIndex].householdInfo.address.latitude, householdArray[householdIndex].householdInfo.address.longitude);
+      var latlng = new google.maps.LatLng(householdArray[householdIndex].latitude, householdArray[householdIndex].longitude);
 
       contentString = "<h4>Household Members</h4>";
-      if (householdArray[householdIndex].headOfHousehold && householdArray[householdIndex].headOfHousehold.name) {
-        if (individualIdArray.indexOf(householdArray[householdIndex].headOfHousehold.individualId) > -1) {
-          contentString += "<strong>" + householdArray[householdIndex].headOfHousehold.name + "</strong>" + "<br />";
+      if (householdArray[householdIndex].headOfHouse && householdArray[householdIndex].headOfHouse.preferredName) {
+        if (individualIdArray.indexOf(householdArray[householdIndex].headOfHouse.individualId) > -1) {
+          contentString += "<strong>" + householdArray[householdIndex].headOfHouse.preferredName + "</strong>" + "<br />";
         } else {
-          contentString += householdArray[householdIndex].headOfHousehold.name + "<br />";
+          contentString += householdArray[householdIndex].headOfHouse.preferredName + "<br />";
         }
       }
-      if (householdArray[householdIndex].spouse && householdArray[householdIndex].spouse.name) {
+      if (householdArray[householdIndex].spouse && householdArray[householdIndex].spouse.preferredName) {
         if (individualIdArray.indexOf(householdArray[householdIndex].spouse.individualId) > -1) {
-          contentString += "<strong>" + householdArray[householdIndex].spouse.name + "</strong>" + "<br />";
+          contentString += "<strong>" + householdArray[householdIndex].spouse.preferredName + "</strong>" + "<br />";
         } else {
-          contentString += householdArray[householdIndex].spouse.name + "<br />";
+          contentString += householdArray[householdIndex].spouse.preferredName + "<br />";
         }
       }
-      for (otherHouseholdMembersIndex in householdArray[householdIndex].otherHouseholdMembers) {
-        if (householdArray[householdIndex].otherHouseholdMembers[otherHouseholdMembersIndex].name) {
-          if (individualIdArray.indexOf(householdArray[householdIndex].otherHouseholdMembers[otherHouseholdMembersIndex].individualId) > -1) {
-            contentString += "<strong>" + householdArray[householdIndex].otherHouseholdMembers[otherHouseholdMembersIndex].name + "</strong>" + "<br />";
+      for (childrenIndex in householdArray[householdIndex].children) {
+        if (householdArray[householdIndex].children[childrenIndex].preferredName) {
+          if (individualIdArray.indexOf(householdArray[householdIndex].children[childrenIndex].individualId) > -1) {
+            contentString += "<strong>" + householdArray[householdIndex].children[childrenIndex].preferredName + "</strong>" + "<br />";
           } else {
-            contentString += householdArray[householdIndex].otherHouseholdMembers[otherHouseholdMembersIndex].name + "<br />";
+            contentString += householdArray[householdIndex].children[childrenIndex].preferredName + "<br />";
           }
         }
       }
 
-      if (householdArray[householdIndex].householdInfo && householdArray[householdIndex].householdInfo.address) {
+      if (householdArray[householdIndex] && householdArray[householdIndex].desc1) {
         contentString += "<h4>Address</h4>";
-        if (householdArray[householdIndex].householdInfo.address.addr1) {
-          contentString += householdArray[householdIndex].householdInfo.address.addr1 + "<br />";
+        if (householdArray[householdIndex].desc1) {
+          contentString += householdArray[householdIndex].desc1 + "<br />";
         }
-        if (householdArray[householdIndex].householdInfo.address.addr2) {
-          contentString += householdArray[householdIndex].householdInfo.address.addr2 + "<br />";
+        if (householdArray[householdIndex].desc2) {
+          contentString += householdArray[householdIndex].desc2 + "<br />";
         }
-        if (householdArray[householdIndex].householdInfo.address.addr3) {
-          contentString += householdArray[householdIndex].householdInfo.address.addr3 + "<br />";
+        if (householdArray[householdIndex].desc3) {
+          contentString += householdArray[householdIndex].desc3 + "<br />";
         }
-        if (householdArray[householdIndex].householdInfo.address.addr4) {
-          contentString += householdArray[householdIndex].householdInfo.address.addr4 + "<br />";
+        if (householdArray[householdIndex].desc4) {
+          contentString += householdArray[householdIndex].desc4 + "<br />";
         }
-        if (householdArray[householdIndex].householdInfo.address.addr5) {
-          contentString += householdArray[householdIndex].householdInfo.address.addr5 + "<br />";
+        if (householdArray[householdIndex].desc5) {
+          contentString += householdArray[householdIndex].desc5 + "<br />";
         }
 
         //create directions link
@@ -84,12 +84,12 @@ Template.organizationMap.onCreated(function() {
         }
         theLocation +=
           "saddr=" +
-          "&daddr=" + householdArray[householdIndex].householdInfo.address.addr1 + "," +
-                      householdArray[householdIndex].householdInfo.address.addr2 + "," +
-                      householdArray[householdIndex].householdInfo.address.addr3 + "," +
-                      householdArray[householdIndex].householdInfo.address.addr4 +
-          "&center=" + householdArray[householdIndex].householdInfo.address.latitude + "," +
-                      householdArray[householdIndex].householdInfo.address.longitude +
+          "&daddr=" + householdArray[householdIndex].desc1 + "," +
+                      householdArray[householdIndex].desc2 + "," +
+                      householdArray[householdIndex].desc3 + "," +
+                      householdArray[householdIndex].desc4 +
+          "&center=" + householdArray[householdIndex].latitude + "," +
+                      householdArray[householdIndex].longitude +
           "&zoom=17" +
           "&views=traffic" +
           "&directionsmode=driving" +
@@ -103,13 +103,13 @@ Template.organizationMap.onCreated(function() {
         }
       }
 
-      infoWindowArray[householdArray[householdIndex].headOfHousehold.name] = new google.maps.InfoWindow({
+      infoWindowArray[householdArray[householdIndex].headOfHouse.preferredName] = new google.maps.InfoWindow({
         content: contentString
       });
 
       /*
       var image = {
-        url: "https://chart.googleapis.com/chart?chst=d_bubble_text_small&chld=bb|" + householdArray[householdIndex].headOfHousehold.name + "|FFFFFF|000000",
+        url: "https://chart.googleapis.com/chart?chst=d_bubble_text_small&chld=bb|" + householdArray[householdIndex].headOfHouse.preferredName + "|FFFFFF|000000",
         // This marker is 20 pixels wide by 32 pixels tall.
         //size: new google.maps.Size(20, 32),
         // The origin for this image is 0,0.
@@ -123,7 +123,7 @@ Template.organizationMap.onCreated(function() {
         //icon: image,
         position: latlng,
         map: map.instance,
-        title: householdArray[householdIndex].headOfHousehold.name
+        title: householdArray[householdIndex].headOfHouse.preferredName
       });
 
       google.maps.event.addListener(marker, 'click', function() {

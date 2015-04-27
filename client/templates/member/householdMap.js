@@ -4,14 +4,12 @@ Template.householdMap.helpers({
     if (GoogleMaps.loaded()) {
       // Map initialization options
       if (this.householdData
-        && this.householdData.householdInfo
-        && this.householdData.householdInfo.address
-        && this.householdData.householdInfo.address.latitude
-        && this.householdData.householdInfo.address.longitude) {
+        && this.householdData.latitude
+        && this.householdData.longitude) {
           return {
             center: new google.maps.LatLng(
-              this.householdData.householdInfo.address.latitude,
-              this.householdData.householdInfo.address.longitude
+              this.householdData.latitude,
+              this.householdData.longitude
             ),
             zoom: 17
           };

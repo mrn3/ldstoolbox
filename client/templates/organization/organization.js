@@ -11,10 +11,9 @@ Template.organization.events({
     var selector =
       {
         $or: [
-          {"headOfHousehold.individualId": {$in: individualIdArray}},
           {"headOfHouse.individualId": {$in: individualIdArray}},
           {"spouse.individualId": {$in: individualIdArray}},
-          {"otherHouseholdMembers.individualId": {$in: individualIdArray}}
+          {"children.individualId": {$in: individualIdArray}}
         ]
       };
     var householdArray = householdCollection.find(selector).fetch();

@@ -1,11 +1,5 @@
 <template name="householdItem">
 
-  {{#if headOfHousehold.individualId}}
-    <a class="item item-icon-right" href="/member/{{headOfHousehold.individualId}}">
-      {{{coupleName}}}
-      <i class="icon ion-ios-arrow-right"></i>
-    </a>
-  {{/if}}
   {{#if headOfHouse.individualId}}
     <a class="item item-icon-right" href="/member/{{headOfHouse.individualId}}">
       {{{coupleName}}}

@@ -92,10 +92,8 @@ Router.map(function() {
       var selector =
         {$or:
           [
-            {"headOfHousehold.individualId": parseInt(this.params.individualId)},
             {"headOfHouse.individualId": parseInt(this.params.individualId)},
             {"spouse.individualId": parseInt(this.params.individualId)},
-            {"otherHouseholdMembers.individualId": parseInt(this.params.individualId)},
             {"children.individualId": parseInt(this.params.individualId)}
           ]
         };
@@ -159,11 +157,14 @@ Router.map(function() {
     name: "callingGroup",
     onBeforeAction: requireLogin,
     waitOn: function () {
-      return Meteor.subscribe("callingGroupPublication")
+      return [
+        Meteor.subscribe("callingGroupPublication"),
+        Meteor.subscribe("memberAllPublication", "ward")
+      ]
     },
     data: function() {
       return {
-        callingData: callingGroupCollection.findOne({_id: this.params._id}, {sort: {"children.displayOrder": 1}})
+        callingData: callingGroupCollection.findOne({_id: this.params._id})
       };
     },
     fastRender: true
@@ -249,7 +250,7 @@ Router.map(function() {
       return [
         Meteor.subscribe("callingChangePublication"),
         Meteor.subscribe("userPublication"),
-        Meteor.subscribe("stakeMemberPublication")
+        Meteor.subscribe("memberAllPublication", "stake")
       ]
     },
     data: function() {
@@ -317,7 +318,7 @@ Router.map(function() {
       return [
         Meteor.subscribe("meetingPublication"),
         Meteor.subscribe("userPublication"),
-        Meteor.subscribe("stakeMemberPublication")
+        Meteor.subscribe("memberAllPublication", "ward")
       ]
     },
     data: function() {
@@ -384,7 +385,7 @@ Router.map(function() {
     waitOn: function () {
       return [
         Meteor.subscribe("userPublication"),
-        Meteor.subscribe("stakeMemberPublication"),
+        Meteor.subscribe("memberAllPublication", "stake"),
         Meteor.subscribe("stakeAllHouseholdPublication"),
         Meteor.subscribe("stakeCallingPublication"),
         Meteor.subscribe("reportPublication")

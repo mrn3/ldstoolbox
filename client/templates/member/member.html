@@ -48,10 +48,10 @@
               <i class="icon ion-ios-arrow-right"></i>
             </a>
           {{/if}}
-          {{#if email}}
-            <a class="item item-icon-right" href="mailto:{{householdInfo.email}}">
+          {{#if emailAddress}}
+            <a class="item item-icon-right" href="mailto:{{emailAddress}}">
               Household Email
-              <span class="item-note">{{email}}</span>
+              <span class="item-note">{{emailAddress}}</span>
               <i class="icon ion-ios-arrow-right"></i>
             </a>
           {{/if}}
@@ -81,15 +81,6 @@
           <div class="item item-divider">
             Household Members
           </div>
-          {{#with headOfHousehold}}
-            <a class="item item-icon-right" href="/member/{{individualId}}">
-            <p>Head of Household</p>
-            <h2>
-              {{name}}
-            </h2>
-            <i class="icon ion-ios-arrow-right"></i>
-          </a>
-          {{/with}}
           {{#with headOfHouse}}
             <a class="item item-icon-right" href="/member/{{individualId}}">
             <p>Head of House</p>
@@ -106,7 +97,7 @@
               <i class="icon ion-ios-arrow-right"></i>
             </a>
           {{/with}}
-          {{#each otherHouseholdMembers}}
+          {{#each children}}
             <a class="item item-icon-right" href="/member/{{individualId}}">
               <p>Child</p>
               <h2>{{preferredName}}</h2>
@@ -116,7 +107,7 @@
         {{/with}}
         {{#with memberData}}
           <div class="item item-divider">
-            Organizations
+            Organization(s)
           </div>
           {{#each organizations}}
             <a class="item item-icon-right" href="/organization/{{_id}}">

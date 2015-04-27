@@ -25,6 +25,7 @@ Meteor.publish('singleMemberPublication', function(inIndividualId) {
 Meteor.publish('memberLimitedPublication', function(inLevel, inLimit) {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
+    var selector;
     var options =
       {
         limit: inLimit,
@@ -32,16 +33,45 @@ Meteor.publish('memberLimitedPublication', function(inLevel, inLimit) {
         fields:
           {
             "preferredName": 1,
-            "preferredName": 1,
             "individualId": 1,
             "callings.positionName": 1
           }
       };
     if (inLevel == "stake") {
-      return memberCollection.find({stakeUnitNo: user.stakeUnitNo}, options);
+      selector =
+        {
+          stakeUnitNo: user.stakeUnitNo
+        };
     } else {
-      return memberCollection.find({stakeUnitNo: user.stakeUnitNo, wardUnitNo: user.selectedWardUnitNo}, options);
+      selector =
+        {
+          stakeUnitNo: user.stakeUnitNo,
+          wardUnitNo: user.selectedWardUnitNo
+        };
     }
+    return memberCollection.find(selector, options);
+  } else {
+    return [];
+  }
+});
+
+Meteor.publish('memberAllPublication', function(inLevel) {
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    var selector;
+    if (inLevel == "stake") {
+      selector =
+        {
+          stakeUnitNo: user.stakeUnitNo
+        };
+    } else {
+      selector =
+        {
+          stakeUnitNo: user.stakeUnitNo,
+          wardUnitNo: user.selectedWardUnitNo
+        };
+    }
+    return memberCollection.find(selector);
   } else {
     return [];
   }
@@ -49,6 +79,7 @@ Meteor.publish('memberLimitedPublication', function(inLevel, inLimit) {
 
 Meteor.publish('memberOrganizationPublication', function() {
   if (this.userId) {
+    var selector;
     var options =
       {
         fields:
@@ -61,22 +92,18 @@ Meteor.publish('memberOrganizationPublication', function() {
       };
     var user = Meteor.users.findOne(this.userId);
     if (user.selectedWardUnitNo == "" || isNaN(user.selectedWardUnitNo)) {
-      return memberCollection.find({stakeUnitNo: user.stakeUnitNo, wardUnitNo: user.stakeUnitNo});
+      selector =
+        {
+          stakeUnitNo: user.stakeUnitNo
+        };
     } else {
-      return memberCollection.find({stakeUnitNo: user.stakeUnitNo, wardUnitNo: user.selectedWardUnitNo});
+      selector =
+        {
+          stakeUnitNo: user.stakeUnitNo,
+          wardUnitNo: user.selectedWardUnitNo
+        };
     }
-  } else {
-    return [];
-  }
-});
-
-Meteor.publish('stakeMemberPublication', function() {
-  if (this.userId) {
-    var user = Meteor.users.findOne(this.userId);
-    var selector = {$or: [
-      {"stakeUnitNo": user.stakeUnitNo}
-    ]};
-    return memberCollection.find(selector);
+    return memberCollection.find(selector, options);
   } else {
     return [];
   }
@@ -170,12 +197,9 @@ Meteor.publish('singleHouseholdByIndividualIdPublication', function(inIndividual
           [
             {$or:
               [
-                {"headOfHousehold.individualId": inIndividualId},
                 {"headOfHouse.individualId": inIndividualId},
                 {"spouse.individualId": inIndividualId},
-                {"otherHouseholdMembers.individualId": inIndividualId},
-                {"children.individualId": inIndividualId}
-              ]
+                {"children.individualId": inIndividualId}              ]
             },
             {stakeUnitNo: user.stakeUnitNo}
           ]
@@ -200,20 +224,18 @@ Meteor.publish('householdLimitedPublication', function(inLevel, inLimit) {
           {
             "coupleName": 1,
             "headOfHouse.individualId": 1,
-            "headOfHouse.directoryName": 1,
-            "headOfHousehold.individualId": 1,
-            "headOfHousehold.name": 1,
+            "headOfHouse.preferredName": 1,
             "spouse.individualId": 1,
-            "spouse.name": 1,
-            "otherHouseholdMembers.individualId": 1,
-            "otherHouseholdMembers.name": 1,
-            "householdInfo.address.addr1": 1,
-            "householdInfo.address.addr2": 1,
-            "householdInfo.address.addr3": 1,
-            "householdInfo.address.addr4": 1,
-            "householdInfo.address.addr5": 1,
-            "householdInfo.address.latitude": 1,
-            "householdInfo.address.longitude": 1
+            "spouse.preferredName": 1,
+            "children.individualId": 1,
+            "children.preferredName": 1,
+            "desc1": 1,
+            "desc2": 1,
+            "desc3": 1,
+            "desc4": 1,
+            "desc5": 1,
+            "latitude": 1,
+            "longitude": 1
           }
       };
     if (inLevel == "stake") {
@@ -238,18 +260,18 @@ Meteor.publish('wardAllHouseholdPublication', function() {
             "headOfHouse.individualId": 1,
             "headOfHouse.directoryName": 1,
             "headOfHousehold.individualId": 1,
-            "headOfHousehold.name": 1,
+            "headOfHouse.preferredName": 1,
             "spouse.individualId": 1,
-            "spouse.name": 1,
-            "otherHouseholdMembers.individualId": 1,
-            "otherHouseholdMembers.name": 1,
-            "householdInfo.address.addr1": 1,
-            "householdInfo.address.addr2": 1,
-            "householdInfo.address.addr3": 1,
-            "householdInfo.address.addr4": 1,
-            "householdInfo.address.addr5": 1,
-            "householdInfo.address.latitude": 1,
-            "householdInfo.address.longitude": 1
+            "spouse.preferredName": 1,
+            "children.individualId": 1,
+            "children/preferredName": 1,
+            "desc1": 1,
+            "desc2": 1,
+            "desc3": 1,
+            "desc4": 1,
+            "desc5": 1,
+            "latitude": 1,
+            "longitude": 1
           }
       };
     return householdCollection.find({stakeUnitNo: user.stakeUnitNo, wardUnitNo: user.selectedWardUnitNo}, options);

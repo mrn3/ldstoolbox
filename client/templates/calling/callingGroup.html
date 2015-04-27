@@ -12,12 +12,13 @@
           </div>
           {{#each assignmentsInGroup}}
             <a href="/member/{{individualId}}" class="item item-icon-right">
-              <h4>
-                {{positionName}}
-              </h4>
-              <h2>
-                {{individualId}}
-              </h2>
+              <span class="item-note">
+                Date Called: {{formatDate dateActivated}}
+                <br />
+                Set Apart: {{#if setApartFlg}} Yes {{else}} No {{/if}}
+              </span>
+              <p>{{positionName}}</p>
+              {{getMemberName individualId}}
               {{> ionIcon icon="ios-arrow-right"}}
             </a>
           {{/each}}
@@ -28,12 +29,13 @@
             </div>
             {{#each assignmentsInGroup}}
               <a href="/member/{{individualId}}" class="item item-icon-right">
-                <h4>
-                  {{positionName}}
-                </h4>
-                <h2>
-                  {{individualId}}
-                </h2>
+                <span class="item-note">
+                  Date Called: {{formatDate dateActivated}}
+                  <br />
+                  Set Apart: {{#if setApartFlg}} Yes {{else}} No {{/if}}
+                </span>
+                <p>{{positionName}}</p>
+                {{getMemberName individualId}}
                 {{> ionIcon icon="ios-arrow-right"}}
               </a>
             {{/each}}

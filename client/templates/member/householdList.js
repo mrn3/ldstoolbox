@@ -2,7 +2,7 @@ var options = {
   //keepHistory: 1000 * 60 * 5,
   //localSearch: true
 };
-var fields = ['coupleName', "headOfHousehold.name", "spouse.name", "otherHouseholdMembers.name"];
+var fields = ['coupleName', "headOfHouse.preferredName", "spouse.preferredName", "children/preferredName"];
 
 householdSearch = new SearchSource("households", fields, options, 5);
 
