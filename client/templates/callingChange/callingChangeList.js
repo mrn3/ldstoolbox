@@ -312,16 +312,21 @@ Template.callingChangeList.events({
     Session.set("callingChangeSearchInput", $("#callingChangeSearchInput").val());
   },
   "scroll .mainContentArea": function (event, template) {
-    //hide searchbar on scroll down, show on scroll up
-    if (event.target.scrollTop < Session.get("previousScrollTop")) {
+    //make sure it has been scrolled two times to prevent bouncing
+    if ((Session.get("previousScrollTop") < Session.get("previous2ScrollTop"))
+      && (event.target.scrollTop < Session.get("previousScrollTop"))) {
+      //scrolling up - show searchbar
       $(".mainContentArea").addClass("has-subheader")
       $("#searchBarSubHeader").slideDown();
     } else {
+      //scrolling down - hide searchbar and load more results
       $(".mainContentArea").removeClass("has-subheader")
       $("#searchBarSubHeader").slideUp();
+      theHandle.loadNextPage();
     }
+    Session.set("previous2ScrollTop", Session.get("previousScrollTop"));
     Session.set("previousScrollTop", event.target.scrollTop);
-  },
+  }
   "click [data-action=showCallingChangeActionSheet]": function (event, template) {
     IonActionSheet.show({
       buttons: [
@@ -373,5 +378,8 @@ Template.callingChangeList.rendered = function() {
   }
   if (typeof Session.get("previousScrollTop") == "undefined") {
     Session.set("previousScrollTop", 0);
+  }
+  if (typeof Session.get("previous2ScrollTop") == "undefined") {
+    Session.set("previous2ScrollTop", 0);
   }
 };

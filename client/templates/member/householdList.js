@@ -66,11 +66,9 @@ Template.householdList.events({
     });
   },
   "scroll .mainContentArea": function (event, template) {
-    //make sure it has been scrolled two times
-    if (
-      (Session.get("previousScrollTop") < Session.get("previous2ScrollTop"))
-      && (event.target.scrollTop < Session.get("previousScrollTop"))
-      ) {
+    //make sure it has been scrolled two times to prevent bouncing
+    if ((Session.get("previousScrollTop") < Session.get("previous2ScrollTop"))
+      && (event.target.scrollTop < Session.get("previousScrollTop"))) {
       //scrolling up - show searchbar
       $(".mainContentArea").addClass("has-subheader")
       $("#searchBarSubHeader").slideDown();

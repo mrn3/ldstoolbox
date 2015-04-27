@@ -66,10 +66,9 @@ Template.memberList.events({
     });
   },
   "scroll .mainContentArea": function (event, template) {
-    //console.log(event.target.scrollTop);
-    //console.log(event.target.scrollHeight);
-    //console.log(event.target.scrollTop / event.target.scrollHeight);
-    if (event.target.scrollTop < Session.get("previousScrollTop")) {
+    //make sure it has been scrolled two times to prevent bouncing
+    if ((Session.get("previousScrollTop") < Session.get("previous2ScrollTop"))
+      && (event.target.scrollTop < Session.get("previousScrollTop"))) {
       //scrolling up - show searchbar
       $(".mainContentArea").addClass("has-subheader")
       $("#searchBarSubHeader").slideDown();
@@ -79,6 +78,7 @@ Template.memberList.events({
       $("#searchBarSubHeader").slideUp();
       theHandle.loadNextPage();
     }
+    Session.set("previous2ScrollTop", Session.get("previousScrollTop"));
     Session.set("previousScrollTop", event.target.scrollTop);
   }
 });
@@ -89,6 +89,9 @@ Template.memberList.rendered = function() {
   }
   if (typeof Session.get("previousScrollTop") == "undefined") {
     Session.set("previousScrollTop", 0);
+  }
+  if (typeof Session.get("previous2ScrollTop") == "undefined") {
+    Session.set("previous2ScrollTop", 0);
   }
   Session.set("selectedWardUnitNo", Meteor.user().selectedWardUnitNo);
 };
