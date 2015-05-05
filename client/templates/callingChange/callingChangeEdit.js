@@ -102,7 +102,7 @@ Template.callingChangeEdit.events({
       } else if (event.target.id == "markInterviewed") {
         var meetingDate;
         var foundMeeting;
-        
+
         meetingDate = moment().subtract(1, "days").day(7).format("YYYY-MM-DD");
         foundMeeting = meetingCollection.findOne({"meetingDate": meetingDate});
         //if meeting not found, try next week
@@ -169,12 +169,14 @@ Template.callingChangeEdit.events({
       } else if (event.target.id == "markCanceled") {
         properties = {
           status:                   "Canceled",
-          dateCanceled:             new Date()
+          dateCanceled:             new Date(),
+          meeting:                  null
         };
       } else if (event.target.id == "markOnHold") {
         properties = {
           status:                   "On Hold",
-          dateOnHold:               new Date()
+          dateOnHold:               new Date(),
+          meeting:                  null
         };
       } else if ((event.target.id == "unmarkCanceled") || (event.target.id == "unmarkOnHold")) {
         var restoredStatus;
