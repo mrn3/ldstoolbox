@@ -180,31 +180,6 @@ Template.callingChangeList.helpers({
     }
 
     return callingChangeCollection.find(selector, options);
-  },
-  userCanViewCallingChangeList: function () {
-    if (Meteor.user() && Meteor.user().callings) {
-
-      //bishop, counselors, executive secretary, ward clerk, membership clerk
-      var allowedCallingList = ["Bishop",
-                                "Bishopric First Counselor",
-                                "Bishopric Second Counselor",
-                                "Ward Executive Secretary",
-                                "Ward Clerk",
-                                "Ward Assistant Clerk--Membership"];
-      var userCallingList = Meteor.user().callings.reduce(
-        function(total, calling){
-          return total.concat(calling.positionName);
-        },
-      []);
-
-      //high priest orgtypeid 1921
-
-      var callingIntersection =
-        userCallingList.filter(function(n) {
-          return allowedCallingList.indexOf(n) != -1
-        });
-      return (callingIntersection.length > 0);
-    }
   }
 });
 
