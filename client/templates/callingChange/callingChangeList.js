@@ -19,239 +19,166 @@ Template.callingChangeList.helpers({
     }
   },
   callingChangeData: function(){
-    var selector = {};
     var regExp;
+
+    //default selector makes sure they are in the stake
+    var selector = {
+      $and:
+        [
+          {
+            stakeUnitNo: Meteor.user().stakeUnitNo
+          }
+        ]
+      };
+
+    function searchClause(inRegExp) {
+      return {
+        $or: [
+          {"member.preferredName": inRegExp},
+          {"calling.positionName": inRegExp}
+        ]
+      };
+    }
+
+    function isBishopric(inOrgArray) {
+      for (inOrgArrayIndex in inOrgArray) {
+        if (inOrgArray[inOrgArrayIndex] == "Bishopric") {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    var userCallingOrgArray = _.pluck(Meteor.user().callings, "name");
+
+    callingOrgClause = {
+      "calling.name": {
+        $in: userCallingOrgArray
+      }
+    }
+
+    var completeClause = {
+      $or:
+        [
+          {
+            $and:
+              [
+                {
+                  type: "Call"
+                },
+                {
+                  status: "Set Apart Recorded"
+                }
+              ]
+          },
+          {
+            $and:
+              [
+                {
+                  type: "Release"
+                },
+                {
+                  status: "Recorded"
+                }
+              ]
+          },
+          {
+            status: "Canceled"
+          }
+        ]
+    };
+
+    var incompleteClause = {
+      $or:
+        [
+          {
+            $and:
+              [
+                {
+                  type: "Call"
+                },
+                {
+                  $and:
+                    [
+                      {
+                        status:
+                          {
+                            $not: "Set Apart Recorded"
+                          }
+                      },
+                      {
+                        status:
+                          {
+                            $not: "Canceled"
+                          }
+                      }
+                    ]
+                }
+              ]
+          },
+          {
+            $and:
+              [
+                {
+                  type: "Release"
+                },
+                {
+                  $and:
+                    [
+                      {
+                        status:
+                          {
+                            $not: "Recorded"
+                          }
+                      },
+                      {
+                        status:
+                          {
+                            $not: "Canceled"
+                          }
+                      }
+                    ]
+                }
+              ]
+          }
+        ]
+    };
+
+    var typeClause = {
+      type: Session.get("typeSelector")
+    }
+
+    var statusClause = {
+      status: Session.get("statusSelector")
+    }
 
     var options = {sort: {interviewDate: 1, interviewTime: 1}};
 
+    //if search filter
     if (Session.get("callingChangeSearchInput")) {
       regExp = buildRegExp(Session.get("callingChangeSearchInput"));
-
-      if ((Session.get("statusSelector") == "Complete")) {
-        selector =
-          {
-            $and:
-              [
-                {
-                  $or: [
-                    {"member.preferredName": regExp},
-                    {"calling.positionName": regExp}
-                  ]
-                },
-                {
-                  $or:
-                    [
-                      {
-                        $and:
-                          [
-                            {
-                              type: "Call"
-                            },
-                            {
-                              status: "Set Apart Recorded"
-                            }
-                          ]
-                      },
-                      {
-                        $and:
-                          [
-                            {
-                              type: "Release"
-                            },
-                            {
-                              status: "Recorded"
-                            }
-                          ]
-                      },
-                      {
-                        status: "Canceled"
-                      }
-                    ]
-                }
-              ]
-          };
-      } else if ((Session.get("statusSelector") == "Incomplete")) {
-        selector =
-          {
-            $and:
-              [
-                {
-                  $or: [
-                    {"member.preferredName": regExp},
-                    {"calling.positionName": regExp}
-                  ]
-                },
-                {
-                  $or:
-                    [
-                      {
-                        $and:
-                          [
-                            {
-                              type: "Call"
-                            },
-                            {
-                              $and:
-                                [
-                                  {
-                                    status:
-                                      {
-                                        $not: "Set Apart Recorded"
-                                      }
-                                  },
-                                  {
-                                    status:
-                                      {
-                                        $not: "Canceled"
-                                      }
-                                  }
-                                ]
-                            }
-                          ]
-                      },
-                      {
-                        $and:
-                          [
-                            {
-                              type: "Release"
-                            },
-                            {
-                              $and:
-                                [
-                                  {
-                                    status:
-                                      {
-                                        $not: "Recorded"
-                                      }
-                                  },
-                                  {
-                                    status:
-                                      {
-                                        $not: "Canceled"
-                                      }
-                                  }
-                                ]
-                            }
-                          ]
-                      }
-                    ]
-                }
-              ]
-          };
-      } else {
-        selector =
-          {
-            $or: [
-              {"member.preferredName": regExp},
-              {"calling.positionName": regExp}
-            ]
-          };
-      }
-    } else {
-      if ((Session.get("statusSelector") == "Complete")) {
-        selector =
-          {
-            $or:
-              [
-                {
-                  $and:
-                    [
-                      {
-                        type: "Call"
-                      },
-                      {
-                        status: "Set Apart Recorded"
-                      }
-                    ]
-                },
-                {
-                  $and:
-                    [
-                      {
-                        type: "Release"
-                      },
-                      {
-                        status: "Recorded"
-                      }
-                    ]
-                },
-                {
-                  status: "Canceled"
-                }
-              ]
-          };
-        } else if ((Session.get("statusSelector") == "Incomplete")) {
-          selector =
-            {
-              $or:
-                [
-                  {
-                    $and:
-                      [
-                        {
-                          type: "Call"
-                        },
-                        {
-                          $and:
-                            [
-                              {
-                                status:
-                                  {
-                                    $not: "Set Apart Recorded"
-                                  }
-                              },
-                              {
-                                status:
-                                  {
-                                    $not: "Canceled"
-                                  }
-                              }
-                            ]
-                        }
-                      ]
-                  },
-                  {
-                    $and:
-                      [
-                        {
-                          type: "Release"
-                        },
-                        {
-                          $and:
-                            [
-                              {
-                                status:
-                                  {
-                                    $not: "Recorded"
-                                  }
-                              },
-                              {
-                                status:
-                                  {
-                                    $not: "Canceled"
-                                  }
-                              }
-                            ]
-                        }
-                      ]
-                  }
-                ]
-            };
-        }
+      selector['$and'].push(searchClause(regExp));
     }
 
-    if ((Session.get("statusSelector") == "Complete")
-      || (Session.get("statusSelector") == "Incomplete")
-      || (Session.get("statusSelector") == "All")) {
-      if (Session.get("typeSelector") != "All") {
-        selector.type = Session.get("typeSelector");
-      }
-    } else {
-      selector.status = Session.get("statusSelector");
-      if (Session.get("typeSelector") != "All") {
-        selector.type = Session.get("typeSelector");
-      }
+    //status - either picked complete, incomplete, or not all
+    if ((Session.get("statusSelector") == "Complete")) {
+      selector['$and'].push(completeClause);
+    } else if ((Session.get("statusSelector") == "Incomplete")) {
+      selector['$and'].push(incompleteClause);
+    } else if (Session.get("statusSelector") != "All") {
+      selector['$and'].push(statusClause);
     }
+
+    //filter on type
+    if (Session.get("typeSelector") != "All") {
+      selector['$and'].push(typeClause);
+    }
+
+    //if not in bishopric, limit to organization
+    if (!isBishopric(userCallingOrgArray)) {
+      selector['$and'].push(callingOrgClause);
+    }
+
     return callingChangeCollection.find(selector, options);
   },
   userCanViewCallingChangeList: function () {
@@ -269,6 +196,9 @@ Template.callingChangeList.helpers({
           return total.concat(calling.positionName);
         },
       []);
+
+      //high priest orgtypeid 1921
+
       var callingIntersection =
         userCallingList.filter(function(n) {
           return allowedCallingList.indexOf(n) != -1

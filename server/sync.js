@@ -310,18 +310,6 @@ Meteor.methods({
         //sometimes assignmentsInGroup just at this level
         assignmentsInGroup = callingList[callingListIndex].assignmentsInGroup;
         for (var assignmentsInGroupIndex in assignmentsInGroup) {
-          member = memberCollection.findOne({individualId: assignmentsInGroup[assignmentsInGroupIndex].individualId});
-          callingCollection.insert(
-            _.extend(
-              assignmentsInGroup[assignmentsInGroupIndex],
-              {
-                wardUnitNo: inWardUnitNo,
-                stakeUnitNo: inStakeUnitNo,
-                member: member
-              }
-            )
-          );
-
           memberCollection.update(
             {
               individualId: assignmentsInGroup[assignmentsInGroupIndex].individualId
@@ -342,6 +330,17 @@ Meteor.methods({
                 }
             }
           );
+          member = memberCollection.findOne({individualId: assignmentsInGroup[assignmentsInGroupIndex].individualId});
+          callingCollection.insert(
+            _.extend(
+              assignmentsInGroup[assignmentsInGroupIndex],
+              {
+                wardUnitNo: inWardUnitNo,
+                stakeUnitNo: inStakeUnitNo,
+                member: member
+              }
+            )
+          );
         }
 
         children = callingList[callingListIndex].children;
@@ -349,18 +348,6 @@ Meteor.methods({
           //other times assignmentsInGroup deeper at this level
           assignmentsInGroup = children[childrenIndex].assignmentsInGroup;
           for (var assignmentsInGroupIndex in assignmentsInGroup) {
-            member = memberCollection.findOne({individualId: assignmentsInGroup[assignmentsInGroupIndex].individualId});
-            callingCollection.insert(
-              _.extend(
-                assignmentsInGroup[assignmentsInGroupIndex],
-                {
-                  wardUnitNo: inWardUnitNo,
-                  stakeUnitNo: inStakeUnitNo,
-                  member: member
-                }
-              )
-            );
-
             memberCollection.update(
               {
                 individualId: assignmentsInGroup[assignmentsInGroupIndex].individualId
@@ -380,6 +367,17 @@ Meteor.methods({
                       )
                   }
               }
+            );
+            member = memberCollection.findOne({individualId: assignmentsInGroup[assignmentsInGroupIndex].individualId});
+            callingCollection.insert(
+              _.extend(
+                assignmentsInGroup[assignmentsInGroupIndex],
+                {
+                  wardUnitNo: inWardUnitNo,
+                  stakeUnitNo: inStakeUnitNo,
+                  member: member
+                }
+              )
             );
           }
         }

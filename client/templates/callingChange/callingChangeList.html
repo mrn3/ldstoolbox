@@ -1,32 +1,27 @@
 <template name="callingChangeList">
 
-  {{#if userCanViewCallingChangeList}}
-    {{>barHeader title="Calling Changes" leftType="callingChangeList" rightType="callingChangeList"}}
+  {{>barHeader title="Calling Changes" leftType="callingChangeList" rightType="callingChangeList"}}
 
-    <div id="searchBarSubHeader" class="bar bar-subheader item-input-inset">
-      <label class="item-input-wrapper">
-        <i class="icon ion-search placeholder-icon"></i>
-        <input id="callingChangeSearchInput" type="search" placeholder="Search Text" value="{{callingChangeSearchInputValue}}">
-      </label>
-    </div>
+  <div id="searchBarSubHeader" class="bar bar-subheader item-input-inset">
+    <label class="item-input-wrapper">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input id="callingChangeSearchInput" type="search" placeholder="Search Text" value="{{callingChangeSearchInputValue}}">
+    </label>
+  </div>
 
-    {{#ionView}}
-      {{#ionContent class="has-subheader mainContentArea"}}
-        {{#ionList}}
-          {{#each callingChangeData}}
-            {{#if isSelected "Interview Scheduled"}}
-              <div class="item item-divider">
-                {{formattedDateTime}}
-              </div>
-            {{/if}}
-            {{>callingChangeItem}}
-          {{/each}}
-        {{/ionList}}
-      {{/ionContent}}
-    {{/ionView}}
-
-  {{else}}
-    {{> notAllowed title="Calling Changes"}}
-  {{/if}}
+  {{#ionView}}
+    {{#ionContent class="has-subheader mainContentArea"}}
+      {{#ionList}}
+        {{#each callingChangeData}}
+          {{#if isSelected "Interview Scheduled"}}
+            <div class="item item-divider">
+              {{formattedDateTime}}
+            </div>
+          {{/if}}
+          {{>callingChangeItem}}
+        {{/each}}
+      {{/ionList}}
+    {{/ionContent}}
+  {{/ionView}}
 
 </template>
