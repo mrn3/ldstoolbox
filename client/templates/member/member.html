@@ -26,14 +26,14 @@
             Contact Information
           </div>
           {{#if phone}}
-            <a class="item item-icon-right" href="#" data-action=showIndividualPhoneActionSheet>
+            <a class="item item-icon-right" href="#" data-action="showIndividualPhoneActionSheet">
               Individual Phone
               <span class="item-note">{{phone}}</span>
               <i class="icon ion-ios-arrow-right"></i>
             </a>
           {{/if}}
           {{#if email}}
-            <a class="item item-icon-right" href="mailto:{{email}}">
+            <a class="item item-icon-right" href="#" data-action="showIndividualEmailActionSheet">
               Individual Email
               <span class="item-note">{{email}}</span>
               <i class="icon ion-ios-arrow-right"></i>
@@ -42,14 +42,14 @@
         {{/with}}
         {{#with householdData}}
           {{#if phone}}
-            <a class="item item-icon-right" data-action=showHouseholdPhoneActionSheet>
+            <a class="item item-icon-right" data-action="showHouseholdPhoneActionSheet">
               Household Phone
               <span class="item-note">{{phone}}</span>
               <i class="icon ion-ios-arrow-right"></i>
             </a>
           {{/if}}
           {{#if emailAddress}}
-            <a class="item item-icon-right" href="mailto:{{emailAddress}}">
+            <a class="item item-icon-right" href="#" data-action="showHouseholdEmailActionSheet">
               Household Email
               <span class="item-note">{{emailAddress}}</span>
               <i class="icon ion-ios-arrow-right"></i>

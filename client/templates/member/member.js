@@ -123,7 +123,55 @@ Template.member.events({
         if (index === 2) {
           IonPopup.alert({
             title: 'Press Ctrl-C (or Command-C) to copy',
-            template: "<input type='text' value='" + member.phone + "' onClick='this.setSelectionRange(0, this.value.length)'>",
+            template: "<input type='text' value='" + household.phone + "' onClick='this.setSelectionRange(0, this.value.length)'>",
+            okText: 'Okay',
+          });
+        }
+        return true;
+      }
+    });
+  },
+  "click [data-action=showIndividualEmailActionSheet]": function (event, template) {
+    var member = this;
+    IonActionSheet.show({
+      buttons: [
+        { text: "Send Email"},
+        { text: "Copy To Clipboard" }
+      ],
+      cancelText: "Cancel",
+      cancel: function() {},
+      buttonClicked: function(index) {
+        if (index === 0) {
+          window.location = "mailto:" + member.email;
+        }
+        if (index === 1) {
+          IonPopup.alert({
+            title: 'Press Ctrl-C (or Command-C) to copy',
+            template: "<input type='text' value='" + member.email + "' onClick='this.setSelectionRange(0, this.value.length)'>",
+            okText: 'Okay',
+          });
+        }
+        return true;
+      }
+    });
+  },
+  "click [data-action=showHouseholdEmailActionSheet]": function (event, template) {
+    var household = this;
+    IonActionSheet.show({
+      buttons: [
+        { text: "Send Email"},
+        { text: "Copy To Clipboard" }
+      ],
+      cancelText: "Cancel",
+      cancel: function() {},
+      buttonClicked: function(index) {
+        if (index === 0) {
+          window.location = "mailto:" + household.emailAddress;
+        }
+        if (index === 1) {
+          IonPopup.alert({
+            title: 'Press Ctrl-C (or Command-C) to copy',
+            template: "<input type='text' value='" + household.emailAddress + "' onClick='this.setSelectionRange(0, this.value.length)'>",
             okText: 'Okay',
           });
         }
