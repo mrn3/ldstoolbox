@@ -261,6 +261,19 @@
                 <span class="item-note">{{speaker.preferredName}}</span>
                 <i class="icon ion-ios-arrow-right"></i>
               </a>
+              <label class="item item-input item-select">
+                <div class="input-label">
+                  Order
+                </div>
+                <select id="{{_id}}" class="speakerOrderSelect">
+                  <option {{isSelected order 1}}>1</option>
+                  <option {{isSelected order 2}}>2</option>
+                  <option {{isSelected order 3}}>3</option>
+                  <option {{isSelected order 4}}>4</option>
+                  <option {{isSelected order 5}}>5</option>
+                  <option {{isSelected order 6}}>6</option>
+                </select>
+              </label>
               <div class="item item-divider">
                 <button type="button" class="button button-clear button-small pull-right removeSpeakerButton">
                   Remove

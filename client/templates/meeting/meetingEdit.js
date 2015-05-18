@@ -153,10 +153,9 @@ Template.meetingEdit.events({
     announcementCollection.remove({_id: this._id});
   },
   'change .announcementInput': function(e, instance) {
-    announcementValue = document.getElementById(this._id).value;
     var updateObject = {};
-    updateObject.$set = {text: announcementValue, wardUnitNo: Meteor.user().wardUnitNo};
-    announcementCollection.update(this._id, updateObject);
+    updateObject.$set = {text: e.target.value};
+    announcementCollection.update(e.target.id, updateObject);
   },
   'click #addIntermediateHymnButton': function(e, instance) {
     intermediateHymnCollection.insert({meetingId: this._id, afterSpeaker: 1, wardUnitNo: Meteor.user().wardUnitNo });
@@ -169,10 +168,9 @@ Template.meetingEdit.events({
     Session.set("intermediateHymnId", this._id);
   },
   'change .intermediateHymnAfterSpeakerSelect': function(e, instance) {
-    afterSpeakerValue = document.getElementById(this._id).value;
     var updateObject = {};
-    updateObject.$set = {afterSpeaker: afterSpeakerValue, wardUnitNo: Meteor.user().wardUnitNo};
-    intermediateHymnCollection.update(this._id, updateObject);
+    updateObject.$set = {afterSpeaker: e.target.value};
+    intermediateHymnCollection.update(e.target.id, updateObject);
   },
   'click #addMusicalNumberButton': function(e, instance) {
     musicalNumberCollection.insert({meetingId: this._id, afterSpeaker: 1, wardUnitNo: Meteor.user().wardUnitNo });
@@ -193,10 +191,9 @@ Template.meetingEdit.events({
     Session.set("musicalNumberId", this._id);
   },
   'change .musicalNumberAfterSpeakerSelect': function(e, instance) {
-    afterSpeakerValue = document.getElementById(this._id).value;
     var updateObject = {};
-    updateObject.$set = {afterSpeaker: afterSpeakerValue, wardUnitNo: Meteor.user().wardUnitNo};
-    musicalNumberCollection.update(this._id, updateObject);
+    updateObject.$set = {afterSpeaker: e.target.value};
+    musicalNumberCollection.update(e.target.id, updateObject);
   },
   'click #addVisitorButton': function(e, instance) {
     visitorCollection.insert({meetingId: this._id, wardUnitNo: Meteor.user().wardUnitNo});
@@ -217,6 +214,11 @@ Template.meetingEdit.events({
   'click .speakerItem': function(e, instance) {
     Session.set("memberSelectType", "speaker");
     Session.set("speakerId", this._id);
+  },
+  'change .speakerOrderSelect': function(e, instance) {
+    var updateObject = {};
+    updateObject.$set = {order: e.target.value};
+    speakerCollection.update(e.target.id, updateObject);
   },
   'click #addRecognitionButton': function(e, instance) {
     recognitionCollection.insert({meetingId: this._id, "members": [{_id: Random.id()}], wardUnitNo: Meteor.user().wardUnitNo});

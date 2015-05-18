@@ -304,7 +304,7 @@ Router.map(function() {
         intermediateHymnData: intermediateHymnCollection.find({meetingId: this.params._id}),
         visitorData: visitorCollection.find({meetingId: this.params._id}),
         announcementData: announcementCollection.find({meetingId: this.params._id}),
-        speakerData: speakerCollection.find({meetingId: this.params._id}),
+        speakerData: speakerCollection.find({meetingId: this.params._id}, {sort: {order: 1}}),
         recognitionData: recognitionCollection.find({meetingId: this.params._id}),
         callingChangeData: callingChangeCollection.find({"meeting._id": this.params._id}, {sort: {type: -1}})
       };
@@ -412,7 +412,7 @@ Router.map(function() {
     visitorArray = visitorCollection.find({meetingId : this.params._id}).fetch();
     musicalNumberArray = musicalNumberCollection.find({meetingId : this.params._id}).fetch();
     announcementArray = announcementCollection.find({meetingId : this.params._id}).fetch();
-    speakerArray = speakerCollection.find({meetingId : this.params._id}).fetch();
+    speakerArray = speakerCollection.find({meetingId : this.params._id}, {sort: {order: 1}}).fetch();
     recognitionArray = recognitionCollection.find({meetingId : this.params._id}).fetch();
 
     var doc = new PDFDocument({size: "A4", margin: 50});
