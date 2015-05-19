@@ -22,6 +22,7 @@ Template.memberSelect.helpers({
     return (
       (Session.get("memberSelectType") == "organist") ||
       (Session.get("memberSelectType") == "chorister") ||
+      (Session.get("memberSelectType") == "music") ||
       (Session.get("memberSelectType") == "presiding") ||
       (Session.get("memberSelectType") == "conducting") ||
       (Session.get("memberSelectType") == "visitor")
@@ -37,6 +38,9 @@ Template.memberSelect.helpers({
   choristerData: function() {
     //get Chorister position
     return memberCollection.find({"callings.positionTypeId": 1585, "wardUnitNo": Meteor.user().wardUnitNo});
+  },
+  musicData: function() {
+    return memberCollection.find({"callings.orgTypeId": 1300, "wardUnitNo": Meteor.user().wardUnitNo});
   },
   presidingData: function() {
     //get Presiding position - Stake Presidency, Bishopric
@@ -126,6 +130,11 @@ function doUpdate (inUpdateObject) {
   else if (Session.get("memberSelectType") == "musicalNumberAccompanist") {
     var updateObject = {};
     updateObject.$set = {accompanist: inUpdateObject, wardUnitNo: Meteor.user().wardUnitNo};
+    musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
+  }
+  else if (Session.get("memberSelectType") == "musicalNumberConductor") {
+    var updateObject = {};
+    updateObject.$set = {conductor: inUpdateObject, wardUnitNo: Meteor.user().wardUnitNo};
     musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
   }
   history.back();

@@ -23,6 +23,24 @@
             {{/each}}
           {{/if}}
 
+          {{#if memberSelectTypeIs "musicalNumberPerformer"}}
+            {{#each musicData}}
+              {{>memberSelectItem}}
+            {{/each}}
+          {{/if}}
+
+          {{#if memberSelectTypeIs "musicalNumberConductor"}}
+            {{#each musicData}}
+              {{>memberSelectItem}}
+            {{/each}}
+          {{/if}}
+
+          {{#if memberSelectTypeIs "musicalNumberAccompanist"}}
+            {{#each musicData}}
+              {{>memberSelectItem}}
+            {{/each}}
+          {{/if}}
+
           {{#if memberSelectTypeIs "presiding"}}
             {{#each presidingData}}
               {{>memberSelectItem}}

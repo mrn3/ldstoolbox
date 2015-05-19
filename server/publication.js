@@ -4,6 +4,8 @@ Meteor.publish('likelyOptionsMemberPublication', function() {
     var selector = {$or: [
       //bishopric, chorister, or organist
       {"callings.positionTypeId": {$in: [4, 54, 55, 234, 1585]}, "wardUnitNo": user.wardUnitNo},
+      //music
+      {"callings.orgTypeId": {$in: [1300]}, "wardUnitNo": user.wardUnitNo},
       //stake presidency or high council
       {"callings.positionTypeId": {$in: [1, 2, 3, 94]}, "stakeUnitNo": user.stakeUnitNo}
     ]};
@@ -435,7 +437,8 @@ Meteor.publish("userPublication", function () {
                                         individualId: 1,
                                         callings: 1,
                                         ldsAccount: 1,
-                                        selectedWardUnitNo: 1}});
+                                        selectedWardUnitNo: 1,
+                                        includePrimarySongs: 1}});
   } else {
     return [];
   }

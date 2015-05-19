@@ -343,6 +343,9 @@ Router.map(function() {
   });
   this.route("/hymnSelect/", {
     name: "hymnSelect",
+    waitOn: function () {
+      return Meteor.subscribe("userPublication")
+    },
     onBeforeAction: requireLogin,
     fastRender: true
   });
@@ -619,6 +622,11 @@ Router.map(function() {
             if (musicalNumberArray[musicalNumberIndex] && musicalNumberArray[musicalNumberIndex].performer && musicalNumberArray[musicalNumberIndex].performer.preferredName) {
               doc.text(musicalNumberArray[musicalNumberIndex].performer.preferredName, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
               doc.text("Performer: ____________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+              distanceFromTop += verticalPositionIncrement;
+            }
+            if (musicalNumberArray[musicalNumberIndex] && musicalNumberArray[musicalNumberIndex].conductor && musicalNumberArray[musicalNumberIndex].conductor.preferredName) {
+              doc.text(musicalNumberArray[musicalNumberIndex].conductor.preferredName, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
+              doc.text("Conductor: __________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
               distanceFromTop += verticalPositionIncrement;
             }
             if (musicalNumberArray[musicalNumberIndex] && musicalNumberArray[musicalNumberIndex].accompanist && musicalNumberArray[musicalNumberIndex].accompanist.preferredName) {

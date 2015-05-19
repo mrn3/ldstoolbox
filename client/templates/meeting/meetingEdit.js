@@ -186,6 +186,10 @@ Template.meetingEdit.events({
     Session.set("memberSelectType", "musicalNumberPerformer");
     Session.set("musicalNumberId", this._id);
   },
+  'click .musicalNumberConductorItem': function(e, instance) {
+    Session.set("memberSelectType", "musicalNumberConductor");
+    Session.set("musicalNumberId", this._id);
+  },
   'click .musicalNumberAccompanistItem': function(e, instance) {
     Session.set("memberSelectType", "musicalNumberAccompanist");
     Session.set("musicalNumberId", this._id);

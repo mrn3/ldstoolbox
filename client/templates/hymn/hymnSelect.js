@@ -1,18 +1,22 @@
 var options = {
-  keepHistory: 1000 * 60 * 5,
-  localSearch: true
+  //keepHistory: 1000 * 60 * 5,
+  //localSearch: true
 };
 var fields = ["name", "numberText"];
 
-hymnSearch = new SearchSource('hymns', fields, options);
+hymnSearch = new SearchSource("hymns", fields, options);
 
 Template.hymnSelect.helpers({
+  includePrimarySongs: function() {
+    if (Session.get("includePrimarySongs")) {
+      return "checked";
+    }
+  },
   hymnData: function(){
     return hymnSearch.getData({
       transform: function(matchText, regExp) {
         return matchText.replace(regExp, "<strong>$&</strong>")
-      },
-      sort: {isoScore: -1}
+      }
     });
   },
   isLoading: function() {
@@ -63,11 +67,19 @@ Template.hymnSelect.events({
       this.numberText = jQuery('<p>' + this.number + '</p>').text();
     }
     doUpdate(this);
+  },
+  "change #includePrimarySongs": function(e, instance) {
+    Session.set("includePrimarySongs", e.target.checked);
+    Meteor.call("setIncludePrimarySongs", e.target.checked);
+    var text = $("#searchInput").val().trim();
+    hymnSearch.search(text);
   }
 });
 
-/*
-Template.callingSelect.rendered = function() {
-  $('#searchInput').focus();
+
+Template.hymnSelect.rendered = function() {
+  //$('#searchInput').focus();
+  if (!Session.get("includePrimarySongs")) {
+    Session.set("includePrimarySongs", Meteor.user().includePrimarySongs);
+  }
 };
-*/
