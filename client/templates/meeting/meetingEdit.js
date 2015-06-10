@@ -224,6 +224,11 @@ Template.meetingEdit.events({
     updateObject.$set = {order: e.target.value};
     speakerCollection.update(e.target.id, updateObject);
   },
+  'change .speakerTopicInput': function(e, instance) {
+    var updateObject = {};
+    updateObject.$set = {topic: e.target.value};
+    speakerCollection.update(e.target.id, updateObject);
+  },
   'click #addRecognitionButton': function(e, instance) {
     recognitionCollection.insert({meetingId: this._id, "members": [{_id: Random.id()}], wardUnitNo: Meteor.user().wardUnitNo});
   },
