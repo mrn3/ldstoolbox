@@ -16,8 +16,8 @@ Template.meetingEdit.helpers({
   userCanEditMeeting: function () {
     if (Meteor.user() && Meteor.user().callings) {
 
-      //bishop, counselors, executive secretary, ward clerk, membership clerk
-      var allowedCallingList = [4, 54, 55, 56, 57, 787];
+      //bishop, counselors, executive secretary, ward clerk, membership clerk, librarian
+      var allowedCallingList = [4, 54, 55, 56, 57, 787, 229];
       var userCallingList = Meteor.user().callings.reduce(
         function(total, calling){
           return total.concat(calling.positionTypeId);
