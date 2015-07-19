@@ -152,7 +152,14 @@ Template.callingChangeList.helpers({
       status: Session.get("statusSelector")
     }
 
-    var options = {sort: {interviewDate: 1, interviewTime: 1}};
+    var options;
+    if (Session.get("statusSelector") == "Interview Scheduled") {
+      options = {sort: {interviewDate: 1, interviewTime: 1}};
+    } else if (Session.get("sortSelector") == "Calling Name") {
+      options = {sort: {"calling.name": 1}};
+    } else {
+      options = {sort: {"member.preferredName": 1}};
+    }
 
     //if search filter
     if (Session.get("callingChangeSearchInput")) {

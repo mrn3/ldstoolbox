@@ -13,6 +13,13 @@ Template.layout.helpers({
       return "";
     }
   },
+  selectedSortOption: function(value){
+    if (Session.get("statusSelector") == value) {
+      return {selected: "selected"};
+    } else {
+      return "";
+    }
+  },
   routeIn: function (inRouteList) {
     var inRouteListArray = inRouteList.split(",");
     for (inRouteListArrayIndex in inRouteListArray) {
@@ -32,6 +39,9 @@ Template.layout.events({
   },
   "change #typeSelector": function(e, instance){
     Session.set("typeSelector", $("#typeSelector").val());
+  },
+  "change #sortSelector": function(e, instance){
+    Session.set("sortSelector", $("#sortSelector").val());
   }
 });
 
@@ -41,5 +51,8 @@ Template.layout.rendered = function() {
   }
   if (typeof Session.get("statusSelector") == "undefined") {
     Session.set("statusSelector", "Incomplete");
+  }
+  if (typeof Session.get("sortSelector") == "undefined") {
+    Session.set("sortSelector", "Incomplete");
   }
 };

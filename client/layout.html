@@ -53,7 +53,7 @@
 
         {{#ionSideMenu side="right"}}
           <div class="bar bar-header bar-dark">
-            <h1 class="title">Search Filters</h1>
+            <h1 class="title">Search Options</h1>
           </div>
           <div class="content has-header">
             <div class="list">
@@ -89,6 +89,17 @@
                     <option value="Set Apart Recorded" {{selectedStatusOption "Set Apart Recorded"}}>Set Apart Recorded</option>
                     <option value="Canceled" {{selectedStatusOption "Canceled"}}>Canceled</option>
                     <option value="On Hold" {{selectedStatusOption "On Hold"}}>On Hold</option>
+                  </select>
+                </label>
+
+                <label class="item item-input item-select">
+                  <div class="input-label">
+                    Sort
+                  </div>
+                  <select id="sortSelector" name="sortSelector">
+                    <option value="None" {{selectedSortOption "None"}}>None</option>
+                    <option value="Member Name" {{selectedSortOption "Member Name"}}>Member Name</option>
+                    <option value="Calling Name" {{selectedSortOption "Calling Name"}}>Calling Name</option>
                   </select>
                 </label>
               {{/if}}
