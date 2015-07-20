@@ -53,6 +53,6 @@ Template.layout.rendered = function() {
     Session.set("statusSelector", "Incomplete");
   }
   if (typeof Session.get("sortSelector") == "undefined") {
-    Session.set("sortSelector", "Incomplete");
+    Session.set("sortSelector", "Member Name");
   }
 };
