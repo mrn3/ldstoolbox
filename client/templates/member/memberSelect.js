@@ -93,12 +93,12 @@ function doUpdate (inUpdateObject) {
   }
   else if (Session.get("memberSelectType") == "visitor") {
     var updateObject = {};
-    updateObject.$set = {visitor: inUpdateObject, wardUnitNo: Meteor.user().wardUnitNo};
+    updateObject.$set = {visitor: inUpdateObject, wardUnitNo: Meteor.user().wardUnitNo, stakeUnitNo: Meteor.user().stakeUnitNo};
     visitorCollection.update(Session.get("visitorId"), updateObject);
   }
   else if (Session.get("memberSelectType") == "speaker") {
     var updateObject = {};
-    updateObject.$set = {speaker: inUpdateObject, wardUnitNo: Meteor.user().wardUnitNo};
+    updateObject.$set = {speaker: inUpdateObject, meetingDate: Session.get("meetingDate"), wardUnitNo: Meteor.user().wardUnitNo, stakeUnitNo: Meteor.user().stakeUnitNo};
     speakerCollection.update(Session.get("speakerId"), updateObject);
   }
   else if (Session.get("memberSelectType") == "recognition") {
@@ -124,17 +124,17 @@ function doUpdate (inUpdateObject) {
   }
   else if (Session.get("memberSelectType") == "musicalNumberPerformer") {
     var updateObject = {};
-    updateObject.$set = {performer: inUpdateObject, wardUnitNo: Meteor.user().wardUnitNo};
+    updateObject.$set = {performer: inUpdateObject, wardUnitNo: Meteor.user().wardUnitNo, stakeUnitNo: Meteor.user().stakeUnitNo};
     musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
   }
   else if (Session.get("memberSelectType") == "musicalNumberAccompanist") {
     var updateObject = {};
-    updateObject.$set = {accompanist: inUpdateObject, wardUnitNo: Meteor.user().wardUnitNo};
+    updateObject.$set = {accompanist: inUpdateObject, wardUnitNo: Meteor.user().wardUnitNo, stakeUnitNo: Meteor.user().stakeUnitNo};
     musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
   }
   else if (Session.get("memberSelectType") == "musicalNumberConductor") {
     var updateObject = {};
-    updateObject.$set = {conductor: inUpdateObject, wardUnitNo: Meteor.user().wardUnitNo};
+    updateObject.$set = {conductor: inUpdateObject, wardUnitNo: Meteor.user().wardUnitNo, stakeUnitNo: Meteor.user().stakeUnitNo};
     musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
   }
   history.back();

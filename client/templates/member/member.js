@@ -14,6 +14,7 @@ Template.member.rendered = function() {
 
 Template.member.helpers({
   formattedMeetingDate: function() {
+    console.log(this)
     return moment(this.meetingDate).format("dddd, MMMM D, YYYY");
   }
 });

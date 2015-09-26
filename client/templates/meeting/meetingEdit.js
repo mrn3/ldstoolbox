@@ -218,6 +218,7 @@ Template.meetingEdit.events({
   'click .speakerItem': function(e, instance) {
     Session.set("memberSelectType", "speaker");
     Session.set("speakerId", this._id);
+    Session.set("meetingDate", $('#meetingDate').val());
   },
   'change .speakerOrderSelect': function(e, instance) {
     var updateObject = {};
