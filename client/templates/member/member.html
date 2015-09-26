@@ -116,6 +116,25 @@
             </a>
           {{/each}}
         {{/with}}
+
+        <div class="item item-divider">
+          Speaking Assignments
+        </div>
+        {{#each speakerData}}
+          <a class="item item-icon-right" href="/meetingEdit/{{meetingId}}">
+            {{formattedMeetingDate}}
+            <i class="icon ion-ios-arrow-right"></i>
+          </a>
+        {{/each}}
+        <div class="item item-divider">
+          Sacrament Prayers
+        </div>
+        {{#each prayerData}}
+          <a class="item item-icon-right" href="/meetingEdit/{{_id}}">
+            {{formattedMeetingDate}}
+            <i class="icon ion-ios-arrow-right"></i>
+          </a>
+        {{/each}}
         <!--
         {{#with userData}}
           <div class="item item-divider">

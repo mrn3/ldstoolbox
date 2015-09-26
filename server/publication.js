@@ -365,6 +365,15 @@ Meteor.publish('speakerPublication', function() {
   }
 });
 
+Meteor.publish('singleSpeakerByIndividualIdPublication', function(inIndividualId) {
+  if (this.userId) {
+    var user = Meteor.users.findOne(this.userId);
+    return speakerCollection.find({"speaker.individualId": inIndividualId, stakeUnitNo: user.stakeUnitNo});
+  } else {
+    return [];
+  }
+});
+
 Meteor.publish('recognitionPublication', function() {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);

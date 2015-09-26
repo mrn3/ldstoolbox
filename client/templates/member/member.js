@@ -12,6 +12,12 @@ Template.member.rendered = function() {
   */
 }
 
+Template.member.helpers({
+  formattedMeetingDate: function() {
+    return moment(this.meetingDate).format("dddd, MMMM D, YYYY");
+  }
+});
+
 Template.member.events({
   "click [data-action=showAddressActionSheet]": function (event, template) {
     var household = this;

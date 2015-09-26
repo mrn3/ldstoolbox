@@ -147,7 +147,7 @@ Template.meetingEdit.events({
     Session.set("memberSelectType", "conducting");
   },
   'click #addAnnouncementButton': function(e, instance) {
-    announcementCollection.insert({meetingId: this._id, text: "", wardUnitNo: Meteor.user().wardUnitNo });
+    announcementCollection.insert({meetingId: this._id, text: "", wardUnitNo: Meteor.user().wardUnitNo, stakeUnitNo: Meteor.user().stakeUnitNo });
   },
   'click .removeAnnouncementButton': function(e, instance) {
     announcementCollection.remove({_id: this._id});
@@ -158,7 +158,7 @@ Template.meetingEdit.events({
     announcementCollection.update(e.target.id, updateObject);
   },
   'click #addIntermediateHymnButton': function(e, instance) {
-    intermediateHymnCollection.insert({meetingId: this._id, afterSpeaker: 1, wardUnitNo: Meteor.user().wardUnitNo });
+    intermediateHymnCollection.insert({meetingId: this._id, afterSpeaker: 1, wardUnitNo: Meteor.user().wardUnitNo, stakeUnitNo: Meteor.user().stakeUnitNo });
   },
   'click .removeIntermediateHymnButton': function(e, instance) {
     intermediateHymnCollection.remove({_id: this._id});
@@ -173,7 +173,7 @@ Template.meetingEdit.events({
     intermediateHymnCollection.update(e.target.id, updateObject);
   },
   'click #addMusicalNumberButton': function(e, instance) {
-    musicalNumberCollection.insert({meetingId: this._id, afterSpeaker: 1, wardUnitNo: Meteor.user().wardUnitNo });
+    musicalNumberCollection.insert({meetingId: this._id, afterSpeaker: 1, wardUnitNo: Meteor.user().wardUnitNo, stakeUnitNo: Meteor.user().stakeUnitNo });
   },
   'click .removeMusicalNumberButton': function(e, instance) {
     musicalNumberCollection.remove({_id: this._id});
@@ -200,7 +200,7 @@ Template.meetingEdit.events({
     musicalNumberCollection.update(e.target.id, updateObject);
   },
   'click #addVisitorButton': function(e, instance) {
-    visitorCollection.insert({meetingId: this._id, wardUnitNo: Meteor.user().wardUnitNo});
+    visitorCollection.insert({meetingId: this._id, wardUnitNo: Meteor.user().wardUnitNo, stakeUnitNo: Meteor.user().stakeUnitNo});
   },
   'click .removeVisitorButton': function(e, instance) {
     visitorCollection.remove({_id: this._id});
@@ -210,7 +210,7 @@ Template.meetingEdit.events({
     Session.set("visitorId", this._id);
   },
   'click #addSpeakerButton': function(e, instance) {
-    speakerCollection.insert({meetingId: this._id, wardUnitNo: Meteor.user().wardUnitNo});
+    speakerCollection.insert({meetingId: this._id, meetingDate: $('#meetingDate').val(), wardUnitNo: Meteor.user().wardUnitNo, stakeUnitNo: Meteor.user().stakeUnitNo});
   },
   'click .removeSpeakerButton': function(e, instance) {
     speakerCollection.remove({_id: this._id});
@@ -230,7 +230,7 @@ Template.meetingEdit.events({
     speakerCollection.update(e.target.id, updateObject);
   },
   'click #addRecognitionButton': function(e, instance) {
-    recognitionCollection.insert({meetingId: this._id, "members": [{_id: Random.id()}], wardUnitNo: Meteor.user().wardUnitNo});
+    recognitionCollection.insert({meetingId: this._id, "members": [{_id: Random.id()}], wardUnitNo: Meteor.user().wardUnitNo, stakeUnitNo: Meteor.user().stakeUnitNo});
   },
   'click .removeRecognitionButton': function(e, instance) {
     recognitionCollection.remove({_id: this._id});

@@ -1,5 +1,5 @@
 //for monitoring from kadira
-Kadira.connect("pvBC29Y6Tu8fjkn7R", "27e67b07-c1e1-4784-9681-834a00969d3e");
+//Kadira.connect("pvBC29Y6Tu8fjkn7R", "27e67b07-c1e1-4784-9681-834a00969d3e");
 
 Meteor.startup(function () {
 

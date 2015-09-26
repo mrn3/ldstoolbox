@@ -85,11 +85,13 @@ Router.map(function() {
     waitOn: function () {
       return [
         Meteor.subscribe("singleMemberPublication", parseInt(this.params.individualId)),
-        Meteor.subscribe("singleHouseholdByIndividualIdPublication", parseInt(this.params.individualId))
+        Meteor.subscribe("singleHouseholdByIndividualIdPublication", parseInt(this.params.individualId)),
+        Meteor.subscribe("singleSpeakerByIndividualIdPublication", parseInt(this.params.individualId)),
+        Meteor.subscribe("meetingPublication", parseInt(this.params.individualId))
       ]
     },
     data: function() {
-      var selector =
+      var householdSelector =
         {$or:
           [
             {"headOfHouse.individualId": parseInt(this.params.individualId)},
@@ -97,9 +99,18 @@ Router.map(function() {
             {"children.individualId": parseInt(this.params.individualId)}
           ]
         };
+      var prayerSelector =
+          {$or:
+            [
+              {"invocation.individualId": parseInt(this.params.individualId)},
+              {"benediction.individualId": parseInt(this.params.individualId)}
+            ]
+          };
       return {
         memberData: memberCollection.findOne({individualId: parseInt(this.params.individualId)}),
-        householdData: householdCollection.findOne(selector)
+        householdData: householdCollection.findOne(householdSelector),
+        speakerData: speakerCollection.find({"speaker.individualId": parseInt(this.params.individualId)}),
+        prayerData: meetingCollection.find(prayerSelector)
       };
     },
     fastRender: true

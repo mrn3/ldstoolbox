@@ -94,6 +94,17 @@
 
                 <label class="item item-input item-select">
                   <div class="input-label">
+                    Organization
+                  </div>
+                  <select id="organizationSelector" name="organizationSelector">
+                    <option value="None" {{selectedSortOption "None"}}>None</option>
+                    <option value="HIGH_PRIEST" {{selectedSortOption "High Priests"}}>Member Name</option>
+                    <option value="ELDER" {{selectedSortOption "Elders"}}>Member Name</option>
+                  </select>
+                </label>
+
+                <label class="item item-input item-select">
+                  <div class="input-label">
                     Sort
                   </div>
                   <select id="sortSelector" name="sortSelector">
