@@ -1,0 +1,115 @@
+<template name="signupEdit">
+
+  <div class="bar bar-header bar-light">
+    {{> barHeaderLeft leftType="cancel"}}
+
+    {{> barHeaderTitle title="Edit Signup"}}
+    <div class="buttons">
+      {{#with signupData}}
+        <a id="doneButton" class="button button-clear pull-right button-positive">
+          <strong>Done</strong>
+        </a>
+      {{/with}}
+    </div>
+  </div>
+
+  {{#ionView}}
+    {{#ionContent}}
+      {{#ionList}}
+        {{#with signupData}}
+          <label class="item item-input">
+            <span class="input-label">Signup Name</span>
+            <input type="text" id="signupName" placeholder="Signup Name" value="{{signupName}}">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Signup Date</span>
+            <input type="date" id="signupDate" placeholder="Signup Date" value="{{signupDate}}">
+          </label>
+          <a id="responsibleItem" class="item item-icon-right" href="{{pathFor 'memberSelect'}}">
+            Responsible
+            <span class="item-note">{{{responsibleSession}}}</span>
+            <i class="icon ion-ios-arrow-right"></i>
+          </a>
+          <div class="item item-divider">
+            Volunteers
+            <button id="addVolunteerButton" type="button" class="button button-clear button-small pull-right">
+              Add
+              <span class="icon ion-plus"></span>
+            </button>
+          </div>
+        {{/with}}
+
+        {{#each volunteerData}}
+          <div class="list list-inset">
+            <a id="{{_id}}" class="item item-icon-right volunteerItem" href="{{pathFor 'memberSelect'}}">
+              Volunteer Name
+              <span class="item-note">{{volunteer.preferredName}}</span>
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
+            <label class="item item-input">
+              <input type="text" id="{{_id}}" placeholder="Description" class="volunteerDescriptionInput" value="{{description}}">
+            </label>
+            <label class="item item-input item-select">
+              <div class="input-label">
+                Order
+              </div>
+              <select id="{{_id}}" class="volunteerOrderSelect">
+                <option {{isSelected order 1}}>1</option>
+                <option {{isSelected order 2}}>2</option>
+                <option {{isSelected order 3}}>3</option>
+                <option {{isSelected order 4}}>4</option>
+                <option {{isSelected order 5}}>5</option>
+                <option {{isSelected order 6}}>6</option>
+                <option {{isSelected order 7}}>7</option>
+                <option {{isSelected order 8}}>8</option>
+                <option {{isSelected order 9}}>9</option>
+                <option {{isSelected order 10}}>10</option>
+                <option {{isSelected order 11}}>11</option>
+                <option {{isSelected order 12}}>12</option>
+                <option {{isSelected order 13}}>13</option>
+                <option {{isSelected order 14}}>14</option>
+                <option {{isSelected order 15}}>15</option>
+                <option {{isSelected order 16}}>16</option>
+                <option {{isSelected order 17}}>17</option>
+                <option {{isSelected order 18}}>18</option>
+                <option {{isSelected order 19}}>19</option>
+              </select>
+            </label>
+            <div class="item item-divider">
+              <button type="button" class="button button-clear button-small pull-right removeVolunteerButton">
+                Remove
+                <span class="icon ion-close"></span>
+              </button>
+            </div>
+          </div>
+        {{/each}}
+
+        {{#if userCanDeleteSignup}}
+          {{#with signupData}}
+            <div class="item item-divider">
+              &nbsp;
+            </div>
+            <a class="button button-positive button-full button-clear" id="emailVolunteersButton">
+              Email Volunteers
+            </a>
+            <div class="item item-divider">
+              &nbsp;
+            </div>
+            <a class="button button-positive button-full button-clear" id="emailVolunteersButton">
+              Text Volunteers
+            </a>
+            <div class="item item-divider">
+              &nbsp;
+            </div>
+            <a class="button button-positive button-full button-clear" data-action="showActionSheet">
+              Delete Signup
+            </a>
+            <div class="item item-divider">
+              &nbsp;
+            </div>
+          {{/with}}
+        {{/if}}
+      {{/ionList}}
+    {{/ionContent}}
+  {{/ionView}}
+</template>

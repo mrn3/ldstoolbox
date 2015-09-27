@@ -137,6 +137,14 @@ function doUpdate (inUpdateObject) {
     updateObject.$set = {conductor: inUpdateObject, wardUnitNo: Meteor.user().wardUnitNo, stakeUnitNo: Meteor.user().stakeUnitNo};
     musicalNumberCollection.update(Session.get("musicalNumberId"), updateObject);
   }
+  else if (Session.get("memberSelectType") == "responsible") {
+    Session.set('selectedResponsible', inUpdateObject);
+  }
+  else if (Session.get("memberSelectType") == "volunteer") {
+    var updateObject = {};
+    updateObject.$set = {volunteer: inUpdateObject, signupDate: Session.get("signupDate"), wardUnitNo: Meteor.user().wardUnitNo, stakeUnitNo: Meteor.user().stakeUnitNo};
+    volunteerCollection.update(Session.get("volunteerId"), updateObject);
+  }
   history.back();
 }
 

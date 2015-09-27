@@ -21,6 +21,8 @@ unitCollection = new Meteor.Collection("unit");
 hymnCollection = new Meteor.Collection("hymn");
 memberClientCollection = new Meteor.Collection("memberClient");
 organizationCollection = new Meteor.Collection("organization");
+signupCollection = new Meteor.Collection("signup");
+volunteerCollection = new Meteor.Collection("volunteer");
 
 //make them all ground
 /*

@@ -362,6 +362,40 @@ Router.map(function() {
     },
     fastRender: true
   });
+  this.route("/signupList/", {
+    name: "signupList",
+    onBeforeAction: requireLogin,
+    waitOn: function () {
+      return [
+        Meteor.subscribe("signupPublication"),
+        Meteor.subscribe("userPublication")
+      ]
+    },
+    data: function() {
+      return {
+        signupData: signupCollection.find({}, {sort: {signupDate: -1}})
+      };
+    },
+    fastRender: true
+  });
+  this.route("/signupEdit/:_id", {
+    name: "signupEdit",
+    onBeforeAction: requireLogin,
+    waitOn: function () {
+      return [
+        Meteor.subscribe("signupPublication"),
+        Meteor.subscribe("volunteerPublication"),
+        Meteor.subscribe("userPublication")
+      ]
+    },
+    data: function() {
+      return {
+        signupData: signupCollection.findOne(this.params._id),
+        volunteerData: volunteerCollection.find({signupId: this.params._id}, {sort: {order: 1}})
+      };
+    },
+    fastRender: true
+  });
   this.route("/hymnSelect/", {
     name: "hymnSelect",
     waitOn: function () {

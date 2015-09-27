@@ -15,6 +15,14 @@
       {{/if}}
     {{/if}}
 
+    {{#if isEqual rightType "signupList"}}
+      {{#if userCanCreateSignup}}
+        <a id="createSignupButton" class="button button-clear pull-right button-positive">
+          {{> ionIcon icon='ios-plus-empty'}}
+        </a>
+      {{/if}}
+    {{/if}}
+
     {{#if isEqual rightType "callingChangeList"}}
       <button class="button button-clear pull-left" data-ion-menu-toggle="right">
         {{#if isAndroid}}
