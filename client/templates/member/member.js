@@ -14,8 +14,12 @@ Template.member.rendered = function() {
 
 Template.member.helpers({
   formattedMeetingDate: function() {
-    console.log(this)
-    return moment(this.meetingDate).format("dddd, MMMM D, YYYY");
+    var formattedMeetingDate = moment(this.meetingDate).format("dddd, MMMM D, YYYY");
+    var momentMeetingDate = moment(this.meetingDate);
+    var today = moment();
+    var dateDifference = today.diff(momentMeetingDate, 'months');
+
+    return moment(this.meetingDate).format("dddd, MMMM D, YYYY") + " (" + dateDifference + " months ago)";
   }
 });
 
