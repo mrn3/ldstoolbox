@@ -60,13 +60,15 @@ Template.signupEdit.events({
   },
   'click #emailVolunteersButton': function(e, instance) {
     var volunteerArray = volunteerCollection.find({signupId: this._id}).fetch();
-    console.log(volunteerArray)
-    var volunteerPhoneArray = volunteerArray.map(function(obj) { return "'" + obj['volunteer'].givenName + ' ' + obj['volunteer'].surname + ' <' + obj['volunteer'].email + '>' + "'" });
-    console.log(volunteerPhoneArray)
-    var emailString = "mailto:" + volunteerPhoneArray.join(",");
-    console.log(emailString);
+    var volunteerEmailArray = volunteerArray.map(function(obj) { if (obj["volunteer"] && obj["volunteer"].email) { return obj["volunteer"].email } });
+    var emailString = "mailto:" + volunteerEmailArray.join(",");
     window.location = emailString;
-    //window.location = "mailto:mattrobertnewman@gmail.com"
+  },
+  'click #textVolunteersButton': function(e, instance) {
+    var volunteerArray = volunteerCollection.find({signupId: this._id}).fetch();
+    var volunteerPhoneArray = volunteerArray.map(function(obj) { if (obj["volunteer"] && obj["volunteer"].phone) { return obj["volunteer"].phone } });
+    var emailString = "sms:" + volunteerPhoneArray.join(",");
+    window.location = emailString;
   },
   'click [data-action=showActionSheet]': function(e, instance){
     var signup = this;
