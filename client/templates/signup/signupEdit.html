@@ -17,19 +17,34 @@
     {{#ionContent}}
       {{#ionList}}
         {{#with signupData}}
-          <label class="item item-input">
-            <span class="input-label">Signup Name</span>
-            <input type="text" id="signupName" placeholder="Signup Name" value="{{signupName}}">
-          </label>
-          <label class="item item-input">
-            <span class="input-label">Signup Date</span>
-            <input type="date" id="signupDate" placeholder="Signup Date" value="{{signupDate}}">
-          </label>
-          <a id="responsibleItem" class="item item-icon-right" href="{{pathFor 'memberSelect'}}">
-            Responsible
-            <span class="item-note">{{{responsibleSession}}}</span>
-            <i class="icon ion-ios-arrow-right"></i>
-          </a>
+          {{#if userIsSignupAdmin}}
+            <label class="item item-input">
+              <span class="input-label">Signup Name</span>
+              <input type="text" id="signupName" placeholder="Signup Name" value="{{signupName}}">
+            </label>
+            <label class="item item-input">
+              <span class="input-label">Signup Date</span>
+              <input type="date" id="signupDate" placeholder="Signup Date" value="{{signupDate}}">
+            </label>
+            <a id="responsibleItem" class="item item-icon-right" href="{{pathFor 'memberSelect'}}">
+              Responsible
+              <span class="item-note">{{{responsibleSession}}}</span>
+              <i class="icon ion-ios-arrow-right"></i>
+            </a>
+          {{else}}
+            <label class="item item-input">
+              <span class="input-label">Signup Name</span>
+              <span class="item-note">{{signupName}}</span>
+            </label>
+            <label class="item item-input">
+              <span class="input-label">Signup Date</span>
+              <span class="item-note">{{formattedSignupDate}}</span>
+            </label>
+            <label class="item item-input">
+              <span class="input-label">Responsible</span>
+              <span class="item-note">{{{responsibleSession}}}</span>
+            </label>
+          {{/if}}
           <div class="item item-divider">
             Volunteers
             <button id="addVolunteerButton" type="button" class="button button-clear button-small pull-right">
@@ -41,40 +56,60 @@
 
         {{#each volunteerData}}
           <div class="list list-inset">
+            {{#if userIsSignupAdmin}}
+              <label class="item item-input">
+                <input type="text" id="{{_id}}" placeholder="Description" class="volunteerDescriptionInput" value="{{description}}">
+              </label>
+            {{else}}
+              {{#if description}}
+                <label class="item item-input">
+                  <span class="item-note">{{description}}</span>
+                </label>
+              {{/if}}
+            {{/if}}
             <a id="{{_id}}" class="item item-icon-right volunteerItem" href="{{pathFor 'memberSelect'}}">
               Volunteer Name
               <span class="item-note">{{volunteer.preferredName}}</span>
               <i class="icon ion-ios-arrow-right"></i>
             </a>
-            <label class="item item-input">
-              <input type="text" id="{{_id}}" placeholder="Description" class="volunteerDescriptionInput" value="{{description}}">
-            </label>
-            <label class="item item-input item-select">
-              <div class="input-label">
-                Order
-              </div>
-              <select id="{{_id}}" class="volunteerOrderSelect">
-                <option {{isSelected order 1}}>1</option>
-                <option {{isSelected order 2}}>2</option>
-                <option {{isSelected order 3}}>3</option>
-                <option {{isSelected order 4}}>4</option>
-                <option {{isSelected order 5}}>5</option>
-                <option {{isSelected order 6}}>6</option>
-                <option {{isSelected order 7}}>7</option>
-                <option {{isSelected order 8}}>8</option>
-                <option {{isSelected order 9}}>9</option>
-                <option {{isSelected order 10}}>10</option>
-                <option {{isSelected order 11}}>11</option>
-                <option {{isSelected order 12}}>12</option>
-                <option {{isSelected order 13}}>13</option>
-                <option {{isSelected order 14}}>14</option>
-                <option {{isSelected order 15}}>15</option>
-                <option {{isSelected order 16}}>16</option>
-                <option {{isSelected order 17}}>17</option>
-                <option {{isSelected order 18}}>18</option>
-                <option {{isSelected order 19}}>19</option>
-              </select>
-            </label>
+            {{#if userIsSignupAdmin}}
+              <label class="item item-input item-select">
+                <div class="input-label">
+                  Order
+                </div>
+                <select id="{{_id}}" class="volunteerOrderSelect">
+                  <option {{isSelected order 1}}>1</option>
+                  <option {{isSelected order 2}}>2</option>
+                  <option {{isSelected order 3}}>3</option>
+                  <option {{isSelected order 4}}>4</option>
+                  <option {{isSelected order 5}}>5</option>
+                  <option {{isSelected order 6}}>6</option>
+                  <option {{isSelected order 7}}>7</option>
+                  <option {{isSelected order 8}}>8</option>
+                  <option {{isSelected order 9}}>9</option>
+                  <option {{isSelected order 10}}>10</option>
+                  <option {{isSelected order 11}}>11</option>
+                  <option {{isSelected order 12}}>12</option>
+                  <option {{isSelected order 13}}>13</option>
+                  <option {{isSelected order 14}}>14</option>
+                  <option {{isSelected order 15}}>15</option>
+                  <option {{isSelected order 16}}>16</option>
+                  <option {{isSelected order 17}}>17</option>
+                  <option {{isSelected order 18}}>18</option>
+                  <option {{isSelected order 19}}>19</option>
+                </select>
+              </label>
+              {{#unless isAndroid}}
+                <a class="item item-icon-right" href="{{reminderTextLink volunteer.phone}}}">
+                  Send Reminder Text
+                  <i class="icon ion-ios-arrow-right"></i>
+                </a>
+              {{/unless}}
+              <a class="item item-icon-right" href="/member/{{volunteer.individualId}}">
+                View Member
+                <i class="icon ion-ios-arrow-right"></i>
+              </a>
+            {{/if}}
             <div class="item item-divider">
               <button type="button" class="button button-clear button-small pull-right removeVolunteerButton">
                 Remove
@@ -84,21 +119,21 @@
           </div>
         {{/each}}
         {{#with signupData}}
-          <div class="item item-divider">
-            &nbsp;
-          </div>
-          <a class="button button-positive button-full button-clear" id="emailVolunteersButton">
-            Email Volunteers
-          </a>
-          {{#if isAndroid}}
+          {{#if userIsSignupAdmin}}
             <div class="item item-divider">
               &nbsp;
             </div>
-            <a id="android" class="button button-positive button-full button-clear textVolunteersButton">
-              Text Volunteers
+            <a class="button button-positive button-full button-clear" id="emailVolunteersButton">
+              Email Volunteers
             </a>
-          {{/if}}
-          {{#if userCanDeleteSignup}}
+            {{#if isAndroid}}
+              <div class="item item-divider">
+                &nbsp;
+              </div>
+              <a id="android" class="button button-positive button-full button-clear textVolunteersButton">
+                Text Volunteers
+              </a>
+            {{/if}}
             <div class="item item-divider">
               &nbsp;
             </div>

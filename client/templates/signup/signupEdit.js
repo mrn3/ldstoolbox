@@ -1,5 +1,10 @@
 Template.signupEdit.helpers({
-  userCanDeleteSignup: function () {
+  userIsSignupAdmin: function () {
+    //if this user is the responsible party, then they can administer it
+    if (Meteor.user() && Session.get("selectedResponsible") && Meteor.user().individualId == Session.get("selectedResponsible").individualId) {
+      return true;
+    }
+    //also if someone in bishopric, they can admin it
     if (Meteor.user() && Meteor.user().callings) {
       //bishop, counselors, executive secretary, ward clerk, membership clerk, librarian
       var allowedCallingList = [4, 54, 55, 56, 57, 787, 229];
@@ -8,12 +13,10 @@ Template.signupEdit.helpers({
           return total.concat(calling.positionTypeId);
         },
       []);
-
       var callingIntersection =
         userCallingList.filter(function(n) {
           return allowedCallingList.indexOf(n) != -1
         });
-
       return (callingIntersection.length > 0);
     }
   },
@@ -30,6 +33,13 @@ Template.signupEdit.helpers({
     } else {
       return "";
     }
+  },
+  reminderTextLink: function (inPhone) {
+    var formattedSignupDate = moment($('#signupDate').val()).format("dddd, MMMM D, YYYY");
+    return "sms:" + inPhone + "&body=This is a reminder that you signed up for " + $('#signupName').val() + " on " + formattedSignupDate + ". Thanks!";
+  },
+  formattedSignupDate: function () {
+    return moment($('#signupDate').val()).format("dddd, MMMM D, YYYY");
   }
 });
 
