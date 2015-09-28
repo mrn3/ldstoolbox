@@ -432,10 +432,14 @@ Meteor.publish('signupPublication', function() {
   }
 });
 
-Meteor.publish('volunteerPublication', function() {
+Meteor.publish('volunteerPublication', function(inIndividualId) {
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
-    return volunteerCollection.find({wardUnitNo: user.wardUnitNo});
+    if (inIndividualId) {
+      return volunteerCollection.find({"volunteer.individualId": inIndividualId, wardUnitNo: user.wardUnitNo});
+    } else {
+      return volunteerCollection.find({wardUnitNo: user.wardUnitNo});
+    }
   } else {
     return [];
   }

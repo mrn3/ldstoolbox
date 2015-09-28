@@ -18,8 +18,14 @@ Template.member.helpers({
     var momentMeetingDate = moment(this.meetingDate);
     var today = moment();
     var dateDifference = today.diff(momentMeetingDate, 'months');
-
     return moment(this.meetingDate).format("dddd, MMMM D, YYYY") + " (" + dateDifference + " months ago)";
+  },
+  formattedSignupDate: function() {
+    var formattedSignupDate = moment(this.signupDate).format("dddd, MMMM D, YYYY");
+    var momentSignupDate = moment(this.signupDate);
+    var today = moment();
+    var dateDifference = today.diff(momentSignupDate, 'months');
+    return moment(this.signupDate).format("dddd, MMMM D, YYYY") + " (" + dateDifference + " months ago)";
   }
 });
 

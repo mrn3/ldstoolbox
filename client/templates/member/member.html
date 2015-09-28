@@ -135,6 +135,15 @@
             <i class="icon ion-ios-arrow-right"></i>
           </a>
         {{/each}}
+        <div class="item item-divider">
+          Signups
+        </div>
+        {{#each volunteerData}}
+          <a class="item item-icon-right" href="/signupEdit/{{signupId}}">
+            {{formattedSignupDate}}
+            <i class="icon ion-ios-arrow-right"></i>
+          </a>
+        {{/each}}
         <!--
         {{#with userData}}
           <div class="item item-divider">
