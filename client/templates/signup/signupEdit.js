@@ -73,10 +73,7 @@ Template.signupEdit.events({
     var textString = "sms:" + volunteerPhoneArray.join(",");
     var formattedSignupDate = moment($('#signupDate').val()).format("dddd, MMMM D, YYYY");
     if (e.target.id == 'android') {
-      emailString += "?";
-      emailString += "body=This is a reminder that you signed up for " + $('#signupName').val() + " on " + formattedSignupDate + ". Thanks!";
-    } else {
-      //emailString += "&";
+      emailString += "?body=This is a reminder that you signed up for " + $('#signupName').val() + " on " + formattedSignupDate + ". Thanks!";
     }
     window.location = textString;
   },
