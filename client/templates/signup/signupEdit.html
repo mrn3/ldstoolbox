@@ -83,21 +83,29 @@
             </div>
           </div>
         {{/each}}
-
-        {{#if userCanDeleteSignup}}
-          {{#with signupData}}
+        {{#with signupData}}
+          <div class="item item-divider">
+            &nbsp;
+          </div>
+          <a class="button button-positive button-full button-clear" id="emailVolunteersButton">
+            Email Volunteers
+          </a>
+          {{#if isAndroid}}
             <div class="item item-divider">
               &nbsp;
             </div>
-            <a class="button button-positive button-full button-clear" id="emailVolunteersButton">
-              Email Volunteers
-            </a>
-            <div class="item item-divider">
-              &nbsp;
-            </div>
-            <a class="button button-positive button-full button-clear" id="textVolunteersButton">
+            <a id="android" class="button button-positive button-full button-clear textVolunteersButton">
               Text Volunteers
             </a>
+          {{else}}
+            <div class="item item-divider">
+              &nbsp;
+            </div>
+            <a id="other" class="button button-positive button-full button-clear textVolunteersButton">
+              Text Volunteers
+            </a>
+          {{/if}}
+          {{#if userCanDeleteSignup}}
             <div class="item item-divider">
               &nbsp;
             </div>
@@ -107,8 +115,8 @@
             <div class="item item-divider">
               &nbsp;
             </div>
-          {{/with}}
-        {{/if}}
+          {{/if}}
+        {{/with}}
       {{/ionList}}
     {{/ionContent}}
   {{/ionView}}

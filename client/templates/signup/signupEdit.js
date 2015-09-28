@@ -61,14 +61,24 @@ Template.signupEdit.events({
   'click #emailVolunteersButton': function(e, instance) {
     var volunteerArray = volunteerCollection.find({signupId: this._id}).fetch();
     var volunteerEmailArray = volunteerArray.map(function(obj) { if (obj["volunteer"] && obj["volunteer"].email) { return obj["volunteer"].email } });
-    var emailString = "mailto:" + volunteerEmailArray.join(",");
+    var emailString = "mailto:" + volunteerEmailArray.join(",")
+    var formattedSignupDate = moment($('#signupDate').val()).format("dddd, MMMM D, YYYY");
+    emailString += "?subject=" + $('#signupName').val() + " - " + formattedSignupDate;
+    emailString += "&body=This is a reminder that you signed up for " + $('#signupName').val() + " on " + formattedSignupDate + ". Thanks!";
     window.location = emailString;
   },
-  'click #textVolunteersButton': function(e, instance) {
+  'click .textVolunteersButton': function(e, instance) {
     var volunteerArray = volunteerCollection.find({signupId: this._id}).fetch();
     var volunteerPhoneArray = volunteerArray.map(function(obj) { if (obj["volunteer"] && obj["volunteer"].phone) { return obj["volunteer"].phone } });
-    var emailString = "sms:" + volunteerPhoneArray.join(",");
-    window.location = emailString;
+    var textString = "sms:" + volunteerPhoneArray.join(",");
+    var formattedSignupDate = moment($('#signupDate').val()).format("dddd, MMMM D, YYYY");
+    if (e.target.id == 'android') {
+      emailString += "?";
+      emailString += "body=This is a reminder that you signed up for " + $('#signupName').val() + " on " + formattedSignupDate + ". Thanks!";
+    } else {
+      //emailString += "&";
+    }
+    window.location = textString;
   },
   'click [data-action=showActionSheet]': function(e, instance){
     var signup = this;
