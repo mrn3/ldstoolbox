@@ -669,7 +669,7 @@ Router.map(function() {
     intermediateHymnArray = intermediateHymnCollection.find({meetingId : this.params._id}).fetch();
     visitorArray = visitorCollection.find({meetingId : this.params._id}).fetch();
     musicalNumberArray = musicalNumberCollection.find({meetingId : this.params._id}).fetch();
-    announcementArray = announcementCollection.find({meetingId : this.params._id}).fetch();
+    announcementArray = announcementCollection.find({meetingId : this.params._id, announcementSacramentWorthy: true}).fetch();
     speakerArray = speakerCollection.find({meetingId : this.params._id}, {sort: {order: 1}}).fetch();
     recognitionArray = recognitionCollection.find({meetingId : this.params._id}).fetch();
 
@@ -812,6 +812,16 @@ Router.map(function() {
       }
     }
 
+    if (meeting && meeting.newRecords) {
+      doc.text("New Records: ______________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+      var newRecordsArray = meeting.newRecords.split('\n')
+      for (var i=0; i<newRecordsArray.length; i++) {
+        doc.text(newRecordsArray[i], distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
+        doc.text("____________________________________________________________", distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
+        distanceFromTop += verticalPositionIncrement;
+      }
+    }
+
     doc.fontSize(14);
     distanceFromTop += 5;
     doc.text("Sacrament", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
@@ -906,6 +916,15 @@ Router.map(function() {
     }
     distanceFromTop += verticalPositionIncrement;
 
+    if (meeting && meeting.notes) {
+      doc.text("Notes: ______________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
+      var notesArray = meeting.notes.split('\n')
+      for (var i=0; i<notesArray.length; i++) {
+        doc.text(notesArray[i], distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
+        doc.text("____________________________________________________________", distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
+        distanceFromTop += verticalPositionIncrement;
+      }
+    }
     /*
     Conducting
     My name is...and (presiding authority) has asked me to conduct this meeting.

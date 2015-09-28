@@ -140,6 +140,15 @@ Template.meetingEdit.events({
   'click #benedictionItem': function(e, instance) {
     Session.set("memberSelectType", "benediction");
   },
+  'click #fastAndTestimony': function(e){
+    if (e.target.checked) {
+      IonPopup.alert({
+        title: "Read in Records Reminder",
+        template: "Since this is a fast and testimony meeting, you might want to read in records of new members (it is a good time to do it once a month).  To do so, fill out the New Records section below.",
+        okText: "Okay"
+      });
+    }
+  },
   'click #presidingItem': function(e, instance) {
     Session.set("memberSelectType", "presiding");
   },
@@ -155,6 +164,11 @@ Template.meetingEdit.events({
   'change .announcementInput': function(e, instance) {
     var updateObject = {};
     updateObject.$set = {text: e.target.value};
+    announcementCollection.update(e.target.id, updateObject);
+  },
+  'click .announcementSacramentWorthyCheckbox': function(e, instance) {
+    var updateObject = {};
+    updateObject.$set = {announcementSacramentWorthy: e.target.checked};
     announcementCollection.update(e.target.id, updateObject);
   },
   'click #addIntermediateHymnButton': function(e, instance) {
@@ -316,6 +330,8 @@ Template.meetingEdit.events({
       closingHymn:          Session.get("selectedClosingHymn"),
       invocation:           Session.get("selectedInvocation"),
       benediction:          Session.get("selectedBenediction"),
+      newRecords:           $('#newRecords').val(),
+      notes:                $('#notes').val()
     };
     if (properties) {
       updateObject.$set = properties;

@@ -25,6 +25,13 @@
             </label>
 
             <div class="item item-divider">
+              Notes
+            </div>
+            <label class="item">
+              <textarea id="notes" placeholder="Notes" rows="3">{{notes}}</textarea>
+            </label>
+
+            <div class="item item-divider">
               Prayers
             </div>
             <a id="invocationItem" class="item item-icon-right" href="{{pathFor 'memberSelect'}}">
@@ -214,6 +221,15 @@
               <label class="item item-input">
                 <input type="text" id="{{_id}}" placeholder="Announcement" class="announcementInput" value="{{text}}">
               </label>
+              <div class="item item-toggle">
+                 Sacrament Worthy
+                 <label class="toggle toggle-assertive">
+                   <input type="checkbox" id="{{_id}}" class="announcementSacramentWorthyCheckbox" checked="{{isChecked announcementSacramentWorthy}}">
+                   <div class="track">
+                     <div class="handle"></div>
+                   </div>
+                 </label>
+              </div>
               <div class="item item-divider">
                 <button type="button" class="button button-clear button-small pull-right removeAnnouncementButton">
                   Remove
@@ -342,6 +358,15 @@
           {{/each}}
 
           {{#with meetingData}}
+          <div class="item item-divider">
+            New Records (copy and paste from <a target="_blank" href="https://www.lds.org/mls/mbr/report/members-moved-in">here</a>)
+          </div>
+          <label class="item">
+            <textarea id="newRecords" placeholder="New Records" rows="3">{{newRecords}}</textarea>
+          </label>
+          {{/with}}
+
+          {{#with meetingData}}
             <div class="item item-divider">
               Sustainings and Releases
             </div>
@@ -381,6 +406,7 @@
               &nbsp;
             </div>
           {{/with}}
+
         {{/ionList}}
       {{/ionContent}}
     {{/ionView}}
