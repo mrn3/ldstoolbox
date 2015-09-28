@@ -298,6 +298,15 @@
                   <option {{isSelected order 6}}>6</option>
                 </select>
               </label>
+              <div class="item item-toggle">
+                 Confirmed
+                 <label class="toggle toggle-assertive">
+                   <input type="checkbox" id="{{_id}}" class="speakerConfirmedCheckbox" checked="{{isChecked speakerConfirmed}}">
+                   <div class="track">
+                     <div class="handle"></div>
+                   </div>
+                 </label>
+              </div>
               <div class="item item-divider">
                 <button type="button" class="button button-clear button-small pull-right removeSpeakerButton">
                   Remove

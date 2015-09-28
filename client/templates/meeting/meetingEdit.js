@@ -32,8 +32,8 @@ Template.meetingEdit.helpers({
       return (callingIntersection.length > 0);
     }
   },
-  isChecked: function(inFastAndTestimony) {
-    if (inFastAndTestimony) {
+  isChecked: function(inBoolean) {
+    if (inBoolean) {
       return "checked";
     }
   },
@@ -242,6 +242,11 @@ Template.meetingEdit.events({
   'change .speakerTopicInput': function(e, instance) {
     var updateObject = {};
     updateObject.$set = {topic: e.target.value};
+    speakerCollection.update(e.target.id, updateObject);
+  },
+  'click .speakerConfirmedCheckbox': function(e, instance) {
+    var updateObject = {};
+    updateObject.$set = {speakerConfirmed: e.target.checked};
     speakerCollection.update(e.target.id, updateObject);
   },
   'click #addRecognitionButton': function(e, instance) {
