@@ -88,6 +88,8 @@ Meteor.publish('memberOrganizationPublication', function() {
           {
             "preferredName": 1,
             "individualId": 1,
+            "email": 1,
+            "phone": 1,
             "callings.positionName": 1,
             "organizations._id": 1
           }
