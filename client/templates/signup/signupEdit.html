@@ -109,16 +109,20 @@
                   <option {{isSelected order "29"}}>29</option>
                 </select>
               </label>
-              {{#unless isAndroid}}
-                <a class="item item-icon-right" href="{{reminderTextLink volunteer.phone}}}">
-                  Send Reminder Text
+              {{#if volunteer.preferredName}}
+                {{#if volunteer.phone}}
+                  {{#unless isAndroid}}
+                    <a class="item item-icon-right" href="{{reminderTextLink volunteer.phone description}}">
+                      Send Reminder Text
+                      <i class="icon ion-ios-arrow-right"></i>
+                    </a>
+                  {{/unless}}
+                {{/if}}
+                <a class="item item-icon-right" href="/member/{{volunteer.individualId}}">
+                  View Member
                   <i class="icon ion-ios-arrow-right"></i>
                 </a>
-              {{/unless}}
-              <a class="item item-icon-right" href="/member/{{volunteer.individualId}}">
-                View Member
-                <i class="icon ion-ios-arrow-right"></i>
-              </a>
+              {{/if}}
             {{/if}}
             <div class="item item-divider">
               <button type="button" class="button button-clear button-small pull-right removeVolunteerButton">

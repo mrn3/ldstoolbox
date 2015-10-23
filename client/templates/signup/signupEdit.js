@@ -34,9 +34,10 @@ Template.signupEdit.helpers({
       return "";
     }
   },
-  reminderTextLink: function (inPhone) {
+  reminderTextLink: function (inPhone, inDescription) {
+    var signup = signupCollection.findOne({_id: this.signupId})
     var formattedSignupDate = moment($('#signupDate').val()).format("dddd, MMMM D, YYYY");
-    return "sms:" + inPhone + "&body=This is a reminder that you signed up for " + $('#signupName').val() + " on " + formattedSignupDate + ". Thanks!";
+    return "sms:" + inPhone + "&body=This is a reminder that you signed up for " + signup.signupName + " on " + formattedSignupDate + " and with details of " + inDescription + ". Thanks!";
   },
   formattedSignupDate: function () {
     return moment($('#signupDate').val()).format("dddd, MMMM D, YYYY");
@@ -74,17 +75,45 @@ Template.signupEdit.events({
     var emailString = "mailto:" + volunteerEmailArray.join(",")
     var formattedSignupDate = moment($('#signupDate').val()).format("dddd, MMMM D, YYYY");
     emailString += "?subject=" + $('#signupName').val() + " - " + formattedSignupDate;
-    emailString += "&body=This is a reminder that you signed up for " + $('#signupName').val() + " on " + formattedSignupDate + ". Thanks!";
+    emailString += "&body=This is a reminder that you signed up for " + $('#signupName').val() + " on " + formattedSignupDate + "."
+    var volunteerDescriptionArray = volunteerArray.map(function(obj) {
+      if (obj.description && obj["volunteer"] && obj["volunteer"].preferredName) {
+        return obj.description + " - " + obj["volunteer"].preferredName
+      }
+    })
+    emailString += "%0D%0A" //add hard return
+    emailString += "%0D%0A"
+    emailString += "The details are:"
+    emailString += "%0D%0A"
+    for (var i=0; i<volunteerDescriptionArray.length; i++) {
+      if (volunteerDescriptionArray[i]) {
+        emailString += "%0D%0A" + volunteerDescriptionArray[i]
+      }
+    }
+    emailString += "%0D%0A"
+    emailString += "%0D%0A"
+    emailString += "Please let me know if you won't be able to do this.  Thanks!"
     window.location = emailString;
   },
   'click .textVolunteersButton': function(e, instance) {
-    var volunteerArray = volunteerCollection.find({signupId: this._id}).fetch();
+    var volunteerArray = volunteerCollection.find({signupId: this._id}).fetch()
     var volunteerPhoneArray = volunteerArray.map(function(obj) { if (obj["volunteer"] && obj["volunteer"].phone) { return obj["volunteer"].phone } });
     var textString = "sms:" + volunteerPhoneArray.join(",");
     var formattedSignupDate = moment($('#signupDate').val()).format("dddd, MMMM D, YYYY");
     if (e.target.id == 'android') {
-      emailString += "?body=This is a reminder that you signed up for " + $('#signupName').val() + " on " + formattedSignupDate + ". Thanks!";
+      textString += "?body=This is a reminder that you signed up for " + $('#signupName').val() + " on " + formattedSignupDate + ". Thanks!";
     }
+    var volunteerDescriptionArray = volunteerArray.map(function(obj) { if (obj.description && obj["volunteer"] && obj["volunteer"].preferredName) { return obj.description + " - " + obj["volunteer"].preferredName } })
+    textString += "\r\n" //add hard return
+    textString += "\r\n"
+    textString += "The details are:"
+    textString += "\r\n"
+    for (var i=0; i<volunteerDescriptionArray.length; i++) {
+      textString += "\r\n" + volunteerDescriptionArray[i]
+    }
+    textString += "\r\n"
+    textString += "\r\n"
+    textString += "Please let me know if you won't be able to do this.  Thanks!"
     window.location = textString;
   },
   'click [data-action=showActionSheet]': function(e, instance){
