@@ -841,11 +841,6 @@ Router.map(function() {
     distanceFromTop += verticalPositionIncrement;
     distanceFromTop += verticalPositionIncrement;
 
-    if (distanceFromTop > 600) {
-      doc.addPage();
-      distanceFromTop = 40;
-    }
-
     doc.fontSize(14);
     distanceFromTop += 5;
     doc.text("Gospel Messages, Testimonies, and Music", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
@@ -861,6 +856,13 @@ Router.map(function() {
 
     if (typeof speakerArray != "undefined") {
       for(var speakerIndex in speakerArray) {
+
+        //new page if needed
+        if (distanceFromTop > 600) {
+          doc.addPage();
+          distanceFromTop = 40;
+        }
+
         if (speakerArray[speakerIndex] && speakerArray[speakerIndex].speaker && speakerArray[speakerIndex].speaker.preferredName) {
           doc.text(speakerArray[speakerIndex].speaker.preferredName, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
         }
