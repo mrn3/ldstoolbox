@@ -841,6 +841,11 @@ Router.map(function() {
     distanceFromTop += verticalPositionIncrement;
     distanceFromTop += verticalPositionIncrement;
 
+    if (distanceFromTop > 600) {
+      doc.addPage();
+      distanceFromTop = 40;
+    }
+
     doc.fontSize(14);
     distanceFromTop += 5;
     doc.text("Gospel Messages, Testimonies, and Music", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
