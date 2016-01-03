@@ -1,10 +1,74 @@
 //for monitoring from kadira
-//Kadira.connect("pvBC29Y6Tu8fjkn7R", "27e67b07-c1e1-4784-9681-834a00969d3e");
+Kadira.connect("pvBC29Y6Tu8fjkn7R", "27e67b07-c1e1-4784-9681-834a00969d3e");
 
 Meteor.startup(function () {
 
   //add hidden collection to Houson admin console
   Houston.add_collection(Meteor.users);
+
+  memberCollection._ensureIndex({ "individualId": 1});
+  memberCollection._ensureIndex({ "wardUnitNo": 1});
+  memberCollection._ensureIndex({ "stakeUnitNo": 1});
+  memberCollection._ensureIndex({ "callings.positionTypeId": 1});
+  memberCollection._ensureIndex({ "callings.orgTypeId": 1});
+  memberCollection._ensureIndex({ "switchedPreferredName": 1});
+  memberCollection._ensureIndex({ "preferredName": 1});
+
+  callingCollection._ensureIndex({ "wardUnitNo": 1});
+  callingCollection._ensureIndex({ "stakeUnitNo": 1});
+
+  callingGroupCollection._ensureIndex({ "wardUnitNo": 1});
+  callingGroupCollection._ensureIndex({ "stakeUnitNo": 1});
+
+  callingChangeCollection._ensureIndex({ "wardUnitNo": 1});
+  callingChangeCollection._ensureIndex({ "stakeUnitNo": 1});
+  callingChangeCollection._ensureIndex({ "calling._id": 1});
+  callingChangeCollection._ensureIndex({ "calling.displayName": 1});
+  callingChangeCollection._ensureIndex({ "calling.positionName": 1});
+  callingChangeCollection._ensureIndex({ "calling.wardUnitNo": 1});
+  callingChangeCollection._ensureIndex({ "meeting._id": 1});
+  callingChangeCollection._ensureIndex({ "meeting.meetingDate": 1});
+  callingChangeCollection._ensureIndex({ "member._id": 1});
+  callingChangeCollection._ensureIndex({ "member.individualId": 1});
+  callingChangeCollection._ensureIndex({ "member.switchedPreferredName": 1});
+  callingChangeCollection._ensureIndex({ "type": 1});
+  callingChangeCollection._ensureIndex({ "status": 1});
+
+  householdCollection._ensureIndex({ "wardUnitNo": 1});
+  householdCollection._ensureIndex({ "stakeUnitNo": 1});
+  householdCollection._ensureIndex({ "headOfHouse.individualId": 1});
+  householdCollection._ensureIndex({ "spouse.individualId": 1});
+  householdCollection._ensureIndex({ "children.individualId": 1});
+
+  meetingCollection._ensureIndex({ "wardUnitNo": 1});
+  meetingCollection._ensureIndex({ "stakeUnitNo": 1});
+  meetingCollection._ensureIndex({ "meetingDate": 1});
+
+  speakerCollection._ensureIndex({ "wardUnitNo": 1});
+  speakerCollection._ensureIndex({ "stakeUnitNo": 1});
+  speakerCollection._ensureIndex({ "speaker.individualId": 1});
+
+  recognitionCollection._ensureIndex({ "wardUnitNo": 1});
+  recognitionCollection._ensureIndex({ "stakeUnitNo": 1});
+
+  announcementCollection._ensureIndex({ "wardUnitNo": 1});
+  announcementCollection._ensureIndex({ "stakeUnitNo": 1});
+
+  musicalNumberCollection._ensureIndex({ "wardUnitNo": 1});
+  musicalNumberCollection._ensureIndex({ "stakeUnitNo": 1});
+
+  intermediateHymnCollection._ensureIndex({ "wardUnitNo": 1});
+  intermediateHymnCollection._ensureIndex({ "stakeUnitNo": 1});
+
+  signupCollection._ensureIndex({ "wardUnitNo": 1});
+  signupCollection._ensureIndex({ "stakeUnitNo": 1});
+
+  volunteerCollection._ensureIndex({ "wardUnitNo": 1});
+  volunteerCollection._ensureIndex({ "stakeUnitNo": 1});
+  volunteerCollection._ensureIndex({ "volunteer.individualId": 1});
+
+  unitCollection._ensureIndex({ "wardUnitNo": 1});
+  unitCollection._ensureIndex({ "stakeUnitNo": 1});
 
   if (hymnCollection.find().count() == 0) {
     hymnCollection.insert({number: 1, numberText: "1", name: "The Morning Breaks", type: "hymn"});
