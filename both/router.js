@@ -323,8 +323,8 @@ Router.map(function() {
     data: function() {
       return {
         meetingData: meetingCollection.findOne(this.params._id),
-        musicalNumberData: musicalNumberCollection.find({meetingId: this.params._id}),
-        intermediateHymnData: intermediateHymnCollection.find({meetingId: this.params._id}),
+        musicalNumberData: musicalNumberCollection.find({meetingId: this.params._id}, {sort: {afterSpeaker: 1}}),
+        intermediateHymnData: intermediateHymnCollection.find({meetingId: this.params._id}, {sort: {afterSpeaker: 1}}),
         visitorData: visitorCollection.find({meetingId: this.params._id}),
         announcementData: announcementCollection.find({meetingId: this.params._id}),
         speakerData: speakerCollection.find({meetingId: this.params._id}, {sort: {order: 1}}),
