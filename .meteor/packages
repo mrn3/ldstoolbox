@@ -11,7 +11,6 @@ zimme:iron-router-active
 anti:fake
 matb33:collection-hooks
 aldeed:collection2
-aldeed:autoform
 meteoric:ionic-sass
 meteoric:ionicons-sass
 meteoric:ionic
@@ -47,3 +46,4 @@ spacebars
 check
 standard-minifier-css
 standard-minifier-js
+aldeed:autoform
