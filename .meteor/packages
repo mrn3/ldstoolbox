@@ -5,16 +5,11 @@
 
 insecure
 accounts-password
-fourseven:scss
 iron:router
-zimme:iron-router-active
 anti:fake
 matb33:collection-hooks
 aldeed:collection2
-meteoric:ionic-sass
-meteoric:ionicons-sass
 meteoric:ionic
-meteoric:autoform-ionic
 useraccounts:ionic
 http
 pascoual:pdfkit
@@ -47,3 +42,8 @@ check
 standard-minifier-css
 standard-minifier-js
 aldeed:autoform
+fourseven:scss
+meteoric:autoform-ionic
+meteoric:ionic-sass
+meteoric:ionicons-sass
+zimme:iron-router-active
