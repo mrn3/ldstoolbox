@@ -674,8 +674,16 @@ Meteor.startup(function () {
     recognitionTypeCollection.insert({typeName: "Baby Blessing"});
     recognitionTypeCollection.insert({typeName: "Baptism"});
     recognitionTypeCollection.insert({typeName: "Confirmation"});
-    recognitionTypeCollection.insert({typeName: "Aaronic Priesthood Advancement"});
-    recognitionTypeCollection.insert({typeName: "Primary Advancement"});
+    recognitionTypeCollection.insert({typeName: "Conferral of Aaronic Priesthood"});
+    recognitionTypeCollection.insert({typeName: "Ordination to the Office of Deacon"});
+    recognitionTypeCollection.insert({typeName: "Ordination to the Office of Teacher"});
+    recognitionTypeCollection.insert({typeName: "Ordination to the Office of Priest"});
+    recognitionTypeCollection.insert({typeName: "Conferral of Melchizedek Priesthood"});
+    recognitionTypeCollection.insert({typeName: "Ordination to the Office of Elder"});
+    recognitionTypeCollection.insert({typeName: "Ordination to the Office of High Priest"});
+    recognitionTypeCollection.insert({typeName: "Advancement from Primary"});
+    recognitionTypeCollection.insert({typeName: "Young Womanhood Recognition"});
+    recognitionTypeCollection.insert({typeName: "Eagle Scout Award"});
     recognitionTypeCollection.insert({typeName: "Mission Call"});
   }
 
