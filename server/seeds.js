@@ -687,6 +687,9 @@ Meteor.startup(function () {
     recognitionTypeCollection.insert({typeName: "Personal Progress"});
     recognitionTypeCollection.insert({typeName: "Young Womanhood Recognition"});
     recognitionTypeCollection.insert({typeName: "Mission Call"});
+    recognitionTypeCollection.insert({typeName: "Wedding"});
+    recognitionTypeCollection.insert({typeName: "Temple Sealing"});
+    recognitionTypeCollection.insert({typeName: "Funeral"});
   }
 
   if (callingCollection.find({wardUnitNo: -1}).count() === 0) {
