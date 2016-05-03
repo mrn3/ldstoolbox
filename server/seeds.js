@@ -674,6 +674,7 @@ Meteor.startup(function () {
     recognitionTypeCollection.insert({typeName: "Baby Blessing"});
     recognitionTypeCollection.insert({typeName: "Baptism"});
     recognitionTypeCollection.insert({typeName: "Confirmation"});
+    recognitionTypeCollection.insert({typeName: "Advancement from Primary"});
     recognitionTypeCollection.insert({typeName: "Conferral of Aaronic Priesthood"});
     recognitionTypeCollection.insert({typeName: "Ordination to the Office of Deacon"});
     recognitionTypeCollection.insert({typeName: "Ordination to the Office of Teacher"});
@@ -681,12 +682,12 @@ Meteor.startup(function () {
     recognitionTypeCollection.insert({typeName: "Conferral of Melchizedek Priesthood"});
     recognitionTypeCollection.insert({typeName: "Ordination to the Office of Elder"});
     recognitionTypeCollection.insert({typeName: "Ordination to the Office of High Priest"});
-    recognitionTypeCollection.insert({typeName: "Advancement from Primary"});
-    recognitionTypeCollection.insert({typeName: "Young Womanhood Recognition"});
     recognitionTypeCollection.insert({typeName: "Eagle Scout Award"});
+    recognitionTypeCollection.insert({typeName: "Duty to God Award"});
+    recognitionTypeCollection.insert({typeName: "Personal Progress"});
+    recognitionTypeCollection.insert({typeName: "Young Womanhood Recognition"});
     recognitionTypeCollection.insert({typeName: "Mission Call"});
   }
-
 
   if (callingCollection.find({wardUnitNo: -1}).count() === 0) {
     //dump in generic callings too
