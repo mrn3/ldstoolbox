@@ -1,5 +1,5 @@
 //for monitoring from kadira
-Kadira.connect("pvBC29Y6Tu8fjkn7R", "27e67b07-c1e1-4784-9681-834a00969d3e");
+//Kadira.connect("pvBC29Y6Tu8fjkn7R", "27e67b07-c1e1-4784-9681-834a00969d3e");
 
 Meteor.startup(function () {
 
@@ -686,6 +686,9 @@ Meteor.startup(function () {
     recognitionTypeCollection.insert({typeName: "Duty to God Award"});
     recognitionTypeCollection.insert({typeName: "Personal Progress"});
     recognitionTypeCollection.insert({typeName: "Young Womanhood Recognition"});
+    recognitionTypeCollection.insert({typeName: "Seminary Attendance Certificate"});
+    recognitionTypeCollection.insert({typeName: "Seminary Completion Certificate"});
+    recognitionTypeCollection.insert({typeName: "Seminary Graduation"});
     recognitionTypeCollection.insert({typeName: "Mission Call"});
     recognitionTypeCollection.insert({typeName: "Wedding"});
     recognitionTypeCollection.insert({typeName: "Temple Sealing"});
