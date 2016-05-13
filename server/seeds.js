@@ -682,6 +682,7 @@ Meteor.startup(function () {
     recognitionTypeCollection.insert({typeName: "Conferral of Melchizedek Priesthood"});
     recognitionTypeCollection.insert({typeName: "Ordination to the Office of Elder"});
     recognitionTypeCollection.insert({typeName: "Ordination to the Office of High Priest"});
+    recognitionTypeCollection.insert({typeName: "Faith in God Award"});
     recognitionTypeCollection.insert({typeName: "Eagle Scout Award"});
     recognitionTypeCollection.insert({typeName: "Duty to God Award"});
     recognitionTypeCollection.insert({typeName: "Personal Progress"});
