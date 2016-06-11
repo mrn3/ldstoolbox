@@ -19,11 +19,11 @@ Meteor.startup(function () {
 
   callingGroupCollection._ensureIndex({ "wardUnitNo": 1});
   callingGroupCollection._ensureIndex({ "stakeUnitNo": 1});
-  
+
   callingChangeCollection._ensureIndex({ "wardUnitNo": 1});
   callingChangeCollection._ensureIndex({ "stakeUnitNo": 1});
   callingChangeCollection._ensureIndex({ "calling._id": 1});
-  callingChangeCollection._ensureIndex({ "calling.displayName": 1});
+  callingChangeCollection._ensureIndex({ "calling.groupName": 1});
   callingChangeCollection._ensureIndex({ "calling.positionName": 1});
   callingChangeCollection._ensureIndex({ "calling.wardUnitNo": 1});
   callingChangeCollection._ensureIndex({ "meeting._id": 1});

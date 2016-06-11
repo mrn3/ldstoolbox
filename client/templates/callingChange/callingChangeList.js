@@ -19,7 +19,8 @@ Template.callingChangeList.helpers({
     }
   },
   callingChangeData: function(){
-    var regExp;
+
+    var regExp
 
     //default selector makes sure they are in the stake
     var selector = {
@@ -29,7 +30,7 @@ Template.callingChangeList.helpers({
             stakeUnitNo: Meteor.user().stakeUnitNo
           }
         ]
-      };
+    }
 
     function searchClause(inRegExp) {
       return {
@@ -37,7 +38,7 @@ Template.callingChangeList.helpers({
           {"member.preferredName": inRegExp},
           {"calling.positionName": inRegExp}
         ]
-      };
+      }
     }
 
     function isBishopric(inOrgArray) {
@@ -49,7 +50,7 @@ Template.callingChangeList.helpers({
       return false;
     }
 
-    var userCallingOrgArray = _.pluck(Meteor.user().callings, "name");
+    var userCallingOrgArray = _.pluck(Meteor.user().callings, "groupName")
 
     callingOrgClause = {
       "calling.name": {
@@ -186,7 +187,7 @@ Template.callingChangeList.helpers({
       selector['$and'].push(callingOrgClause);
     }
 
-    return callingChangeCollection.find(selector, options);
+    return callingChangeCollection.find(selector, options)
   }
 });
 

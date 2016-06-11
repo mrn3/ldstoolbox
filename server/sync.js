@@ -210,7 +210,7 @@ Meteor.methods({
     try {
       var householdList;
 
-      var householdListUrl = "https://www.lds.org/mobiledirectory/services/v2/ldstools/member-detaillist-with-callings/" + inWardUnitNo;
+      var householdListUrl = "https://www.lds.org/mobiledirectory/services/ludrs/1.1/mem/mobile/member-detaillist-with-callings/" + inWardUnitNo;
       result = Meteor.http.call("GET", householdListUrl, {
         params: {
           timeout: 30000
@@ -286,11 +286,11 @@ Meteor.methods({
         memberCollection.remove({preferredName: "", wardUnitNo: inWardUnitNo});
       }
 
-      callingList = parsedResult.callings;
-
       //remove all positions in the ward
       callingCollection.remove({wardUnitNo: inWardUnitNo});
       callingGroupCollection.remove({wardUnitNo: inWardUnitNo});
+
+      var callingList = parsedResult.callings;
 
       var member;
       var children;
@@ -307,6 +307,32 @@ Meteor.methods({
           )
         );
 
+        memberCollection.update(
+          {
+            individualId: parseInt(callingList[callingListIndex].individualId)
+          },
+          {
+            $addToSet:
+              {
+                callings:
+                  {
+                    orgTypeId:      callingList[callingListIndex].groupName,
+                    name:           callingList[callingListIndex].callingName,
+                    instanceId:     parseInt(callingList[callingListIndex].groupInstance),
+                    positionName:   callingList[callingListIndex].callingName,
+                    positionTypeId: parseInt(callingList[callingListIndex].positionId),
+
+                    groupName:      callingList[callingListIndex].groupName,
+                    callingName:    callingList[callingListIndex].callingName,
+                    positionId:     parseInt(callingList[callingListIndex].positionId),
+                    groupKey:       parseInt(callingList[callingListIndex].groupKey),
+                    groupInstance:  parseInt(callingList[callingListIndex].groupInstance)
+                  }
+              }
+          }
+        );
+
+        /*
         //sometimes assignmentsInGroup just at this level
         assignmentsInGroup = callingList[callingListIndex].assignmentsInGroup;
         for (var assignmentsInGroupIndex in assignmentsInGroup) {
@@ -381,6 +407,7 @@ Meteor.methods({
             );
           }
         }
+        */
       }
     } catch (e) {
       // Got a network error, time-out or HTTP error in the 400 or 500 range.

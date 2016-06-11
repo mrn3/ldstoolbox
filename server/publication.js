@@ -342,8 +342,8 @@ Meteor.publish('organizationPublication', function() {
 
 Meteor.publish('callingChangePublication', function() {
   if (this.userId) {
-    var user = Meteor.users.findOne(this.userId);
-    return callingChangeCollection.find({wardUnitNo: user.wardUnitNo});
+    var user = Meteor.users.findOne(this.userId)
+    return callingChangeCollection.find({wardUnitNo: user.wardUnitNo})
   } else {
     return [];
   }
