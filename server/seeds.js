@@ -735,9 +735,9 @@ Meteor.startup(function () {
     callingCollection.insert({positionName: "Relief Society", wardUnitNo: -1});
     callingCollection.insert({positionName: "Relief Society Meeting Coordinator", wardUnitNo: -1});
     callingCollection.insert({positionName: "Relief Society Meeting Committee Member", wardUnitNo: -1});
-    callingCollection.insert({positionName: "Relief Society Compassionate", wardUnitNo: -1});
+    callingCollection.insert({positionName: "Relief Society Compassionate Service Coordinator", wardUnitNo: -1});
     callingCollection.insert({positionName: "Service Coordinator", wardUnitNo: -1});
-    callingCollection.insert({positionName: "Relief Society Compassionate", wardUnitNo: -1});
+    callingCollection.insert({positionName: "Relief Society Compassionate Service Assistant Coordinator", wardUnitNo: -1});
     callingCollection.insert({positionName: "Service Assistant Coordinator", wardUnitNo: -1});
     callingCollection.insert({positionName: "Relief Society Teacher", wardUnitNo: -1});
     callingCollection.insert({positionName: "Relief Society Visiting Teaching Coordinator", wardUnitNo: -1});
