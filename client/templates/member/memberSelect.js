@@ -37,10 +37,10 @@ Template.memberSelect.helpers({
   },
   choristerData: function() {
     //get Chorister position
-    return memberCollection.find({"callings.positionTypeId": 1585, "wardUnitNo": Meteor.user().wardUnitNo});
+    return memberCollection.find({"callings.positionTypeId": {$in: [223, 1585]}, "wardUnitNo": Meteor.user().wardUnitNo});
   },
   musicData: function() {
-    return memberCollection.find({"callings.orgTypeId": 1300, "wardUnitNo": Meteor.user().wardUnitNo});
+    return memberCollection.find({"callings.positionTypeId": {$in: [223, 1585]}, "wardUnitNo": Meteor.user().wardUnitNo});
   },
   presidingData: function() {
     //get Presiding position - Stake Presidency, Bishopric
