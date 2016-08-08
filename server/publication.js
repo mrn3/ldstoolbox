@@ -3,11 +3,11 @@ Meteor.publish('likelyOptionsMemberPublication', function() {
     var user = Meteor.users.findOne(this.userId);
     var selector = {$or: [
       //bishopric, chorister, or organist
-      {"callings.positionTypeId": {$in: [4, 54, 55, 234, 1585]}, "wardUnitNo": user.wardUnitNo},
+      {"callings.positionId": {$in: [4, 54, 55, 233, 234, 1585]}, "wardUnitNo": user.wardUnitNo},
       //music
       {"callings.orgTypeId": {$in: [1300]}, "wardUnitNo": user.wardUnitNo},
       //stake presidency or high council
-      {"callings.positionTypeId": {$in: [1, 2, 3, 94]}, "stakeUnitNo": user.stakeUnitNo}
+      {"callings.positionId": {$in: [1, 2, 3, 94]}, "stakeUnitNo": user.stakeUnitNo}
     ]};
     return memberCollection.find(selector);
   } else {
