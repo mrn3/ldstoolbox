@@ -42,8 +42,8 @@ check
 standard-minifier-css
 standard-minifier-js
 aldeed:autoform
-fourseven:scss
 meteoric:autoform-ionic
-meteoric:ionic-sass
-meteoric:ionicons-sass
 zimme:iron-router-active
+fourseven:scss
+hashwin:ionicons-sass
+hashwin:ionic-sass

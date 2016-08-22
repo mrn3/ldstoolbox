@@ -5,6 +5,9 @@ $positive: #DE4F4F;
 @import '.meteor/local/build/programs/server/assets/packages/meteoric_ionicons-sass/ionicons';
 */
 
+@import '{hashwin:ionic-sass}/_ionic';
+@import '{hashwin:ionicons-sass}/_ionicons';
+
 .ionic-body.platform-android {
   font-family: "Roboto", sans-serif;
 
