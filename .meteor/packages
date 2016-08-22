@@ -42,7 +42,7 @@ check@1.2.3
 standard-minifier-css@1.2.0
 standard-minifier-js@1.2.0
 zimme:iron-router-active
-fourseven:scss
+fourseven:scss@3.8.0_1
 hashwin:ionicons-sass
 hashwin:ionic-sass
 shell-server
