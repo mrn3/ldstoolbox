@@ -14,9 +14,6 @@ useraccounts:ionic
 http@1.2.9
 pascoual:pdfkit
 meteorhacks:search-source
-accounts-facebook@1.0.10
-accounts-twitter@1.1.11
-accounts-google@1.0.10
 accounts-ui@1.1.9
 mrt:moment
 meteorhacks:kadira@2.20.1
