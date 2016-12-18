@@ -1,4 +1,4 @@
-LDS Toolbox is an open-source, real-time suite of tools for members of the LDS Church built with [Meteor](http://meteor.com) and based on [Meteoric Ionic](https://github.com/meteoric/meteor-ionic) as a template.  It also makes use of the [lds.org API Documentation](https://github.com/LDSorg/lds.org-api-documentation) for some of the data.
+LDS Toolbox is an open-source, real-time suite of tools for members of the LDS Church built with [Meteor](http://meteor.com) and based on [Meteoric Ionic](https://github.com/meteoric/meteor-ionic) as a template.  It also makes use of the [lds.org API Documentation](https://github.com/LDSorg/lds.org-api-documentation) for some of the data.  
 
 These tools augment tools already available through LDS Tools, Leader and Clerk Resourced (LCR), and lds.org. 
 
