@@ -6,7 +6,9 @@ If you'd like to be part of the project, please see if there's anything you can 
 
 Note that LDS Toolbox is distributed under the [MIT License](http://opensource.org/licenses/MIT)
 
-# Get Started
+## Get Started
 
-1. <a href='https://www.meteor.com/install' target='_blank'>Install Meteor</a>
+1. <a href="https://www.meteor.com/install" target="_blank">Install Meteor</a>
 2. Clone the repo
+
+This is [Install Meteor](https://www.meteor.com/install){:target="_blank"} that opens in a new window.
