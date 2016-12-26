@@ -8,7 +8,14 @@ Note that LDS Toolbox is distributed under the [MIT License](http://opensource.o
 
 ## Get Started
 
-1. <a href="https://www.meteor.com/install" target="_blank">Install Meteor</a>
+1. [Install Meteor](https://www.meteor.com/install)
 2. Clone the repo
+3. Switch to folder
 
-This is [Install Meteor](https://www.meteor.com/install){:target="_blank"} that opens in a new window.
+```cd ldstoolbox```
+
+4. Start up the app
+
+```meteor```
+
+5. In a browser, go to localhost:3000
