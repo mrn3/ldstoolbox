@@ -260,7 +260,7 @@ Template.callingChangeList.events({
           }
           IonPopup.alert({
             title: 'Press Ctrl-C (or Command-C) to copy',
-            template: "<textarea rows='10' onClick='this.setSelectionRange(0, this.value.length)'>" + memberNameString + "</textarea>",
+            template: "<textarea style='width:100%' rows='10' onClick='this.setSelectionRange(0, this.value.length)'>" + memberNameString + "</textarea>",
             okText: 'Okay',
           });
         }
