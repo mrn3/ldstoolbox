@@ -584,16 +584,8 @@ Router.map(function() {
             distanceFromTop += verticalPositionIncrement;
             doc.text("ADMINISTRATION OF THE SACRAMENT", distanceFromLeft1, distanceFromTop, {align: "center", width: halfPageWidth});
 
-            console.log('speakerArray: ');
-            console.log(speakerArray);
-            console.log('intermediateHymnArray: ');
-            console.log(intermediateHymnArray);
-            console.log('musicalNumberArray: ');
-            console.log(musicalNumberArray);
             if (typeof speakerArray != "undefined") {
                 for(var speakerIndex in speakerArray) {
-                    console.log('speakerIndex: ');
-                    console.log(speakerIndex);
                     if (speakerArray[speakerIndex] && speakerArray[speakerIndex].speaker && speakerArray[speakerIndex].speaker.preferredName) {
                         distanceFromTop += verticalPositionIncrement;
                         distanceFromTop += verticalPositionIncrement;
@@ -602,8 +594,6 @@ Router.map(function() {
                     }
 
                     for(var intermediateHymnIndex in intermediateHymnArray) {
-                        console.log('intermediateHymnIndex: ');
-                        console.log(intermediateHymnIndex);
                         if ((intermediateHymnArray[intermediateHymnIndex].afterSpeaker - 1) == speakerIndex) {
                             distanceFromTop += verticalPositionIncrement;
                             distanceFromTop += verticalPositionIncrement;
@@ -616,8 +606,6 @@ Router.map(function() {
                         }
                     }
                     for(var musicalNumberIndex in musicalNumberArray) {
-                        console.log('musicalNumberIndex: ');
-                        console.log(musicalNumberIndex);
                         if ((musicalNumberArray[musicalNumberIndex].afterSpeaker - 1) == speakerIndex) {
                             distanceFromTop += verticalPositionIncrement;
                             distanceFromTop += verticalPositionIncrement;
@@ -684,6 +672,10 @@ Router.map(function() {
         announcementArray = announcementCollection.find({meetingId : this.params._id, announcementSacramentWorthy: true}).fetch();
         speakerArray = speakerCollection.find({meetingId : this.params._id}, {sort: {order: 1}}).fetch();
         recognitionArray = recognitionCollection.find({meetingId : this.params._id}).fetch();
+
+        console.log(speakerArray);
+        console.log(musicalNumberArray);
+        console.log(intermediateHymnArray);
 
         var doc = new PDFDocument({size: "A4", margin: 50});
 
@@ -866,8 +858,18 @@ Router.map(function() {
             distanceFromTop += verticalPositionIncrement;
         }
 
+        console.log('speakerArray: ');
+        console.log(speakerArray);
+        console.log('intermediateHymnArray: ');
+        console.log(intermediateHymnArray);
+        console.log('musicalNumberArray: ');
+        console.log(musicalNumberArray);
+
         if (typeof speakerArray != "undefined") {
             for(var speakerIndex in speakerArray) {
+
+                console.log('speakerIndex: ');
+                console.log(speakerIndex);
 
                 //new page if needed
                 if (distanceFromTop > 600) {
@@ -882,6 +884,10 @@ Router.map(function() {
                 distanceFromTop += verticalPositionIncrement;
 
                 for(var intermediateHymnIndex in intermediateHymnArray) {
+
+                    console.log('intermediateHymnIndex: ');
+                    console.log(intermediateHymnIndex);
+
                     if ((intermediateHymnArray[intermediateHymnIndex].afterSpeaker - 1) == speakerIndex) {
                         doc.text("Intermediate Hymn: _____________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
                         if (intermediateHymnArray[intermediateHymnIndex].hymn.number) {
@@ -893,6 +899,10 @@ Router.map(function() {
                     }
                 }
                 for(var musicalNumberIndex in musicalNumberArray) {
+
+                    console.log('musicalNumberIndex: ');
+                    console.log(musicalNumberIndex);
+
                     if ((musicalNumberArray[musicalNumberIndex].afterSpeaker - 1) == speakerIndex) {
                         doc.text("Musical Number", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
                         distanceFromTop += verticalPositionIncrement;
