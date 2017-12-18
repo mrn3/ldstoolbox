@@ -594,7 +594,7 @@ Router.map(function() {
                     }
 
                     for(var intermediateHymnIndex in intermediateHymnArray) {
-                        if ((intermediateHymnArray[intermediateHymnIndex].afterSpeaker - 1) == speakerIndex) {
+                        if ((intermediateHymnArray[intermediateHymnIndex].afterSpeaker) == speakerArray[speakerIndex].order) {
                             distanceFromTop += verticalPositionIncrement;
                             distanceFromTop += verticalPositionIncrement;
                             doc.text("Intermediate Hymn", distanceFromLeft1, distanceFromTop, {align: "left", width: halfPageWidth});
@@ -606,7 +606,7 @@ Router.map(function() {
                         }
                     }
                     for(var musicalNumberIndex in musicalNumberArray) {
-                        if ((musicalNumberArray[musicalNumberIndex].afterSpeaker - 1) == speakerIndex) {
+                        if ((musicalNumberArray[musicalNumberIndex].afterSpeaker) == speakerArray[speakerIndex].order) {
                             distanceFromTop += verticalPositionIncrement;
                             distanceFromTop += verticalPositionIncrement;
                             doc.text("Musical Number", distanceFromLeft1, distanceFromTop, {align: "left", width: halfPageWidth});
@@ -889,10 +889,10 @@ Router.map(function() {
 
                     console.log('intermediateHymnIndex: ');
                     console.log(intermediateHymnIndex);
-                    console.log((intermediateHymnArray[intermediateHymnIndex].afterSpeaker - 1));
-                    console.log(((intermediateHymnArray[intermediateHymnIndex].afterSpeaker - 1) == speakerIndex));
+                    console.log((intermediateHymnArray[intermediateHymnIndex].afterSpeaker));
+                    console.log(((intermediateHymnArray[intermediateHymnIndex].afterSpeaker) == speakerArray[speakerIndex].order));
 
-                    if ((intermediateHymnArray[intermediateHymnIndex].afterSpeaker - 1) == speakerIndex) {
+                    if ((intermediateHymnArray[intermediateHymnIndex].afterSpeaker) == speakerArray[speakerIndex].order) {
                         doc.text("Intermediate Hymn: _____________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
                         if (intermediateHymnArray[intermediateHymnIndex].hymn.number) {
                             doc.text(intermediateHymnArray[intermediateHymnIndex].hymn.number + " - " + intermediateHymnArray[intermediateHymnIndex].hymn.name, distanceFromLeft3, distanceFromTop, {align: "left", width: pageWidth});
@@ -906,10 +906,10 @@ Router.map(function() {
 
                     console.log('musicalNumberIndex: ');
                     console.log(musicalNumberIndex);
-                    console.log((musicalNumberArray[musicalNumberIndex].afterSpeaker - 1));
-                    console.log(((musicalNumberArray[musicalNumberIndex].afterSpeaker - 1) == speakerIndex));
+                    console.log((musicalNumberArray[musicalNumberIndex].afterSpeaker));
+                    console.log(((musicalNumberArray[musicalNumberIndex].afterSpeaker) == speakerArray[speakerIndex].order));
 
-                    if ((musicalNumberArray[musicalNumberIndex].afterSpeaker - 1) == speakerIndex) {
+                    if ((musicalNumberArray[musicalNumberIndex].afterSpeaker) == speakerArray[speakerIndex].order) {
                         doc.text("Musical Number", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
                         distanceFromTop += verticalPositionIncrement;
                         doc.text("Song: ________________________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
