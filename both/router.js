@@ -666,9 +666,9 @@ Router.map(function() {
         meetingDateFormatted = meeting.meetingDate;
         releaseResultArray = callingChangeCollection.find({"meeting._id" : this.params._id, type: "Release"}).fetch();
         callingResultArray = callingChangeCollection.find({"meeting._id" : this.params._id, type: "Call"}).fetch();
-        intermediateHymnArray = intermediateHymnCollection.find({meetingId : this.params._id}).fetch();
         visitorArray = visitorCollection.find({meetingId : this.params._id}).fetch();
-        musicalNumberArray = musicalNumberCollection.find({meetingId : this.params._id}).fetch();
+        intermediateHymnArray = intermediateHymnCollection.find({meetingId : this.params._id}, {sort: {afterSpeaker: 1}}).fetch();
+        musicalNumberArray = musicalNumberCollection.find({meetingId : this.params._id}, {sort: {afterSpeaker: 1}}).fetch();
         announcementArray = announcementCollection.find({meetingId : this.params._id, announcementSacramentWorthy: true}).fetch();
         speakerArray = speakerCollection.find({meetingId : this.params._id}, {sort: {order: 1}}).fetch();
         recognitionArray = recognitionCollection.find({meetingId : this.params._id}).fetch();
@@ -870,6 +870,8 @@ Router.map(function() {
 
                 console.log('speakerIndex: ');
                 console.log(speakerIndex);
+                console.log('order: ');
+                console.log(speakerArray[speakerIndex].order);
 
                 //new page if needed
                 if (distanceFromTop > 600) {
