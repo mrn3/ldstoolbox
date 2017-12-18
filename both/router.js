@@ -463,8 +463,8 @@ Router.map(function() {
             this.name = "meetingProgramPrint";
 
             meeting = meetingCollection.findOne(this.params._id);
-            intermediateHymnArray = intermediateHymnCollection.find({meetingId : this.params._id}).fetch();
-            musicalNumberArray = musicalNumberCollection.find({meetingId : this.params._id}).fetch();
+            intermediateHymnArray = intermediateHymnCollection.find({meetingId : this.params._id}, {sort: {afterSpeaker: 1}}).fetch();
+            musicalNumberArray = musicalNumberCollection.find({meetingId : this.params._id}, {sort: {afterSpeaker: 1}}).fetch();
             announcementArray = announcementCollection.find({meetingId : this.params._id}).fetch();
             speakerArray = speakerCollection.find({meetingId : this.params._id}, {sort: {order: 1}}).fetch();
             recognitionArray = recognitionCollection.find({meetingId : this.params._id}).fetch();
