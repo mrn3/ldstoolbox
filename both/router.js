@@ -887,6 +887,8 @@ Router.map(function() {
 
                     console.log('intermediateHymnIndex: ');
                     console.log(intermediateHymnIndex);
+                    console.log((intermediateHymnArray[intermediateHymnIndex].afterSpeaker - 1));
+                    console.log(((intermediateHymnArray[intermediateHymnIndex].afterSpeaker - 1) == speakerIndex));
 
                     if ((intermediateHymnArray[intermediateHymnIndex].afterSpeaker - 1) == speakerIndex) {
                         doc.text("Intermediate Hymn: _____________________________________________________________", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
@@ -902,6 +904,8 @@ Router.map(function() {
 
                     console.log('musicalNumberIndex: ');
                     console.log(musicalNumberIndex);
+                    console.log((musicalNumberArray[musicalNumberIndex].afterSpeaker - 1));
+                    console.log(((musicalNumberArray[musicalNumberIndex].afterSpeaker - 1) == speakerIndex));
 
                     if ((musicalNumberArray[musicalNumberIndex].afterSpeaker - 1) == speakerIndex) {
                         doc.text("Musical Number", distanceFromLeft1, distanceFromTop, {align: "left", width: pageWidth});
